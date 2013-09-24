@@ -11,8 +11,7 @@
   </head>
   <body>
     <nav role="navigation">
-        <div class="container">
-            <a title="home" class="logo">One Ham Army</a>
+            <a title="home" class="logo hidden-xs hidden-sm">One Ham Army</a>
 			<ul>
 			    <li class="active"><a href="#">Blog</a></li>
 			    <li><a href="#">About Me</a></li>
@@ -21,11 +20,15 @@
 			    <li><a href="#"><i class="icon-github"></i></a></li>
 			    <li><a href="#"><i class="icon-twitter"></i></a></li>
 			</ul>
-        </div>
   	</nav>
 
+    <div class="visible-xs box">XS</div>
+    <div class="visible-sm box">SM</div>
+    <div class="visible-md box">MD</div>
+    <div class="visible-lg box">LG</div>
+
     <div class="container">
-      	<section id="text" class="col-md-6 col-md-offset-3">
+      	<section id="text">
     	    <h1 class="post-title">Continuous Delivery for Java Development</h1>
     	    <span class="post-date"><i class="icon-time"></i> August 7, 2013</span>
 
