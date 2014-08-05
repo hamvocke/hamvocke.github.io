@@ -1,3 +1,4 @@
-name: Your New Jekyll Site
+name: One Ham Army
 markdown: redcarpet
-pygments: true
+include: ['.htaccess']
+highlighter: pygments
