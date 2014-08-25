@@ -44,10 +44,21 @@ a:hover {
 
 footer {
 	height: 3em;
-	border-top: 1px solid #aaa;
-	margin: auto;
-	margin-top: 3em;
+	border-top: 1px solid #ddd;
+	margin: 50px auto 50px;
 	width: 80%;
+}
+
+footer .contact {
+	margin: 10px 0 0 10px;
+	text-align: center;
+	font-size: 0.8em;
+	color: #aaa;
+}
+
+footer .contact .icons {
+	margin: 10px 0 0 0;
+	font-size: 1.2em;
 }
 
 nav {
@@ -78,19 +89,27 @@ nav ul li a {
 	color: #444;
 }
 
-#sidebar {
-    margin-top: 10em;
-}
-
-#sidebar h1 {
-    font-size: 1.1em;
-}
-
-#headline {
-	background: orange;
-	padding-top: 3em;
-	padding-bottom: 3em;
+h1.title {
+	font-size: 3.5em;
+	margin-bottom: 50px;
 	text-align: center;
+}
+
+#home h1 {
+	margin-top: 200px;
+}
+
+#home p.lead {
+	text-align: center;
+	color: #aaa;
+	font-size: 1.5em;
+	margin-top: 30px;
+	margin-bottom: 200px;
+}
+
+#blog {
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
 #text {
@@ -104,9 +123,9 @@ nav ul li a {
 	text-align: right;
 	font-weight: 400;
 	font-style: italic;
-	font-size: 0.9em;
+	font-size: 0.8em;
 	margin-bottom: 1.5em;
-	color: #aaa;
+	color: #ccc;
 }
 
 .intro {
@@ -114,7 +133,7 @@ nav ul li a {
 	line-height: 1.4em;
 }
 
-@media (min-width: @screen-xs) and (max-width: @screen-xs-max) {
+@media (max-width: 768px) {
 	#text {
 		width: 100%;
 	}
