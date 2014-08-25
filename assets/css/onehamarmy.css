@@ -75,7 +75,6 @@ nav a.logo {
 nav ul {
 	display: inline;
 	padding: 0;
-	margin-left: 60px;
 }
 
 nav ul li {
@@ -136,5 +135,13 @@ h1.title {
 @media (max-width: 768px) {
 	#text {
 		width: 100%;
+	}
+
+	#home h1 {
+		margin-top: 40px;
+	}
+
+	#home p.lead {
+		margin-bottom: 40px;
 	}
 }
