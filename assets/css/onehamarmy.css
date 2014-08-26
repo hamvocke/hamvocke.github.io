@@ -124,12 +124,21 @@ h1.title {
 	font-style: italic;
 	font-size: 0.8em;
 	margin-bottom: 1.5em;
-	color: #ccc;
+	color: #aaa;
 }
 
 .intro {
 	font-size: 1.2em;
 	line-height: 1.4em;
+}
+
+.tags {
+	color: #aaa;
+	font-size: 0.9em;
+}
+
+.tags i {
+	margin-right: 10px;
 }
 
 @media (max-width: 768px) {
