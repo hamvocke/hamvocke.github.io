@@ -1,0 +1,8 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+/* TEAM */
+  Owner: Ham Vocke
+  Site: http://www.onehamarmy.com
+  Twitter: hamvocke
+  Location: Haselünne, Germany
