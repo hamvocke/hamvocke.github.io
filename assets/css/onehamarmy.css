@@ -127,6 +127,10 @@ h1.title {
 	color: #aaa;
 }
 
+.post img {
+    width: 100%;
+}
+
 .intro {
 	font-size: 1.2em;
 	line-height: 1.4em;
