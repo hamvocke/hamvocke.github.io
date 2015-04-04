@@ -16,18 +16,18 @@ that Monday morning and everything felt unfamiliar. A different apartment to
 wake up in, an unknown way to work, being a complete stranger in a big city. _"This will take ages to
 get used to"_, was the thought that constantly accompanied me.
 
-I took the _S31_ and the _U3_ lines to the office that morning which worked way better that I
-expected, given that I am a total public transport dilettante. So there I was, outside of the new
+I took public transport to the office that morning which worked way better than I
+expected, considering I am a complete public transport dilettante. So there I was, outside of the new
 office, way ahead of my time and hesitant to enter. I grabbed a coffee from a shop at the corner and
 decided to wait outside since I did not want to be the first on the scene.
 
 When I finally entered the office I was greeted by a sweet breakfast with Franzbrötchen, Croissants 
 and more people than I could ever remember in such a short time. Everyone was keen to introduce themselves 
-and curious to hear who I was and what I had to tell. `anxiety--;`
+and curious to hear who I was and what I had to tell.
 
 
 # Polyglot projects and the best tools for the job
-Right during our breakfast I was told which project I'd be assigned to. I only got the project's name
+Right during our breakfast I was told which project I'd be assigned to. I only got to know the project's name
 so I was eager to get to know more about what would keep me occupied for the next months. After
 a short time of fiddling around with my new notebook I had a session in which I was introduced to
 the project, the business model and the technologies we chose to work with. Hearing about the technology
@@ -40,22 +40,21 @@ around with in my spare time anyways.
 I was used to work with self-written Java frameworks that were thought to be a one-size-fits-all
 solution to each and every project presented to us. There's nothing wrong with using Java, not at
 all. However, I never liked the approach of shoehorning every single requirement into something that could be solved
-with the few given tools had at hand instead of using the best tools for the job. Seeing that my
+with the few given tools we had at hand instead of using the best tools for the job. Seeing that my
 team would share that opinion and was eager to try something new was obviously something I was
 absolutely happy with. Working on a project and getting the chance to learn new languages and
-frameworks at the same time was obviously something I was more than pleased to do. `happiness++;`
+frameworks at the same time was obviously something I was more than pleased to do.
 
 
 # Trains on strike, a pub, and an expensive taxi
 My first day ended quite spectacular. The train drivers were on strike so I had no way to get home
-to my apartment after work. A colleague suggested to join him for one beer at the pub and so things
-took its course. After a little more than the announced _"one beer"_ I ended up being stranded somewhere 
-in Hamburg (thanks to the public transport dilettante that I am) with a dead phone and this random guy 
-from Leeds and whom I called "Dave" even though that was certainly not his real name. Dave and I
-managed to share a Taxi to the central station and I took the Taxi to get further home to my apartment.
-After all it was a great -- albeit expensive, thanks to the Taxi -- night and a great ending of my
-first day. The spontaneous pub night helped breaking the ice and from that point onwards the
-unfamiliarity was gone. And I had a decent story to share on the next day.
+to my apartment after work. A colleague suggested to join him for a beer at the pub which sounded like a
+solid plan to me. After some more than the announced _"one beer"_ I ended up being stranded somewhere 
+in Hamburg (thanks to my awesome orientation skills) with a dead phone and this random guy 
+from Leeds I simply decided to call "Dave" even though that was certainly not his real name. Dave and I
+managed to snatch a Taxi and get to the Hauptbahnhof. I took the Taxi to get further home to my apartment
+and managed to end my oddysey. After all it was a great -- albeit expensive, thanks to the Taxi -- night and a great ending of my
+first day. The spontaneous pub night helped breaking the ice. On top of that I had a decent story to share on the next day.
 
 
 # ThoughtWorks, what's it like?
