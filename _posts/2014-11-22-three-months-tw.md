@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Working at ThoughtWorks, a three month retrospective 
-tags: personal
+tags: personal job
 excerpt: More than three months into my new job at ThoughtWorks I tell the story of my first day at my new job and take a first look in the rearview mirror to reflect about work, company culture and other remarkable stuff
 ---
 

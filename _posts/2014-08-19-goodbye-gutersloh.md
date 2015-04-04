@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Goodbye Gütersloh, Hello Hamburg!
-tags: personal
+tags: personal job
 excerpt: Today is my last day in Gütersloh. I'm leaving Bertelsmann after six exciting years. This post is about the my previous journey as a software developer and about my future in Hamburg.
 ---
 
