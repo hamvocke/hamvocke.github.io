@@ -1,8 +1,8 @@
 ---
 layout: post
-title: ThoughtWorks, three months in 
+title: Working at ThoughtWorks, a three month retrospective 
 tags: personal
-excerpt: More than three months into my new job at ThoughtWorks I take a first look in the rearview mirror and reflect about work, company culture and other remarkable stuff
+excerpt: More than three months into my new job at ThoughtWorks I tell the story of my first day at my new job and take a first look in the rearview mirror to reflect about work, company culture and other remarkable stuff
 ---
 
 More than three months ago I took the first step of a fascinating journey: It was my first day at 
@@ -10,23 +10,26 @@ More than three months ago I took the first step of a fascinating journey: It wa
 had made me curious and nervous for the past couple of weeks. As it turned out, the anxiety should
 only last until my very first hours at work. After that everything immediately felt like home.
 
-# Breakfast and Handshakes
+# My first day
 My first day at ThoughtWorks started after a night of fairly restless sleep. I woke up way too early
 that Monday morning and everything felt unfamiliar. A different apartment to
 wake up in, an unknown way to work, being a complete stranger in a big city. _"This will take ages to
 get used to"_, was the thought that constantly accompanied me.
 
+
+## Breakfast and Handshakes
 I took public transport to the office that morning which worked way better than I
 expected, considering I am a complete public transport dilettante. So there I was, outside of the new
 office, way ahead of my time and hesitant to enter. I grabbed a coffee from a shop at the corner and
 decided to wait outside since I did not want to be the first on the scene.
 
-When I finally entered the office I was greeted by a sweet breakfast with Franzbrötchen, Croissants 
+When I finally entered the office I was greeted by a sweet breakfast with 
+[Franzbrötchen](https://en.wikipedia.org/wiki/Franzbr%C3%B6tchen), Croissants 
 and more people than I could ever remember in such a short time. Everyone was keen to introduce themselves 
 and curious to hear who I was and what I had to tell.
 
 
-# Polyglot projects and the best tools for the job
+## Polyglot projects and the best tools for the job
 Right during our breakfast I was told which project I'd be assigned to. I only got to know the project's name
 so I was eager to get to know more about what would keep me occupied for the next months. After
 a short time of fiddling around with my new notebook I had a session in which I was introduced to
@@ -46,7 +49,7 @@ absolutely happy with. Working on a project and getting the chance to learn new 
 frameworks at the same time was obviously something I was more than pleased to do.
 
 
-# Trains on strike, a pub, and an expensive taxi
+## Trains on strike, a pub & an expensive taxi
 My first day ended quite spectacular. The train drivers were on strike so I had no way to get home
 to my apartment after work. A colleague suggested to join him for a beer at the pub which sounded like a
 solid plan to me. After some more than the announced _"one beer"_ I ended up being stranded somewhere 
@@ -100,3 +103,24 @@ we get from working with not completely understood technology and domains. Worki
 will help you with that.
 5. Spread the knowledge. You reduce the [Bus Factor](http://en.wikipedia.org/wiki/Bus_factor) if at
 least two people know about each topic and therefore reduce the risk for the entire project.
+
+## Keep it simple, stupid
+The [KISS principle](https://en.wikipedia.org/wiki/KISS_principle) is applied everywhere and I 
+love it. Keep it as simple as possible, avoid
+over-engineering, don't try to make things unnecessarily complex. This mentality is applied to
+technological and business decisions and really helps us moving fast and getting stuff done.
+
+## Contribute to the community
+One thing you can clearly feel while being around at ThoughtWorks is the strong community focus.
+Internally as well as externally ThoughtWorkers try to contribute as much to their communities as
+they can. There are talks on a widespread range of topics every friday over lunchtime, free for
+every ThoughtWorker to join. Externally, people organize and participate in meetups, hackathons, 
+even conferences for the local communities. Its something that everyone in the company values.
+Giving and contributing instead of just taking is something people strive for. And rightly so. You
+get to learn so much more as soon as you start contributing instead of just consuming.
+
+# Moving forward
+It's been a great three months so far. I've met amazingly knowledgeable, genuinely friendly and helpful people and
+I'm looking forward to working with these people in the future. I'm excited to be able to keep on
+learning new stuff every day and to contribute to the community. As it turns out it's been a great
+decision to go to Hamburg!
