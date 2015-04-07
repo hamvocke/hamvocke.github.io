@@ -154,6 +154,10 @@ h1.title {
 	color: #777;
 }
 
+.comments {
+	margin-top: 50px;
+}
+
 @media (max-width: 768px) {
 	#text {
 		width: 100%;
