@@ -3,6 +3,7 @@ layout: post
 title: Import your DKB account into Homebank
 tags: programming
 excerpt: Homebank is a great and free personal finance tool. I have written a small converter that allows you to import account data from DKB accounts.
+comments: true
 ---
 
 Recently I started using [Homebank](http://homebank.free.fr/), a great and free personal finance

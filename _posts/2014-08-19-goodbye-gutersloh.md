@@ -3,6 +3,7 @@ layout: post
 title: Goodbye Gütersloh, Hello Hamburg!
 tags: personal job
 excerpt: Today is my last day in Gütersloh. I'm leaving Bertelsmann after six exciting years. This post is about the my previous journey as a software developer and about my future in Hamburg.
+comments: true
 ---
 
 Today marks my last day in Gütersloh. My bags are packed, my stuff is sitting neatly packed in boxes in my apartment, waiting to be hauled into a big van. I'm sitting in my office near the Autobahn in Gütersloh, on the same floor I've been working for the past five years. I'm sitting here, cleaning up my stuff, waiting for my colleagues to show up for the cake my girlfriend baked for my farewell. Sitting here on my last day and waiting in my office led me to think about the whole journey that brought me here in the first place.
