@@ -1,5 +1,5 @@
 name: One Ham Army
-markdown: redcarpet
+markdown: kramdown
 include: ['.htaccess']
 highlighter: pygments
 
