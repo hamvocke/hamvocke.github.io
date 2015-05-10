@@ -6,8 +6,12 @@ excerpt: I've recently tried a new approach for facilitating an agile retrospeci
 comments: true
 ---
 
+![Tweetrospective Photo](/assets/img/uploads/tweetrospectivePhoto.jpg)
+
 Retrospectives are an essential tool in Agile software development. Whatever methodology you use,
-as long as you develop software in iterations you will have retrospectives after each of those.
+as long as you develop software in iterations you will have retrospectives after each of those (and
+if you don't: shame on you, my friend).
+
 Retrospectives help the team to take a step back from the day-to-day business and to reflect on
 what's happened in the past iteration. The team gets to discuss about problems and risks, annoyances
 and moments of frustration, but also about successes and progress. All of this has the intention to
@@ -53,40 +57,40 @@ time to time.
 
 Eventually I stumbled across the ["#tweetmysprint"](http://plans-for-retrospectives.com/?id=97) idea
 by [Thomas Guest](http://wordaligned.org/) and found it to be really interesting. It suggests using
-Twitter's tweet format to let the team write their thoughts about the past iteration and ordering it
+Twitter's Tweet format to let the team write their thoughts about the past iteration and ordering it
 in a timeline. I decided to let my retro revolve around exactly this concept. As it turns out it was
 a great idea. Our team had lots of fun and we got some really interesting results out of it. 
 
 At the end of this post you will find some resources that will help you doing it yourself
 
 ## The concept in a nutshell
-You start off describing the concept to the team. The team gets to write a couple of tweets about
+You start off describing the concept to the team. The team gets to write a couple of Tweets about
 the last iteration on sticky notes. **#hashtags**, **@mentions** and **emojis** are highly encouraged. 
-Next you organize all these tweets into a timeline and
-read it out loud. Every teammember gets to vote on the tweets he or she wants to discuss about using
-**retweets** and **favourites**. You organize the highest voted tweets into **trending topics** and give
+Next you organize all these Tweets into a timeline and
+read it out loud. Every teammember gets to vote on the Tweets he or she wants to discuss about using
+**Retweets** and **Favourites**. You organize the highest voted Tweets into **Trending Topics** and give
 the team time to discuss about these in more detail.
 
 It turns out that the Twitter universe offers everything you need for this. Restricting the opinions
 on the sticky notes to Twitter's 140 characters limit is a good lesson on brevity and conciseness.
 It is challenging to stick to this format and therefore will result in some really creative answers. 
-Hashtags, Mentions and Emojis really offer some unique opportunities. Mentioning someone in a tweet
+Hashtags, Mentions and Emojis really offer some unique opportunities. Mentioning someone in a Tweet
 can be used to appreciate a specific person or to celebrate success. Hashtags are a really great
-concept to put additional information, emotion or funny references into the short tweet format.
+concept to put additional information, emotion or funny references into the short Tweet format.
 
 
 ## Preparation
 As usual make sure to have a room where the whole team fits and can talk and discuss in an undisturbed fashion. 
 Get enough sticky notes and pens for everyone. Make sure to pick the right format for the sticky notes. I've found a
-wide rectangular shape to be fitting (obviously resembling the format of one single tweet).
+wide rectangular shape to be fitting (obviously resembling the format of one single Tweet).
 
-Print enough of the resources sheets at the end of this post **(TODO ADD LINK)** for your team and
-cut out the retweet and favourite icons. Prepare a bunch of these "icons" for each team member and
-hand them out together with the sticky notes and pen.
+Print enough of the [Tweetrospective Sheets](#resources) at the end of this post for your team and
+cut out the Retweet and Favourite icons. Prepare a bunch of these icons for each team member and
+hand them out together with the sticky notes and pens.
 
 ## Facilitating the Retro
 Facilitating your Tweetrospective won't be any different from other retros. Try your best to set a scene
-where everyone feels secure and comfortable. Writing tweets allows to get creative and share short
+where everyone feels secure and comfortable. Writing Tweets allows to get creative and share short
 thoughts in an entertaining way with others. This could be a good opportunity to break the ice
 within a team.
 
@@ -95,58 +99,59 @@ There might be people in your team who don't know the concept of Twitter. Even i
 is aware, it's a good idea to recap what Twitter is and how it works to set the scene for all
 participants. Make sure to explain the concept of Twitter and to describe the whole vocabulary around it. 
 Tell the team what type of content gets published on Twitter. Mention the
-140 characters limit of tweets, hashtags, mentioning other users and emojis. 
+140 characters limit of Tweets, Hashtags, mentioning other users and Emojis. 
 
-Next give the team around 10 minutes (feel free to vary) to write as many tweets as you consider
+Give the team around 10 minutes (feel free to vary) to write as many Tweets as you consider
 suitable (personally, I gave no limit)
 
-In my tweetrospective I prepared one example tweet on a sticky note that included
-hashtags, mentions and emojis to show off what was possible. The content of this example tweet was just 
+In my Tweetrospective I prepared one example Tweet on a sticky note that included
+hashtags, mentions and emojis to show off what was possible. The content of this example Tweet was just 
 a reference to one of our team's inside jokes which really helped laid out the foundation for a lighthearted
-atmosphere. Having a sample tweet helped me to make sure what I expected really fast.
+atmosphere and got the idea across easily.
 
 ### Writing Tweets
 It might be helpful to give your team a couple of examples of what they can write about. Possible
-tweets are success stories of the last iteration, stories of failures, lessons learned, rants,
+Tweets are success stories of the last iteration, stories of failures, lessons learned, rants,
 appreciations of others or shameless plugs of something a teammate has been up to.
 
-Usually, tweets always contain the name of the person writing the tweet. To stick to the concept of
-Twitter as close as possible, your tweetrospective's tweets could also contain the name of the
+Usually, Tweets always contain the author's name. To stick to the concept of
+Twitter as close as possible, your Tweetrospective's Tweets could also contain the name of the
 individual authors. However, this might influence the safety levels of your teammates. I decided to
-encourage the team to write their name on top of each tweet if they think it's suitable for the
-content. However, if they prefer to stay anonymous they could simply write "anonymous" as the
-author on top of their tweets.
+encourage the team to write their name on top of each Tweet if they think it's suitable for the
+content. However, if they prefer to stay anonymous they could simply write "anonymous" instead.
 
 ### Organising the Timeline
-After the time is up, collect the individual tweets and arrange them in a timeline. Read out the
-tweets to the whole team. This is probably the funniest part since reading out hashtags and emojis
+After the time is up, collect the individual Tweets and arrange them in a timeline. Read out the
+timeline to the team. This is probably the funniest part since reading out hashtags and emojis
 is something unusual and offers a great potential where people can get creative.
 
 ### Retweets & Favourites
 You'll want to find out which topics are most important for the team to discuss. Instead of relying
 on dot-votes or something similar, you can - once again - use Twitter's mechanisms for that. Let
-everyone put **Retweets** and **Favourites** next to the tweets they are most interested in for the upcoming
+everyone put **Retweets** and **Favourites** next to the Tweets they are most interested in for the upcoming
 discussion. Everyone can use the cut-out icons you have prepared previously. 
-In our tweetrospective I made no difference between the semantics of retweets and favourites. However,
-you could also consider applying different semantics to retweets and favourites respectively. A
-possible way would be to say that retweets are considered as votes for the upcoming discussion while
-favourites indicate that you want to put emphasis on a tweet's content (e.g. agree to the
+In our Tweetrospective I made no difference between the semantics of Retweets and Favourites. However,
+you could also consider applying different semantics to Retweets and Favourites respectively. A
+possible way would be to say that Retweets are considered as votes for the upcoming discussion while
+favourites indicate that you want to put emphasis on a Tweet's content (e.g. agree to the
 appreciation of a teammate). 
 
-After everyone has gone wild with their retweets and favourites you can identify the most voted-on
-tweets and re-arrange them to the **Trending Topics**. Go through these trending topics from most to
+After everyone has gone wild with their Retweets and Favourites you can identify the most voted-on
+Tweets and re-arrange them to the **Trending Topics**. Go through these trending topics from most to
 fewest-voted and let the team discuss the individual contents.
 
 From here on it's all discussion for the team. Just make sure to moderate and guide the discussion as you would usually do 
 and extract action items out of it.
 
-## Resources
+<a name="resources"></a>
+
+## Resources 
 You can do a Tweetrospective really simple without much preparation. Just make sure you have enough
-sticky notes, pens and a whiteboard for everyone. You can simply let everyone draw retweet and
-favourite icons on the whiteboard right next to the sticky note tweets.
+sticky notes, pens and a whiteboard for everyone. You can simply let everyone draw Retweet and
+Favourite icons on the whiteboard right next to the sticky note Tweets.
 
 If you want to step up your Tweetrospective game and save some time during the voting phase
-(drawing retweet and favourite icons seems to take quite some time) you can also print out the
+(drawing Retweet and Favourite icons seems to take quite some time) you can also print out the
 following Tweetrospective Sheets and cut out the icons for your teammembers before the retro.
 
 <div class="centered">
@@ -161,8 +166,6 @@ following Tweetrospective Sheets and cut out the icons for your teammembers befo
 		<a href="/assets/img/uploads/tweetrospective.svg">SVG</a>
 	</p>
 </div>
-
-** TODO: Change tweetrospective, tweets to uppercase **
 
 ## Footnotes
 [^1]: If you're interested in this topic you can find a comprehensive guide in Derby's and Larsen's [Agile Retrospectives: Making Good Teams Great](https://pragprog.com/book/dlret/agile-retrospectives)
