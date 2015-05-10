@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Agile Retrospective Idea: The Tweetrospective"
+title: "The Tweetrospective - refresh your next Agile Retrospective"
 tags: agile 
 excerpt: I've recently tried a new approach for facilitating an agile retrospecitve based on Twitter. It was a fun and creative session and I got great feedback. Read what I've done, what I've learned and grab some resources to do it yourself!
 comments: true
@@ -167,5 +167,12 @@ following Tweetrospective Sheets and cut out the icons for your teammembers befo
 	</p>
 </div>
 
-## Footnotes
+## Closing thoughts
+The Tweetrospective we had was a really fun and insightful session for our team. I plan to repeat it again some time 
+in the future. Perhaps I could get the idea across and inspire someone to try it out themselves. If you give it a try 
+feel free to share your experience. If you find something to improve or criticise just leave a comment in the comments section.
+
+<hr>
+**Footnotes**
+
 [^1]: If you're interested in this topic you can find a comprehensive guide in Derby's and Larsen's [Agile Retrospectives: Making Good Teams Great](https://pragprog.com/book/dlret/agile-retrospectives)
