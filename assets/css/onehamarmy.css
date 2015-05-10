@@ -132,7 +132,14 @@ h1.title {
 }
 
 .post img {
-    width: 100%;
+    max-width: 100%;
+	height: auto;
+}
+
+.post div.centered {
+	display: block;
+	margin: auto;
+	text-align: center;
 }
 
 .intro {
