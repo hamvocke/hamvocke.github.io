@@ -137,9 +137,32 @@ After everyone has gone wild with their retweets and favourites you can identify
 tweets and re-arrange them to the **Trending Topics**. Go through these trending topics from most to
 fewest-voted and let the team discuss the individual contents.
 
-Make sure to guide the discussion and extract action items out of it.
+From here on it's all discussion for the team. Just make sure to moderate and guide the discussion as you would usually do 
+and extract action items out of it.
 
 ## Resources
+You can do a Tweetrospective really simple without much preparation. Just make sure you have enough
+sticky notes, pens and a whiteboard for everyone. You can simply let everyone draw retweet and
+favourite icons on the whiteboard right next to the sticky note tweets.
+
+If you want to step up your Tweetrospective game and save some time during the voting phase
+(drawing retweet and favourite icons seems to take quite some time) you can also print out the
+following Tweetrospective Sheets and cut out the icons for your teammembers before the retro.
+
+<div class="centered">
+	<a href="/assets/img/uploads/tweetrospective.pdf">
+		<img src="/assets/img/uploads/printSheet.png" alt="The Tweetrospective Print Sheet">
+	</a>
+	<hr>
+	<p>
+		<strong>Download as:</strong> <br>
+		<a href="/assets/img/uploads/tweetrospective.pdf">PDF</a> |
+		<a href="/assets/img/uploads/tweetrospective.png">PNG</a> |
+		<a href="/assets/img/uploads/tweetrospective.svg">SVG</a>
+	</p>
+</div>
+
+** TODO: Change tweetrospective, tweets to uppercase **
 
 ## Footnotes
 [^1]: If you're interested in this topic you can find a comprehensive guide in Derby's and Larsen's [Agile Retrospectives: Making Good Teams Great](https://pragprog.com/book/dlret/agile-retrospectives)
