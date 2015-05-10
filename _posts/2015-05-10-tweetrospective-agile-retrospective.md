@@ -140,7 +140,7 @@ and extract action items out of it.
 <a name="resources"></a>
 
 ## Resources 
-You can do a Tweetrospective really simple without much preparation. Just make sure you have enough
+A Tweetrospective can be done easily and without much preparation. Just make sure you have enough
 sticky notes, pens and a whiteboard for everyone. You can simply let everyone draw Retweet and
 Favourite icons on the whiteboard right next to the sticky note Tweets.
 
