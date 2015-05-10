@@ -14,10 +14,9 @@ if you don't: shame on you, my friend).
 
 Retrospectives help the team to take a step back from the day-to-day business and to reflect on
 what's happened in the past iteration. The team gets to discuss about problems and risks, annoyances
-and moments of frustration, but also about successes and progress. All of this has the intention to
-find a way to eliminate the bad and encourage the good things in the future.
+and moments of frustration, but also about success stories and progress. The intention of this is to find a way to eliminate the bad and encourage the good things in the future.
 
-Every Retrospective will be facilitated by one person (the facilitator) who will prepare and setup 
+Every retrospective will be facilitated by one person (the facilitator) who will prepare and setup 
 the retro and guide the team. There are different approaches on how to facilitate a good retro and
 there are more books than you will want to read about that specific topic so I won't go into detail
 here [^1]. 
@@ -41,7 +40,7 @@ and really helps you keeping everything in mind for preparing retrospectives) an
 of retros that got the job done but that's about it. There's no vast pool of experience that I could
 rely on.
 
-Luckily enough there's a nice place for inspiration online that a colleague of mine showed me a
+Luckily enough there's a nice place for inspiration online that a colleague showed me a
 couple of weeks ago: the [Retr-o-mat](http://plans-for-retrospectives.com/) has a very nice
 collection of ideas and approaches for the individual phases for a retrospective. And on top of it
 it will automatically generate a fully fledged plan for your next retro by randomly picking one of the concepts
@@ -51,17 +50,13 @@ Introducing five new concepts for our team in the upcoming retro was more than I
 once we only have limited time and I want to get the most out of it instead of spending most of it
 explaining new games and approaches to the team. Secondly we are not that strict when it comes to
 the agenda of a retro. So instead of picking a completely generated plan I started browsing through
-the individual suggestions for the _"Gather Data"_ and _"Generate Insights"_ sections. There were
-quite some interesting suggestions around here and I can highly recommend browsing through them from
-time to time.
+the individual suggestions for the _"Gather Data"_ and _"Generate Insights"_ sections.
 
 Eventually I stumbled across the ["#tweetmysprint"](http://plans-for-retrospectives.com/?id=97) idea
 by [Thomas Guest](http://wordaligned.org/) and found it to be really interesting. It suggests using
 Twitter's Tweet format to let the team write their thoughts about the past iteration and ordering it
 in a timeline. I decided to let my retro revolve around exactly this concept. As it turns out it was
 a great idea. Our team had lots of fun and we got some really interesting results out of it. 
-
-At the end of this post you will find some resources that will help you doing it yourself
 
 ## The concept in a nutshell
 You start off describing the concept to the team. The team gets to write a couple of Tweets about
@@ -71,16 +66,16 @@ read it out loud. Every teammember gets to vote on the Tweets he or she wants to
 **Retweets** and **Favourites**. You organize the highest voted Tweets into **Trending Topics** and give
 the team time to discuss about these in more detail.
 
-It turns out that the Twitter universe offers everything you need for this. Restricting the opinions
+It turns out that the Twitter universe offers everything you need for a retro. Restricting the opinions
 on the sticky notes to Twitter's 140 characters limit is a good lesson on brevity and conciseness.
 It is challenging to stick to this format and therefore will result in some really creative answers. 
-Hashtags, Mentions and Emojis really offer some unique opportunities. Mentioning someone in a Tweet
-can be used to appreciate a specific person or to celebrate success. Hashtags are a really great
+Hashtags, Mentions and Emojis offer some unique opportunities. Mentioning someone in a Tweet
+can be used to appreciate a specific person or to celebrate success. Hashtags are a great
 concept to put additional information, emotion or funny references into the short Tweet format.
 
 
 ## Preparation
-As usual make sure to have a room where the whole team fits and can talk and discuss in an undisturbed fashion. 
+As usual make sure to have a room where the whole team fits and can talk and discuss in an undisturbed way. 
 Get enough sticky notes and pens for everyone. Make sure to pick the right format for the sticky notes. I've found a
 wide rectangular shape to be fitting (obviously resembling the format of one single Tweet).
 
@@ -91,8 +86,7 @@ hand them out together with the sticky notes and pens.
 ## Facilitating the Retro
 Facilitating your Tweetrospective won't be any different from other retros. Try your best to set a scene
 where everyone feels secure and comfortable. Writing Tweets allows to get creative and share short
-thoughts in an entertaining way with others. This could be a good opportunity to break the ice
-within a team.
+thoughts in an entertaining way with others. This could be a good opportunity to break the ice in a team.
 
 ### Presenting the Concept
 There might be people in your team who don't know the concept of Twitter. Even if you think everyone
@@ -106,7 +100,7 @@ suitable (personally, I gave no limit)
 
 In my Tweetrospective I prepared one example Tweet on a sticky note that included
 hashtags, mentions and emojis to show off what was possible. The content of this example Tweet was just 
-a reference to one of our team's inside jokes which really helped laid out the foundation for a lighthearted
+a reference to one of our team's inside jokes which laid out the foundation for a lighthearted
 atmosphere and got the idea across easily.
 
 ### Writing Tweets
@@ -133,7 +127,7 @@ discussion. Everyone can use the cut-out icons you have prepared previously.
 In our Tweetrospective I made no difference between the semantics of Retweets and Favourites. However,
 you could also consider applying different semantics to Retweets and Favourites respectively. A
 possible way would be to say that Retweets are considered as votes for the upcoming discussion while
-favourites indicate that you want to put emphasis on a Tweet's content (e.g. agree to the
+Favourites indicate that you want to put emphasis on a Tweet's content (e.g. underline the
 appreciation of a teammate). 
 
 After everyone has gone wild with their Retweets and Favourites you can identify the most voted-on
