@@ -72,6 +72,12 @@ nav a.logo {
 	padding: 15px;
 }
 
+nav .subtitle {
+	font-style: italic;
+	color: #aaa;
+	font-weight: 300;
+}
+
 nav ul {
 	display: inline;
 	padding: 0;
@@ -102,7 +108,9 @@ h1.title {
 	color: #aaa;
 	font-size: 1.5em;
 	margin-top: 30px;
-	margin-bottom: 200px;
+	font-weight: 300;
+	font-style: italic;
+	margin-bottom: 120px;
 }
 
 #home .image {
