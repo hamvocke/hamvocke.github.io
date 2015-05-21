@@ -1,4 +1,6 @@
-name: One Ham Army - Hermann Vocke's personal website and blog
+name: One Ham Army
+description: Hermann Vocke on software development, technology and random stuff
+url: http://www.onehamarmy.com
 markdown: kramdown
 include: ['.htaccess']
 highlighter: pygments
