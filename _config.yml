@@ -1,4 +1,4 @@
-name: One Ham Army
+name: One Ham Army - Hermann Vocke's personal website and blog
 markdown: kramdown
 include: ['.htaccess']
 highlighter: pygments
