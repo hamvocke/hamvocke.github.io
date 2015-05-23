@@ -1,6 +1,6 @@
-name: One Ham Army
+name: Ham Vocke
 description: Hermann Vocke on software development, technology and random stuff
-url: http://www.onehamarmy.com
+url: http://www.hamvocke.com
 markdown: kramdown
 include: ['.htaccess']
 highlighter: pygments
