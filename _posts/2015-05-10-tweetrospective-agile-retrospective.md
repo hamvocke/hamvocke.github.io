@@ -154,10 +154,9 @@ following Tweetrospective Sheets and cut out the icons for your teammembers befo
 	</a>
 	<hr>
 	<p>
-		<strong>Download as:</strong> <br>
-		<a href="/assets/img/uploads/tweetrospective.pdf">PDF</a> |
-		<a href="/assets/img/uploads/tweetrospective.png">PNG</a> |
-		<a href="/assets/img/uploads/tweetrospective.svg">SVG</a>
+		<a class="btn btn-primary" href="/assets/img/uploads/tweetrospective.pdf">Download as PDF</a> |
+		<a class="btn btn-primary" href="/assets/img/uploads/tweetrospective.png">Download as PNG</a> |
+		<a class="btn btn-primary" href="/assets/img/uploads/tweetrospective.svg">Download as SVG</a>
 	</p>
 </div>
 
