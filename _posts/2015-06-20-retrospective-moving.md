@@ -2,6 +2,7 @@
 layout: post
 title: "How the metaphor of 'moving apartments' helps with your next Retrospective"
 tags: agile
+excerpt: Probably everyone has moved at least once in their life. It's a lot of work but also offers unique opportunities. This post will tell you how the metaphor of moving can help you get great results out of your next Retrospective.
 comments: true
 ---
 
