@@ -45,7 +45,7 @@ Every project has similar things that don't need to be done right now but need t
 We had a really great session with our team using the "moving" metaphor. The team collected lots and lots of ideas that we could discuss about. I got great feedback on how the metaphor of moving really helped the team finding all these ideas. The four given questions offer analogies that everyone can relate to and they translate to project work really well.
 
 ## Resources
-As in [my last Retrospective](/2015/05/10/tweetrospective-agile-retrospective.html), I prepared some print-outs to better visualize the content of the Retro. I could also try to draw these but my drawing skills are pretty limited so I decided to go with printing them. Feel free to download the print-out if you want to try it for yourself. I'd love to hear from you if you're trying this out!
+As in [my last Retrospective](/blog/tweetrospective-agile-retrospective), I prepared some print-outs to better visualize the content of the Retro. I could also try to draw these but my drawing skills are pretty limited so I decided to go with printing them. Feel free to download the print-out if you want to try it for yourself. I'd love to hear from you if you're trying this out!
 
 <div class="centered">
   <a href="/assets/img/uploads/movingRetroSheet.png">
