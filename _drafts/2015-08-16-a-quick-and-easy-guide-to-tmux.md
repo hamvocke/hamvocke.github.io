@@ -2,7 +2,7 @@
 layout: post
 title: A Quick and Easy Guide to tmux
 tags: terminal
-excerpt: tmux is a tool that can help you to be more productive using the terminal. Think of it as a window manager in your terminal with some extra fanciness on top. This post gives you an easy-to-follow introduction to tmux and explains its basic features and how you use them.
+excerpt: tmux is a tool that can boost your productivity while using the terminal. Think of it as a window manager in your terminal with some extra fanciness on top. This post gives you an easy-to-follow introduction to tmux and explains its basic features and how to use them.
 comments: true
 ---
 
@@ -139,7 +139,7 @@ On top of that there are plenty of resources out there that help you getting fur
 
 For now it's best to discover some stuff on your own. Experiment, fool around and maybe try to use tmux in your daily work. It takes a while to get used to and you'll probably feel slow in the very beginning. I can only encourage you to keep using it. Get a feeling for its functionality and in no time you'll find out that your work with the terminal will be pure bliss and insanely fast.
 
-Right now I'm preparing a follow up to give you some more insights on customizations I find useful in general and especially for pair programming. Stay tuned!
+As you're reading this I'm preparing a follow up post to give you some more on how to customize tmux. I'll share some customizations I find useful in general and especially for pair programming. Stay tuned!
 
 <hr>
 **Footnotes**
