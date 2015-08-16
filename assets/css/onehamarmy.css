@@ -125,8 +125,12 @@ h1.title {
 
 #text {
 	text-align: left;
-	width: 540px;
+	width: 600px;
 	margin: auto;
+}
+
+#text ul {
+	margin-bottom: 1.5em;
 }
 
 #text ul li {
