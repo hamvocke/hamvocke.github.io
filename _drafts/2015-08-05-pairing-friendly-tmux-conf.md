@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Making tmux Pretty and Usable - A Guide to the tmux.conf
+title: Making tmux Pretty and Usable - A Guide to Customizing your tmux.conf
 tags: programming linux terminal
-excerpt: tmux certainly has its flaws when you use its vanilla configuration. I'll show you how you can customize tmux so that it better fits your needs and is a little more comfortable to use.
+excerpt: tmux certainly has its flaws when you use its vanilla configuration. I'll show you how you can customize tmux so that it fits your needs, is a little more comfortable to use and pretty to look at.
 comments: true
 ---
 
@@ -13,7 +13,7 @@ If you've followed that guide you might have had a feeling that many people have
 And actually it's quite easy to customize the look and feel of tmux. Let me tell you something about the basics of customizing tmux and share some of the configurations I find most useful.
 
 ## Customizing tmux
-Customizing tmux is as easy as editing a text file. tmux uses a file called `tmux.conf` to store its configuration. If you store a file as `~/.tmux.conf` then tmux will use this configuration file for your user. If you want to share a configuration for multiple users (e.g. if you should feel the urge to start tmux as super user (please think about this carefully!)) you can also put your tmux.conf into a system-wide directory. The location of this directory will be different accross different operating systems. The man page (`man tmux`) will tell you the exact location, just have a look at documentation for the `-f` parameter.
+Customizing tmux is as easy as editing a text file. tmux uses a file called `tmux.conf` to store its configuration. If you store that file as `~/.tmux.conf` (**Note:** there's a period as the first character in the file name. It's a hidden file) tmux will pick this configuration file for your current user. If you want to share a configuration for multiple users (e.g. if you should feel the urge to start tmux as super user (please think about this carefully!)) you can also put your tmux.conf into a system-wide directory. The location of this directory will be different accross different operating systems. The man page (`man tmux`) will tell you the exact location, just have a look at documentation for the `-f` parameter.
 
 ### Less awkward prefix keys
 Probably the most common change among tmux users is to change the **prefix** from the rather awkward `C-b` to something that's a little more accessible. Personally I'm using `C-a` instead but note that this might interfere with bash's "go to beginning of line" command[^1]. On top of the `C-a` binding I've also remapped my Caps Lock key to act as Ctrl since I'm not using Caps Lock anyways. This allows me to nicely trigger my prefix key combo.
@@ -69,7 +69,7 @@ I like to give my tmux windows custom names using the `,` key. This helps me nam
 ## Changing the look of tmux
 Changing the colors and design of tmux is a little more complex than what I've presented so far. You'll want tmux to give a consistent look which is why you most likely have to change the looks of quite a lot of elements tmux displays. This is why changes to the design often result in plenty of lines in your config. I can only recommend to put these into their own identifiable section within your tmux.conf to be able to change this block of config without accidentaly ripping out some of your precious custom key bindings. I'm using comments, starting with a `#` character to make it visible where the design changes start.
 
-Credit where credit is due: The following design is not mine. /u/<TODO> published it on /r/unixporn so it's his effort and all thanks have to go out to him. Thanks!
+**Credit where credit is due:** I did not create the following design. [/u/dothebarbwa](https://www.reddit.com/user/dothebarbwa) was so kind to [publish](https://www.reddit.com/r/unixporn/comments/3cn5gi/tmux_is_my_wm_on_os_x/) it on [/r/unixporn](https://www.reddit.com/r/unixporn) so it's his effort and all thanks have to go out to him. Thanks!
 
 Depending on your color scheme (I'm using [base16-ocean-dark](https://github.com/chriskempson/base16)) your resulting tmux will look something like this:
 
@@ -183,10 +183,13 @@ There is some really interesting stuff out there. I've seen people doing pure ma
 
 
 ## Further resources
-- dotfiles repos
-- reddit.com/r/unixporn (beware, don't get sidetracked; and beware of the useless overcustimzations)
+As I've already told you, there are plenty of resources out there where you can find people presenting their tmux.confs in a similar fashion to what I've done here. Feel free to browse and search for inspiration. Personally I love reading other people's blog posts about their tmux configs.
 
-You can also find my complete tmux.conf (along with other configuration files I'm using n my systems) on my [dotfiles repo](https://github.com/hamvocke/dotfiles)
+GitHub is also a great source. Simply search for *"tmux.conf"* or repos called *"dotfiles"* to find a vast amount of configurations that are out there.
+
+If you're especially looking for theming options, I can also recommend having a look at [/r/unixporn](https://reddit.com/r/unixporn) (SFW, in spite of its title). It's a great place where people showcase their fine-tuned and heavily themed unix environments. Some stuff is really nice, some other stuff is only pretty but mostly dysfunctional. From time to time you find people sharing their tmux.conf as well, you can also deliberately search for the term "tmux.conf" to find what you're looking for.
+
+You can also find my complete tmux.conf (along with other configuration files I'm using on my systems) on my personal [dotfiles repo](https://github.com/hamvocke/dotfiles) on GitHub.
 
 <hr>
 **Footnotes**
