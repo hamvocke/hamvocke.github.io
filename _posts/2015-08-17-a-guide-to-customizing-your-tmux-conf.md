@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Making tmux Pretty and Usable - A Guide to Customizing your tmux.conf
-tags: programming linux terminal
+tags: terminal
 excerpt: tmux certainly has its flaws when you use its vanilla configuration. I'll show you how you can customize tmux so that it fits your needs, is a little more comfortable to use and pretty to look at.
 comments: true
 ---
