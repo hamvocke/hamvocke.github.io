@@ -5,4 +5,4 @@
   Owner: Ham Vocke
   Site: http://www.hamvocke.com
   Twitter: hamvocke
-  Location: Hambur, Germany
+  Location: Hamburg, Germany
