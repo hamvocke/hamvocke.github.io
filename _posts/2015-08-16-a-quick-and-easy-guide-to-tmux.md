@@ -139,7 +139,7 @@ On top of that there are plenty of resources out there that help you getting fur
 
 For now it's best to discover some stuff on your own. Experiment, fool around and maybe try to use tmux in your daily work. It takes a while to get used to and you'll probably feel slow in the very beginning. I can only encourage you to keep using it. Get a feeling for its functionality and in no time you'll find out that your work with the terminal will be pure bliss and insanely fast.
 
-If you're interested in customizing your tmux experience I recommend that you read my [Guide to Customizing your tmux.conf](/blog/a-guide-to-customizing-your-tmux-conf/). And if you really want to get the most out of tmux, you should try [working collaboratively](/blog/remote-pair-programming-with-tmux/) in the same session for once.
+If you're interested in customizing your tmux experience I recommend that you read my [Guide to Customizing your tmux.conf](/blog/a-guide-to-customizing-your-tmux-conf/).
 
 <hr>
 **Footnotes**
