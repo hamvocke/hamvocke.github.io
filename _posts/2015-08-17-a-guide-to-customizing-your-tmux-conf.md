@@ -73,7 +73,7 @@ Changing the colors and design of tmux is a little more complex than what I've p
 
 Depending on your color scheme (I'm using [base16-ocean-dark](https://github.com/chriskempson/base16)) your resulting tmux will look something like this:
 
-![themed tmux](/assets/img/uploads/tmux_custom.png)
+![themed tmux](/assets/img/uploads/tmux_custom.jpg)
 
     ######################
     ### DESIGN CHANGES ###

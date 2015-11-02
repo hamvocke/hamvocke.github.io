@@ -38,6 +38,8 @@ Please note that _"shared"_ will be the name of the session, feel free to give i
 
 From here Alice and Bob can happily hack away on their terminal and make use of all the fancy features offered by tmux. They can create panes and windows, launch different command line applications and pair happily on their tasks. They can even detach from that session and return at any later point. Both will see the exact same output in their respective terminal window. 
 
+![synchronized session sharing with tmux](/assets/img/uploads/ssh_tmux_simple.png)
+
 But somehow Alice and Bob feel that this is not quite perfect. There are situations where they want to work on different stuff while still being in that session. But as soon as Alice switches to a different window to work on her tasks, Bob's terminal will also switch along.  
 
 ## Independent Window Switching
@@ -53,6 +55,8 @@ The steps for this setup are a little different:
 
 That's it. Now both can move between tmux windows independently. The content (including panes) within those windows will be synchronized between all clients.
 
+![independent shared sessions with tmux](/assets/img/uploads/ssh_tmux_advanced.png)
+
 If you want to get a feeling for what's happening behind the scenes you can simply look up what sessions and window groups have been created after Alice has created her session. A simple `tmux ls` will reveal what's happening:
 
     bob: 2 windows (created Mon Nov  2 22:51:24 2015) [80x23] (group 0) (attached)
@@ -60,11 +64,26 @@ If you want to get a feeling for what's happening behind the scenes you can simp
 
 As you can see, there are two sessions with their respective name. Both sessions are in the same group `(group 0)` and therefore share the same windows.
 
-Note: The dot pattern results from a mismatch in the terminal sizes. 
+## Where do all the dots come from?
 
-This solution scales, you can not only pair but theoretically have an indefinite amount of people joining that session (well, there will be a practical limit, maybe you want to find out ;))
+![dot pattern on window size mismatch](/assets/img/uploads/ssh_tmux_mismatch.png)
 
-A honorable mention goes out to tmate.io. @kaeff recently made me aware of this service that allows you to set this kind of config up in an ad-hoc fashion. So if you want to have it even more hassle-free feel free to give it a shot.
+You might notice that occasionally you'll see a weird dot pattern in one of your terminals. Don't worry, nothing's broken. This dot pattern occurs if not all of you have the same terminal window size. Those with a bigger terminal window will see the dot pattern for that area where the bigger windows exceed the smallest window in that session. 
+
+## Conclusion
+To me this is a really nice and lightweight solution if you want to collaborate remotely. You can use it for pair programming, to troubleshoot issues on your servers together and much more. Surely there are restrictions for this solution. You are bound to the command line, there's no way around it. You also need to have a separate channel to talk to each other (which fits quite well in the "do one thing and do it well" philosophy if you ask me; there are multiple VoIP services or old school telephones out there). 
+
+If you are looking for a one-stop solution, one of the previously mentioned tools and services might be better suited for you. 
+
+One last honorable mention goes out to [tmate.io](http://tmate.io/). A couple of weeks ago [@kaeff](https://twitter.com/kaeff), one of my colleagues pointed out to me that this service does exactly what I've just described in this article. If you want to avoid the (quite small) hassle of connecting into one of your machines over ssh, tmate can give you a set up in an ad-hoc fashion easily.
+
+If you have any further experience or opinions feel free to share them with us in the comments section!
+
+# TODO
+Proofread
+compress images
+check links
+prevent linebreak in code snippets
 
 <hr>
 **Footnotes**
