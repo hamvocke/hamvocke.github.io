@@ -48,7 +48,7 @@ This is what it will look like in action:
 
 But somehow Alice and Bob feel that this is not quite perfect. There are situations where they want to work on different stuff while still being in that session. But as soon as Alice switches to a different window to work on her tasks, Bob's terminal will also switch along.  
 
-## Independent Window Switching
+## Independent window switching
 Instead of sharing the exact same session between multiple tmux clients, we can also create multiple session within the same window group. The result is similar to what we've seen above with one difference: Each developer can switch tmux windows independently. 
 
 All contents of the windows will be synchronized between all clients. But each client can decide individually which window's content should be shown at the moment. This allows Alice and Bob to work independently on different tasks if they feel the need to do so. Whenever they want to go back to normal pairing they can switch back to the same tmux window and will see the same content again. 
@@ -77,7 +77,7 @@ As you can see, there are two sessions with their respective name. Both sessions
 
 <img class="space-bottom" src="/assets/img/uploads/ssh_tmux_advanced.png" alt="independent shared sessions with tmux">
 
-## Benefits and Drawbacks
+## Benefits and drawbacks
 To me this is a really nice and lightweight solution if you want to collaborate remotely. You can use it for pair programming, to troubleshoot issues on your servers together and much more. However, you need to be aware that this is a solution with a lot of restrictions. You're completely bound to the command line and its tools, there's no way around it. You also need to have a separate channel to talk to each other 
 
 If you are looking for a fully-fledged solution that allows you to use tools outside of the command line and also includes audio and video conferencing, one of the previously mentioned tools and services might be better suited for you. But if you need something really lightweight that you can control completely on your own and are not afraid of the command line, this setup might be perfect for you.
