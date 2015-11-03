@@ -25,7 +25,7 @@ Alternatively they cold also designate Alice's or Bob's machine as the pairing h
 
 Once they are connected to the same machine, they can use tmux for a shared environment. tmux's client-server architecture allows multiple clients to connect to the same sessions on a server (we've got all that session handling stuff covered in the [intro guide](/blog/a-quick-and-easy-guide-to-tmux/)). That's perfect for our plans. We can have one session that holds all the windows and panes and can connect one client for each developer.
 
-![synchronized session sharing with tmux](/assets/img/uploads/ssh_tmux_simple.png)
+<img class="space-bottom" src="/assets/img/uploads/ssh_tmux_simple.png" alt="synchronized session sharing with tmux">
 
 ## Sharing a tmux session
 The simplest setup is using the exact same session with multiple tmux client instances. The following steps will get us there:
@@ -75,7 +75,7 @@ If you want to get a feeling for what's happening behind the scenes you can simp
 
 As you can see, there are two sessions with their respective name. Both sessions are in the same group `(group 0)` and therefore share the same windows.
 
-![independent shared sessions with tmux](/assets/img/uploads/ssh_tmux_advanced.png)
+<img class="space-bottom" src="/assets/img/uploads/ssh_tmux_advanced.png" alt="independent shared sessions with tmux">
 
 ## Benefits and Drawbacks
 To me this is a really nice and lightweight solution if you want to collaborate remotely. You can use it for pair programming, to troubleshoot issues on your servers together and much more. However, you need to be aware that this is a solution with a lot of restrictions. You're completely bound to the command line and its tools, there's no way around it. You also need to have a separate channel to talk to each other 

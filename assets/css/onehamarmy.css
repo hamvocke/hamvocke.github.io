@@ -158,6 +158,10 @@ h1.title {
 	height: auto;
 }
 
+.post img.space-bottom {
+	margin-bottom: 3em;
+}
+
 .post video {
 	max-width: 100%;
 	height: auto;
