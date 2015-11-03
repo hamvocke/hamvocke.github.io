@@ -40,7 +40,7 @@ From here Alice and Bob can happily hack away on their terminal and make use of 
 
 This is what it will look like in action:
 
-![screen sharing with ssh and tmux in acion](/assets/img/uploads/ssh_tmux_simple2.gif)
+<video src="/assets/video/ssh_tmux_simple.webm" autoplay controls></video>
 
 But somehow Alice and Bob feel that this is not quite perfect. There are situations where they want to work on different stuff while still being in that session. But as soon as Alice switches to a different window to work on her tasks, Bob's terminal will also switch along.  
 
@@ -50,7 +50,7 @@ Instead of sharing the exact same session between multiple tmux clients, we can 
 All contents of the windows will be synchronized between all clients. But each client can decide individually which window's content should be shown at the moment. This allows Alice and Bob to work independently on different tasks if they feel the need to do so. Whenever they want to go back to normal pairing they can switch back to the same tmux window and will see the same content again. 
 
 This is how independent window switching will look like in action:
-![screen sharing with ssh and tmux in acion](/assets/img/uploads/ssh_tmux_simple2.gif)
+<video src="/assets/video/ssh_tmux_advanced.webm" autoplay controls></video>
 
 The steps for this setup are a little different:
 
