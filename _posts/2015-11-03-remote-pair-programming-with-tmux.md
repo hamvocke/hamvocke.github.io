@@ -62,7 +62,7 @@ The steps for this setup are a little different:
 <ol>
   <li>Again, Alice and Bob <code>ssh</code> into the same server</li>
   <li>Alice, as before, creates a new tmux session: <code>tmux new -s alice</code>. tmux will implicitly create a new <strong>window group</strong></li>
-  <li>Bob does not join that same session. Instead he starts a <strong>new session</strong> and connects that session to the same <strong>window group</strong> as Alice’s <em>“shared”</em> session: <code>tmux new -s bob -t alice</code></li>
+  <li>Bob does not join that same session. Instead he starts a <strong>new session</strong> and connects that session to the same <strong>window group</strong> as Alice’s session: <code>tmux new -s bob -t alice</code></li>
 </ol>
 </div>
 That's it. Now both can move between tmux windows independently. The content (including panes) within those windows will be synchronized between all clients.
