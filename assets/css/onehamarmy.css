@@ -42,6 +42,12 @@ a:hover {
 	text-decoration: none;
 }
 
+code {
+    background: #383838;
+    color: #F7CA88;
+    white-space: nowrap;
+}
+
 footer {
 	height: 3em;
 	border-top: 1px solid #ddd;
