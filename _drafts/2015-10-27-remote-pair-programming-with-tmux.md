@@ -6,7 +6,7 @@ excerpt: For many developers pair programming is the way to go. But pairing ofte
 comments: true
 ---
 
-[Pair Programming](https://en.wikipedia.org/wiki/Pair_programming) has found wide adoption in software development ever since it became popular with the rise of Extreme Programming and other agile development approaches. This practice where two developers are working on the same machine and the same task has some really neat advantages over working all by yourself. Working in pairs results in higher quality, spreads knowledge between your team members and ultimately leads to higher satisfaction. Sounds cool? Well, it is![^1]
+[Pair Programming](https://en.wikipedia.org/wiki/Pair_programming) has found wide adoption in software development ever since it became popular with the rise of Extreme Programming and other agile development approaches. This practice where two developers are working on the same machine and the same task has some really neat advantages over working all by yourself. Working in pairs results in higher quality, spreads knowledge between your team members and ultimately leads to higher satisfaction. Sounds cool? Well, it is!
 
 However, pair programming often becomes difficult as soon as the development team is spread accross different locations. People might be working from home. Parts of your team might be located at a different office, maybe even in an entirely different country. 
 
@@ -14,7 +14,7 @@ It's 2015, the idea of pair programming has been around for more than a decade b
 
 Those are a lot of services and tools, trying to solve multiple of your problems at once. Personally, I like to keep it simple. I like to keep control over what I'm doing. I like to have tools that do one job and do that job right. And, like many other developers, I like to work in my terminal and hack away in vim/emacs/nano (I'm not gonna start an editor war here!). Luckily, I have everything I need at my disposal. And most likely so do you!
 
-A simple combination of **SSH** and **tmux**[^2] is all we need to setup a really effective and lightweight remote pair programming environment. We can use all of our beloved command line tools with finely tuned dotfiles and pat ourselves on the backs for working on our hacker credibility.
+A simple combination of **SSH** and **tmux**[^1] is all we need to setup a really effective and lightweight remote pair programming environment. We can use all of our beloved command line tools with finely tuned dotfiles and pat ourselves on the backs for working on our hacker credibility.
 
 ## What are we going to do?
 Let's imagine we have two developers, _Alice_ and _Bob_. They want to collaborate on a task and since they both are comfortable using the command line they decide to set up a shared terminal environment to work together.
@@ -30,9 +30,13 @@ Once they are connected to the same machine, they can use tmux for a shared envi
 ## Sharing a tmux session
 The simplest setup is using the exact same session with multiple tmux client instances. The following steps will get us there:
 
-1. Alice and Bob `ssh` into the same server
-2. Alice creates a new tmux sesssion: `tmux new -s shared`
-3. Bob connects to that session: `tmux attach -t shared`
+<div class="highlight">
+<ol>
+  <li>Alice and Bob <code>ssh</code> into the same server</li>
+  <li>Alice creates a new tmux sesssion: <code>tmux new -s shared</code></li>
+  <li>Bob connects to that session: <code>tmux attach -t shared</code></li>
+</ol>
+</div>
 
 Please note that _"shared"_ will be the name of the session, feel free to give it any name you like. 
 
@@ -54,10 +58,13 @@ This is how independent window switching will look like in action:
 
 The steps for this setup are a little different:
 
-1. Again, Alice and Bob `ssh` into the same server
-2. Alice, as before, creates a new tmux session: `tmux new -s alice`. tmux will implicitly create a new **window group**
-3. Bob does not join that same session. Instead he starts a **new session** and connects that session to the same **window group** as Alice's _"shared"_ session: `tmux new -s bob -t alice`
-
+<div class="highlight">
+<ol>
+  <li>Again, Alice and Bob <code>ssh</code> into the same server</li>
+  <li>Alice, as before, creates a new tmux session: <code>tmux new -s alice</code>. tmux will implicitly create a new <strong>window group</strong></li>
+  <li>Bob does not join that same session. Instead he starts a <strong>new session</strong> and connects that session to the same <strong>window group</strong> as Alice’s <em>“shared”</em> session: <code>tmux new -s bob -t alice</code></li>
+</ol>
+</div>
 That's it. Now both can move between tmux windows independently. The content (including panes) within those windows will be synchronized between all clients.
 
 
@@ -82,5 +89,4 @@ If you have any further experience or opinions feel free to share them with us i
 <hr>
 **Footnotes**
 
-[^1]: just in case it's not obvious by now: I strongly believe in the benefits of pair programming. Ever since I joined ThoughtWorks I see the advantages on a daily basis. Your mileage may vary, though. There are tasks that greatly benefit from pairing while others (especially simple ones) could be better tackled by an individual developer.
-[^2]: If you don't feel familiar with tmux or need a quick refresh take a look at my [introductory guide to tmux](/blog/a-quick-and-easy-guide-to-tmux/).
+[^1]: If you don't feel familiar with tmux or need a quick refresh take a look at my [introductory guide to tmux](/blog/a-quick-and-easy-guide-to-tmux/).
