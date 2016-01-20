@@ -60,6 +60,14 @@ Enabling mouse mode allows you to select windows and different panes by simply c
     set -g mouse-select-pane on
     set -g mouse-resize-pane on
 
+**Update for tmux 2.1**:  
+As Jon Lillie pointed out in the comments, mouse mode has been [rewritten in tmux 2.1](https://github.com/tmux/tmux/blob/master/CHANGES#L6-L13). Once you are on tmux 2.1 (or later) you can activate the new mouse mode with a single command:
+
+    # Enable mouse mode (tmux 2.1 and above)
+    set -g mouse on
+
+The new mode is a combination of all the old mouse options and fixes the text selection issues as well.
+
 ### Stop renaming windows automatically
 I like to give my tmux windows custom names using the `,` key. This helps me naming my windows according to the context they're focusing on. By default tmux will update the window title automatically depending on the last executed command within that window. In order to prevent tmux from overriding my wisely chosen window names I want to suppress this behavior:
 
