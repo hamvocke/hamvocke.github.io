@@ -60,7 +60,7 @@ The shortcut to split panes into a left and a right pane is `C-b %`. Remembering
 
 ![tmux with two split panes](/assets/img/uploads/tmux_split.png)
 
-Where there's a split into left and right, there's also a split into top and bottom pane. To split a pane into tip and bottom panes use the `C-b "` shortcut.
+Where there's a split into left and right, there's also a split into top and bottom pane. To split a pane into top and bottom panes use the `C-b "` shortcut.
 
 ### Navigating Panes
 Right now we're trapped in the newly created pane. But we really really want to go back to the left one. Easy peasy: Switching to a different pane uses the `C-b <arrow key>` shortcut, where &lt;arrow key> is the arrow key pointing to the pane you want to switch to. In our case we want to switch to the panel on the left so it's `C-b left` for us. Just once more, so that we fully understand this: This means you press `Ctrl` and `b` (your prefix) followed by the `left` arrow key to get to the pane on the left.
