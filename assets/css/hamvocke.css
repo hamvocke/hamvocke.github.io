@@ -205,6 +205,24 @@ h1.title {
 	margin-top: 50px;
 }
 
+.skills .tag {
+	background: #444;
+	color: #fff;
+	padding: 4px 12px;
+	margin: 4px;
+	border-radius: 6px;
+	white-space: nowrap;
+}
+
+.skills {
+	margin: 2em 0;
+	line-height: 2.3em;
+}
+
+.float-right {
+	float: right;
+}
+
 @media (max-width: 768px) {
 	#text {
 		width: 100%;
