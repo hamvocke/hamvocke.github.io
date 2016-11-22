@@ -1,0 +1,73 @@
+==================================================================
+https://keybase.io/ham
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.hamvocke.com
+  * I am ham (https://keybase.io/ham) on keybase.
+  * I have a public key with fingerprint E6CC 6772 E6C8 4F26 8ABE  A6B4 3E86 026C 7C4B EEB9
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101a1670966cc95460ecaa406bedadf4465c63f66e24821f2eb5f7a056cd0dd60f00a",
+            "fingerprint": "e6cc6772e6c84f268abea6b43e86026c7c4beeb9",
+            "host": "keybase.io",
+            "key_id": "3e86026c7c4beeb9",
+            "kid": "0101442c8ba401cdd5140fdf7bd621d5af1ff27b6b2b6fc44fabd01995a19f1f86c60a",
+            "uid": "0eccfe263668d171bd19b7d491c3ef19",
+            "username": "ham"
+        },
+        "service": {
+            "hostname": "www.hamvocke.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1479841425,
+    "expire_in": 157680000,
+    "prev": "a8945e3e205c6cc89d0aaa98154df3fcb60716ddb5d61cdcdc0575efaa88e2c2",
+    "seqno": 12,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+owFtUn9QFFUcP34EeZBoNTUQDcNWAnHd7O7tvt09NaUS1EMFiyRn9Gb3vbewAXdw
+t3DyU7E0TlAQ66pxCorhhxhUTCSmwhlKo1SIWoxjoTRcaENJkjMlCu2RTf/03h9v
+3vf7+Xy+n+/3vboHgnT6gGd3B+aWWX47GjB4XdJlMh5PKSHZUTFhLiVy8PyBcxF2
+qtYcBRFmgqRISqQARwoAQCiwDCAxFEWGBBJGIpIZBrAQmGQAMM3wNCXTWGJlTiRZ
+ABGJECBlkhQJAyErtizsyHcoNlWTxZoY4DhaO3lGpgEvSlgEEmPCPCBpADnISBhL
+gkbMtjv9DM2cJDqxUbFrMe1inbf3P/j/fDMMDXlJ80pBhFiKIWUkcxICNIVYUaZk
+meYkINESkCHDyKKESEoQWJEStBwPIJj3XfiPHIZQxjQwAcAjiqMkRAkShxiBgiYs
+U/66hU7ssIl5WENni3lEuYHQAkUKxP6Z+pu4l3S5XEYNUGSHOdgI7XkaNd9hV+3Q
+nuunqmq+2U9Wi/Pn0Viy3tOxSooNaVPUCEXY4VTsNsJMaUioKn5hiuEEnqEYmjUQ
+eFu+4sBWxY9gOcCT2vKXwUWapMgLDItNmN5Eak8HIS8gUhRFgadYBskmGUqA5CiA
+kMQioI1O2yTLsVgWRZ7HNKQJf2sFNrsmTmtGxSxN1Klk2US10IGJcr07MDpYF6DX
+hdwX6P9gOv2CRf/+uqGgRbqjqeV0ZtXYduf5hFYQehM0JHY0LT10w3jL3HLKJ7Oe
+zQ83veFZder12Op06vOG8aSgIx/1FG+9490fubGurOPyXdqb4M2Ompj8bOHx+j97
+Nr/zQe9cy9kLCS1t/Wt/3KNblf7t7GNvncFRkR0RBx+ZclvSsp6IdybuOv92ZUFl
+X01bQe22RFTHd/xybcEZSkx7sdrtuvxqGNM1Hc7M1IXtuPLCnDv11oE1GSFbj62L
+casZ44ejFw98feG5NTWG0pL22cnvl90YMuuXRXq8hyuchLP0yCzH9oamfHlgasKY
+bFS/OfHxS25XSuwnlWV9h3KCv6hqK0tqVnfF75+RXc7mgOxnwKRp4acrBs7y53oz
+t/yxr3vjSQbV+jxLCuuXb4lTDL93d7VGt9YMj1XFdja+b5mypbLh312PHY54+uSx
+TMv2n8fIvRWhMQeXG4y+Hza1djuCr5weG8xM6ZqJHG98cMfoMBzpm2qLuBq8Eo6u
+qBrG5M2BlFceurYv4vEU7tJFuDoqme15qmTkdrI7rrkp7eLqDXu/im5/snawdaVv
+sD/p0msFu9tv+/pHl7bvHD/OWkq8nRF3MpJ2DiWMhpMTyQ0Z7zZ6u/sq19Ukh6yv
+7ZwZja+7vz2u/7RrT8NiNz0dU3M3dKTeYn20+r3GNOnq+mnfufQP35zbkK4X1/71
+cmeY+uuJn5ZUPG/6Gw==
+=d3nu
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ham
+
+==================================================================
