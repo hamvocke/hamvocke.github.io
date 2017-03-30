@@ -17,6 +17,7 @@ Tools
   * travis-ci
   * gitlab
   * concourse
+  * drone
   * GoCD
   * jenkins
   * circle ci
