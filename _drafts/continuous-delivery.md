@@ -21,6 +21,9 @@ Tools
   * GoCD
   * jenkins
   * circle ci
+  * codeship
+  * semaphore ci
+  * screwdriver cd
   * ...
 
 Hosted vs cloud-based
@@ -36,3 +39,9 @@ Concourse: self hosted, all jobs (tasks?) run in their own container. Nice way t
 Why having a "go" script is beneficial ([link to blog](https://www.thoughtworks.com/insights/blog/praise-go-script-part-i))
 
 Deploying vs Releasing / Feature toggles
+
+Building/deploying: options, options, options
+  * docker (not all CI tools support this (snap does on request: https://snap-ci.com/docker/)
+  * naive ssh deployment (snowflake servers)
+  * phoenix servers
+  * heroku, flynn, et al.
