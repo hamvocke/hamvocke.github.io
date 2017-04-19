@@ -25,10 +25,9 @@ Tools
   * semaphore ci
   * screwdriver cd
   * ...
+  (see 'choosing a cd tool' post)
 
-Hosted vs cloud-based
-
-Host own instances to showcase what they look like
+Hosted vs cloud-based, open-source vs proprietary, free vs paid
 
 Jenkins: gets a lot of hate (and is not my favourite either) but still you have to value it for what it is: an open source tool that's quite easy to set up. And it's way better than nothing at all.
 
@@ -39,6 +38,8 @@ Concourse: self hosted, all jobs (tasks?) run in their own container. Nice way t
 Why having a "go" script is beneficial ([link to blog](https://www.thoughtworks.com/insights/blog/praise-go-script-part-i))
 
 Deploying vs Releasing / Feature toggles
+
+Multiple environments, typical stages
 
 Building/deploying: options, options, options
   * docker (not all CI tools support this (snap does on request: https://snap-ci.com/docker/)
