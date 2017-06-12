@@ -93,7 +93,6 @@ Depending on your color scheme (I'm using [base16-ocean-dark](https://github.com
     
     ## Status bar design
     # status line
-    set -g status-utf8 on
     set -g status-justify left
     set -g status-bg default
     set -g status-fg colour12
