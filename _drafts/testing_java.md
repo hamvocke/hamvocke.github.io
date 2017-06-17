@@ -25,7 +25,7 @@ Luckily test automation is a quite well-understood and mature topic. The develop
 **TODO: more literature about testing, unit testing etc. (Meszaros?, Writing OO Software guided by tests)**
 
 ## The Test Pyramid
-If you want to get serious about automated tests for your software there is one key concept that you should stick to: the **test pyramid**. Mike Cohn came up with this concept in his book [Succeeding with Agile](https://www.amazon.com/dp/0321579364/ref=cm_sw_r_cp_dp_T2_bbyqzbMSHAG05). It's a great visual metaphor telling you that you should think about different layers of testing. On top of that it tells you how big each of these layers should roughly be.
+If you want to get serious about automated tests for your software there is one key concept that you should stick to: the **test pyramid**. Mike Cohn came up with this concept in his book [Succeeding with Agile](https://www.amazon.com/dp/0321579364/ref=cm_sw_r_cp_dp_T2_bbyqzbMSHAG05). It's a great visual metaphor telling you to think about different layers of testing and how much testing to do on each layer.
 
 Mike Cohn's original testing pyramid consists of three layers that your test suite should consist of (bottom to top):
   
@@ -58,6 +58,17 @@ These tests are on a higher level than your unit tests. Integrating slow parts l
 ### UI Tests
 All applications have some sort of user interface. Typically we're talking about a web interface in the context of web applications but if you think about it, a REST API or command line client is as much of a user interface as a React application.
 
-Testing through the user interface is the most end-to-end way you could test your application. You run your tests against the same interface your real users would use. It's quite obvious that these tests give you the biggest confidence when you need to decide if your software is working or not. With [Selenium](http://docs.seleniumhq.org/) and the [WebDriver Protocol](https://www.w3.org/TR/webdriver/) there are some tools that allow you to automate your UI tests by automatically driving a (headless) browser, performing clicks, entering data and checking the state of your user interface.
+Testing through the user interface is the most end-to-end way you could test your application. You run your tests against the same interface real users would use. It's quite obvious that these tests give you the biggest confidence when you need to decide if your software is working or not. With [Selenium](http://docs.seleniumhq.org/) and the [WebDriver Protocol](https://www.w3.org/TR/webdriver/) there are some tools that allow you to automate your UI tests by automatically driving a (headless) browser, performing clicks, entering data and checking the state of your user interface.
 
-Running these UI tests proves to be quite an adventure. These kinds of tests are notoriously flaky, failing for unrelated and unforeseeable reasons. They require a lot of maintenance and run pretty slow. 
+UI tests come with their own kind of problems. They are notoriously flaky and often fail for unexpected and unforseeable reasons. They require a lot of maintenance and run pretty slowly. Yet they give you the highest confidence that your application is working correctly end to end. Due to their high maintenance cost you should aim to reduce the number of UI tests to the bare minimum. Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and try to reflect the most important steps of these user journeys in your automated UI tests. If you're building an e-commerce site your most valuable customer journey could be a user searching for a product, putting it in the shopping basket and doing a checkout. Done. If this journey still works you should be pretty good to go. Everything else can and should be tested in lower levels of the test pyramid.
+
+
+### Contract Tests
+**TODO**
+Test the contract (interface) between two services. Loose coupling, allow services to evolve on their own without breaking dependencies, foster communication between teams, decouple services and allow omitting flaky and hard to setup end to end testing.
+
+### Avoid Test Duplication
+When you write automated tests for your application be aware where you put them within your test pyramid. As a rule of thumb keep in mind that stuff you test on lower levels doesn't need to be tested on higher levels of the pyramid again. If you can check all sorts of edge-cases and invalid input combinations on unit level do so. There's no need to check all these cases again on your service or UI level (though you technically can, of course). Do yourself a favor and avoid duplicating your tests throughout the pyramid and try to put your tests as low as possible within the testing pyramid to come up with a fast, maintainable and reliable test suite.
+
+
+## The Sample Application
