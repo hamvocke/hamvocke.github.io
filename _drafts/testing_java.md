@@ -8,7 +8,7 @@ comments: true
 
 Microservices are all the rage. If you've attended a tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the success stories that companies love to share about their microservices journey. 
 
-Somewhere beneath that hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have made [a way better job](https://www.martinfowler.com/microservices) at breaking this down for you than I ever could. Chance is, if you're reading this you somehow ended up with the decision to take a look into what's behind this magic buzzword.
+Somewhere beneath that hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down for you than I ever could. Chance is, if you're reading this you somehow ended up with the decision to take a look into what's behind this magic buzzword.
 
 ## Key Concepts of Test Automation
 Microservices go hand in hand with _continuous delivery_, a practice where you automatically ensure that your software can potentially be released to production at any time you like. Again, a lot of stuff has been written about this topic and if you want to find out how to get started, I can highly recommend to pick up [the Continuous Delivery book](https://www.amazon.com/gp/product/0321601912) that will teach you almost everything you need to know. With continuous delivery all changes (e.g. bugfixes and new features) to your software end up in front of your customers more frequently and more reliably than with traditional deployment approaches. Think about multiple production deployments a day instead of releasing once a quarter.
@@ -49,8 +49,6 @@ As broad and fuzzy as this description might be for now, we'll soon discover wha
 
 These tests are on a higher level than your unit tests. Integrating slow parts like filesystem, databases and network they tend to be much slower than your unit tests. They also tend to be a little bit more difficult to write than small and isolated unit tests. Still, they have the advantage of giving you more confidence that your application works as intended than your unit tests alone.
 
-**TODO: don't test what's already been tested on a lower layer**
-
 ### UI Tests
 All applications have some sort of user interface. Typically we're talking about a web interface in the context of web applications but if you think about it, a REST API or command line client is as much of a user interface as a React application.
 
@@ -68,6 +66,7 @@ When you write automated tests for your application be aware where you put them 
 
 
 ## Implementing a Test Suite
+Let's see how we can implement a test suite with tests for the different layers of the test pyramid. I've created a [sample application](https://github.com/hamvocke/spring-testing) with tests on the different layers of the testing pyramid. The codebase contains more tests than necessary and actively contradicts my hint that you should avoid test duplication. For demonstration purposes I decided to duplicate some tests along the test pyramid but please keep in mind that you wouldn't need to do this in your codebase. The sample application is a simple [Spring Boot ](https://projects.spring.io/spring-boot/) application and should be understandable even if you've never worked with Spring Boot before. The sample service provide a REST interface, talks to a database and fetches information from a third-party REST service.
 
 ### The Sample Application
 
