@@ -43,7 +43,7 @@ A good unit test suite will be immensely helpful during development: You know th
 
 ### Service Tests
 
-Your service tests will test the integration of larger parts of your system. The term "service tests" can be quite broad and virtually every team I've worked with interpreted and named this layer of tests differently. Essentially it all comes down to test the collaboration between different parts of your system: collaboration between larger components, integration points with the database, filesystem or network, or even the network and your application's API.
+Your service tests will test the integration of larger parts of your system. The term "service tests" can be quite broad and developers often come up with slightly different names and interpretations for these kinds of tests. Essentially it all comes down to test the collaboration between different parts of your system: collaboration between larger components, integration points with the database, filesystem or network, or even the network and your application's API.
 
 As broad and fuzzy as this description might be for now, we'll soon discover what this can look like in the context of a simple Java-based microservice.
 
@@ -77,5 +77,7 @@ Let's see how we can implement a test suite with tests for the different layers 
 ### CDC Tests
 
 ## Further reading
+
+[Testing Microservices](https://martinfowler.com/articles/microservice-testing)
 
 **TODO: more literature about testing, unit testing etc. (Meszaros?, Writing OO Software guided by tests)**
