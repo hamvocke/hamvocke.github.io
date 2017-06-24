@@ -377,7 +377,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
      inkscape:cx="400.81401"
-     inkscape:cy="203.81143"
+     inkscape:cy="260.95429"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -876,7 +876,7 @@
        d="M 30.63197,221.76717 H 53.684922"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.52916676;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.11666692, 0.52916673;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker8374)" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.5291667;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker9512);marker-end:url(#marker9624)"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.52916673;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.11666692,0.52916673;stroke-opacity:1;marker-start:url(#marker9512);marker-end:url(#marker9624);stroke-dashoffset:0"
        d="m 141.15651,225.47136 h 12.81237"
        id="path8259"
        inkscape:connector-curvature="0"
