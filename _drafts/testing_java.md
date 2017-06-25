@@ -1,20 +1,28 @@
 ---
 layout: post
-title: Testing Java Microservices
+title: Testing Microservices
 tags: programming java testing
 excerpt: If you want to jump aboard the Microservices hype-train, continuous delivery and test automation will be your best friends. Finding out which tests you need and how you can write them can be quite challenging. This post sums up my experience testing Microservices to allow fast development and frequent deployments.
 comments: true
 ---
 
-Microservices are all the rage. If you've attended a tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the success stories that companies love to share about their microservices journey. 
+Microservices are all the rage. If you've attended any tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the success stories that companies love to share about their microservices journey.
 
-Somewhere beneath that hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down for you than I ever could. Chance is, if you're reading this you somehow ended up with the decision to take a look into what's behind this magic buzzword.
+Somewhere beneath that hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down for you than I ever could. Chance is, if you're reading this article you somehow ended up with the decision to take a look into what's behind this magic buzzword.
+
+## Microservices Need Automated Testing
+
+Microservices go hand in hand with _continuous delivery_, a practice where you automatically ensure that your software can potentially be released to production at any time you like using a _build pipeline_. This build pipeline will also be used to automatically deploy your application to any testing or production environment. Since you'll be juggling with quite some services if you advance on your microservices adventure, deploying these services quickly soon becomes a necessity. Deploying dozens or even hundreds of services using tedious manual processes will soon become too overwhelming for your team.
+
+The most success -- if not all -- success stories around microservices are told by teams who employed continuous delivery or _continuous deployment_ (every change to your software that's proven to be releasable will be deployed to production). How do you proof that your latest change still results in releasable software? You test your software including the latest change thoroughly. Traditionally you'd do this manually, deploying your application to a test environment and then perform some black-box style testing e.g. by clicking through your user interface, to see if anything's broken. It's quite obvious that testing all changes manually is time-consuming, repetitive and tedious. Repetitive is boring, boring leads to mistakes and makes you look for a different job quite soon. Luckily there's a remedy for repetitive tasks: **automation**. Ever since test automation became a thing (and it's been a thing for quite a while now) the software development community has come up with lots of concepts, tools and libraries that help you automating your tests. 
+
+Automating your tests is one of the big game changers for your life as a software developer. Automate your tests and you no longer have to mindlessly follow click protocols in order to find out if your latest release is ready for production. Automate your tests and you can change your codebase more easily. If you've ever tried doing a large-scale refactoring without a proper test suite I bet you know what a horrifying experience this can be. How would you know if you accidentally broke stuff along the way? Well, you click through all your manual test cases, that's how. But let's be honest: do you really enjoy that? How about making large-scale changes (or any changes for that matter) and knowing if you broke stuff within seconds while taking a nice sip of coffee? Sounds more enjoyable, if you ask me. 
+
+Test automation is key for a successful microservices architecture. Test automation is essential for continuous delivery. Continuous delivery is a good (maybe even essential) foundation for a microservices architecture. Therefore doing microservices without test automation will likely result in a desaster. On top of that you get all the other sweet sweet benefits of continuous delivery: hassle-free deployments, releasing software more frequently to your customers, experimentation and fast feedback, and a lot more. Again, a lot of stuff has been written about this topic and if you want to find out how to get started, I can highly recommend to pick up [the Continuous Delivery book](https://www.amazon.com/gp/product/0321601912) that will teach you almost everything you need to know.
+
+Getting started with test automation can be quite intimidating. As it's quite a maure topic by now a lot of stuff has been written that's supposed to make your life easier. It's a lot of material to sift through and finding the good stuff is hard. In order to test microservices there are some concepts, tools and libraries that have proven to be effective.
 
 ## Key Concepts of Test Automation
-**TODO: shorten!**
-Microservices go hand in hand with _continuous delivery_, a practice where you automatically ensure that your software can potentially be released to production at any time you like. Again, a lot of stuff has been written about this topic and if you want to find out how to get started, I can highly recommend to pick up [the Continuous Delivery book](https://www.amazon.com/gp/product/0321601912) that will teach you almost everything you need to know. With continuous delivery all changes (e.g. bugfixes and new features) to your software end up in front of your customers more frequently and more reliably than with traditional deployment approaches. Think about multiple production deployments a day instead of releasing once a quarter.
-
-The key to releasing more frequently is **automation**. Automate all manual efforts diligently and you'll end up with a process that will be more reliable, reproducible and fast. One of the cornerstones of your automation effort is _test automation_. Automate your tests and you no longer have to mindlessly follow click protocols in order to find out if your latest release is ready for production. Automate your tests and you can change your codebase more easily. If you've ever tried doing a large-scale refactoring without a proper test suite I bet you know what a horrifying experience this can be. How would you know if you accidentally broke stuff along the way? Well, you click through all your manual test cases, that's how. But let's be honest: do you really enjoy that? How about making large-scale changes (or any changes for that matter) and knowing if you broke stuff within seconds while taking a nice sip of coffee? Sounds more enjoyable, if you ask me. 
 
 Test automation is not exactly the new kid on the block. Yet I keep seeing teams that struggle implementing proper automated tests or still have to begin their test automation journey. Starting from zero, however, can be an intimidating tasks. What aspects of your codebase do you need to test? How should you structure and write your tests? What tools and libraries can make your life easier? 
 
@@ -53,7 +61,7 @@ As broad and fuzzy as this description might be for now, we'll soon discover wha
 These tests are on a higher level than your unit tests. Integrating slow parts like filesystem, databases and network they tend to be much slower than your unit tests. They also tend to be a little bit more difficult to write than small and isolated unit tests. Still, they have the advantage of giving you more confidence that your application works as intended than your unit tests alone.
 
 ### UI Tests
-**TODO introduce "e2e" test term
+**TODO introduce "e2e" test term**
 All applications have some sort of user interface. Typically we're talking about a web interface in the context of web applications but if you think about it, a REST API or command line client is as much of a user interface as a React application.
 
 Testing through the user interface is the most end-to-end way you could test your application. You run your tests against the same interface real users would use. It's quite obvious that these tests give you the biggest confidence when you need to decide if your software is working or not. With [Selenium](http://docs.seleniumhq.org/) and the [WebDriver Protocol](https://www.w3.org/TR/webdriver/) there are some tools that allow you to automate your UI tests by automatically driving a (headless) browser, performing clicks, entering data and checking the state of your user interface.
@@ -94,5 +102,10 @@ Make sure to check out the [sample application](https://github.com/hamvocke/spri
 ## Further reading
 
 [Testing Microservices](https://martinfowler.com/articles/microservice-testing)
+* TDD by example - Kent Beck
+* Continuous Delivery - Jez Humble, Dave Farley
 
-**TODO: more literature about testing, unit testing etc. (Meszaros?, Writing OO Software guided by tests)**
+**TODO**
+
+  * spell check
+  * more literature about testing, unit testing etc. (Meszaros?, Writing OO Software guided by tests)
