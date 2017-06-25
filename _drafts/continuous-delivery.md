@@ -10,6 +10,8 @@ DRAFT
 
 title idea: Kickstart to Continuous Delivery
 
+**key: fast feedback**
+
 Diving into continuous delivery: hassle free deployments, no more getting up at 3am, no more manual clicking and intervention, all that stuff
 
 Tools
