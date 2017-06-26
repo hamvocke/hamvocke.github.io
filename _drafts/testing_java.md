@@ -10,6 +10,13 @@ Microservices are all the rage. If you've attended any tech conference or read s
 
 Somewhere beneath that hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down for you than I ever could. Chance is, if you're reading this article you somehow ended up with the decision to take a look into what's behind this magic buzzword.
 
+**TODO: teaser image?**
+
+## <abbr title="too long; didn't read">tl;dr</abbr>
+Automate your tests. Keep the [test pyramid](https://martinfowler.com/bliki/TestPyramid.html) in mind (forget about the original names of the layers). Write tests with different granularity. Use unit test (solitary and sociable) to test the insides of your application. Put special attention to the places where your application serializes and deserializes data (e.g. your REST API, accessing databases and the filesystem, calling other services via REST/gRPC/whatever). Test the collaboration between services with contract tests (CDC).
+
+**TODO update tl;dr?**
+
 ## Microservices Need Automated Testing
 
 Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can potentially be released to production at any time you like. You use a **build pipeline** to automatically test and deploy your application to all of your testing and production environments. Since you'll be juggling with quite some services once you advance on your microservices adventure, deploying these services in a fast and reproducible way soon becomes a necessity. Deploying dozens or even hundreds of services using tedious manual processes will simply be too overwhelming for your team to be a reasonable approach.
