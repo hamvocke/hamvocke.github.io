@@ -40,7 +40,7 @@ To test microservices some concepts, tools and libraries have proven to be effec
 
 
 ## The Test Pyramid
-If you want to get serious about automated tests for your software there is one key concept that you should keep in mind: the **test pyramid**. Mike Cohn came up with this concept in his book [Succeeding with Agile](https://www.amazon.com/dp/0321579364/ref=cm_sw_r_cp_dp_T2_bbyqzbMSHAG05). It's a great visual metaphor telling you to think about different layers of testing and how much testing to do on each layer.
+If you want to get serious about automated tests for your software there is one key concept that you should know about: the **test pyramid**. Mike Cohn came up with this concept in his book [Succeeding with Agile](https://www.amazon.com/dp/0321579364/ref=cm_sw_r_cp_dp_T2_bbyqzbMSHAG05). It's a great visual metaphor telling you to think about different layers of testing and how much testing to do on each layer.
 
 ![Test Pyramid](/assets/img/uploads/testPyramid.png)
 
@@ -50,21 +50,16 @@ Mike Cohn's original testing pyramid consists of three layers that your test sui
   2. Service Tests
   3. User Interface Tests
 
-And while [some will argue](https://watirmelon.blog/2011/06/10/yet-another-software-testing-pyramid/) that either the naming or some conceptual aspects of Mike Cohn's test pyramid are not optimal, its essence can still serve as a good rule of thumb when it comes to establishing your own test suite. It's okay to come up with other names for your test layers. Virtually every team I've worked with came up with different names for _service tests_ and _UI tests_ and that's okay as long as you keep it consistent within your codebase and your entire team uses a shared language.
-
-Indeed, Cohn's pyramid can be misleading. His UI test layer, for example, suggests that UI tests have to be high-level tests. Considering the rise of single page application frameworks like _React_, _Angular_, _ember.js_, _vue.js_ and others it becomes obvious that testing your user interface can also be done on a unit level.
-
-Your best bet is to remember two things from Cohn's original test pyramid:
+Unfortunately the concept of the test pyramid falls a little short if you take a close look. [Some will argue](https://watirmelon.blog/2011/06/10/yet-another-software-testing-pyramid/) that either the naming or some conceptual aspects of Mike Cohn's test pyramid are not optimal, and I have to agree. From a modern point of view the test pyramid seems overly simplistic and can therefore be a bit misleading. Still, due to it's simplicity the essence of the test pyramid still is a good rule of thumb when it comes to establishing your own test suite/ Your best bet is to remember two things from Cohn's original test pyramid:
 
   1. Write tests with different granularity
   2. The more high-level you get the fewer tests you should have on that level
 
-Stick to the pyramid shape to come up with a healthy, fast and maintainable test suite: Write _lots_ of small and fast _unit tests_. Write _some_ more coarse-grained tests and _very few_ high level tests that test your application from end to end. 
+Stick to the pyramid shape to come up with a healthy, fast and maintainable test suite: Write _lots_ of small and fast _unit tests_. Write _some_ more coarse-grained tests and _very few_ high level tests that test your application from end to end. Watch out that you don't end up with a [test ice-cream cone](https://watirmelon.blog/2012/01/31/introducing-the-software-testing-ice-cream-cone/) that will be a nightmare to maintain and takes way too long to run.
 
-Watch out that you don't end up with a [test ice-cream cone](https://watirmelon.blog/2012/01/31/introducing-the-software-testing-ice-cream-cone/) that will be a nightmare to maintain and takes way too long to run.
+Don't become too attached to the names of the individual layers in Cohn's test pyramid. In fact they can be quite misleading: _service test_ is a term that is hard to capture (Cohn himself talks about the observation that [a lot of developers completely ignore this layer](https://www.mountaingoatsoftware.com/blog/the-forgotten-layer-of-the-test-automation-pyramid)). In the advent of modern single page application frameworks like react, angular, vue and the legions of others it becomes apparent that _UI tests_ don't have to be on the highest level of your pyramid -- you're perfectly able to unit test your UI in all of these frameworks.
 
-
-
+Given the shortcomings of the original names it's totally okay to come up with other names for your test layers. Virtually every team I've worked with came up with different names for _service tests_ and _UI tests_ and that's fine as long as you keep it consistent within your codebase and your team's discussions. To make this more clear, I'll suggest names and give examples of the test types I discovered to be helpful when testing microservices.
 
 ## Types of Tests
 While the test pyramid suggests that you'll have three different types of tests (_unit tests_, _service tests_ and _UI tests_) I need to disappoint you. Your reality will look a little more diverse. To build an effective test suite you'll need some more buckets to sort your tests into. Lets keep cohn's test pyramid in mind for its good things (use layers with different granularity, make sure they're differently sized, avoid duplication throughout the layers). for the types of tests we need, let's find the categories that better reflect what we really need.
