@@ -13,7 +13,14 @@ Somewhere beneath that hype are some true advantages to adopting a microservice 
 **TODO: teaser image?**
 
 ## <abbr title="too long; didn't read">tl;dr</abbr>
-Automate your tests. Keep the [test pyramid](https://martinfowler.com/bliki/TestPyramid.html) in mind (forget about the original names of the layers). Write tests with different granularity. Use unit test (solitary and sociable) to test the insides of your application. Put special attention to the places where your application serializes and deserializes data (e.g. your REST API, accessing databases and the filesystem, calling other services via REST/gRPC/whatever). Test the collaboration between services with contract tests (CDC).
+Don't know if this article is for you? These are the key takeaways:
+
+  * Automate your tests (surprise!)
+  * Remember the [test pyramid](https://martinfowler.com/bliki/TestPyramid.html) _(forget about the original names of the layers though)_
+  * Write tests with different granularity
+  * Use unit test (_solitary_ and _sociable_) to test the insides of your application
+  * Use integration tests to test all places where your application serializes/deserializes data (e.g. public APIs, accessing databases and the filesystem, calling other microservices, reading from/writing to queues)
+  * Test collaboration between services with contract tests (CDC).
 
 **TODO update tl;dr?**
 
