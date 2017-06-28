@@ -10,6 +10,8 @@ Microservices are all the rage and have been for quite some time. If you've atte
 
 Somewhere beneath that hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down for you than I ever could. Chance is, if you're reading this article you somehow ended up with the decision to take a look into what's behind this magic buzzword.
 
+The idea for this post has been sitting with me for a long time now. And even during writing this article I was wondering whether I wasn't too late to the party and everything there is to say had already been said. Yet, I still encounter a lot of teams that are heading out on their adventure to build microservices who are still puzzled about this whole testing thing. And I observed that I tell the same stories to all of them. So I decided to write down the essence of these stories for everyone to read. Have fun. **TODO rework intro**
+
 **TODO: teaser image?**
 
 ## <abbr title="too long; didn't read">tl;dr</abbr>
