@@ -54,13 +54,16 @@ And while [some will argue](https://watirmelon.blog/2011/06/10/yet-another-softw
 
 Indeed, Cohn's pyramid can be misleading. His UI test layer, for example, suggests that UI tests have to be high-level tests. Considering the rise of single page application frameworks like _React_, _Angular_, _ember.js_, _vue.js_ and others it becomes obvious that testing your user interface can also be done on a unit level.
 
-Your key takeaway should be to implement layers of different size with different levels of integration in your test suite. Stick to the pyramid shape to come up with a healthy, fast and maintainable test suite: Write _lots_ of small and fast _unit tests_. Write _some_ more coarse-grained tests that test that your service's business logic as a whole works well. Finally write _very few_ high level tests that test your application from end to end, e.g. by automatically navigating your application's UI, entering data, clicking here and there and checking that the outcome in your UI is as expected. 
+Your best bet is to remember two things from Cohn's original test pyramid:
+
+  1. Write tests with different granularity
+  2. The more high-level you get the fewer tests you should have on that level
+
+Stick to the pyramid shape to come up with a healthy, fast and maintainable test suite: Write _lots_ of small and fast _unit tests_. Write _some_ more coarse-grained tests and _very few_ high level tests that test your application from end to end. 
 
 Watch out that you don't end up with a [test ice-cream cone](https://watirmelon.blog/2012/01/31/introducing-the-software-testing-ice-cream-cone/) that will be a nightmare to maintain and takes way too long to run.
 
 
-## Avoid Test Duplication
-When you write automated tests for your application be aware where you put them within your test pyramid. As a rule of thumb keep in mind that stuff you test on lower levels doesn’t need to be tested on higher levels of the pyramid again. If you can check all sorts of edge-cases and invalid input combinations on unit level do so. There’s no need to check all these cases again on your service or UI level (though you technically can, of course). Do yourself a favor and avoid duplicating your tests throughout the pyramid and try to put your tests as low as possible within the testing pyramid to come up with a fast, maintainable and reliable test suite.
 
 
 ## Types of Tests
@@ -95,7 +98,10 @@ UI tests come with their own kind of problems. They are notoriously flaky and of
 **TODO**
 Test the contract (interface) between two services. Loose coupling, allow services to evolve on their own without breaking dependencies, foster communication between teams, decouple services and allow omitting flaky and hard to setup end to end testing.
 
+## Avoid Test Duplication
+Now that you know that you should write different types of tests there's one more pitfall for you to avoid: test duplication. While your gut feeling might say that there's no such thing as too many tests let me assure you, there is. Every single test in your test suite is additional baggage and doesn't come for free. Writing and maintaining tests takes time. Reading and understanding other people's test takes time. And of course, running tests takes time.
 
+As with production code you should strive for simplicity and avoid duplication. If you managed to test all of your code's edge cases on a unit level there's no need to test for these edge cases again in a higher-level test. As a rule of thumb if you've tested something on a lower level, there's no reason to test it again on a higher level. If your high-level test adds additional value (e.g. testing the integration with a real database) than this is something you should have, even though you might have tested the same database access function in a unit test. Just make sure to focus on the integration part in that test and avoid going through all possible edge-cases again.
 
 ## Implementing a Test Suite
 Let's see how we can implement a test suite with tests for the different layers of the test pyramid. I've created a [sample application](https://github.com/hamvocke/spring-testing) with tests on the different layers of the testing pyramid. The codebase contains more tests than necessary and actively contradicts my hint that you should avoid test duplication. For demonstration purposes I decided to duplicate some tests along the test pyramid but please keep in mind that you wouldn't need to do this in your codebase. 
@@ -131,3 +137,4 @@ Make sure to check out the [sample application](https://github.com/hamvocke/spri
   * more literature about testing, unit testing etc. (Meszaros?, Writing OO Software guided by tests)
   * remove filler words (quite)
   * be consistent with AE/BE
+  * "high-level" vs "high level"
