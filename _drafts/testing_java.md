@@ -6,7 +6,7 @@ excerpt: If you want to jump aboard the Microservices hype-train, continuous del
 comments: true
 ---
 
-Microservices are all the rage and have been for quite some time. If you've attended any tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the success stories that companies love to share about their microservices journey.
+Microservices have been all the rage for quite some time now. If you've attended any tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the success stories that companies love to share about their microservices journey.
 
 Somewhere beneath that hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down for you than I ever could. Chance is, if you're reading this article you somehow ended up with the decision to take a look into what's behind this magic buzzword.
 
@@ -15,14 +15,15 @@ The idea for this post has been sitting with me for a long time now. And even du
 **TODO: teaser image?**
 
 ## <abbr title="too long; didn't read">tl;dr</abbr>
-Don't know if this article is for you? These are the key takeaways:
+What you'll take away from this post:
 
   * Automate your tests (surprise!)
   * Remember the [test pyramid](https://martinfowler.com/bliki/TestPyramid.html) _(forget about the original names of the layers though)_
-  * Write tests with different granularity
+  * Write tests with different granularity/levels of integration
   * Use unit test (_solitary_ and _sociable_) to test the insides of your application
   * Use integration tests to test all places where your application serializes/deserializes data (e.g. public APIs, accessing databases and the filesystem, calling other microservices, reading from/writing to queues)
-  * Test collaboration between services with contract tests (CDC).
+  * Test collaboration between services with contract tests (CDC)
+  * Favor CDC tests over end to end tests
 
 **TODO update tl;dr?**
 
@@ -67,18 +68,25 @@ Given the shortcomings of the original names it's totally okay to come up with o
 While the test pyramid suggests that you'll have three different types of tests (_unit tests_, _service tests_ and _UI tests_) I need to disappoint you. Your reality will look a little more diverse. Lets keep Cohn's test pyramid in mind for its good things (use test layers with different granularity, make sure they're differently sized) and find out what types of tests we need for an effective test suite.
 
 ### Unit tests
-The foundation of your test suite will be made up of unit tests. Your unit tests make sure that a certain unit (your _subject under test_) of your codebase works as intended. If you ask three people what _"unit"_ means in the context of unit tests, you'll probably receive four different, slightly nuanced answers. To a certain extend it's a matter of your own definition and once again, this is alright. 
+The foundation of your test suite will be made up of unit tests. Your unit tests make sure that a certain unit (your _subject under test_) of your codebase works as intended. 
+
+#### What's a Unit?
+If you ask three different people what _"unit"_ means in the context of unit tests, you'll probably receive four different, slightly nuanced answers. To a certain extend it's a matter of your own definition and once again, this is alright. 
 
 If you're working in a functional language a _unit_ will probably be a single function within your codebase. Your unit tests will call your function with different parameters and ensure that the function returns the expected values. In an object-oriented language a unit can range from a single method to an entire class. 
 
+#### Sociable and Solitary
 Some argue that all other collaborators (e.g. other classes that are called by your class under test) of your subject under test should be substituted with _mocks_ or _stubs_ to come up with perfect isolation and to avoid side-effects and complicated test setup. Others argue that only collaborators that are slow or have bigger side effects (e.g. classes that access databases or make network calls) should be stubbed or mocked. [In some discussions](https://www.martinfowler.com/bliki/UnitTest.html) you find the terms **solitary** unit tests (for the former) and **sociable** unit tests (for the latter) to talk about the different approaches of writing unit tests (based on Jay Field's [Working Effectively with Unit Tests](https://leanpub.com/wewut)). If you have some spare time you can go down the rabbit hole and [read more about the pros and cons](https://martinfowler.com/articles/mocksArentStubs.html) of the different schools of thought.
 
 At the end of the day it doesn't really matter if you go for solitary or sociable unit tests, if you consider yourself to be a classicist or a mockist kind of tester. In fact I find myself using both approaches all the time. If it becomes awkward to use real collaborators I will use mocks and stubs generously. If I feel like involving the real collaborator gives makes for a better test (because it tests the integration between different units in my codebase), I'll only stub the outermost parts of my service.
 
+#### Mocking and Stubbing
 **Mocking** and **stubbing** ([they are not the same](https://martinfowler.com/articles/mocksArentStubs.html) if you want to be precise)  should be heavily used instruments in your unit tests. In plain words it means that you replace a real thing (e.g. a class, module or function) with a fake version of that thing. The fake version looks and acts like the real thing (answers to the same method calls) but answers with canned responses that you define yourself at the beginning of your unit test. Regardless of your technology choice, there's a good chance that either your language's standard library or some third-party library will provide you with elegang ways to set up mocks. And even writing your own mocks from scratch is only a matter of writing a fake class/module/function with the same signature as the real one and setting up the fake in your test.
 
 Your unit tests will run very fast. On a decent machine you can expect to run thousands of unit tests within a few minutes. Test small pieces of your codebase in isolation and avoid hitting databases, the filesystem or firing HTTP queries (by using mocks and stubs for these parts) to keep your tests fast. Once you got a hang of writing unit tests you will become more and more fluent in writing them. Stub out external collaborators, set up some input data, call your subject under test and check that the returned value is what you expected. Look into [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) and let your unit tests guide your development; if applied correctly it can help you get into a great flow and come up with a good and maintainable design while automatically producing a comprehensive and fully automated test suite. 
 
+
+#### Unit Testing is not Enough
 A good unit test suite will be immensely helpful during development: You know that all the small units you tested are working correctly in isolation. Your small-scoped unit tests help you narrowing down and reproducing errors in your code. And they give you fast feedback while working with the codebase and will tell you whether you broke something (unintendedly). Consider them as a tool _for developers_ as they are written from the developer's point of view and make their job easier. 
 
 Unfortunately writing only unit alone won't get you very far. With unit tests alone you don't know whether your application as a whole works as intended. You don't know whether the features your customers love actually work. Being focused on the tiny pieces from the inside point of view you can't put yourself in the customer's shoes and see if everything works for them. You won't know if you did a proper job plumbing and wiring all those components, classes and modules together. Maybe there's something funky happening once all your small units join forces and work as a bigger system? And maybe you wrote perfectly elegant and well-crafted code that totally fails to solve your users problem. Seems like we need more.
