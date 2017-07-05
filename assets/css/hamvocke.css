@@ -162,14 +162,14 @@ h1.title {
 .post img {
 	max-width: 100%;
 	height: auto;
-	margin: 2em auto;
+	margin: 1em auto 1em;
 	text-align: center;
 }
 
 .post img + em {
 	display: block;
 	width: 80%;
-	margin: -1em auto 2.5em;
+	margin: 0 auto 2.5em;
 	font-size: 16px;
 }
 
