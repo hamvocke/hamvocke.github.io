@@ -21,18 +21,17 @@ h1.post-title {
 	line-height: 1.1em;
 }
 
-h3 {
+h2, h3, h4 {
 	margin-top: 1.5em;
-	margin-bottom: 0.3em;
-	font-size: 24px;
 	font-weight: 700;
 }
 
+h3 {
+	font-size: 24px;
+}
+
 h4 {
-	margin-top: 1.5em;
-	margin-bottom: 0.3em;
 	font-size: 20px;
-	font-weight: 700;
 }
 
 p {
@@ -163,6 +162,15 @@ h1.title {
 .post img {
 	max-width: 100%;
 	height: auto;
+	margin: 2em auto;
+	text-align: center;
+}
+
+.post img + em {
+	display: block;
+	width: 80%;
+	margin: -1em auto 2.5em;
+	font-size: 16px;
 }
 
 .post img.space-bottom {
@@ -172,6 +180,10 @@ h1.title {
 .post video {
 	max-width: 100%;
 	height: auto;
+}
+
+.post pre {
+	margin-bottom: 1.5em;
 }
 
 .post div.centered {
