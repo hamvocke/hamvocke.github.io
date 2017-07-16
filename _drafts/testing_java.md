@@ -74,6 +74,7 @@ While the test pyramid suggests that you'll have three different types of tests 
 The foundation of your test suite will be made up of unit tests. Your unit tests make sure that a certain unit (your _subject under test_) of your codebase works as intended. 
 
 ![unit tests](/assets/img/uploads/unitTest.png)
+*a unit test typically replaces external collaborators with mocks or stubs*
 
 #### What's a Unit?
 If you ask three different people what _"unit"_ means in the context of unit tests, you'll probably receive four different, slightly nuanced answers. To a certain extend it's a matter of your own definition and once again, this is alright. 
@@ -102,6 +103,7 @@ All non-trivial applications will integrate with some other parts at some point.
 Integration tests live at the boundary of your service. Conceptually they're always about triggerng an action that leads to integrating with the outside part (filesystem, database, etc). A database integration test would probably look like this:
 
 ![a database integration test](/assets/img/uploads/dbIntegrationTest.png)
+*A database integration test integrates your code with a real database*
 
     1. start a database
     2. connect your application to the database
@@ -112,7 +114,8 @@ Integration tests live at the boundary of your service. Conceptually they're alw
 As another example, an integration test for your REST API could look like this:
 
 ![an HTTP integration test](/assets/img/uploads/httpIntegrationTest.png)
-    
+*An HTTP integration test tests that real HTTP calls reach your code*
+
     1. start your application
     2. fire a real HTTP request against one of your REST endpoints
     3. check that the desired interaction has been triggered within your application

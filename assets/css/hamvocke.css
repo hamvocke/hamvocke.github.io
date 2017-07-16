@@ -170,8 +170,9 @@ h1.title {
 .post img + em {
 	display: block;
 	width: 80%;
-	margin: 0 auto 2.5em;
+	margin: -1em auto 2em;
 	font-size: 16px;
+	text-align: center;
 }
 
 .post img.space-bottom {
