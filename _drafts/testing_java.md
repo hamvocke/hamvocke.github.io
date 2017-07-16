@@ -101,18 +101,24 @@ All non-trivial applications will integrate with some other parts at some point.
 
 Integration tests live at the boundary of your service. Conceptually they're always about triggerng an action that leads to integrating with the outside part (filesystem, database, etc). A database integration test would probably look like this:
 
+![a database integration test](/assets/img/uploads/dbIntegrationTest.png)
+
     1. start a database
     2. connect your application to the database
     3. trigger a function within your code that writes stuff to the database
     4. check that the expected data has been written to the database
 
+
 As another example, an integration test for your REST API could look like this:
+
+![an HTTP integration test](/assets/img/uploads/httpIntegrationTest.png)
     
     1. start your application
     2. fire a real HTTP request against one of your REST endpoints
     3. check that the desired interaction has been triggered within your application
 
-Your integration tests can -- like unit tests -- be fairly whitebox. Some frameworks allow you to start your application while still being able to mock some other parts of your application so that you can check that the correct interactions have happened. 
+
+Your integration tests -- like unit tests -- can be fairly whitebox. Some frameworks allow you to start your application while still being able to mock some other parts of your application so that you can check that the correct interactions have happened. 
 
 Write integration tests for all pieces of code where you either _serialize_ or _deserialize_ data. And that can be a lot in a microservices architecture. Some examples are:
 
@@ -127,13 +133,22 @@ Writing integration tests around these boundaries allow you to ensure that writi
 With regards to the test pyramid these tests are on a higher level than your unit tests. Integrating slow parts like filesystems, databases and network tends to be much slower than running unit tests with these pieces stubbed out. They also tend to be a little bit more difficult to write than small and isolated unit tests. Still, they have the advantage of giving you all the confidence that your application can correctly work with all the external parts it needs to talk to which is something you wouldn't figure out with unit tests alone.
 
 ### UI Tests
-**TODO introduce "e2e" test term**
-All applications have some sort of user interface. Typically we're talking about a web interface in the context of web applications but if you think about it, a REST API or command line client is as much of a user interface as a React application.
-Testing through the user interface is the most end-to-end way you could test your application. You run your tests against the same interface real users would use. It's quite obvious that these tests give you the biggest confidence when you need to decide if your software is working or not. With [Selenium](http://docs.seleniumhq.org/) and the [WebDriver Protocol](https://www.w3.org/TR/webdriver/) there are some tools that allow you to automate your UI tests by automatically driving a (headless) browser, performing clicks, entering data and checking the state of your user interface.  UI tests come with their own kind of problems. They are notoriously flaky and often fail for unexpected and unforseeable reasons. They require a lot of maintenance and run pretty slowly. Yet they give you the highest confidence that your application is working correctly end to end. Due to their high maintenance cost you should aim to reduce the number of UI tests to the bare minimum. Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and try to reflect the most important steps of these user journeys in your automated UI tests. If you're building an e-commerce site your most valuable customer journey could be a user searching for a product, putting it in the shopping basket and doing a checkout. Done. If this journey still works you should be pretty good to go. Everything else can and should be tested in lower levels of the test pyramid.
+Most applications have some sort of user interface. Typically we're talking about a web interface in the context of web applications but if you think about it, a REST API or command line interface is as much of a user interface as a fancy react UI.
+
+_UI tests_ test that the user interface of your application works correctly. User input should trigger the right actions, data should be presented to the user, the UI state should adapt as expected.
+
+UI Tests and end-to-end tests are often considered to be the same thing. For me this conflates two things that are not necessarily related. Yes, testing your application end-to-end often means driving your test through the user interface. The inverse, however, is not true. Testing your user interface doesn't have to be done in an end-to-end fashion. Depending on the technology you use, testing your user interface can be as simple as writing some unit tests for your react/angular/ember.js/vue.js/whatever-is-fancy-next-week application without needing to connect to external databases or downstream services.
+
+With traditional web applications testing the user interface can be achieved with tools like Selenium. If you consider a REST API to be your outermost user interface you should have everything you need by writing proper integration tests. 
 
 **TODO: write about UI-checking tests, lineup, csscritic and stuff**
+Thoughts:
+  * UI Tests tend to be flaky, UI changes a lot, tests will become brittle
+  * UI regression using things like galen, lineup, csscritic and co
 
 ### End to End Tests
+Testing through the user interface is the most end-to-end way you could test your application. You run your tests against the same interface real users would use. It's quite obvious that these tests give you the biggest confidence when you need to decide if your software is working or not. With [Selenium](http://docs.seleniumhq.org/) and the [WebDriver Protocol](https://www.w3.org/TR/webdriver/) there are some tools that allow you to automate your UI tests by automatically driving a (headless) browser, performing clicks, entering data and checking the state of your user interface.  UI tests come with their own kind of problems. They are notoriously flaky and often fail for unexpected and unforseeable reasons. They require a lot of maintenance and run pretty slowly. Yet they give you the highest confidence that your application is working correctly end to end. Due to their high maintenance cost you should aim to reduce the number of UI tests to the bare minimum. Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and try to reflect the most important steps of these user journeys in your automated UI tests. If you're building an e-commerce site your most valuable customer journey could be a user searching for a product, putting it in the shopping basket and doing a checkout. Done. If this journey still works you should be pretty good to go. Everything else can and should be tested in lower levels of the test pyramid.
+
 
 ### Contract Tests
 **TODO**
@@ -183,3 +198,4 @@ Make sure to check out the [sample application](https://github.com/hamvocke/spri
   * commata
   * avoid passive voice
   * start bulled points with caps?
+  * minify images
