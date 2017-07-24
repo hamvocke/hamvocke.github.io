@@ -18,12 +18,12 @@ The idea for this post has been sitting with me for a long time now. And even du
 What you'll take away from this post:
 
   * Automate your tests (surprise!)
-  * Remember the [test pyramid](https://martinfowler.com/bliki/TestPyramid.html) _(forget about the original names of the layers though)_
+  * Remember the [test pyramid](https://martinfowler.com/bliki/TestPyramid.html) _(don't be too confused by the original names of the layers, though)_
   * Write tests with different granularity/levels of integration
   * Use unit test (_solitary_ and _sociable_) to test the insides of your application
   * Use integration tests to test all places where your application serializes/deserializes data (e.g. public APIs, accessing databases and the filesystem, calling other microservices, reading from/writing to queues)
   * Test collaboration between services with contract tests (CDC)
-  * Favor CDC tests over end to end tests
+  * Favor CDC tests over end-to-end tests
 
 **TODO update tl;dr?**
 
@@ -140,7 +140,7 @@ Most applications have some sort of user interface. Typically we're talking abou
 
 _UI tests_ test that the user interface of your application works correctly. User input should trigger the right actions, data should be presented to the user, the UI state should adapt as expected.
 
-UI Tests and end-to-end tests are often considered to be the same thing. For me this conflates two things that are not necessarily related. Yes, testing your application end-to-end often means driving your test through the user interface. The inverse, however, is not true. Testing your user interface doesn't have to be done in an end-to-end fashion. Depending on the technology you use, testing your user interface can be as simple as writing some unit tests for your react/angular/ember.js/vue.js/whatever-is-fancy-next-week application without needing to connect to external databases or downstream services.
+UI Tests and end-to-end tests are often considered to be the same thing. For me this conflates two things that are not _necessarily_ related. Yes, testing your application end-to-end often means driving your test through the user interface. The inverse, however, is not true. Testing your user interface doesn't have to be done in an end-to-end fashion. Depending on the technology you use, testing your user interface can be as simple as writing some unit tests for your react/angular/ember.js/vue.js/whatever-is-fancy-next-week application without needing to connect to external databases or downstream services.
 
 With traditional web applications testing the user interface can be achieved with tools like Selenium. If you consider a REST API to be your outermost user interface you should have everything you need by writing proper integration tests. 
 
@@ -154,7 +154,25 @@ Thoughts:
 
 Testing through **TODO: is it "testing through"?**  the user interface is the most end-to-end way you could test your application. You run your tests against the same interface real users would use. It's quite obvious that these tests give you the biggest confidence when you need to decide if your software is working or not. With [Selenium](http://docs.seleniumhq.org/) and the [WebDriver Protocol](https://www.w3.org/TR/webdriver/) there are some tools that allow you to automate your UI tests by automatically driving a (headless) browser, performing clicks, entering data and checking the state of your user interface.  UI tests come with their own kind of problems. They are notoriously flaky and often fail for unexpected and unforseeable reasons. They require a lot of maintenance and run pretty slowly. Yet they give you the highest confidence that your application is working correctly end to end. Due to their high maintenance cost you should aim to reduce the number of UI tests to the bare minimum. Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and try to reflect the most important steps of these user journeys in your automated UI tests. If you're building an e-commerce site your most valuable customer journey could be a user searching for a product, putting it in the shopping basket and doing a checkout. Done. If this journey still works you should be pretty good to go. Everything else can and should be tested in lower levels of the test pyramid.
 
+#### Do Your Features Work Correctly?
+The higher you move up in your test pyramid the more you enter the realms of testing whether the features you're building work correctly from a users perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from _"if I enter the values `x` and `y`, the return value should be `z`"_ towards a _"if the user clicks the 'add to basket' button, the item should be put in the shopping basket"_. Sometimes you'll hear the terms **functional test** or **acceptance test** for these kinds of tests. Sometimes people will tell you that functional and acceptance tests are different things. Most of the times this discussion is a pretty big source of confusion for everyone involved. 
 
+Here's the thing: At one point you should make sure to test that your software works correctly from a _feature_ perspective, not just from a technical perspective.
+
+This is also the area where people will bring up <abbr title="Behaviour-Driven Development">BDD</abbr> and tools that allow you to implement BDD tests. BDD or a BDD-style way of wrtiting tests can be a nice trick to shift your mindset from implementation details towards the users' needs. Go ahead and give it a try. You don't even need to adopt full-blown BDD tools like [Cucumber](https://cucumber.io/) (there's nothing wrong with it). Some assertion libraries (like [chai.js](http://chaijs.com/guide/styles/#should) allow you to write assertions with `should`-style keywords that can make your tests more BDD-like. And even if you don't employ a library that provides this notation, clever and well-factored code will get you in a way of writing user behaviour focues tests. Some helper methods/functions will get you a very long way:
+
+    def test_add_to_basket():
+	# given
+	user_with_empty_basket()
+	bicycle = article("bicycle")
+
+	# when
+	article_page.add_to_basket(bicycle)
+
+	# then
+	shopping_basket.contains(bicycle)
+
+**TODO rework example, syntax highlighting**
 ### Contract Tests
 **TODO**
 Test the contract (interface) between two services. Loose coupling, allow services to evolve on their own without breaking dependencies, foster communication between teams, decouple services and allow omitting flaky and hard to setup end to end testing.
@@ -163,6 +181,8 @@ Test the contract (interface) between two services. Loose coupling, allow servic
 Now that you know that you should write different types of tests there's one more pitfall for you to avoid: test duplication. While your gut feeling might say that there's no such thing as too many tests let me assure you, there is. Every single test in your test suite is additional baggage and doesn't come for free. Writing and maintaining tests takes time. Reading and understanding other people's test takes time. And of course, running tests takes time.
 
 As with production code you should strive for simplicity and avoid duplication. If you managed to test all of your code's edge cases on a unit level there's no need to test for these edge cases again in a higher-level test. As a rule of thumb if you've tested something on a lower level, there's no reason to test it again on a higher level. If your high-level test adds additional value (e.g. testing the integration with a real database) than this is something you should have, even though you might have tested the same database access function in a unit test. Just make sure to focus on the integration part in that test and avoid going through all possible edge-cases again.
+
+## What About "Functional Tests" and "Acceptance Tests"?
 
 ## Implementing a Test Suite
 Let's see how we can implement a test suite with tests for the different layers of the test pyramid. I've created a [sample application](https://github.com/hamvocke/spring-testing) with tests on the different layers of the testing pyramid. The codebase contains more tests than necessary and actively contradicts my hint that you should avoid test duplication. For demonstration purposes I decided to duplicate some tests along the test pyramid but please keep in mind that you wouldn't need to do this in your codebase. 
