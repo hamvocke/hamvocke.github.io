@@ -159,19 +159,20 @@ The higher you move up in your test pyramid the more you enter the realms of tes
 
 Here's the thing: At one point you should make sure to test that your software works correctly from a _feature_ perspective, not just from a technical perspective.
 
-This is also the area where people will bring up <abbr title="Behaviour-Driven Development">BDD</abbr> and tools that allow you to implement BDD tests. BDD or a BDD-style way of wrtiting tests can be a nice trick to shift your mindset from implementation details towards the users' needs. Go ahead and give it a try. You don't even need to adopt full-blown BDD tools like [Cucumber](https://cucumber.io/) (there's nothing wrong with it). Some assertion libraries (like [chai.js](http://chaijs.com/guide/styles/#should) allow you to write assertions with `should`-style keywords that can make your tests more BDD-like. And even if you don't employ a library that provides this notation, clever and well-factored code will get you in a way of writing user behaviour focues tests. Some helper methods/functions will get you a very long way:
+This is also the area where people will bring up <abbr title="Behaviour-Driven Development">BDD</abbr> and tools that allow you to implement tests in a BDD fashion. BDD or a BDD-style way of wrtiting tests can be a nice trick to shift your mindset from implementation details towards the users' needs. Go ahead and give it a try. You don't even need to adopt full-blown BDD tools like [Cucumber](https://cucumber.io/) (there's nothing wrong with it). Some assertion libraries (like [chai.js](http://chaijs.com/guide/styles/#should) allow you to write assertions with `should`-style keywords that can make your tests more BDD-like. And even if you don't employ a library that provides this notation, clever and well-factored code will get you in a way of writing user behaviour focues tests. Some helper methods/functions will get you a very long way:
 
-    def test_add_to_basket():
-	# given
-	user_with_empty_basket()
-	bicycle = article("bicycle")
+{% highlight python %}
+def test_add_to_basket():
+    # given
+    user_with_empty_basket()
+    bicycle = article("bicycle")
 
-	# when
-	article_page.add_to_basket(bicycle)
+    # when
+    article_page.add_to_basket(bicycle)
 
-	# then
-	shopping_basket.contains(bicycle)
-
+    # then
+    shopping_basket.contains(bicycle)
+{% endhighlight %}
 **TODO rework example, syntax highlighting**
 ### Contract Tests
 **TODO**

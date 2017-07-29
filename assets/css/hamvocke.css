@@ -1,263 +1,269 @@
 body {
-	font-size: 18px;
-	font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 h1, h2 {
-	font-family: 'Roboto Slab', sans-serif;
-	color: #222;
+    font-family: 'Roboto Slab', sans-serif;
+    color: #222;
 }
 
 abbr {
-	font-variant: small-caps;
-	font-size: 1.2em;
+    font-variant: small-caps;
+    font-size: 1.1em;
+    text-decoration: none;
 }
 
 h1.post-title {
-	margin-top: 1em;
-	margin-bottom: 1em;
-	font-size: 48px;
-	font-weight: 700;
-	line-height: 1.1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.1em;
 }
 
 h2, h3, h4 {
-	margin-top: 1.5em;
-	font-weight: 700;
+    margin-top: 1.5em;
+    font-weight: 700;
 }
 
 h3 {
-	font-size: 24px;
+    font-size: 24px;
 }
 
 h4 {
-	font-size: 20px;
+    font-size: 20px;
 }
 
 p {
-	line-height: 1.5em;
-	color: #444;
-	margin-bottom: 1.5em;
+    line-height: 1.5em;
+    color: #444;
+    margin-bottom: 1.5em;
 }
 
 a {
-	color: #E74C3C;
+    color: #E74C3C;
 }
 
 a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 code {
-    background: #383838;
-    color: #F7CA88;
+    background: #f5f5f5;
+    color: #333;
+    border: 1px solid #ccc;
     white-space: nowrap;
 }
 
+pre>code {
+    border: none;
+}
+
 footer {
-	height: 3em;
-	border-top: 1px solid #ddd;
-	margin: 50px auto 50px;
-	width: 80%;
+    height: 3em;
+    border-top: 1px solid #ddd;
+    margin: 50px auto 50px;
+    width: 80%;
 }
 
 footer .contact {
-	margin: 10px 0 0 10px;
-	text-align: center;
-	font-size: 0.8em;
-	color: #aaa;
+    margin: 10px 0 0 10px;
+    text-align: center;
+    font-size: 0.8em;
+    color: #aaa;
 }
 
 footer .contact .icons {
-	margin: 10px 0 0 0;
-	font-size: 1.2em;
+    margin: 10px 0 0 0;
+    font-size: 1.2em;
 }
 
 nav {
-	line-height: 2em;
-	text-align: center;
+    line-height: 2em;
+    text-align: center;
 }
 
 nav a.logo {
-	font-size: 28px;
-	font-family: 'Roboto Slab', sans-serif;
-	padding: 15px;
+    font-size: 28px;
+    font-family: 'Roboto Slab', sans-serif;
+    padding: 15px;
 }
 
 nav .subtitle {
-	font-style: italic;
-	color: #aaa;
-	font-weight: 300;
+    font-style: italic;
+    color: #aaa;
+    font-weight: 300;
 }
 
 nav ul {
-	display: inline;
-	padding: 0;
+    display: inline;
+    padding: 0;
 }
 
 nav ul li {
-	display: inline;
-	list-style-type: none;
+    display: inline;
+    list-style-type: none;
 }
 
 nav ul li a {
-	display: inline-block;
-	padding: 15px 20px;
-	color: #444;
+    display: inline-block;
+    padding: 15px 20px;
+    color: #444;
 }
 
 h1.title {
-	font-size: 3.5em;
-	margin-bottom: 50px;
-	text-align: center;
+    font-size: 3.5em;
+    margin-bottom: 50px;
+    text-align: center;
 }
 
 #home {
-	text-align: center;
+    text-align: center;
 }
 
 #home p.lead {
-	color: #aaa;
-	font-size: 1.5em;
-	margin-top: 30px;
-	font-weight: 300;
-	font-style: italic;
-	margin-bottom: 120px;
+    color: #aaa;
+    font-size: 1.5em;
+    margin-top: 30px;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 120px;
 }
 
 #home .image {
-	margin: auto;
-	margin-top: 120px;
+    margin: auto;
+    margin-top: 120px;
 }
 
 #blog {
-	margin-top: 50px;
-	margin-bottom: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 #text {
-	text-align: left;
-	width: 600px;
-	margin: auto;
+    text-align: left;
+    width: 600px;
+    margin: auto;
 }
 
 #text ul {
-	margin-bottom: 1.5em;
+    margin-bottom: 1.5em;
 }
 
 #text ul li {
-	margin-bottom: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .post-date {
-	display: block;
-	text-align: right;
-	font-weight: 400;
-	font-style: italic;
-	font-size: 0.8em;
-	margin-bottom: 1.5em;
-	color: #aaa;
+    display: block;
+    text-align: right;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.8em;
+    margin-bottom: 1.5em;
+    color: #aaa;
 }
 
 .post img {
-	max-width: 100%;
-	height: auto;
-	margin: 2em auto;
-	text-align: center;
-	display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 2em auto;
+    text-align: center;
+    display: block;
 }
 
 .post img + em {
-	display: block;
-	width: 80%;
-	margin: -1em auto 2em;
-	font-size: 16px;
-	text-align: center;
+    display: block;
+    width: 80%;
+    margin: -1em auto 2em;
+    font-size: 16px;
+    text-align: center;
 }
 
 .post img.space-bottom {
-	margin-bottom: 3em;
+    margin-bottom: 3em;
 }
 
 .post video {
-	max-width: 100%;
-	height: auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .post pre {
-	margin-bottom: 1.5em;
+    margin-bottom: 1.5em;
 }
 
 .post div.centered {
-	display: block;
-	margin: auto;
-	text-align: center;
+    display: block;
+    margin: auto;
+    text-align: center;
 }
 
 .post div.highlight {
-	margin: 2.5em 0;
-	border-left: 8px solid #F7CA88;
+    margin: 2.5em 0;
+    border-left: 8px solid #F7CA88;
 }
 
 .intro {
-	font-size: 1.2em;
-	line-height: 1.4em;
+    font-size: 1.2em;
+    line-height: 1.4em;
 }
 
 .tags {
-	color: #aaa;
-	font-size: 0.9em;
+    color: #aaa;
+    font-size: 0.9em;
 }
 
 .tags i {
-	margin-right: 10px;
+    margin-right: 10px;
 }
 
 .pager {
-	margin-top: 50px;
+    margin-top: 50px;
 }
 
 .page_number {
-	margin: 0 30px;
-	color: #777;
+    margin: 0 30px;
+    color: #777;
 }
 
 .comments {
-	margin-top: 50px;
+    margin-top: 50px;
 }
 
 .skills .tag {
-	background: #444;
-	color: #fff;
-	padding: 4px 12px;
-	margin: 4px;
-	border-radius: 6px;
-	white-space: nowrap;
+    background: #444;
+    color: #fff;
+    padding: 4px 12px;
+    margin: 4px;
+    border-radius: 6px;
+    white-space: nowrap;
 }
 
 .skills {
-	margin: 2em 0;
-	line-height: 2.3em;
+    margin: 2em 0;
+    line-height: 2.3em;
 }
 
 .float-right {
-	float: right;
+    float: right;
 }
 
 @media (max-width: 768px) {
-	#text {
-		width: 100%;
-	}
+    #text {
+	width: 100%;
+    }
 
-	#home .image {
-		margin-top: 40px;
-	}
+    #home .image {
+	margin-top: 40px;
+    }
 
-	#home p.lead {
-		margin-bottom: 40px;
-	}
+    #home p.lead {
+	margin-bottom: 40px;
+    }
 
-	.page_number {
-		margin: 0 10px;
-	}
+    .page_number {
+	margin: 0 10px;
+    }
 }
