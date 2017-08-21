@@ -125,17 +125,17 @@ As another example, an integration test for your REST API could look like this:
 
 Your integration tests -- like unit tests -- can be fairly whitebox. Some frameworks allow you to start your application while still being able to mock some other parts of your application so that you can check that the correct interactions have happened.
 
-Write integration tests for all pieces of code where you either _serialize_ or _deserialize_ data. And that can be a lot in a microservices architecture. Some examples are:
+Write integration tests for all pieces of code where you either _serialize_ or _deserialize_ data. In a microservices architecture this can happen more often than you might think. Some examples are:
 
-  * Calls to your REST API
+  * Calls to your services' REST API
   * Reading and writing to databases
   * Calling other microservices
   * Reading and writing from queues
   * Writing to the filesystem
 
-Writing integration tests around these boundaries allow you to ensure that writing data to and reading data from these external collaborators works fine. If you can you should prefer to run your external dependencies locally: spin up a local MySQL database or test against a local ext4 filesystem. In some other cases this won't be as easy. If you're integrating with third-party systems from another vendor you might not have the option to run an instance of that service locally (though you should try to find a way if possible). In this case you should opt for running a dedicated test instance somewhere within your system and point at this test system when running your integration tests. Avoid integrating with the real production system in your unit tests. Blasting thousands of test requests against a production system is a surefire way to make people angry because you're cluttering their logs (in the best case) or even DoS'ing their service (in the worst case).
+Writing integration tests around these boundaries allow you to make sure that writing data to and reading data from these external collaborators works fine. If possible you should prefer to run your external dependencies locally: spin up a local MySQL database or test against a local ext4 filesystem. In some cases this won't be as easy. If you're integrating with third-party systems from another vendor you might not have the option to run an instance of that service locally (though you should try; talk to your vendor and try to find a way). If there's no way to run a third-party service locally you should opt for running a dedicated test instance somewhere within your system and point at this test instance when running your integration tests. Avoid integrating with the real production system in your automated tests. Blasting thousands of test requests against a production system is a surefire way to get people angry at you because you're cluttering their logs (in the best case) or even <abbr title="Denial of Service">DoS</abbr>'ing their service (in the worst case).
 
-With regards to the test pyramid these tests are on a higher level than your unit tests. Integrating slow parts like filesystems, databases and network tends to be much slower than running unit tests with these pieces stubbed out. They also tend to be a little bit more difficult to write than small and isolated unit tests. Still, they have the advantage of giving you all the confidence that your application can correctly work with all the external parts it needs to talk to which is something you wouldn't figure out with unit tests alone.
+With regards to the test pyramid integration tests are on a higher level than your unit tests. Integrating slow parts like filesystems, databases and network tends to be much slower than running unit tests with these pieces stubbed out. They also tend to be a little bit more difficult to write than small and isolated unit tests. Still, they have the advantage of giving you the confidence that your application can correctly work with all the external parts it needs to talk to which is something you wouldn't figure out with unit tests alone.
 
 ### UI Tests
 Most applications have some sort of user interface. Typically we're talking about a web interface in the context of web applications but if you think about it, a REST API or command line interface is as much of a user interface as a fancy react UI.
@@ -146,7 +146,7 @@ UI Tests and end-to-end tests are often considered to be the same thing. For me 
 
 With traditional web applications testing the user interface can be achieved with tools like Selenium. If you consider a REST API to be your outermost user interface you should have everything you need by writing proper integration tests.
 
-**TODO: write about UI-checking tests, lineup, csscritic and stuff**
+**TODO: write about UI-checking tests, lineup, csscritic, galen and stuff**
 Thoughts:
   * UI Tests tend to be flaky, UI changes a lot, tests will become brittle
   * UI regression using things like galen, lineup, csscritic and co
@@ -156,36 +156,42 @@ Thoughts:
 
 Testing through **TODO: is it "testing through"?**  the user interface is the most end-to-end way you could test your application. You run your tests against the same interface real users would use. It's quite obvious that these tests give you the biggest confidence when you need to decide if your software is working or not. With [Selenium](http://docs.seleniumhq.org/) and the [WebDriver Protocol](https://www.w3.org/TR/webdriver/) there are some tools that allow you to automate your UI tests by automatically driving a (headless) browser, performing clicks, entering data and checking the state of your user interface.  UI tests come with their own kind of problems. They are notoriously flaky and often fail for unexpected and unforseeable reasons. They require a lot of maintenance and run pretty slowly. Yet they give you the highest confidence that your application is working correctly end to end. Due to their high maintenance cost you should aim to reduce the number of UI tests to the bare minimum. Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and try to reflect the most important steps of these user journeys in your automated UI tests. If you're building an e-commerce site your most valuable customer journey could be a user searching for a product, putting it in the shopping basket and doing a checkout. Done. If this journey still works you should be pretty good to go. Everything else can and should be tested in lower levels of the test pyramid.
 
-#### Do Your Features Work Correctly?
-The higher you move up in your test pyramid the more you enter the realms of testing whether the features you're building work correctly from a users perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from _"if I enter the values `x` and `y`, the return value should be `z`"_ towards a _"if the user clicks the 'add to basket' button, the item should be put in the shopping basket"_. Sometimes you'll hear the terms **functional test** or **acceptance test** for these kinds of tests. Sometimes people will tell you that functional and acceptance tests are different things. Most of the times this discussion is a pretty big source of confusion for everyone involved.
+### Contract Tests
+**TODO**
+Test the contract (interface) between two services. Loose coupling, allow services to evolve on their own without breaking dependencies, foster communication between teams, decouple services and allow omitting flaky and hard to setup end to end testing.
 
-Here's the thing: At one point you should make sure to test that your software works correctly from a _feature_ perspective, not just from a technical perspective.
+### Do Your Features Work Correctly?
+The higher you move up in your test pyramid the more you enter the realms of testing whether the features you're building work correctly from a users perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from 
 
-This is also the area where people will bring up <abbr title="Behaviour-Driven Development">BDD</abbr> and tools that allow you to implement tests in a BDD fashion. BDD or a BDD-style way of wrtiting tests can be a nice trick to shift your mindset from implementation details towards the users' needs. Go ahead and give it a try. You don't even need to adopt full-blown BDD tools like [Cucumber](https://cucumber.io/) (there's nothing wrong with it). Some assertion libraries (like [chai.js](http://chaijs.com/guide/styles/#should) allow you to write assertions with `should`-style keywords that can make your tests more BDD-like. And even if you don't employ a library that provides this notation, clever and well-factored code will get you in a way of writing user behaviour focues tests. Some helper methods/functions will get you a very long way:
+    when I enter the values x and y, the return value should be z 
+    
+towards 
+
+    when the user clicks the 'add to basket' button, the item should be put in the shopping basket
+    
+Sometimes you'll hear the terms [**functional test**](https://en.wikipedia.org/wiki/Functional_testing) or [**acceptance test**](https://en.wikipedia.org/wiki/Acceptance_testing#Acceptance_testing_in_extreme_programming) for these kinds of tests. Sometimes people will tell you that functional and acceptance tests are different things. Sometimes the terms are conflated. Sometimes people will argue endlessly about wording and definitions. Often this discussion is a pretty big source of confusion. Here's the thing: At one point you should make sure to test that your software works correctly from a _feature_ perspective, not just from a technical perspective. What you call these tests is not really that important. Having these tests, however, is. Pick a term, stick to it, and write those tests.
+
+This is also the area where people will bring up <abbr title="Behaviour-Driven Development">BDD</abbr> and tools that allow you to implement tests in a BDD fashion. BDD or a BDD-style way of wrtiting tests can be a nice trick to shift your mindset from implementation details towards the users' needs. Go ahead and give it a try. You don't even need to adopt full-blown BDD tools like [Cucumber](https://cucumber.io/) (there's nothing wrong with it). Some assertion libraries (like [chai.js](http://chaijs.com/guide/styles/#should) allow you to write assertions with `should`-style keywords that can make your tests read more BDD-like. And even if you don't use a library that provides this notation, clever and well-factored code will allow you to user behaviour focues tests. Some helper methods/functions can get you a very long way:
 
 {% highlight python %}
 def test_add_to_basket():
     # given
-    user_with_empty_basket()
+    a_user_with_empty_basket()
     bicycle = article(name="bicycle", price=100)
 
     # when
     article_page.add_to_basket(bicycle)
 
     # then
-    shopping_basket.contains(bicycle)
+    assert shopping_basket.contains(bicycle)
 {% endhighlight %}
-**TODO rework example, syntax highlighting**
-### Contract Tests
-**TODO**
-Test the contract (interface) between two services. Loose coupling, allow services to evolve on their own without breaking dependencies, foster communication between teams, decouple services and allow omitting flaky and hard to setup end to end testing.
+**TODO rework example**
+
 
 ## Avoid Test Duplication
 Now that you know that you should write different types of tests there's one more pitfall for you to avoid: test duplication. While your gut feeling might say that there's no such thing as too many tests let me assure you, there is. Every single test in your test suite is additional baggage and doesn't come for free. Writing and maintaining tests takes time. Reading and understanding other people's test takes time. And of course, running tests takes time.
 
 As with production code you should strive for simplicity and avoid duplication. If you managed to test all of your code's edge cases on a unit level there's no need to test for these edge cases again in a higher-level test. As a rule of thumb if you've tested something on a lower level, there's no reason to test it again on a higher level. If your high-level test adds additional value (e.g. testing the integration with a real database) than this is something you should have, even though you might have tested the same database access function in a unit test. Just make sure to focus on the integration part in that test and avoid going through all possible edge-cases again.
-
-## What About "Functional Tests" and "Acceptance Tests"?
 
 ## Further reading
 
