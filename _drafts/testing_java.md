@@ -6,11 +6,13 @@ excerpt: If you want to jump aboard the Microservices hype-train, continuous del
 comments: true
 ---
 
-Microservices have been all the rage for quite some time now. If you've attended any tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the success stories that companies love to share about their microservices journey.
+Microservices have been all the rage for quite some time now. If you attended any tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the stories that companies love to share about their microservices journey.
 
-Somewhere beneath that hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down for you than I ever could. Chance is, if you're reading this article you somehow ended up with the decision to take a look into what's behind this magic buzzword.
+Somewhere beneath that hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down than I ever could. Chance is, if you're reading this blog post you somehow ended up with the decision to take a look into what's behind this magic buzzword.
 
-The idea for this post has been sitting with me for a long time now. And even during writing this article I was wondering whether I wasn't too late to the party and everything there is to say had already been said. Yet, I still encounter a lot of teams that are heading out on their adventure to build microservices who are still puzzled about this whole testing thing. And I observed that I tell the same stories to all of them. So I decided to write down the essence of these stories for everyone to read. The good thing is: the concepts and tools I'm going to tell you about don't just apply to microservices but can (and should) be used in other settings as well. It doesn't matter if you're building a monolithic application, a mobile app or an IoT device, with some slight deviations the concepts outlined in this post will help you come up with better quality, more reliability and more peace of mind. Have fun. **TODO rework intro**
+Being the hype du jour, a lot has been said and written about building microservices successfully. Yet, I still encounter many teams starting their microservices adventure. After seeing how other big companies solved their problems by adopting a microservices architecture they sense that _"doing microservices"_ will be their best chance at replacing that big dusty legacy application that has been sitting around for too long now. Starting all new comes with many good intentions. _"Testing"_ is often one of them. _"This time we'll do it right. All automated. Less manual testing. Test-driven and whatnot!"_. Suddenly the questions around how to build microservices are accompanied by questions around testing as well.
+
+I believe that proper test automation is essential if you want to introduce, build and run microservices. Getting testing right in a microservices world is what this blog post will tell you. Don't get me wrong, this post can merely be a starting point. Telling you about some core concepts and terms. From here you can dive deeper into further topics (e.g. using the resources I list at the end). And most importantly: from here you can start, experiment and learn what it means to test microservices on your own. You won't get it all correct from the beginning. That's ok. Start with best intentions, be diligent and explore!
 
 **TODO: teaser image?**
 
@@ -165,7 +167,7 @@ This is also the area where people will bring up <abbr title="Behaviour-Driven D
 def test_add_to_basket():
     # given
     user_with_empty_basket()
-    bicycle = article("bicycle")
+    bicycle = article(name="bicycle", price=100)
 
     # when
     article_page.add_to_basket(bicycle)
@@ -225,3 +227,4 @@ Make sure to check out the [sample application](https://github.com/hamvocke/spri
   * avoid passive voice
   * start bulled points with caps?
   * minify images
+  * list resources
