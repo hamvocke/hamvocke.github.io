@@ -31,18 +31,18 @@ What you'll take away from this post:
 
 ## Microservices Need (Test) Automation
 
-Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can be released to production at any time. You use a **build pipeline** to automatically test and deploy your application to all of your testing and production environments. Once you advance on your microservices quest, you'll be juggling with dozens, maybe even hundreds of microservices. At this point building, testing and deploying these services becomes impossible -- at least if you want to deliver working software instead of spending all your time deploying stuff. Automating everything (build, tests, deployment, infrastructure) diligently is your only way forward. 
+Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can be released to production at any time. You use a **build pipeline** to automatically test and deploy your application to all of your testing and production environments. Once you advance on your microservices quest, you'll be juggling with dozens, maybe even hundreds of microservices. At this point building, testing and deploying these services becomes impossible -- at least if you want to deliver working software instead of spending all your time deploying stuff. Automating everything (build, tests, deployment, infrastructure) diligently is your only way forward.
 
 ![build pipeline](/assets/img/uploads/buildPipeline.png)
 *use build pipelines to automatically and reliably get your software into production*
 
-Most -- if not all -- success stories around microservices are told by teams who employed continuous delivery or **continuous deployment** (every change to your software that's proven to be releasable will be deployed to production). These teams make sure that all releasable changes quickly get in the hands of their customers. How do you proof that your latest change still results in releasable software? You test your software including the latest change thoroughly. Traditionally you'd do this manually by deploying your application to a test environment and then performing some black-box style testing e.g. by clicking through your user interface to see if anything's broken. It's obvious that testing all changes manually is time-consuming, repetitive and tedious. Repetitive is boring, boring leads to mistakes and makes you look for a different job quite soon. Luckily there's a remedy for repetitive tasks: **automation**. 
+Most -- if not all -- success stories around microservices are told by teams who employed continuous delivery or **continuous deployment** (every change to your software that's proven to be releasable will be deployed to production). These teams make sure that all releasable changes quickly get in the hands of their customers. How do you proof that your latest change still results in releasable software? You test your software including the latest change thoroughly. Traditionally you'd do this manually by deploying your application to a test environment and then performing some black-box style testing e.g. by clicking through your user interface to see if anything's broken. It's obvious that testing all changes manually is time-consuming, repetitive and tedious. Repetitive is boring, boring leads to mistakes and makes you look for a different job quite soon. Luckily there's a remedy for repetitive tasks: **automation**.
 
-Automating your tests can be one of the big game changers for your life as a software developer. Automate your tests and you (or even worse, a separate quality assurance team) no longer have to mindlessly follow click protocols in order to find out if your latest release is ready for production. Automate your tests and you can change your codebase without batting an eye. If you've ever tried doing a large-scale refactoring without a proper test suite I bet you know what a terrifying experience this can be. How would you know if you accidentally broke stuff along the way? Well, you click through all your manual test cases, that's how. But let's be honest: do you really enjoy that? How about making even large-scale changes and knowing whether you broke stuff within seconds while taking a nice sip of coffee? Sounds more enjoyable if you ask me. 
+Automating your tests can be one of the big game changers for your life as a software developer. Automate your tests and you (or even worse, a separate quality assurance team) no longer have to mindlessly follow click protocols in order to find out if your latest release is ready for production. Automate your tests and you can change your codebase without batting an eye. If you've ever tried doing a large-scale refactoring without a proper test suite I bet you know what a terrifying experience this can be. How would you know if you accidentally broke stuff along the way? Well, you click through all your manual test cases, that's how. But let's be honest: do you really enjoy that? How about making even large-scale changes and knowing whether you broke stuff within seconds while taking a nice sip of coffee? Sounds more enjoyable if you ask me.
 
 Automation in general and test automation specifically are essential to build a successful microservices architecture. Do yourself a favor and take a look into the concepts behind continuous delivery ([the Continuous Delivery book](https://www.amazon.com/gp/product/0321601912) is my go to resource). You will see that diligent automation allows you to deliver software faster and more reliable. Continuous delivery paves the way into a new world full of fast feedback and experimentation. At the very least it makes your life as a developer more peaceful.
 
-If all this stuff is new to you and you know that you have to start from scratch it can look quite intimidating. There probably are a lot of questions on your mind. What aspects of your codebase do you need to test? How should you structure and write your tests? What tools and libraries can make your life easier? 
+If all this stuff is new to you and you know that you have to start from scratch it can look quite intimidating. There probably are a lot of questions on your mind. What aspects of your codebase do you need to test? How should you structure and write your tests? What tools and libraries can make your life easier?
 
 To test microservices some concepts, tools and libraries have proven to be effective. Sticking to these can help you come up with a healthy, reliable and fast test suite. I will explain the most important concepts and approaches that you need to understand in order to test your microservices thoroughly. Picking the right tools and libraries often depends on your choice of programming language and its ecosystem. That's why I'll cover tools, libraries and implementation examples in my follow-up posts that will look at specific language ecosystems. **TODO link to follow up posts**
 
@@ -53,7 +53,7 @@ If you want to get serious about automated tests for your software there is one 
 ![Test Pyramid](/assets/img/uploads/testPyramid.png)
 
 Mike Cohn's original testing pyramid consists of three layers that your test suite should consist of (bottom to top):
-  
+
   1. Unit Tests
   2. Service Tests
   3. User Interface Tests
@@ -73,15 +73,15 @@ Given the shortcomings of the original names it's totally okay to come up with o
 While the test pyramid suggests that you'll have three different types of tests (_unit tests_, _service tests_ and _UI tests_) I need to disappoint you. Your reality will look a little more diverse. Lets keep Cohn's test pyramid in mind for its good things (use test layers with different granularity, make sure they're differently sized) and find out what types of tests we need for an effective test suite.
 
 ### Unit tests
-The foundation of your test suite will be made up of unit tests. Your unit tests make sure that a certain unit (your _subject under test_) of your codebase works as intended. 
+The foundation of your test suite will be made up of unit tests. Your unit tests make sure that a certain unit (your _subject under test_) of your codebase works as intended.
 
 ![unit tests](/assets/img/uploads/unitTest.png)
 *a unit test typically replaces external collaborators with mocks or stubs*
 
 #### What's a Unit?
-If you ask three different people what _"unit"_ means in the context of unit tests, you'll probably receive four different, slightly nuanced answers. To a certain extend it's a matter of your own definition and once again, this is alright. 
+If you ask three different people what _"unit"_ means in the context of unit tests, you'll probably receive four different, slightly nuanced answers. To a certain extend it's a matter of your own definition and once again, this is alright.
 
-If you're working in a functional language a _unit_ will probably be a single function within your codebase. Your unit tests will call your function with different parameters and ensure that the function returns the expected values. In an object-oriented language a unit can range from a single method to an entire class. 
+If you're working in a functional language a _unit_ will probably be a single function within your codebase. Your unit tests will call your function with different parameters and ensure that the function returns the expected values. In an object-oriented language a unit can range from a single method to an entire class.
 
 #### Sociable and Solitary
 Some argue that all other collaborators (e.g. other classes that are called by your class under test) of your subject under test should be substituted with _mocks_ or _stubs_ to come up with perfect isolation and to avoid side-effects and complicated test setup. Others argue that only collaborators that are slow or have bigger side effects (e.g. classes that access databases or make network calls) should be stubbed or mocked. [Occasionally](https://www.martinfowler.com/bliki/UnitTest.html) people label these two sorts of tests as **solitary unit tests** for tests that stub all collaborators and **sociable unit tests** for tests that allow talking to real collaborators (Jay Fields [Working Effectively with Unit Tests](https://leanpub.com/wewut) coined these terms). If you have some spare time you can go down the rabbit hole and [read more about the pros and cons](https://martinfowler.com/articles/mocksArentStubs.html) of the different schools of thought.
@@ -91,11 +91,11 @@ At the end of the day it's not important to decide if you go for solitary or soc
 #### Mocking and Stubbing
 **Mocking** and **stubbing** ([there's a difference](https://martinfowler.com/articles/mocksArentStubs.html) if you want to be precise)  should be heavily used instruments in your unit tests. In plain words it means that you replace a real thing (e.g. a class, module or function) with a fake version of that thing. The fake version looks and acts like the real thing (answers to the same method calls) but answers with canned responses that you define yourself at the beginning of your unit test. Regardless of your technology choice, there's a good chance that either your language's standard library or some third-party library will provide you with elegang ways to set up mocks. And even writing your own mocks from scratch is only a matter of writing a fake class/module/function with the same signature as the real one and setting up the fake in your test.
 
-Your unit tests will run very fast. On a decent machine you can expect to run thousands of unit tests within a few minutes. Test small pieces of your codebase in isolation and avoid hitting databases, the filesystem or firing HTTP queries (by using mocks and stubs for these parts) to keep your tests fast. Once you got a hang of writing unit tests you will become more and more fluent in writing them. Stub out external collaborators, set up some input data, call your subject under test and check that the returned value is what you expected. Look into [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) and let your unit tests guide your development; if applied correctly it can help you get into a great flow and come up with a good and maintainable design while automatically producing a comprehensive and fully automated test suite. 
+Your unit tests will run very fast. On a decent machine you can expect to run thousands of unit tests within a few minutes. Test small pieces of your codebase in isolation and avoid hitting databases, the filesystem or firing HTTP queries (by using mocks and stubs for these parts) to keep your tests fast. Once you got a hang of writing unit tests you will become more and more fluent in writing them. Stub out external collaborators, set up some input data, call your subject under test and check that the returned value is what you expected. Look into [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) and let your unit tests guide your development; if applied correctly it can help you get into a great flow and come up with a good and maintainable design while automatically producing a comprehensive and fully automated test suite.
 
 
 #### Unit Testing is Not Enough
-A good unit test suite will be immensely helpful during development: You know that all the small units you tested are working correctly in isolation. Your small-scoped unit tests help you narrowing down and reproducing errors in your code. And they give you fast feedback while working with the codebase and will tell you whether you broke something (unintendedly). Consider them as a tool _for developers_ as they are written from the developer's point of view and make their job easier. 
+A good unit test suite will be immensely helpful during development: You know that all the small units you tested are working correctly in isolation. Your small-scoped unit tests help you narrowing down and reproducing errors in your code. And they give you fast feedback while working with the codebase and will tell you whether you broke something (unintendedly). Consider them as a tool _for developers_ as they are written from the developer's point of view and make their job easier.
 
 Unfortunately writing only unit alone won't get you very far. With unit tests alone you don't know whether your application as a whole works as intended. You don't know whether the features your customers love actually work. Being focused on the tiny pieces from the inside point of view you can't put yourself in the customer's shoes and see if everything works for them. You won't know if you did a proper job plumbing and wiring all those components, classes and modules together. Maybe there's something funky happening once all your small units join forces and work together as a bigger system. Maybe your code works perfectly fine when running against a mocked database but fails when it's supposed to write data to a real database. And maybe you wrote perfectly elegant and well-crafted code that totally fails to solve your users problem. Seems like we need more in order to spot these problems.
 
@@ -123,7 +123,7 @@ As another example, an integration test for your REST API could look like this:
     3. check that the desired interaction has been triggered within your application
 
 
-Your integration tests -- like unit tests -- can be fairly whitebox. Some frameworks allow you to start your application while still being able to mock some other parts of your application so that you can check that the correct interactions have happened. 
+Your integration tests -- like unit tests -- can be fairly whitebox. Some frameworks allow you to start your application while still being able to mock some other parts of your application so that you can check that the correct interactions have happened.
 
 Write integration tests for all pieces of code where you either _serialize_ or _deserialize_ data. And that can be a lot in a microservices architecture. Some examples are:
 
@@ -144,7 +144,7 @@ _UI tests_ test that the user interface of your application works correctly. Use
 
 UI Tests and end-to-end tests are often considered to be the same thing. For me this conflates two things that are not _necessarily_ related. Yes, testing your application end-to-end often means driving your test through the user interface. The inverse, however, is not true. Testing your user interface doesn't have to be done in an end-to-end fashion. Depending on the technology you use, testing your user interface can be as simple as writing some unit tests for your react/angular/ember.js/vue.js/whatever-is-fancy-next-week application without needing to connect to external databases or downstream services.
 
-With traditional web applications testing the user interface can be achieved with tools like Selenium. If you consider a REST API to be your outermost user interface you should have everything you need by writing proper integration tests. 
+With traditional web applications testing the user interface can be achieved with tools like Selenium. If you consider a REST API to be your outermost user interface you should have everything you need by writing proper integration tests.
 
 **TODO: write about UI-checking tests, lineup, csscritic and stuff**
 Thoughts:
@@ -157,7 +157,7 @@ Thoughts:
 Testing through **TODO: is it "testing through"?**  the user interface is the most end-to-end way you could test your application. You run your tests against the same interface real users would use. It's quite obvious that these tests give you the biggest confidence when you need to decide if your software is working or not. With [Selenium](http://docs.seleniumhq.org/) and the [WebDriver Protocol](https://www.w3.org/TR/webdriver/) there are some tools that allow you to automate your UI tests by automatically driving a (headless) browser, performing clicks, entering data and checking the state of your user interface.  UI tests come with their own kind of problems. They are notoriously flaky and often fail for unexpected and unforseeable reasons. They require a lot of maintenance and run pretty slowly. Yet they give you the highest confidence that your application is working correctly end to end. Due to their high maintenance cost you should aim to reduce the number of UI tests to the bare minimum. Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and try to reflect the most important steps of these user journeys in your automated UI tests. If you're building an e-commerce site your most valuable customer journey could be a user searching for a product, putting it in the shopping basket and doing a checkout. Done. If this journey still works you should be pretty good to go. Everything else can and should be tested in lower levels of the test pyramid.
 
 #### Do Your Features Work Correctly?
-The higher you move up in your test pyramid the more you enter the realms of testing whether the features you're building work correctly from a users perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from _"if I enter the values `x` and `y`, the return value should be `z`"_ towards a _"if the user clicks the 'add to basket' button, the item should be put in the shopping basket"_. Sometimes you'll hear the terms **functional test** or **acceptance test** for these kinds of tests. Sometimes people will tell you that functional and acceptance tests are different things. Most of the times this discussion is a pretty big source of confusion for everyone involved. 
+The higher you move up in your test pyramid the more you enter the realms of testing whether the features you're building work correctly from a users perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from _"if I enter the values `x` and `y`, the return value should be `z`"_ towards a _"if the user clicks the 'add to basket' button, the item should be put in the shopping basket"_. Sometimes you'll hear the terms **functional test** or **acceptance test** for these kinds of tests. Sometimes people will tell you that functional and acceptance tests are different things. Most of the times this discussion is a pretty big source of confusion for everyone involved.
 
 Here's the thing: At one point you should make sure to test that your software works correctly from a _feature_ perspective, not just from a technical perspective.
 
@@ -186,28 +186,6 @@ Now that you know that you should write different types of tests there's one mor
 As with production code you should strive for simplicity and avoid duplication. If you managed to test all of your code's edge cases on a unit level there's no need to test for these edge cases again in a higher-level test. As a rule of thumb if you've tested something on a lower level, there's no reason to test it again on a higher level. If your high-level test adds additional value (e.g. testing the integration with a real database) than this is something you should have, even though you might have tested the same database access function in a unit test. Just make sure to focus on the integration part in that test and avoid going through all possible edge-cases again.
 
 ## What About "Functional Tests" and "Acceptance Tests"?
-
-## Implementing a Test Suite
-Let's see how we can implement a test suite with tests for the different layers of the test pyramid. I've created a [sample application](https://github.com/hamvocke/spring-testing) with tests on the different layers of the testing pyramid. The codebase contains more tests than necessary and actively contradicts my hint that you should avoid test duplication. For demonstration purposes I decided to duplicate some tests along the test pyramid but please keep in mind that you wouldn't need to do this in your codebase. 
-
-### The Sample Application
-The sample application is rather simple but still shows some typical traits of a typical microservice. It provides a REST interface, talks to a database and fetches information from a third-party REST service. It's implemented in [Spring Boot ](https://projects.spring.io/spring-boot/) and should be understandable even if you've never worked with Spring Boot before. 
-
-Make sure to check out the [sample application](https://github.com/hamvocke/spring-testing) on github. The readme should contain all instructions you need to run the application and all automated tests on your machine. **TODO: make sure readme is complete**
-
-#### High-level structure
-![sample application structure](/assets/img/uploads/testService.png)
-
-
-#### Internal structure
-![sample application architecture](/assets/img/uploads/testArchitecture.png)
-
-
-### Unit Tests
-
-### Integration Tests
-
-### CDC Tests
 
 ## Further reading
 
