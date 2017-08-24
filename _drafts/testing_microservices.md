@@ -19,13 +19,17 @@ I believe that proper test automation is essential if you want to introduce, bui
 ## <abbr title="too long; didn't read">tl;dr</abbr>
 What you'll take away from this post:
 
+<div class="highlight">
   * Automate your tests (surprise!)
   * Remember the [test pyramid](https://martinfowler.com/bliki/TestPyramid.html) _(don't be too confused by the original names of the layers, though)_
   * Write tests with different granularity/levels of integration
   * Use unit test (_solitary_ and _sociable_) to test the insides of your application
   * Use integration tests to test all places where your application serializes/deserializes data (e.g. public APIs, accessing databases and the filesystem, calling other microservices, reading from/writing to queues)
   * Test collaboration between services with contract tests (CDC)
-  * Favor CDC tests over end-to-end tests
+  * Use end-to-end tests sparingly, limit to high-value user journeys
+  * don't just test from a developer's perspective, make sure to test features from a user's perspective as well
+
+</div>
 
 **TODO update tl;dr?**
 
@@ -251,12 +255,20 @@ Now that you know that you should write different types of tests there's one mor
 As with production code you should strive for simplicity and avoid duplication. If you managed to test all of your code's edge cases on a unit level there's no need to test for these edge cases again in a higher-level test. As a rule of thumb if you've tested something on a lower level, there's no reason to test it again on a higher level. If your high-level test adds additional value (e.g. testing the integration with a real database) than this is something you should have, even though you might have tested the same database access function in a unit test. Just make sure to focus on the integration part in that test and avoid going through all possible edge-cases again.
 
 ## Further reading
+Want to learn more about the things I described (sometimes only briefly) in this post? Here are the resources I can recommend:
 
-* [Testing Microservices](https://martinfowler.com/articles/microservice-testing)
-* TDD by example - Kent Beck
-* Continuous Delivery - Jez Humble, Dave Farley
-* [Working Effectively with Unit Tests](https://leanpub.com/wewut)
-* Building Microservices - Sam Newman (read a [sample chapter about testing microservices](https://opds.oreilly.com/learning/building-microservices-testing)
+  * ***Building Microservices*** **by Sam Newman**  
+  This book contains so much more there is to know about building microservices. A lot of the ideas in this article can be found in this book as well. The chapter about testing is available as a free sample [over at O'Reilly](https://opds.oreilly.com/learning/building-microservices-testing).
+  * ***[Working Effectively with Unit Tests](https://leanpub.com/wewut)*** **by Jay Fields**  
+  If you level up your unit testing skills or read more about mocking, stubbing, sociable and solitary unit tests, this is your resource.
+  * ***Continuous Delivery*** **by Jez Humble and Dave Farley**  
+  The canonical book on continuous delivery. Contains a lot of useful information about build pipelines, test and deployment automation and the cultural mindset around CD. This book has been a real eye opener in my career.
+  * ***[Testing Microservices](https://martinfowler.com/articles/microservice-testing)*** **by Toby Clemson**  
+  A fantastic slide deck with a lot of useful information about the different considerations when testing a microservice. Has lots of nice diagrams to show what boundaries you should be looking at.
+  * ***Growing Object-Oriented Software Guided by Tests*** by **Steve Freeman and Nat Pryce**  
+  If you're still trying to get your head around this whole testing thing (and ideally are working with Java) this is the single book you should be reading right now.
+  * ***Test-Driven Development: By example*** by **Kent Beck**  
+  The classic TDD book by Kent Beck. Demonstrates on a hands-on walkthrough how you TDD your way to working software.
 
 **TODO**
 
@@ -270,3 +282,5 @@ As with production code you should strive for simplicity and avoid duplication. 
   * start bulled points with caps?
   * minify images
   * list resources
+  * rework "home" page
+  * add "author" section
