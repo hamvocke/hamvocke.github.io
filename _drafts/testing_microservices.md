@@ -138,9 +138,11 @@ Writing integration tests around these boundaries allow you to make sure that wr
 With regards to the test pyramid integration tests are on a higher level than your unit tests. Integrating slow parts like filesystems, databases and network tends to be much slower than running unit tests with these pieces stubbed out. They also tend to be a little bit more difficult to write than small and isolated unit tests. Still, they have the advantage of giving you the confidence that your application can correctly work with all the external parts it needs to talk to which is something you wouldn't figure out with unit tests alone.
 
 ### UI Tests
-Most applications have some sort of user interface. Typically we're talking about a web interface in the context of web applications. If you think about it, you'll probably realise that a REST API or a command line interface is as much of a user interface as a fancy UI.
+Most applications have some sort of user interface. Typically we're talking about a web interface in the context of web applications. If you think about it you'll notice that a REST API or a command line interface is as much of a user interface as a fancy web user interface.
 
 _UI tests_ test that the user interface of your application works correctly. User input should trigger the right actions, data should be presented to the user, the UI state should change as expected.
+
+![user interface tests](/assets/img/uploads/ui_tests.png)
 
 UI Tests and end-to-end tests are sometimes (as in Mark Cohn's case) said to be the same thing. For me this conflates two things that are not _necessarily_ related. Yes, testing your application end-to-end often means driving your tests through the user interface. The inverse, however, is not true. Testing your user interface doesn't have to be done in an end-to-end fashion. Depending on the technology you use, testing your user interface can be as simple as writing some unit tests for your react/angular/ember.js/vue.js/whatever-is-fancy-next-week application without needing to connect to external databases or downstream services.
 
@@ -211,16 +213,20 @@ Furthermore, end-to-End tests require a lot of maintenance and run pretty slowly
 
 Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and translate the most important steps of these user journeys into automated end-to-end tests. If you're building an e-commerce site your most valuable customer journey could be a user searching for a product, putting it in the shopping basket and doing a checkout. That's it. As long as this journey still works you shouldn't be in too much trouble. Maybe you'll find one or two more crucial user journeys that you can translate into end-to-end tests. But everything more than that will probably be more painful than helpful. High maintenance effort and lots of false positives will slow you don't and make sure you'll lose trust in your tests rather sooner than later. Remember: you have lots of lower levels in your test pyramid where you already tested all sorts of edge cases and integrations with other parts of the system. There's no need to repeat these tests on a higher level.
 
-### Acceptance Tests: Do Your Features Work Correctly?
-The higher you move up in your test pyramid the more you enter the realms of testing whether the features you're building work correctly from a users perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from 
+### Acceptance Tests -- Do Your Features Work Correctly?
+The higher you move up in your test pyramid the more you enter the realms of testing whether the features you're building work correctly from a user's perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from 
 
-    when I enter the values x and y, the return value should be z 
+> when I enter the values `x` and `y`, the return value should be `z`
     
 towards 
 
-    when the user clicks the 'add to basket' button, the item should be put in the shopping basket
+> _given_ there's a logged in user  
+> _and_ there's an article "bicycle"  
+> _when_ the user navigates to the "bicycle" article's detail page  
+> _and_ clicks the "add to basket" button  
+> _then_ the article "bicycle" should be in their shopping basket
     
-Sometimes you'll hear the terms [**functional test**](https://en.wikipedia.org/wiki/Functional_testing) or [**acceptance test**](https://en.wikipedia.org/wiki/Acceptance_testing#Acceptance_testing_in_extreme_programming) for these kinds of tests. Sometimes people will tell you that functional and acceptance tests are different things. Sometimes the terms are conflated. Sometimes people will argue endlessly about wording and definitions. Often this discussion is a pretty big source of confusion. Here's the thing: At one point you should make sure to test that your software works correctly from a _feature_ perspective, not just from a technical perspective. What you call these tests is not really that important. Having these tests, however, is. Pick a term, stick to it, and write those tests.
+Sometimes you'll hear the terms [**functional test**](https://en.wikipedia.org/wiki/Functional_testing) or [**acceptance test**](https://en.wikipedia.org/wiki/Acceptance_testing#Acceptance_testing_in_extreme_programming) for these kinds of tests. Sometimes people will tell you that functional and acceptance tests are different things. Sometimes the terms are conflated. Sometimes people will argue endlessly about wording and definitions. Often this discussion is a pretty big source of confusion. Here's the thing: At one point you should make sure to test that your software works correctly from a _user's_ perspective, not just from a technical perspective. What you call these tests is not really that important. Having these tests, however, is. Pick a term, stick to it, and write those tests.
 
 This is also the area where people will bring up <abbr title="Behaviour-Driven Development">BDD</abbr> and tools that allow you to implement tests in a BDD fashion. BDD or a BDD-style way of wrtiting tests can be a nice trick to shift your mindset from implementation details towards the users' needs. Go ahead and give it a try. You don't even need to adopt full-blown BDD tools like [Cucumber](https://cucumber.io/) (there's nothing wrong with it). Some assertion libraries (like [chai.js](http://chaijs.com/guide/styles/#should) allow you to write assertions with `should`-style keywords that can make your tests read more BDD-like. And even if you don't use a library that provides this notation, clever and well-factored code will allow you to user behaviour focues tests. Some helper methods/functions can get you a very long way:
 
