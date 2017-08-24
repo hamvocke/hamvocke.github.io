@@ -173,17 +173,18 @@ Splitting your system into many small pieces often means that these pieces need 
 ![contract tests](/assets/img/uploads/contract_tests.png)
 _each interface has a providing (or publishing) and a consuming (or subscribing) party. The specification of an interface can be considered a contract._
 
-As you often spread the consuming and providing services across different teams you find yourself in the situation of having to clearly specify the interfaces between these services (the so called **contract**).Traditionally companies have approached this problem in the following way:
+As you often spread the consuming and providing services across different teams you find yourself in the situation where you have to clearly specify the interfaces between these services (the so called **contract**). Traditionally companies have approached this problem in the following way:
 
   1. write a long and detailed interface definition (the contract)
-  2. implement the providing service accordingly
+  2. implement the providing service according to the defined contract
   3. throw the interface definition over the fence to the consuming team
-  4. run some large-scale manual system test to see if everything works
-  5. hope that both teams stick to the interface definition forever 
+  4. wait until they implement their part of consuming the interface
+  5. run some large-scale manual system test to see if everything works
+  6. hope that both teams stick to the interface definition forever 
 
-At the very least you should replace steps 4 and 5 with something more automated: Write automated tests that make sure the implemented interface still follows the defined contract.
+If you're not stuck in the dark ages of software development, you hopefully have replaced steps _5._ and _6._ with something more automated. Automated tests make sure that the implemented interface still follows the defined contract. They serve as a good regression test suite and make sure that deviations from the contract will be noticed early.
 
-In a more agile organisation you should take the more efficient and less wasteful route. All your microservices live within the same organisation. It shouldn't be too hard to talk to the developers of the other services directly instead of throwing overly detailed documentation over the fence. After all they're your co-workers and not a third-party vendor that you could only talk to via customer service or legally bulletproof contracts.
+In a more agile organisation you should take the more efficient and less wasteful route. All your microservices live within the same organisation. It really shouldn't be too hard to talk to the developers of the other services directly instead of throwing overly detailed documentation over the fence. After all they're your co-workers and not a third-party vendor that you could only talk to via customer support or legally bulletproof contracts.
 
 **Consumer-Driven Contract tests** (**CDC tests**) let the consumers drive the implementation of the contract tests. Consumers of an interface write tests that check the API for all data they need to work correctly with that API. For a REST API this could be a test that hits all required endpoints via HTTPS and checks the responses for correct HTTP headers and asserts that all required fields in a JSON body are present. The consuming team then publishes this set of tests so that the team providing the interface can fetch and execute these tests easily (executable packages like .jar files, gems, npm packages or even .deb or .rpm packages are a good idea). The providing team can now develop their API by running the CDC tests. Once they all pass they know they have implemented everything the consuming team needs.
 
@@ -202,10 +203,9 @@ The Consumer-Driven Contract approach would leave you with a process looking lik
 
 If your organisation moves to microservices, having CDC tests in place is a big step towards establishing autonomous teams. CDC tests are an automated way to foster team communication. They ensure that interfaces between teams are working at any time. Failing CDC tests are a good indicator that you should walk over to the affected team and have a chat about any upcoming API changes and figure out how you want to move forward.
 
-Implementing CDC tests can in the simplest case be as simple as writing automated tests 
+A naive implementation of CDC tests can be as simple as firing requests against an API and assert that the responses contain everything you need. Over the last couple of years the CDC approach has become more and more popular and tool appeared on the landscape. [Pact](https://github.com/realestate-com-au/pact) is probably the most prominent one these days. It has a sophisticated approach of writing tests for the consumer and the provider side, gives you stubs for third-party services out of the box and has many more nice features. Pact has been ported to a wide variety of platforms and is available for JVM languages, Ruby, .NET, JavaScript and many more. If you want to get started with CDCs and don't know how, Pact can be a sane choice. The amount and complexity of [its documentation](https://docs.pact.io/) can be overwhelming at first. Still, it helps to get a firm understanding for CDCs which in turn makes it easier for you to advocate for the use of CDCs when working with other teams.
 
-#### Favor CDC tests over end-to-end tests
-E2E tests are often flaky, hard to maintain and hard to debug. CDC tests, if done thoroughly can give you the same confidence without all the hassle.
+Consumer-Driven Contract tests can be a real game changer the further you venture on your microservices journey. Do yourself a favor and read up on that concept and give it a try. A solid suite of CDC tests is invaluable for being able to move fast without breaking other services and cause a lot of frustration with other teams.
 
 ### Acceptance Tests: Do Your Features Work Correctly?
 The higher you move up in your test pyramid the more you enter the realms of testing whether the features you're building work correctly from a users perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from 
