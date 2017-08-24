@@ -67,7 +67,7 @@ Stick to the pyramid shape to come up with a healthy, fast and maintainable test
 
 Don't become too attached to the names of the individual layers in Cohn's test pyramid. In fact they can be quite misleading: _service test_ is a term that is hard to capture (Cohn himself talks about the observation that [a lot of developers completely ignore this layer](https://www.mountaingoatsoftware.com/blog/the-forgotten-layer-of-the-test-automation-pyramid)). In the advent of modern single page application frameworks like react, angular, vue and the legions of others it becomes apparent that _UI tests_ don't have to be on the highest level of your pyramid -- you're perfectly able to unit test your UI in all of these frameworks.
 
-Given the shortcomings of the original names it's totally okay to come up with other names for your test layers. Virtually every team I've worked with came up with different names for _service tests_ and _UI tests_ and that's fine as long as you keep it consistent within your codebase and your team's discussions. To make this more clear, I'll suggest names and give examples of the test types I discovered to be helpful when testing microservices.
+Given the shortcomings of the original names it's totally okay to come up with other names for your test layers, as long as you keep it consistent within your codebase and your team's discussions.
 
 ## Types of Tests
 While the test pyramid suggests that you'll have three different types of tests (_unit tests_, _service tests_ and _UI tests_) I need to disappoint you. Your reality will look a little more diverse. Lets keep Cohn's test pyramid in mind for its good things (use test layers with different granularity, make sure they're differently sized) and find out what types of tests we need for an effective test suite.
@@ -148,7 +148,7 @@ With traditional web applications testing the user interface can be achieved wit
 
 With web interfaces there's multiple aspects that you probably want to test: UI behaviour, layout, usability or adherence to your corporate design are only a few. 
 
-Fortunally, testing the behaviour of your user interface is pretty simple. You click here, enter data there and want the state of the user interface to change accordingly. Modern single page application frameworks (like react, vue.js and angular) often come with their own tools and helpers that allow you to thorougly test these interactions in a pretty low-level (unit test) fashion. With a more traditional, server-side rendered application, Selenium-based tests will be your best choice.
+Fortunally, testing the behaviour of your user interface is pretty simple. You click here, enter data there and want the state of the user interface to change accordingly. Modern single page application frameworks (like react, vue.js and angular) often come with their own tools and helpers that allow you to thorougly test these interactions in a pretty low-level (unit test) fashion. Even if you roll your own frontend implementation using vanilla javascript you can use your regular testing tools like [Jasmine](https://jasmine.github.io/) or [Mocha](http://mochajs.org/). With a more traditional, server-side rendered application, Selenium-based tests will be your best choice.
 
 Testing that your web application's layout remains intact is a little harder. Depending on your application and your users' needs you may want to make sure that code changes don't break the websites layout by accident. Nowadays you even need to check your layout on different form factors for responsive designs. The problem is that computers are notoriously bad at checking what "looks good". There's some tools you could try if you want to automatically check your web application's design in your build pipeline. Most of these tools utilize Selenium to open your web application in different browsers and formats, take screenshots and compare these to previously taken screenshots. If the old and new screenshots differ in an unexpected way, the tool will let you know. [Galen](http://galenframework.com/) is one of these tools. But Rolling your own solution isn't too hard, if you have special requirements. Some teams I've worked with build [lineup](https://github.com/otto-de/lineup) and its Java-based cousin [jlineup](https://github.com/otto-de/jlineup) to achieve something similar. Both tools take the same Selenium-based approach I described before.
 
@@ -171,17 +171,19 @@ One of the big benefits of a microservice architecture is that it allows your or
 Splitting your system into many small pieces often means that these pieces need to communicate with each other via certain (hopefully well-defined, sometimes accidentally grown) interfaces. Interfaces between microservices can come in different shapes and technologies. Common ones are REST and JSON via HTTPS, <abbr title="remote procedure calls">RPC</abbr> using something like [gRPC](https://grpc.io/) or even building an event-driven architecture using queues. For each interface there are two parties involved: the **provider** and the **consumer**. The provider serves data. The consumer processes data obtained from providers. In a REST world a provider builds a REST API with all required endpoints; a consumer makes calls to this REST API to fetch data or trigger changes in the other service. In an asynchronous, event-driven world, a provider (often rather called **publisher**) publishes data to a queue; a consumer (often called **subscriber**) subscribes to these queues and reads and processes data.
 
 ![contract tests](/assets/img/uploads/contract_tests.png)
-_each interface has a providing (or publishing) and a consuming (or subscribing) party_
+_each interface has a providing (or publishing) and a consuming (or subscribing) party. The specification of an interface can be considered a contract._
 
-As you often spread the consuming and providing services across different teams you find yourself in the situation of having to clearly specify the individual interfaces. Traditionally companies have approached this problem in the following way:
+As you often spread the consuming and providing services across different teams you find yourself in the situation of having to clearly specify the interfaces between these services (the so called **contract**).Traditionally companies have approached this problem in the following way:
 
-  1. write a long and detailed interface definition
+  1. write a long and detailed interface definition (the contract)
   2. implement the providing service accordingly
   3. throw the interface definition over the fence to the consuming team
   4. run some large-scale manual system test to see if everything works
   5. hope that both teams stick to the interface definition forever 
 
-In a more agile organisation you should take the more efficient and less wasteful route. All your microservices live within the same organisation. It shouldn't be too hard to talk to the developers of the other services directly. After all they're your co-workers and not a third-party vendor that you could only talk to via customer service or legally bulletproof contracts.
+At the very least you should replace steps 4 and 5 with something more automated: Write automated tests that make sure the implemented interface still follows the defined contract.
+
+In a more agile organisation you should take the more efficient and less wasteful route. All your microservices live within the same organisation. It shouldn't be too hard to talk to the developers of the other services directly instead of throwing overly detailed documentation over the fence. After all they're your co-workers and not a third-party vendor that you could only talk to via customer service or legally bulletproof contracts.
 
 **Consumer-Driven Contract tests** (**CDC tests**) let the consumers drive the implementation of the contract tests. Consumers of an interface write tests that check the API for all data they need to work correctly with that API. For a REST API this could be a test that hits all required endpoints via HTTPS and checks the responses for correct HTTP headers and asserts that all required fields in a JSON body are present. The consuming team then publishes this set of tests so that the team providing the interface can fetch and execute these tests easily (executable packages like .jar files, gems, npm packages or even .deb or .rpm packages are a good idea). The providing team can now develop their API by running the CDC tests. Once they all pass they know they have implemented everything the consuming team needs.
 
@@ -200,11 +202,12 @@ The Consumer-Driven Contract approach would leave you with a process looking lik
 
 If your organisation moves to microservices, having CDC tests in place is a big step towards establishing autonomous teams. CDC tests are an automated way to foster team communication. They ensure that interfaces between teams are working at any time. Failing CDC tests are a good indicator that you should walk over to the affected team and have a chat about any upcoming API changes and figure out how you want to move forward.
 
-### Favor CDC tests over end-to-end tests
-**TODO**
+Implementing CDC tests can in the simplest case be as simple as writing automated tests 
+
+#### Favor CDC tests over end-to-end tests
 E2E tests are often flaky, hard to maintain and hard to debug. CDC tests, if done thoroughly can give you the same confidence without all the hassle.
 
-### Do Your Features Work Correctly?
+### Acceptance Tests: Do Your Features Work Correctly?
 The higher you move up in your test pyramid the more you enter the realms of testing whether the features you're building work correctly from a users perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from 
 
     when I enter the values x and y, the return value should be z 
@@ -239,10 +242,11 @@ As with production code you should strive for simplicity and avoid duplication. 
 
 ## Further reading
 
-[Testing Microservices](https://martinfowler.com/articles/microservice-testing)
+* [Testing Microservices](https://martinfowler.com/articles/microservice-testing)
 * TDD by example - Kent Beck
 * Continuous Delivery - Jez Humble, Dave Farley
 * [Working Effectively with Unit Tests](https://leanpub.com/wewut)
+* Building Microservices - Sam Newman (read a [sample chapter about testing microservices](https://opds.oreilly.com/learning/building-microservices-testing)
 
 **TODO**
 
