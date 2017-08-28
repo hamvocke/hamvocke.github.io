@@ -6,29 +6,31 @@ excerpt: If you want to jump aboard the Microservices hype-train, continuous del
 comments: true
 ---
 
+![test output](/assets/img/uploads/testingMicroservicesHeader.jpg)
+
 Microservices have been all the rage for quite some time now. If you attended any tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the stories that companies love to share about their microservices journey.
 
-Somewhere beneath that hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down than I ever could. Chance is, if you're reading this blog post you somehow ended up with the decision to take a look into what's behind this magic buzzword.
+Behind all the hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down than I ever could. Chance is, if you're reading this blog post you somehow ended up with the decision to take a look into what's behind this buzzword.
 
-Being the hype du jour, a lot has been said and written about building microservices successfully. Yet, I still encounter many teams starting their microservices adventure. After seeing how other big companies solved their problems by adopting a microservices architecture they sense that _"doing microservices"_ will be their best chance at replacing that big dusty legacy application that has been sitting around for too long now. Starting all new comes with many good intentions. _"Testing"_ is often one of them. _"This time we'll do it right. All automated. Less manual testing. Test-driven and whatnot!"_. Suddenly the questions around how to build microservices are accompanied by questions around testing as well.
+I believe that proper test automation is essential if you want to introduce, build and run microservices. Getting testing right in a microservices world is what this blog post is about. Don't get me wrong, this post can merely be a starting point, telling you about some core concepts and terms. From here you can dive deeper into further topics (e.g. using the resources I list at the end). And most importantly: from here you can start, experiment and learn what it means to test microservices on your own. You won't get it all correct from the beginning. That's ok. Start with best intentions, be diligent and explore!
 
-I believe that proper test automation is essential if you want to introduce, build and run microservices. Getting testing right in a microservices world is what this blog post will tell you. Don't get me wrong, this post can merely be a starting point. Telling you about some core concepts and terms. From here you can dive deeper into further topics (e.g. using the resources I list at the end). And most importantly: from here you can start, experiment and learn what it means to test microservices on your own. You won't get it all correct from the beginning. That's ok. Start with best intentions, be diligent and explore!
-
-**TODO: teaser image?**
+**TODO: teaser image? maybe a pipeline of three services (user, order, email) with different green stages?**
 
 ## <abbr title="too long; didn't read">tl;dr</abbr>
-What you'll take away from this post:
+Here's what you'll take away from this post:
 
 <div class="highlight">
-  * Automate your tests (surprise!)
-  * Remember the [test pyramid](https://martinfowler.com/bliki/TestPyramid.html) _(don't be too confused by the original names of the layers, though)_
-  * Write tests with different granularity/levels of integration
-  * Use unit test (_solitary_ and _sociable_) to test the insides of your application
-  * Use integration tests to test all places where your application serializes/deserializes data (e.g. public APIs, accessing databases and the filesystem, calling other microservices, reading from/writing to queues)
-  * Test collaboration between services with contract tests (CDC)
-  * Use end-to-end tests sparingly, limit to high-value user journeys
-  * don't just test from a developer's perspective, make sure to test features from a user's perspective as well
-
+    <ul>
+	<li>Automate your tests (surprise!)</li>
+	<li>Use continuous delivery to make your life easier</li>
+	<li>Remember the <a href="https://martinfowler.com/bliki/TestPyramid.html">test pyramid</a> <em>(don't be too confused by the original names of the layers, though)</em></li>
+	<li>Write tests with different granularity/levels of integration</li>
+	<li>Use unit test (<em>solitary</em> and <em>sociable</em>) to test the insides of your application</li>
+	<li>Use integration tests to test all places where your application serializes/deserializes data (e.g. public APIs, accessing databases and the filesystem, calling other microservices, reading from/writing to queues)</li>
+	<li>Test collaboration between services with contract tests (CDC)</li>
+	<li>Use end-to-end tests sparingly, limit to high-value user journeys</li>
+	<li>don't just test from a developer's perspective, make sure to test features from a user's perspective as well</li>
+    </ul>
 </div>
 
 **TODO update tl;dr?**
@@ -48,7 +50,7 @@ Automation in general and test automation specifically are essential to build a 
 
 If all this stuff is new to you and you know that you have to start from scratch it can look quite intimidating. There probably are a lot of questions on your mind. What aspects of your codebase do you need to test? How should you structure and write your tests? What tools and libraries can make your life easier?
 
-To test microservices some concepts, tools and libraries have proven to be effective. Sticking to these can help you come up with a healthy, reliable and fast test suite. I will explain the most important concepts and approaches that you need to understand in order to test your microservices thoroughly. Picking the right tools and libraries often depends on your choice of programming language and its ecosystem. That's why I'll cover tools, libraries and implementation examples in my follow-up posts that will look at specific language ecosystems. **TODO link to follow up posts**
+In order to test microservices some concepts, tools and libraries have proven to be effective. Sticking to these can help you come up with a healthy, reliable and fast test suite. I will explain the most important concepts and approaches that you need to understand in order to test your microservices thoroughly. Picking the right tools and libraries often depends on your choice of programming language and its ecosystem. That's why I'll cover tools, libraries and implementation examples in my follow-up posts that will look at specific language ecosystems. **TODO link to follow up posts**
 
 
 ## The Test Pyramid
@@ -248,11 +250,22 @@ def test_add_to_basket():
 {% endhighlight %}
 **TODO rework example**
 
+### Exploratory Testing
+Even the most diligent test automation efforts are not perfect. Sometimes you miss certain edge cases in your automated tests. Sometimes it's nearly impossible to detect a particular bug by writing a unit test. Certain quality issues don't even become apparent within your automated tests (think about design or usability). Despite your best intentions with regards to test automation, manual testing of some sorts is still a good idea. [Exploratory Testing](https://en.wikipedia.org/wiki/Exploratory_testing) is an approach that you should not omit from your testing portfolio. It is a manual testing approach that emphasizes the tester's freedom and creativity to spot quality issues in a running system. Simply take some time on a regular schedule, roll up your sleeves and try to break stuff within your application. Use a destructive mindset to think about what you could to to provoke issues and errors and document everything you find. Watch out for bugs, design issues, slow response times, missing or misleading error messages and everything else that would annoy you as a user of your software.
+
+The good news is that you can happily automate most of your findings with automated tests. Writing automated tests for the bugs you spot makes sure that there won't be any regressions of that bug in the future. Plus it helps you narrowing down the root cause of that issue during bugfixing.
+
+During exploratory testing you will spot problems that slipped through your build pipeline unnoticed. Don't be frustrated. This is great feedback for the maturity of your build pipeline. As with any feedback, make sure to act on it: Think about what you can do to avoid these kinds of problems in the future. Maybe you're missing out on a certain set of automated tests. Maybe you have just been sloppy with your automated tests in this iteration and need to test more thoroughly in the future. Maybe there's a shiny new tool or approach that you could incorporate in your pipeline to avoid these issues in the future. Consider the issues you spotted a gift that allows you to make your pipeline more thorough and your software delivery more robust. If you never ignore this feedback, your pipeline will grow more mature over time.
 
 ## Avoid Test Duplication
 Now that you know that you should write different types of tests there's one more pitfall for you to avoid: test duplication. While your gut feeling might say that there's no such thing as too many tests let me assure you, there is. Every single test in your test suite is additional baggage and doesn't come for free. Writing and maintaining tests takes time. Reading and understanding other people's test takes time. And of course, running tests takes time.
 
-As with production code you should strive for simplicity and avoid duplication. If you managed to test all of your code's edge cases on a unit level there's no need to test for these edge cases again in a higher-level test. As a rule of thumb if you've tested something on a lower level, there's no reason to test it again on a higher level. If your high-level test adds additional value (e.g. testing the integration with a real database) than this is something you should have, even though you might have tested the same database access function in a unit test. Just make sure to focus on the integration part in that test and avoid going through all possible edge-cases again.
+As with production code you should strive for simplicity and avoid duplication. If you managed to test all of your code's edge cases on a unit level there's no need to test for these edge cases again in a higher-level test. Keep this as a rule of thumb: if you've tested something on a lower level, there's no reason to test it again on a higher level. If your high-level test adds additional value (e.g. testing the integration with a real database) than it's a good idea to have this higher level test even though you might have tested the same database access function in a unit test. Just make sure to focus on the integration part in that test and avoid going through all possible edge-cases again.
+
+Duplicating tests can be quite tempting, especially when you're new to test automation. Be aware of the additional cost and don't be afraid to delete tests if you were able to replace them with lower level tests or if they no longer provide any value.
+
+## Summary
+Test automation and microservices go hand in hand. Once you decide to split your system into many small services, diligent automation of testing and deployment is no longer nice to have but becomes a necessity. Continuous delivery helps you to stay sane within an ever growing system landscape. Automating your tests can be a challenging task and there is a lot of to learn about effective and efficient test automation. You don't have to know everything from the very beginning and can learn a lot of the details as you go. Come up with a healthy testing portfolio by keeping the test pyramid in mind. Have different sets of tests with different granularity. Avoid duplication, be diligent with your test automation and treat your test code as you would treat production code.
 
 ## Further reading
 Want to learn more about the things I described (sometimes only briefly) in this post? Here are the resources I can recommend:
@@ -269,6 +282,7 @@ Want to learn more about the things I described (sometimes only briefly) in this
   If you're still trying to get your head around this whole testing thing (and ideally are working with Java) this is the single book you should be reading right now.
   * ***Test-Driven Development: By example*** by **Kent Beck**  
   The classic TDD book by Kent Beck. Demonstrates on a hands-on walkthrough how you TDD your way to working software.
+
 
 **TODO**
 
