@@ -8,6 +8,10 @@ comments: true
 
 ![test output](/assets/img/uploads/testingMicroservicesHeader.jpg)
 
+* Do not remove this line (it will not be displayed)
+{:toc}
+
+
 Microservices have been all the rage for quite some time now. If you attended any tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the stories that companies love to share about their microservices journey.
 
 Behind all the hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down than I ever could. Chance is, if you're reading this blog post you somehow ended up with the decision to take a look into what's behind this buzzword.
@@ -22,21 +26,21 @@ Here's what you'll take away from this post:
 <div class="highlight">
     <ul>
 	<li>Automate your tests (surprise!)</li>
-	<li>Use continuous delivery to make your life easier</li>
+	<li>Continuous delivery makes your life easier</li>
 	<li>Remember the <a href="https://martinfowler.com/bliki/TestPyramid.html">test pyramid</a> <em>(don't be too confused by the original names of the layers, though)</em></li>
 	<li>Write tests with different granularity/levels of integration</li>
 	<li>Use unit test (<em>solitary</em> and <em>sociable</em>) to test the insides of your application</li>
 	<li>Use integration tests to test all places where your application serializes/deserializes data (e.g. public APIs, accessing databases and the filesystem, calling other microservices, reading from/writing to queues)</li>
 	<li>Test collaboration between services with contract tests (CDC)</li>
 	<li>Use end-to-end tests sparingly, limit to high-value user journeys</li>
-	<li>don't just test from a developer's perspective, make sure to test features from a user's perspective as well</li>
+	<li>Don't just test from a developer's perspective, make sure to test features from a user's perspective as well</li>
+	<li>Manual, exploratory testing will spot issues your build pipeline didn't catch</li>
     </ul>
 </div>
 
 **TODO update tl;dr?**
 
 ## Microservices Need (Test) Automation
-
 Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can be released to production at any time. You use a **build pipeline** to automatically test and deploy your application to all of your testing and production environments. Once you advance on your microservices quest, you'll be juggling with dozens, maybe even hundreds of microservices. At this point building, testing and deploying these services becomes impossible -- at least if you want to deliver working software instead of spending all your time deploying stuff. Automating everything (build, tests, deployment, infrastructure) diligently is your only way forward.
 
 ![build pipeline](/assets/img/uploads/buildPipeline.png)
@@ -208,6 +212,7 @@ Consumer-Driven Contract tests can be a real game changer as you venture further
 Testing your deployed application by automatically driving the web interface is the most end-to-end way you could test your application. The previously described, webdriver driven UI tests are a good example of end-to-end tests.
 
 ![an end-to-end test](/assets/img/uploads/e2etests.png)
+_end-to-end tests test your entire, completely integrated system_
 
 End-to-end tests give you the biggest confidence when you need to decide if your software is working or not. [Selenium](http://docs.seleniumhq.org/) and the [WebDriver Protocol](https://www.w3.org/TR/webdriver/) allow you to automate your UI tests by automatically driving a (headless) browser against your deployed services, performing clicks, entering data and checking the state of your user interface. You can use Selenium directly or use tools that are build on top of it, [Nightwatch](http://nightwatchjs.org/) being one of them.
 
@@ -250,8 +255,15 @@ def test_add_to_basket():
 {% endhighlight %}
 **TODO rework example**
 
+Acceptance tests can come in different levels of granularity. Most of the time they will be rather high-level and test your service through the user interface. However, it's good to understand that there's technically no need to write acceptance tests at the highest level of your test pyramid. If your application design and your scenario at hand permits that you write an acceptance test at unit level, go for it. Having a low-level test is better than having a high-level test. The concept of acceptance tests -- proving that your features work correctly for the user -- is completely orthogonal to your test pyramid.
+
 ### Exploratory Testing
-Even the most diligent test automation efforts are not perfect. Sometimes you miss certain edge cases in your automated tests. Sometimes it's nearly impossible to detect a particular bug by writing a unit test. Certain quality issues don't even become apparent within your automated tests (think about design or usability). Despite your best intentions with regards to test automation, manual testing of some sorts is still a good idea. [Exploratory Testing](https://en.wikipedia.org/wiki/Exploratory_testing) is an approach that you should not omit from your testing portfolio. It is a manual testing approach that emphasizes the tester's freedom and creativity to spot quality issues in a running system. Simply take some time on a regular schedule, roll up your sleeves and try to break stuff within your application. Use a destructive mindset to think about what you could to to provoke issues and errors and document everything you find. Watch out for bugs, design issues, slow response times, missing or misleading error messages and everything else that would annoy you as a user of your software.
+Even the most diligent test automation efforts are not perfect. Sometimes you miss certain edge cases in your automated tests. Sometimes it's nearly impossible to detect a particular bug by writing a unit test. Certain quality issues don't even become apparent within your automated tests (think about design or usability). Despite your best intentions with regards to test automation, manual testing of some sorts is still a good idea. 
+
+![exploratory testing](/assets/img/uploads/exploratoryTesting.png)
+_use exploratory testing to spot all quality issues that your build pipeline didn't spot_
+
+[Exploratory Testing](https://en.wikipedia.org/wiki/Exploratory_testing) is an approach that you should not omit from your testing portfolio. It is a manual testing approach that emphasizes the tester's freedom and creativity to spot quality issues in a running system. Simply take some time on a regular schedule, roll up your sleeves and try to break stuff within your application. Use a destructive mindset to think about what you could to to provoke issues and errors and document everything you find. Watch out for bugs, design issues, slow response times, missing or misleading error messages and everything else that would annoy you as a user of your software.
 
 The good news is that you can happily automate most of your findings with automated tests. Writing automated tests for the bugs you spot makes sure that there won't be any regressions of that bug in the future. Plus it helps you narrowing down the root cause of that issue during bugfixing.
 
