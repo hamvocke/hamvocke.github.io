@@ -4,21 +4,16 @@ title: Testing Microservices
 tags: programming testing
 excerpt: If you want to jump aboard the Microservices hype-train, continuous delivery and test automation will be your best friends. Finding out which tests you need and how you can write them can be quite challenging. This post sums up my experience testing Microservices to allow fast development and frequent deployments.
 comments: true
+toc: true
 ---
 
 ![test output](/assets/img/uploads/testingMicroservicesHeader.jpg)
-
-* Do not remove this line (it will not be displayed)
-{:toc}
-
 
 Microservices have been all the rage for quite some time now. If you attended any tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the stories that companies love to share about their microservices journey.
 
 Behind all the hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down than I ever could. Chance is, if you're reading this blog post you somehow ended up with the decision to take a look into what's behind this buzzword.
 
 I believe that proper test automation is essential if you want to introduce, build and run microservices. Getting testing right in a microservices world is what this blog post is about. Don't get me wrong, this post can merely be a starting point, telling you about some core concepts and terms. From here you can dive deeper into further topics (e.g. using the resources I list at the end). And most importantly: from here you can start, experiment and learn what it means to test microservices on your own. You won't get it all correct from the beginning. That's ok. Start with best intentions, be diligent and explore!
-
-**TODO: teaser image? maybe a pipeline of three services (user, order, email) with different green stages?**
 
 ## <abbr title="too long; didn't read">tl;dr</abbr>
 Here's what you'll take away from this post:
@@ -38,8 +33,6 @@ Here's what you'll take away from this post:
     </ul>
 </div>
 
-**TODO update tl;dr?**
-
 ## Microservices Need (Test) Automation
 Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can be released to production at any time. You use a **build pipeline** to automatically test and deploy your application to all of your testing and production environments. Once you advance on your microservices quest, you'll be juggling with dozens, maybe even hundreds of microservices. At this point building, testing and deploying these services becomes impossible -- at least if you want to deliver working software instead of spending all your time deploying stuff. Automating everything (build, tests, deployment, infrastructure) diligently is your only way forward.
 
@@ -54,7 +47,7 @@ Automation in general and test automation specifically are essential to build a 
 
 If all this stuff is new to you and you know that you have to start from scratch it can look quite intimidating. There probably are a lot of questions on your mind. What aspects of your codebase do you need to test? How should you structure and write your tests? What tools and libraries can make your life easier?
 
-In order to test microservices some concepts, tools and libraries have proven to be effective. Sticking to these can help you come up with a healthy, reliable and fast test suite. I will explain the most important concepts and approaches that you need to understand in order to test your microservices thoroughly. Picking the right tools and libraries often depends on your choice of programming language and its ecosystem. That's why I'll cover tools, libraries and implementation examples in my follow-up posts that will look at specific language ecosystems. **TODO link to follow up posts**
+In order to test microservices some concepts, tools and libraries have proven to be effective. Sticking to these can help you come up with a healthy, reliable and fast test suite. I will explain the most important concepts and approaches that you need to understand in order to test your microservices thoroughly. 
 
 
 ## The Test Pyramid
@@ -68,7 +61,7 @@ Mike Cohn's original testing pyramid consists of three layers that your test sui
   2. Service Tests
   3. User Interface Tests
 
-Unfortunately the concept of the test pyramid falls a little short if you take a closer look. [Some will argue](https://watirmelon.blog/2011/06/10/yet-another-software-testing-pyramid/) that either the naming or some conceptual aspects of Mike Cohn's test pyramid are not optimal, and I have to agree. From a modern point of view the test pyramid seems overly simplistic and can therefore be a bit misleading. Still, due to it's simplicity the essence of the test pyramid still is a good rule of thumb when it comes to establishing your own test suite/ Your best bet is to remember two things from Cohn's original test pyramid:
+Unfortunately the concept of the test pyramid falls a little short if you take a closer look. [Some will argue](https://watirmelon.blog/2011/06/10/yet-another-software-testing-pyramid/) that either the naming or some conceptual aspects of Mike Cohn's test pyramid are not optimal, and I have to agree. From a modern point of view the test pyramid seems overly simplistic and can therefore be a bit misleading. Still, due to it's simplicity the essence of the test pyramid still serves as a good rule of thumb when it comes to establishing your own test suite. Your best bet is to remember two things from Cohn's original test pyramid:
 
   1. Write tests with different granularity
   2. The more high-level you get the fewer tests you should have on that level
@@ -310,3 +303,4 @@ Want to learn more about the things I described (sometimes only briefly) in this
   * list resources
   * rework "home" page
   * add "author" section
+  * update tl;dr
