@@ -7,8 +7,6 @@ comments: true
 toc: true
 ---
 
-![test output](/assets/img/uploads/testingMicroservicesHeader.jpg)
-
 Microservices have been all the rage for quite some time now. If you attended any tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the stories that companies love to share about their microservices journey.
 
 Behind all the hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down than I ever could. Chance is, if you're reading this blog post you somehow ended up with the decision to take a look into what's behind this buzzword.
