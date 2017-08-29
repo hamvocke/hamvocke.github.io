@@ -25,7 +25,7 @@ Here's what you'll take away from this post:
 	<li>Remember the <a href="https://martinfowler.com/bliki/TestPyramid.html">test pyramid</a> <em>(don't be too confused by the original names of the layers, though)</em></li>
 	<li>Write tests with different granularity/levels of integration</li>
 	<li>Use unit test (<em>solitary</em> and <em>sociable</em>) to test the insides of your application</li>
-	<li>Use integration tests to test all places where your application serializes/deserializes data (e.g. public APIs, accessing databases and the filesystem, calling other microservices, reading from/writing to queues)</li>
+	<li>Use integration tests to test all places where your application serializes/deserializes data</li>
 	<li>Test collaboration between services with contract tests (CDC)</li>
 	<li>Use end-to-end tests sparingly, limit to high-value user journeys</li>
 	<li>Don't just test from a developer's perspective, make sure to test features from a user's perspective as well</li>
