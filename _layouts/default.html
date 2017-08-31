@@ -15,8 +15,16 @@
 	<link rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Roboto+Slab:700|Open+Sans:300,400,700" type="text/css">
 	<link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
-	<link rel="icon" href="/assets/img/favicon.png" type="image/x-icon">
 
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png?v=m2lLvX9Kmj">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png?v=m2lLvX9Kmj">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon/favicon-16x16.png?v=m2lLvX9Kmj">
+	<link rel="manifest" href="/assets/img/favicon/manifest.json?v=m2lLvX9Kmj">
+	<link rel="mask-icon" href="/assets/img/favicon/safari-pinned-tab.svg?v=m2lLvX9Kmj" color="#e74c3c">
+	<link rel="shortcut icon" href="/assets/img/favicon/favicon.ico?v=m2lLvX9Kmj">
+	<meta name="msapplication-config" content="/assets/img/favicon/browserconfig.xml?v=m2lLvX9Kmj">
+	<meta name="theme-color" content="#e74c3c">
 
 	<!-- Piwik -->
 	<script type="text/javascript">
@@ -36,12 +44,14 @@
 	<!-- End Piwik Code -->
 </head>
 <body>
-
+    <div id="logo">
+	<a href="/" title="home">
+	    <img src="/assets/img/logo128.png">
+	    <h1>{{ site.name }}</h1>
+	    <p class="subtitle">writing stuff about software</p>
+	</a>
+    </div>
 	<nav role="navigation">
-	    <h1>
-		<a href="/" title="home" class="logo">{{ site.name }}</a>
-	    </h1>
-	    <p class="subtitle">Hermann Vocke's personal website and blog</p>
 		<ul>
 			<li><a href="/">Home</a></li>
 			<li><a href="/blog">Blog</a></li>
