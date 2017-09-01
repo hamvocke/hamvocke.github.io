@@ -314,6 +314,7 @@ h1.title {
 @media (max-width: 768px) {
     #text {
 	    width: 100%;
+      padding: 15px;
     }
 
     #home .image {
