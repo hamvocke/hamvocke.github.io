@@ -62,7 +62,7 @@ pre>code {
 
 #logo {
     text-align: center;
-    margin: 4px;
+    margin: 15px 4px;
 }
 
 #logo img {
@@ -108,7 +108,6 @@ footer .contact .icons {
     font-size: 1.2em;
 }
 
-
 nav {
     line-height: 2em;
     text-align: center;
@@ -116,7 +115,7 @@ nav {
 
 nav ul {
     display: block;
-    margin: 1em 0 1.5em 0;
+    margin: 1em 0 1em 0;
     padding: 0;
 }
 
@@ -181,17 +180,15 @@ h1.title {
 }
 
 .author h4 {
+    text-align: center;
     font-family: 'Roboto Slab', sans-serif;
-}
-
-.author .media-left {
-    vertical-align: middle;
+    margin-top: 4px;
 }
 
 .author img {
     height: 80px;
     width: 80px;
-    margin-right: 8px;
+    margin: auto;
 }
 
 .author p.lead {
@@ -201,10 +198,7 @@ h1.title {
 
 .author .contact {
   padding-top: 12px;
-}
-
-.author .contact a:first-child {
-  padding-left: 0px;
+  text-align: center;
 }
 
 .author .contact a {
@@ -334,11 +328,11 @@ h1.title {
     }
 }
 
-@media(min-width: 1440px) {
+@media(min-width: 1280px) {
     .author {
     	position: fixed;
     	bottom: 12px;
     	left: 12px;
-    	width: 390px;
+    	width: 300px;
     }
 }
