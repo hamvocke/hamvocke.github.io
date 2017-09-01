@@ -173,9 +173,47 @@ h1.title {
     margin-bottom: 0.5em;
 }
 
+.author {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 24px 0;
+    background: #fff;
+}
+
+.author h4 {
+    font-family: 'Roboto Slab', sans-serif;
+}
+
+.author .media-left {
+    vertical-align: middle;
+}
+
+.author img {
+    height: 80px;
+    width: 80px;
+    margin-right: 8px;
+}
+
+.author p.lead {
+    font-size: 0.9em;
+    margin-bottom: 0;
+}
+
+.author .contact {
+  padding-top: 12px;
+}
+
+.author .contact a:first-child {
+  padding-left: 0px;
+}
+
+.author .contact a {
+  padding: 12px;
+}
+
 .post-date {
     display: block;
-    text-align: right;
+    text-align: left;
     font-weight: 400;
     font-style: italic;
     font-size: 0.8em;
@@ -229,8 +267,13 @@ h1.title {
 }
 
 .tags {
+    text-align: right;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 0.8em;
+    margin-bottom: 1.5em;
     color: #aaa;
-    font-size: 0.9em;
+    float: right;
 }
 
 .tags i {
@@ -270,23 +313,31 @@ h1.title {
 
 @media (max-width: 768px) {
     #text {
-	width: 100%;
+	    width: 100%;
     }
 
     #home .image {
-	margin-top: 40px;
+	    margin-top: 40px;
     }
 
     #home p.lead {
-	margin-bottom: 40px;
+	    margin-bottom: 40px;
     }
 
     h1.post-title {
-	font-size: 36px;
+	    font-size: 36px;
     }
 
     .page_number {
-	margin: 0 10px;
+	    margin: 0 10px;
     }
 }
 
+@media(min-width: 1440px) {
+    .author {
+    	position: fixed;
+    	bottom: 12px;
+    	left: 12px;
+    	width: 390px;
+    }
+}
