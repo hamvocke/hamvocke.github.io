@@ -294,12 +294,11 @@ Want to learn more about the things I described (sometimes only briefly) in this
 
 
 **TODO**
-
+  * add toc?
   * remove filler words (quite)
   * be consistent with AE/BE
   * commata
   * avoid passive voice
   * minify images
   * rework "home" page
-  * add "author" section
   * update tl;dr
