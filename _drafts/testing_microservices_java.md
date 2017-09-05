@@ -60,17 +60,120 @@ _the internal structure of our microservice_
   * `Client` classes talk to other APIs, in our case it fetches _JSON_ via _HTTPS_ from the darksky.net weather API
   * `Domain` classes capture our [domain model](https://en.wikipedia.org/wiki/Domain_model) including the domain logic (which, to be fair, is quite trivial in our case). 
 
-Experienced Spring developers might notice that a frequently used layer is missing here: Inspired by [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) a lot of devs build a _service_ layer consisting of _service_ classes (which is its own stereotype in Spring). I decided not to include a service layer in this application. One reason is that our application is simple enough, a service layer would have been an unnecessary level of indirection. The other one is that I think people overdo it with service layers. I often encounter codebases where the entire business logic is captured within service classes. The domain model becomes merely a layer for data, not for behaviour (Martin Fowler calls this an [Aenemic Domain Model](https://en.wikipedia.org/wiki/Anemic_domain_model). For every non-trivial application this wastes a lot of potential to keep your code well-structured and testable and does not fully utilize the power of object orientation.
+Experienced Spring developers might notice that a frequently used layer is missing here: Inspired by [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) a lot of devs build a _service_ layer consisting of _service_ classes (which is its own stereotype in Spring). I decided not to include a service layer in this application. One reason is that our application is simple enough, a service layer would have been an unnecessary level of indirection. The other one is that I think people overdo it with service layers. I often encounter codebases where the entire business logic is captured within service classes. The domain model becomes merely a layer for data, not for behaviour (Martin Fowler calls this an [Aenemic Domain Model](https://en.wikipedia.org/wiki/Anemic_domain_model)). For every non-trivial application this wastes a lot of potential to keep your code well-structured and testable and does not fully utilize the power of object orientation.
 
 Our repositories are straightforward and provide simple <abbr title="Create Read Update Delete">CRUD</abbr> functionality. To keep it simple I used [Spring Data](http://projects.spring.io/spring-data/). Spring Data brings a simple and generic CRUD repository implementation that we can use instead of rolling our own. It also takes care of spinning up a in-memory database for our tests instead of using a real PostgreSQL database as it would in production.
 
-Take a look at the codebase and make yourself familiar with the internal structure. It will be useful for our next stop: Testing the application!
+Take a look at the codebase and make yourself familiar with the internal structure. It will be useful for our next step: Testing the application!
 
 ## Unit Tests
+As I explained in my previous article (**TODO link**) unit tests have the smallest scope of all the different tests in your test suite. Depending on the language you're using (and depending on who you ask) unit tests usually test single functions, methods or classes. Since we're working in Java, an object-oriented language, our unit tests will test methods in our Java classes. My rule of thumb is to have one test class per class of production code.
+
+### What to Test?
+The good thing about unit tests is that you can write them for all your production code classes, regardless of their functionality or which layer in your internal structure they belong to. You can unit tests controllers just like you can unit test repositories, domain classes or file readers. Simply stick to the **one test class per production class** rule of thumb and you're off to a good start.
+
+A unit test class should at least **test the _public_ interface of the class**. Private methods can't be tested anyways since you simply can't call them from a different test class. _Protected_ or _package-private_ are accessible from a test class (given the package structure of your test class is the same as with the production class) but testing these methods could already go too far.
+
+There's a fine line when it comes to writing unit tests: They should ensure that all your non-trivial code paths are tested (including happy path as well es edge cases). At the same time they shouldn't be tied to your implementation too closely. Why's that? Tests that are too close to the production code quickly become annoying. As soon as you refactor your production code (and remember, refactoring means changing the internal structure of your code without altering the externally visible behavior) your unit tests will break. This way you lose one big benefit of unit tests: acting as a safety net for code changes. So what do you want to do instead? Instead of reflecting your internal code structure within your unit tests it's generally more advisable to simply test for observable behavior instead. Think about "if I enter these values, will those values be returned?" instead of "if I enter these values, will the method call class A first, then call class B and then return the result of class A plus the result of class B?".
+
+Private (and sometimes also protected) methods should generally be considered an implementation detail. In order to avoid tying your tests too closely to the production code, reflecting implementation details in your test code should be avoided.
+
+I often hear opponents of unit testing (or <abbr title="Test-Driven Development">TDD</abbr>) arguing that writing unit tests becomes pointless work where you have to test all your methods in order to come up with a high test coverage. They often cite scenarios where an overly eager team lead forced them to write unit tests for getters and setters and all other sorts of trivial code in order to come up with 100% test coverage. Let me tell you, there's so much wrong with that. Despite my previously cited rule to _"test the public interface"_ take care that there's one huge exception: **Don't test trivial code**. You won't gain anything from testing simple _getters_ or _setters_ or other trivial implementations (e.g. without any conditional logic). Don't worry, [Kent Beck said it's ok](https://stackoverflow.com/questions/153234/how-deep-are-your-unit-tests/).
+
+### But I Really Need to Test This Private Method
+If you ever find yourself in a situation where you _really really_ need to test a private method you should take a step back and ask yourself why. I'm pretty sure this is more of a design problem than a scoping problem. Most likely you feel the need to test a private method because it's complex and testing this method through the public interface of the class requires a lot of awkward setup. When I find myself in this situation I usually come to the conclusion that the class I'm testing is already too complex. It's doing too many things -- and thus violates the _single responsibility_ principle, the _S_ of the five [_SOLID_](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) principles. The solution that often works for me is to split the original class in two classes. I move the private method (that I urgently want to test on its own) to the new class, make the new class a dependency of the old one and let the old class call the new dependency. Voilà, my awkward-to-test private method is now public and can be tested. On top of that I have improved the structure of my code by adhering to the single responsibility principle.
+
+### Test Structure
+Typically your unit tests should follow a simple structure:
+  1. Set up the test data
+  2. Call your method under test
+  3. Assert that the expected results are returned
+
+There's a quite nifty mnemonic to keep in mind. Just thing of the _"three As"_ when writing a test: [_"Arrange, Act, Assert"_](http://wiki.c2.com/?ArrangeActAssert). Another one that you can use takes inspiration from <abbr title="Behavior-Driven Development">BDD</abbr>. It's the _"given"_, _"when"_, _"then"_ triad, where _given_ reflects the setup, _when_ the method call and _then_ the assertion part.
+
+This pattern can be applied to other, more high-level tests as well. In every case they ensure that your tests remain easy and consistent to read. On top of that tests written with this structure in mind tend to be shorter and more expressive.
+
+### An Example
+Now that we know what to test and how to structure our unit tests we can finally see a real example.
+
+Let's take the following `Controller` class:
+
+{% highlight java %}
+@RestController
+public class ExampleController {
+
+    private final PersonRepository personRepo;
+
+    @Autowired
+    public ExampleController(final PersonRepository personRepo) {
+        this.personRepo = personRepo;
+    }
+
+    @GetMapping("/hello/{lastName}")
+    public String hello(@PathVariable final String lastName) {
+        Optional<Person> foundPerson = 
+	    personRepo.findByLastName(lastName);
+
+        return foundPerson
+                .map(person -> String.format("Hello %s %s!", 
+		    person.getFirstName(), 
+		    person.getLastName()))
+                .orElse(String.format("Who is this '%s' you're talking about?", lastName));
+    }
+}
+{% endhighlight %}
+
+A corresponding unit test for the `hello(String lastname)` method could look like this:
+
+{% highlight java %}
+public class ExampleControllerTest {
+
+    private ExampleController subject;
+
+    @Mock
+    private PersonRepository personRepo;
+
+    @Before
+    public void setUp() throws Exception {
+        initMocks(this);
+        subject = new ExampleController(personRepo);
+    }
+
+    @Test
+    public void shouldReturnFullNameOfAPerson() throws Exception {
+        Person peter = new Person("Peter", "Pan");
+        given(personRepo.findByLastName("Pan"))
+	    .willReturn(Optional.of(peter));
+
+        String greeting = subject.hello("Pan");
+
+        assertThat(greeting, is("Hello Peter Pan!"));
+    }
+
+    @Test
+    public void shouldTellIfPersonIsUnknown() throws Exception {
+        given(personRepo.findByLastName(anyString()))
+	    .willReturn(Optional.empty());
+
+        String greeting = subject.hello("Pan");
+
+        assertThat(greeting, is("Who is this 'Pan' you're talking about?"));
+    }
+}
+{% endhighlight %}
+
+We're writing the unit tests using [JUnit](http://junit.org) which is the de-facto standard testing framework for Java. We're also using [Mockito](http://site.mockito.org/) to replace the real `PersonRepository` class with a mock for our test. This mock allows us to define canned responses that should be returned in our test context. This makes our test predictable and easy to setup.
+
+Following the _arrange, act, assert_ structure explained above, we can now write two unit tests -- a positive case and a case where the searched person cannot be found. The first, positive test case creates a new person object and tells the mocked repository to return this object when it's called with _"Pan"_ as the value for the `lastName` parameter. The test then goes on to call the method that should be tested and finally asserts that the response is equal to the expected response. The second test works similarly but tests the scenario where the tested method does not find a person for the given parameter.
 
 ## Integration Tests
 
 ## CDC Tests
+
+## General Rules
+  * Test code is as important as production code. Give it the same level of care and attention
+  * one assertion per test
+
 
 **TODO**
   * provide readme.md for repo
