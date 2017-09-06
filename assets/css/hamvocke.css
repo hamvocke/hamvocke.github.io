@@ -164,11 +164,11 @@ h1.title {
     margin: auto;
 }
 
-#text ul {
+#text ul, #text ol {
     margin-bottom: 1.5em;
 }
 
-#text ul li {
+#text ul li, #text ol li {
     margin-bottom: 0.5em;
 }
 

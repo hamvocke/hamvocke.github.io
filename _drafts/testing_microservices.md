@@ -7,46 +7,45 @@ comments: true
 toc: true
 ---
 
-Microservices have been all the rage for quite some time now. If you attended any tech conference or read software engineering blogs lately, you'll probably either be amazed or fed up with all the stories that companies love to share about their microservices journey.
+Microservices have been all the rage for a while. If you attended any tech conference or read software engineering blogs lately, you'll either be amazed or fed up with all the stories that companies love to share about their microservices journey.
 
-Behind all the hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down than I ever could. Chance is, if you're reading this blog post you somehow ended up with the decision to take a look into what's behind this buzzword.
+Behind all the hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down than I could. Chance is, if you're reading this you somehow ended up with the decision to take a look into microservices and what it means to test them.
 
-I believe that proper test automation is essential if you want to introduce, build and run microservices. Getting testing right in a microservices world is what this blog post is about. Don't get me wrong, this post can merely be a starting point, telling you about some core concepts and terms. From here you can dive deeper into further topics (e.g. using the resources I list at the end). And most importantly: From here you can start, experiment and learn what it means to test microservices on your own. You won't get it all correct from the beginning. That's ok. Start with best intentions, be diligent and explore!
+Proper test automation is essential if you want to build and run microservices. Getting testing right in a microservices world is what this blog post is about. Don't get me wrong, this post can merely be a starting point, introducing you to core concepts and terms. From here you can dive deeper into further topics using the linked resources. And most importantly: From here you can start, experiment and learn what it means to test microservices on your own. You won't get it all correct from the beginning. That's ok. Start with best intentions, be diligent and explore!
+
+If test automation is new to you and you have to start from scratch it can look intimidating. There probably are a lot of questions on your mind. What aspects of your codebase do you need to test? How should you structure and write your tests? What tools and libraries can make your life easier?
+
+In order to test microservices some concepts, tools and libraries have proven to be effective. Sticking to these can help you come up with a healthy, reliable and fast test suite. This post will focus on the more high-level concepts and types of tests you should know. If you're interested in more hands-on implementation and structural details, take a look at my follow-up post where I've written and tested a sample microservice. 
 
 ## <abbr title="too long; didn't read">tl;dr</abbr>
 Here's what you'll take away from this post:
 
 <div class="highlight">
-    <ul>
-	<li>Automate your tests (surprise!)</li>
+    <ol>
+	<li>Automate your tests (whoa, surprise!)</li>
 	<li>Continuous delivery makes your life easier</li>
 	<li>Remember the <a href="https://martinfowler.com/bliki/TestPyramid.html">test pyramid</a> <em>(don't be too confused by the original names of the layers, though)</em></li>
-	<li>Write tests with different granularity/levels of integration</li>
-	<li>Use unit test (<em>solitary</em> and <em>sociable</em>) to test the insides of your application</li>
-	<li>Use integration tests to test all places where your application serializes/deserializes data</li>
+	<li>Write tests with different granularity</li>
+	<li>Use unit test to test the insides of your application</li>
+	<li>Use integration tests to test data serialization/deserialization</li>
 	<li>Test collaboration between services with contract tests (CDC)</li>
 	<li>Use end-to-end tests sparingly, limit to high-value user journeys</li>
 	<li>Don't just test from a developer's perspective, make sure to test features from a user's perspective as well</li>
 	<li>Exploratory testing will spot issues your build pipeline didn't catch</li>
-    </ul>
+    </ol>
 </div>
 
 ## Microservices Need (Test) Automation
-Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can be released to production at any time. You use a **build pipeline** to automatically test and deploy your application to all of your testing and production environments. Once you advance on your microservices quest, you'll be juggling with dozens, maybe even hundreds of microservices. At this point building, testing and deploying these services becomes impossible -- at least if you want to deliver working software instead of spending all your time deploying stuff. Automating everything (build, tests, deployment, infrastructure) diligently is your only way forward.
+Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can be released into production any time. You use a **build pipeline** to automatically test and deploy your application to your testing and production environments. Once you advance on your microservices quest you'll be juggling with dozens, maybe even hundreds of microservices. At this point building, testing and deploying these services manually becomes impossible -- at least if you want to deliver working software instead of spending all your time deploying stuff. Automating everything diligently -- from build to tests, deployment and infrastructure -- is your only way forward.
 
 ![build pipeline](/assets/img/uploads/buildPipeline.png)
 *Use build pipelines to automatically and reliably get your software into production*
 
-Most -- if not all -- success stories around microservices are told by teams who employed continuous delivery or **continuous deployment** (every change to your software that's proven to be releasable will be deployed to production). These teams make sure that all releasable changes quickly get in the hands of their customers. How do you proof that your latest change still results in releasable software? You test your software including the latest change thoroughly. Traditionally you'd do this manually by deploying your application to a test environment and then performing some black-box style testing e.g. by clicking through your user interface to see if anything's broken. It's obvious that testing all changes manually is time-consuming, repetitive and tedious. Repetitive is boring, boring leads to mistakes and makes you look for a different job quite soon. Luckily there's a remedy for repetitive tasks: **automation**.
+Most microservices success stories are told by teams who employ continuous delivery or **continuous deployment** (every software change that's proven to be releasable will be deployed to production). These teams make sure that changes get into the hands of their customers quickly. How do you proof that your latest change still results in releasable software? You test your software including the latest change thoroughly. Traditionally you'd do this manually by deploying your application to a test environment and then performing some black-box style testing e.g. by clicking through your user interface to see if anything's broken. It's obvious that testing all changes manually is time-consuming, repetitive and tedious. Repetitive is boring, boring leads to mistakes and makes you look for a different job soon. Luckily there's a remedy for repetitive tasks: **automation**.
 
-Automating your tests can be one of the big game changers in your life as a software developer. Automate your tests and you no longer have to mindlessly follow click protocols in order to find out if your latest release is ready for production. Automate your tests and you can change your codebase without even batting an eye. If you've ever tried doing a large-scale refactoring without a proper test suite I bet you know what a terrifying experience this can be. How would you know if you accidentally broke stuff along the way? Well, you click through all your manual test cases, that's how. But let's be honest: do you really enjoy that? How about making even large-scale changes and knowing whether you broke stuff within seconds while taking a nice sip of coffee? Sounds more enjoyable if you ask me.
+Automating your tests can be a big game changer in your life as a software developer. Automate your tests and you no longer have to mindlessly follow click protocols in order to check if your software still works correctly. Automate your tests and you can change your codebase without batting an eye. If you've ever tried doing a large-scale refactoring without a proper test suite I bet you know what a terrifying experience this can be. How would you know if you accidentally broke stuff along the way? Well, you click through all your manual test cases, that's how. But let's be honest: do you really enjoy that? How about making even large-scale changes and knowing whether you broke stuff within seconds while taking a nice sip of coffee? Sounds more enjoyable if you ask me.
 
-Automation in general and test automation specifically are essential to building a successful microservices architecture. Do yourself a favor and take a look into the concepts behind continuous delivery ([the Continuous Delivery book](https://www.amazon.com/gp/product/0321601912) is my go to resource). You will see that diligent automation allows you to deliver software faster and more reliable. Continuous delivery paves the way into a new world full of fast feedback and experimentation. At the very least it makes your life as a developer more peaceful.
-
-If all this is new to you and you know that you have to start from scratch it can look intimidating. There probably are a lot of questions on your mind. What aspects of your codebase do you need to test? How should you structure and write your tests? What tools and libraries can make your life easier?
-
-In order to test microservices some concepts, tools and libraries have proven to be effective. Sticking to these can help you come up with a healthy, reliable and fast test suite. I will explain the most important concepts and approaches that you need to understand in order to test your microservices thoroughly. 
-
+Automation in general and test automation specifically are essential to building a successful microservices architecture. Do yourself a favor and take a look at the concepts behind continuous delivery ([the Continuous Delivery book](https://www.amazon.com/gp/product/0321601912) is my go to resource). You will see that diligent automation allows you to deliver software faster and more reliable. Continuous delivery paves the way into a new world full of fast feedback and experimentation. At the very least it makes your life as a developer more peaceful.
 
 ## The Test Pyramid
 If you want to get serious about automated tests for your software there is one key concept that you should know about: the **test pyramid**. Mike Cohn came up with this concept in his book [Succeeding with Agile](https://www.amazon.com/dp/0321579364/ref=cm_sw_r_cp_dp_T2_bbyqzbMSHAG05). It's a great visual metaphor telling you to think about different layers of testing and how much testing to do on each layer.
