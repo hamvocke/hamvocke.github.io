@@ -211,14 +211,25 @@ h1.title {
   padding: 12px;
 }
 
-.post-date {
-    display: block;
-    text-align: left;
+.meta-info {
     font-weight: 400;
     font-style: italic;
     font-size: 0.8em;
-    margin-bottom: 1.5em;
     color: #aaa;
+    margin-bottom: 1.5em;
+}
+
+.post-date {
+    margin-bottom: 0.5em;
+}
+
+.tags {
+    text-align: right;
+    float: right;
+}
+
+.tags i {
+    margin-right: 10px;
 }
 
 .post img {
@@ -264,20 +275,6 @@ h1.title {
 .intro {
     font-size: 1.2em;
     line-height: 1.4em;
-}
-
-.tags {
-    text-align: right;
-    font-weight: 400;
-    font-style: italic;
-    font-size: 0.8em;
-    margin-bottom: 1.5em;
-    color: #aaa;
-    float: right;
-}
-
-.tags i {
-    margin-right: 10px;
 }
 
 .pager {

@@ -3,14 +3,18 @@ layout: default
 ---
 
 <h1 class="post-title">{{ page.title }}</h1>
-<div class="tags">
-  <i class="fa fa-tag"></i>
-  {{ page.tags | array_to_sentence_string }}
-</div>
-<span class="post-date">
-  <i class="fa fa-calendar-o"></i> {{ page.date | date_to_string }}
-</span>
+<div class="meta-info">
+  <div class="tags">
+    <i class="fa fa-tag"></i>
+    {{ page.tags | array_to_sentence_string }}
+  </div>
 
+  <div class="post-date">
+    <i class="fa fa-calendar-o"></i> {{ page.date | date_to_string }}
+  </div>
+
+  {% include reading_time.html %}
+</div>
 
 <div class="post">
   {{ content }}
