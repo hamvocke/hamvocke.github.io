@@ -294,7 +294,7 @@ Want to learn more about the things I described (sometimes only briefly) in this
 
 **TODO**
   * add toc?
-  * remove filler words (quite)
+  * remove filler words (quite, very, adverbs)
   * be consistent with AE/BE
   * commata
   * avoid passive voice

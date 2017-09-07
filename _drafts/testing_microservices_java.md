@@ -8,13 +8,9 @@ comments: true
 
 **TODO: link to other post**
 
-In my previous post I gave a big round-trip over what it means to test microservices. We discussed the concept of the test pyramid and found out that you should write different types of automated tests to come up with a reliable and effective test suite. 
+In my previous post I gave a round-trip over what it means to test microservices. We discussed the concept of the test pyramid and found out that you should write different types of automated tests to come up with a reliable and effective test suite. 
 
 While the previous post was a little more abstract, explaining concepts and high-level approaches, this post will be more hands on. We will explore how we can implement the concepts we discussed before. The technology of choice for this post will be **Java** with **Spring Boot** as the application framework.
-
-Java and Spring Boot is a combination I encounter frequently, especially in enterprise contexts. Java might not be the latest and greatest language. Still, it is a tried and trusted language with the JVM as a rock-solid and well-performing foundation. Yeah, I know, you probably know more than just one joke about how slow Java is. Fact is, we're not in the age of sluggish Java applets anymore. Java and the JVM have matured and are a solid choice for modern and high-performing microservices. With the new features that arrived with Java 8 (like functional interfaces, lambdas and streams) you're able to write modern code that borrows some concepts from functional programming. 
-
-Spring Boot has written its own success story in recent years. By bundling up different parts of the vast Spring ecosystem in an opinionated fashion it made getting started with Spring more accessible. Banging out microservices using the combination of Java and Spring Boot has become increasingly easy which made this stack the stack of choice for experienced Java teams in a lot of companies).
 
 This post will show you tools and libraries that help you implement the different types of tests we discussed in the previous post. Some of these can be used independently of Spring Boot. As long as you're using Java you can use these libraries in your codebase -- regardless of the application framework you're using. One of the things I like most about Spring Boot is that it bundles some clever testing mechanisms that support you in writing maintainable and readable tests for your application. So even if you're not using Spring Boot for your application this post might give you some insights.
 
@@ -26,13 +22,12 @@ This post will show you tools and libraries that help you implement the differen
   * [**Selenium**](http://docs.seleniumhq.org/) for writing UI-driven end-to-end tests
   * [**Pact**](https://docs.pact.io/) for writing CDC tests
 
-## Implementing a Test Suite
-I've provided a [sample application](https://github.com/hamvocke/spring-testing) of a rather trivial microservice including a test suite with tests for the different layers of the test pyramid. The codebase contains more tests than I would consider necessary for an application of this size. Some tests on different levels overlap quite extensively. This actively contradicts my hint that you should avoid test duplication throughout your test pyramid. I decided to duplicate tests throughout the test pyramid for demonstration purposes. Please keep in mind that this is not what you want for your real-world application. Duplicated tests are smelly and will be more annoying then helpful in the long run.
-
 ## The Sample Application
-The sample application is rather simple but still shows some typical traits of a typical microservice. It provides a REST interface to the outside world, talks to a database and fetches information from a third-party REST service. It's implemented in [Spring Boot ](https://projects.spring.io/spring-boot/) and should be understandable even if you've never worked with Spring Boot before.
+I've written a [simple microservice](https://github.com/hamvocke/spring-testing) including. The codebase contains a test suite with tests for the different layers of the test pyramid. There are more tests than necessary for an application of this size. The tests on different levels overlap sometimes. This actively contradicts my hint that you should avoid test duplication throughout your test pyramid. I decided to duplicate tests throughout the test pyramid for demonstration purposes. Please keep in mind that this is not what you want for your real-world application. Duplicated tests are smelly and will be more annoying then helpful in the long run.
 
-Make sure to check out the [sample application](https://github.com/hamvocke/spring-testing) on github. The readme should contain all instructions you need to run the application and all automated tests on your machine.
+The sample application shows traits of a typical microservice. It provides a REST interface, talks to a database and fetches information from a third-party REST service. It's implemented in [Spring Boot ](https://projects.spring.io/spring-boot/) and should be understandable even if you've never worked with Spring Boot before.
+
+Make sure to check out [the code](https://github.com/hamvocke/spring-testing) on github. The readme contains all instructions you need to run the application and all automated tests on your machine.
 
 ### Functionality
 The application's functionality is simple. It provides a REST interface with three endpoints:
@@ -60,14 +55,14 @@ _the internal structure of our microservice_
   * `Client` classes talk to other APIs, in our case it fetches _JSON_ via _HTTPS_ from the darksky.net weather API
   * `Domain` classes capture our [domain model](https://en.wikipedia.org/wiki/Domain_model) including the domain logic (which, to be fair, is quite trivial in our case). 
 
-Experienced Spring developers might notice that a frequently used layer is missing here: Inspired by [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) a lot of devs build a _service_ layer consisting of _service_ classes (which is its own stereotype in Spring). I decided not to include a service layer in this application. One reason is that our application is simple enough, a service layer would have been an unnecessary level of indirection. The other one is that I think people overdo it with service layers. I often encounter codebases where the entire business logic is captured within service classes. The domain model becomes merely a layer for data, not for behaviour (Martin Fowler calls this an [Aenemic Domain Model](https://en.wikipedia.org/wiki/Anemic_domain_model)). For every non-trivial application this wastes a lot of potential to keep your code well-structured and testable and does not fully utilize the power of object orientation.
+Experienced Spring developers might notice that a frequently used layer is missing here: Inspired by [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) a lot of developers build a **service layer** consisting of _service_ classes (which is its own stereotype in Spring). I decided not to include a service layer in this application. One reason is that our application is simple enough, a service layer would have been an unnecessary level of indirection. The other one is that I think people overdo it with service layers. I often encounter codebases where the entire business logic is captured within service classes. The domain model becomes merely a layer for data, not for behaviour (Martin Fowler calls this an [Aenemic Domain Model](https://en.wikipedia.org/wiki/Anemic_domain_model)). For every non-trivial application this wastes a lot of potential to keep your code well-structured and testable and does not fully utilize the power of object orientation.
 
 Our repositories are straightforward and provide simple <abbr title="Create Read Update Delete">CRUD</abbr> functionality. To keep it simple I used [Spring Data](http://projects.spring.io/spring-data/). Spring Data brings a simple and generic CRUD repository implementation that we can use instead of rolling our own. It also takes care of spinning up a in-memory database for our tests instead of using a real PostgreSQL database as it would in production.
 
 Take a look at the codebase and make yourself familiar with the internal structure. It will be useful for our next step: Testing the application!
 
 ## Unit Tests
-As I explained in my previous article (**TODO link**) unit tests have the smallest scope of all the different tests in your test suite. Depending on the language you're using (and depending on who you ask) unit tests usually test single functions, methods or classes. Since we're working in Java, an object-oriented language, our unit tests will test methods in our Java classes. My rule of thumb is to have one test class per class of production code.
+Unit tests have the smallest scope of all the different tests in your test suite. Depending on the language you're using (and depending on who you ask) unit tests usually test single functions, methods or classes. Since we're working in Java, an object-oriented language, our unit tests will test methods in our Java classes. My rule of thumb is to have one test class per class of production code.
 
 ### What to Test?
 The good thing about unit tests is that you can write them for all your production code classes, regardless of their functionality or which layer in your internal structure they belong to. You can unit tests controllers just like you can unit test repositories, domain classes or file readers. Simply stick to the **one test class per production class** rule of thumb and you're off to a good start.
@@ -123,7 +118,7 @@ public class ExampleController {
 }
 {% endhighlight %}
 
-A corresponding unit test for the `hello(String lastname)` method could look like this:
+A corresponding unit test for the `hello(lastname)` method could look like this:
 
 {% highlight java %}
 public class ExampleControllerTest {
@@ -167,7 +162,65 @@ We're writing the unit tests using [JUnit](http://junit.org) which is the de-fac
 Following the _arrange, act, assert_ structure explained above, we can now write two unit tests -- a positive case and a case where the searched person cannot be found. The first, positive test case creates a new person object and tells the mocked repository to return this object when it's called with _"Pan"_ as the value for the `lastName` parameter. The test then goes on to call the method that should be tested and finally asserts that the response is equal to the expected response. The second test works similarly but tests the scenario where the tested method does not find a person for the given parameter.
 
 ## Integration Tests
+Integration tests are the next level in your test pyramid. They test that your application can integrate with its sorroundings successfully. For your automated tests this means you don't just need to provide your own application but also the component you're integrating with. If you're testing the integration with a database you need to run a database during your tests. For testing that you can read files from a disk you need to save a file to your disk and use it as input for your integration test.
 
+### What to Test?
+A good way to think about the places of your microservice where you should have integration tests is to think about all places where data gets serialized or deserialized. Common places are:
+
+  * reading HTTP requests and sending HTTP responses through your REST API
+  * reading and writing from/to a database
+  * reading and writing from/to a filesystem
+  * sending HTTP(S) requests to other services and parsing their responses
+
+In our sample codebase you can find integration tests for `Repository`, `Controller` and `Client` classes. All these classes interface with the sorroundings of the application (databases or the network) and serialize and deserialize data. Having tests in place to test these integrations is something we can't achieve with unit tests.
+
+### Database Integration
+The `PersonRepository` is the only repository class in the codebase. It relies on _Spring Data_ and has no actual implementation. It just extends the `CrudRepository` interface and provides a single method header. The rest is Spring magic. Even without the method definition Spring Boot provides a fully functional CRUD repository with `findOne`, `findAll`, `save`, `update` and `delete` methods. Our custom method definition extends this basic functionality and allows us to provide a way to fetch `Person`s by their last name. Spring Data analyses the return type of the method and its method name and checks the method name against a naming convention to figure out what it should do.
+
+{% highlight java %}
+public interface PersonRepository extends CrudRepository<Person, String> {
+    Optional<Person> findByLastName(String lastName);
+}
+{% endhighlight %}
+
+Although _Spring Data_ does the heavy lifting of implementing database repositories for us, I still wrote a database integration test. You might argue that this is _testing the framework_ and something that I should avoid as it's not our code we're testing. Still, I believe having at least one integration test here is crucial. First it tests that our custom `findByLastName` method actually behaves correctly. Secondly it proves that our repository in general uses Spring's magic correctly and most of it all can connect to our desired database.
+
+**TODO remove H2 dependency, provide docker container instead?**
+To make things even easier our test connects to an in-memory _H2_ database. We've defined H2 as a test dependency in our `build.gradle`. Our `application-test.properties` in our test directory don't define any `spring.datasource` properties that's how Spring Data knows it should use an in-memory database. As it finds H2 on the classpath it simply uses H2 during our tests. When running the real application with the `int` profile it connects to a PostgreSQL database as defined in the `application-int.properties`. To avoid having to run a PostgreSQL database during testing I decided to replace it with an H2 instead. That's an awful lot of Spring magic to know and understand. The resulting code is quite easy on the eye but hard to understand if you don't know the fine details of Spring Data. Go ahead and decide for yourself if you prefer magic and simple code over an explicit yet more verbose implementation.
+
+A simple integration test that saves a Person to the connected database and then tries to find it by its last name looks like this:
+
+{% highlight java %}
+@RunWith(SpringRunner.class)
+@DataJpaTest
+public class PersonRepositoryIntegrationTest {
+    @Autowired
+    private PersonRepository subject;
+
+    @After
+    public void tearDown() throws Exception {
+        subject.deleteAll();
+    }
+
+    @Test
+    public void shouldSaveAndFetchPerson() throws Exception {
+        Person peter = new Person("Peter", "Pan");
+        subject.save(peter);
+
+        Optional<Person> maybePeter = subject.findByLastName("Pan");
+
+        assertThat(maybePeter, is(Optional.of(peter)));
+    }
+}
+{% endhighlight %}
+
+You can see that our integration test follows the same _arrange, act, assert_ structure as the unit tests.
+
+### REST API Integration
+
+### Integration With Third-Party Services
+
+### 
 ## CDC Tests
 
 ## General Rules
