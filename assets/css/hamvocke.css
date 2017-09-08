@@ -164,12 +164,9 @@ h1.title {
     margin: auto;
 }
 
-#text ul, #text ol {
-    margin-bottom: 1.5em;
-}
-
 #text ul li, #text ol li {
-    margin-bottom: 0.5em;
+    line-height: 1.5em;
+    margin-top: 0.5em;
 }
 
 .author {
