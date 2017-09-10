@@ -8,7 +8,7 @@ comments: true
 
 **TODO: link to other post**
 
-In my previous post I gave a round-trip over what it means to test microservices. We discussed the concept of the test pyramid and found out that you should write different types of automated tests to come up with a reliable and effective test suite. 
+In my previous post I gave a round-trip over what it means to test microservices. We discussed the concept of the test pyramid and found out that you should write different types of automated tests to come up with a reliable and effective test suite.
 
 While the previous post was a little more abstract, explaining concepts and high-level approaches, this post will be more hands on. We will explore how we can implement the concepts we discussed before. The technology of choice for this post will be **Java** with **Spring Boot** as the application framework.
 
@@ -53,7 +53,7 @@ _the internal structure of our microservice_
   * `Controller` classes provide _REST_ endpoints and deal with _HTTP_ requests and responses
   * `Repository` classes interface with the _database_ and take care of writing and reading data to/from persistent storage
   * `Client` classes talk to other APIs, in our case it fetches _JSON_ via _HTTPS_ from the darksky.net weather API
-  * `Domain` classes capture our [domain model](https://en.wikipedia.org/wiki/Domain_model) including the domain logic (which, to be fair, is quite trivial in our case). 
+  * `Domain` classes capture our [domain model](https://en.wikipedia.org/wiki/Domain_model) including the domain logic (which, to be fair, is quite trivial in our case).
 
 Experienced Spring developers might notice that a frequently used layer is missing here: Inspired by [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) a lot of developers build a **service layer** consisting of _service_ classes (which is its own stereotype in Spring). I decided not to include a service layer in this application. One reason is that our application is simple enough, a service layer would have been an unnecessary level of indirection. The other one is that I think people overdo it with service layers. I often encounter codebases where the entire business logic is captured within service classes. The domain model becomes merely a layer for data, not for behaviour (Martin Fowler calls this an [Aenemic Domain Model](https://en.wikipedia.org/wiki/Anemic_domain_model)). For every non-trivial application this wastes a lot of potential to keep your code well-structured and testable and does not fully utilize the power of object orientation.
 
@@ -106,12 +106,12 @@ public class ExampleController {
 
     @GetMapping("/hello/{lastName}")
     public String hello(@PathVariable final String lastName) {
-        Optional<Person> foundPerson = 
+        Optional<Person> foundPerson =
 	    personRepo.findByLastName(lastName);
 
         return foundPerson
-                .map(person -> String.format("Hello %s %s!", 
-		    person.getFirstName(), 
+                .map(person -> String.format("Hello %s %s!",
+		    person.getFirstName(),
 		    person.getLastName()))
                 .orElse(String.format("Who is this '%s' you're talking about?", lastName));
     }
@@ -217,10 +217,68 @@ public class PersonRepositoryIntegrationTest {
 You can see that our integration test follows the same _arrange, act, assert_ structure as the unit tests.
 
 ### REST API Integration
+Testing our microservice's REST API is quite simple. First we can of course write simple unit tests for all `Controller` classes and call the controller methods directly. `Controller` classes should generally be quite straightforward and focus request and response handling. Putting business logic into controllers should be avoided. Therefore unit tests will be pretty easy.
+
+As Controllers make heavy use of [Spring MVC's](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html) annotations for defining endpoints, query parameters and others we won't get very far with unit tests alone. In order to see if our API works as expected, e.g. by providing the correct endpoints, interpreting input parameters and answering with correct status codes and HTTP endpoints we have to go beyond unit tests. One way to test this would be to start up the entire Spring Boot service and fire real HTTP requests against our API. With this approach we'd be on the very top of our test pyramid. There's another way that's a little less end-to-end. Spring MVC comes with a nice testing utility we can use: [MockMVC](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-testing-spring-boot-applications-testing-autoconfigured-mvc-tests) allows us to only spin up a small slice of our spring application and use a nice <abbr title="Domain-Specific Language">DSL</abbr> to fire test requests at our API and check that the returned data is as expected.
+
+Let's take our `ExampleController` and check if the `/hello/<lastname>` endpoint works correctly:
+
+{% highlight java %}
+@RestController
+public class ExampleController {
+
+    private final PersonRepository personRepository;
+
+    // shortened for clarity
+
+    @GetMapping("/hello/{lastName}")
+    public String hello(@PathVariable final String lastName) {
+        Optional<Person> foundPerson = personRepository.findByLastName(lastName);
+
+        return foundPerson
+             .map(person -> String.format("Hello %s %s!", person.getFirstName(), person.getLastName()))
+             .orElse(String.format("Who is this '%s' you're talking about?", lastName));
+    }
+}
+{% endhighlight %}
+
+Our controller calls the `PersonRepository` in the `/hello/<lastname>` endpoint. For our tests we need to replace this repository class with a mock to avoid hitting a real database. The controller integration test looks as follows:
+
+{% highlight java %}
+@RunWith(SpringRunner.class)
+@WebMvcTest(controllers = ExampleController.class)
+public class ExampleControllerIntegrationTest {
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
+    private PersonRepository personRepository;
+
+    // shortened for clarity
+
+    @Test
+    public void shouldReturnFullName() throws Exception {
+        Person peter = new Person("Peter", "Pan");
+        given(personRepository.findByLastName("Pan")).willReturn(Optional.of(peter));
+
+        mockMvc.perform(get("/hello/Pan"))
+                .andExpect(content().string("Hello Peter Pan!"))
+                .andExpect(status().is2xxSuccessful());
+    }
+}
+{% endhighlight %}
+
+We annotated the test class with `@WebMvcTest` and tell the annotation which controller we're testing. This mechanism instructs Spring to only start the Rest API slice of our application. We won't hit any repositories so spinning them up and requiring a database to connect to would simply be wasteful. This is why the `@WebMvcTest` annotation is quite handy for us.
+
+Instead of relying on the real `PersonRepository` dependency we replace it with a mock in our Spring context using the `@MockBean` annotation. This annotation replaces the annotated class with a Mockito mock globally. In our test methods we can set the behaviour of these mocks exactly as we would do in a unit test, it's a Mockito mock after all. In our simple case we return a static string so there's no need to set up any mocks.
+
+To use `MockMvc` we can simply `@Autowire` a MockMvc instance. In combination with the `@WebMvcTest` annotation this is all Spring needs to fire test requests against our controller. In the test method you see `MockMvc` in action. You can use its DSL to fire requests (in our case a _GET_ request) againt your controller's endpoints and then expect return values and HTTP status codes. The `MockMVC` DSL is quite powerful and should get you a long way.
 
 ### Integration With Third-Party Services
 
-### 
+### Parsing and Writing JSON
+
 ## CDC Tests
 
 ## General Rules
