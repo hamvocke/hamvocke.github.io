@@ -278,6 +278,27 @@ To use `MockMvc` we can simply `@Autowire` a MockMvc instance. In combination wi
 ### Integration With Third-Party Services
 
 ### Parsing and Writing JSON
+Writing a REST API these days you often send your data as JSON over the wire. Using Spring there's no need to writing JSON on your own. Instead you define <abbr title="Plain Old Java Object">POJOs</abbr> that represent the JSON structure you want to parse from a request or send with a response.
+
+Spring automatically can automatically parse JSON and convert it into your Java object structure and vice versa. When we talk to the weather API we receive JSON as response. To make this data structure accessible in our Java code I've written the `WeatherResponse` class. This class defines the nested JSON object structure with all fields that are relevant in our case (for us this is `response.currently.summary` only). Spring uses [Jackson](https://github.com/FasterXML/jackson) to convert between Java and JSON per default. This mechanism is usually hidden from you as a developer. If you define a method in a `RestController` that returns a POJO, Spring MVC will automatically use Jackson to convert that POJO to JSON and send the resulting JSON in the resposne body. Using Spring's `RestTemplate` you get the same magic. If you send a request using `RestTemplate` you can provide a POJO class that should be used to parse the response. Again, Jackson is used under the hood per default.
+
+If you want to test-drive your Jackson Mapping, take a look at the `WeatherResponseTest` I've written.  In this test I test the conversion of JSON into a `WeatherResponse` object. Since this deserialization is the only conversion taking place in the application's flow there's no need to test if a `WeatherResponse` can be converted to JSON correctly. Using this approach it's very simple to test the other way, though.
+
+{% highlight java %}
+@Test
+public void shouldDeserializeJson() throws Exception {
+   String jsonResponse = FileLoader.read("classpath:weatherApiResponse.json");
+   WeatherResponse expectedResponse = new WeatherResponse("Rain");
+
+   WeatherResponse parsedResponse = new ObjectMapper().readValue(jsonResponse, WeatherResponse.class);
+
+   assertThat(parsedResponse, is(expectedResponse));
+}
+{% endhighlight %}
+
+In this test case I read a sample JSON response from a file (you could also simply define a `String` in your test case) and let Jackson parse this JSON response using `ObjectMapper.readValue()`. I then compare the result of the conversion with an expected `WeatherResponse` to see if the conversion works as expected.
+
+You can argue that this kind of test is rather a unit than an integration test. Nevertheless, this kind of test can be pretty valuable to make sure that your JSON serialization and deserialization works as expected. Having these tests in place allows you to keep the integration tests around your REST API and your client classes smaller as you don't need to check the entire JSON conversion again.
 
 ## CDC Tests
 
