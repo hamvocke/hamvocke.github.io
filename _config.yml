@@ -3,7 +3,6 @@ description: Hermann Vocke on software development, technology and random stuff
 url: http://www.hamvocke.com
 markdown: kramdown
 include: ['.htaccess']
-highlighter: pygments
 
 paginate: 5
 paginate_path: "/blog/page:num"
