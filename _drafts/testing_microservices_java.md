@@ -276,6 +276,13 @@ Instead of relying on the real `PersonRepository` dependency we replace it with 
 To use `MockMvc` we can simply `@Autowire` a MockMvc instance. In combination with the `@WebMvcTest` annotation this is all Spring needs to fire test requests against our controller. In the test method you see `MockMvc` in action. You can use its DSL to fire requests (in our case a _GET_ request) againt your controller's endpoints and then expect return values and HTTP status codes. The `MockMVC` DSL is quite powerful and should get you a long way.
 
 ### Integration With Third-Party Services
+The next thing we'll look at is integrating with third-party services. Our microservice talks to [darksky.net](https://darksky.net), a weather REST API. Of course we want to ensure that our service sends requests correctly and parses the responses as we need.
+
+We want to avoid hitting the real _darksky_ servers during our automated tests. Quota limits of our free plan is only part of the reason. The real reason is decoupling. Our tests should run even when the machine, we're running the tests on, can't access the _darksky_ servers. Sitting in an airplane without internet connection, temporary hiccups of the _darksky_ servers or a flaky internet connection are only some of the situations where this becomes useful.
+
+To avoid hitting the real _darksky_ servers, we'll provide our own, fake _darksky_ server for running our integration tests. This might sound like a huge task. Thanks to tools like [Wiremock](http://wiremock.org/) it's easy.
+
+**TODO continue**
 
 ### Parsing and Writing JSON
 Writing a REST API these days you often send your data as JSON over the wire. Using Spring there's no need to writing JSON on your own. Instead you define <abbr title="Plain Old Java Object">POJOs</abbr> that represent the JSON structure you want to parse from a request or send with a response.
