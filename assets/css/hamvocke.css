@@ -58,6 +58,7 @@ code {
 
 pre>code {
     border: none;
+    white-space: pre;
 }
 
 #logo {
