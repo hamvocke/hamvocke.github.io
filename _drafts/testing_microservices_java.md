@@ -278,11 +278,56 @@ To use `MockMvc` we can simply `@Autowire` a MockMvc instance. In combination wi
 ### Integration With Third-Party Services
 The next thing we'll look at is integrating with third-party services. Our microservice talks to [darksky.net](https://darksky.net), a weather REST API. Of course we want to ensure that our service sends requests correctly and parses the responses as we need.
 
-We want to avoid hitting the real _darksky_ servers during our automated tests. Quota limits of our free plan is only part of the reason. The real reason is decoupling. Our tests should run even when the machine, we're running the tests on, can't access the _darksky_ servers. Sitting in an airplane without internet connection, temporary hiccups of the _darksky_ servers or a flaky internet connection are only some of the situations where this becomes useful.
+We want to avoid hitting the real _darksky_ servers during our automated tests. Quota limits of our free plan is only part of the reason. The real reason is decoupling. Our tests should run independently of whatever the lovely people at darksky.net are doing. Even when the machine, we're running the tests on, can't access the _darksky_ servers, e.g. when sitting in an airplane without internet connection, when the _darksky_ servers have temporary hiccups or we have a flaky internet connection.
 
-To avoid hitting the real _darksky_ servers, we'll provide our own, fake _darksky_ server for running our integration tests. This might sound like a huge task. Thanks to tools like [Wiremock](http://wiremock.org/) it's easy.
+To avoid hitting the real _darksky_ servers, we'll provide our own, fake _darksky_ server while running our integration tests. This might sound like a huge task. Thanks to tools like [Wiremock](http://wiremock.org/) it's easy peasy.
 
-**TODO continue**
+{% highlight java %}
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@TestPropertySource(locations = "classpath:application-test.properties")
+public class WeatherClientIntegrationTest {
+
+    @Autowired
+    private WeatherClient subject;
+
+    @Rule
+    public WireMockRule wireMockRule = new WireMockRule(8089);
+
+    @Test
+    public void shouldCallWeatherService() throws Exception {
+        wireMockRule.stubFor(get(urlPathEqualTo("/some-test-api-key/53.5511,9.9937"))
+                .willReturn(aResponse()
+                        .withBody(FileLoader.read("classpath:weatherApiResponse.json"))
+                        .withHeader(CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                        .withStatus(200)));
+
+        Optional<WeatherResponse> weatherResponse = subject.fetchWeather();
+
+        Optional<WeatherResponse> expectedResponse = Optional.of(new WeatherResponse("Rain"));
+        assertThat(weatherResponse, is(expectedResponse));
+    }
+}
+{% endhighlight %}
+
+To use Wiremock we instanciate a `WireMockRule` on a defined port and set up our fake server using Wiremock's DSL. Using the DSL we can define endpoints and corresponding canned responses the Wiremock server should listen and respond to. Next we can call the method we want to test, the one that calls the third-party service and check if the result is parsed correctly. You'll be wondering how this works. How does the test know that it should call the fake Wiremock server instead of the real _darksky_ API. The secret is the the `@TestPropertySource` annotation. It tells our test to load `application-test.properties` instead of the real `application.properties`. Our `application-test.properties` then go ahead and set the URL to use for calling the weather API to the fake Wiremock server:
+
+    weather.url = http://localhost:8089
+
+Note that the port has to be the same we define when instanciating the `WireMockRule` in our test. Exchanging the real weather API URL with a fake one in our tests is made possible by injecting URL in our `WeatherClient` class' constructor:
+
+{% highlight java %}
+@Autowired
+public WeatherClient(final RestTemplate restTemplate,
+                     @Value("${weather.url}") final String weatherServiceUrl,
+                     @Value("${weather.api_key}") final String weatherServiceApiKey) {
+    this.restTemplate = restTemplate;
+    this.weatherServiceUrl = weatherServiceUrl;
+    this.weatherServiceApiKey = weatherServiceApiKey;
+}
+{% endhighlight %}
+
+This way we tell our `WeatherClient` to read the `weatherUrl` parameter's value from the `weather.url` property we define in our application properties.
 
 ### Parsing and Writing JSON
 Writing a REST API these days you often send your data as JSON over the wire. Using Spring there's no need to writing JSON on your own. Instead you define <abbr title="Plain Old Java Object">POJOs</abbr> that represent the JSON structure you want to parse from a request or send with a response.
@@ -308,6 +353,8 @@ In this test case I read a sample JSON response from a file (you could also simp
 You can argue that this kind of test is rather a unit than an integration test. Nevertheless, this kind of test can be pretty valuable to make sure that your JSON serialization and deserialization works as expected. Having these tests in place allows you to keep the integration tests around your REST API and your client classes smaller as you don't need to check the entire JSON conversion again.
 
 ## CDC Tests
+
+## End-to-End Tests
 
 ## General Rules
   * Test code is as important as production code. Give it the same level of care and attention
