@@ -285,7 +285,6 @@ To avoid hitting the real _darksky_ servers, we'll provide our own, fake _darksk
 {% highlight java %}
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@TestPropertySource(locations = "classpath:application-test.properties")
 public class WeatherClientIntegrationTest {
 
     @Autowired
@@ -310,7 +309,7 @@ public class WeatherClientIntegrationTest {
 }
 {% endhighlight %}
 
-To use Wiremock we instanciate a `WireMockRule` on a defined port and set up our fake server using Wiremock's DSL. Using the DSL we can define endpoints and corresponding canned responses the Wiremock server should listen and respond to. Next we can call the method we want to test, the one that calls the third-party service and check if the result is parsed correctly. You'll be wondering how this works. How does the test know that it should call the fake Wiremock server instead of the real _darksky_ API. The secret is the the `@TestPropertySource` annotation. It tells our test to load `application-test.properties` instead of the real `application.properties`. Our `application-test.properties` then go ahead and set the URL to use for calling the weather API to the fake Wiremock server:
+To use Wiremock we instanciate a `WireMockRule` on a defined port and set up our fake server using Wiremock's DSL. Using the DSL we can define endpoints and corresponding canned responses the Wiremock server should listen and respond to. Next we can call the method we want to test, the one that calls the third-party service and check if the result is parsed correctly. You'll be wondering how this works. How does the test know that it should call the fake Wiremock server instead of the real _darksky_ API. The secret lies in our `application.properties` file contained in `src/test/resources`. This is the properties file Spring loads when running tests. In this file we override configuration like API keys and URLs with values that are suitable for our testing purposes, e.g. calling the the fake Wiremock server instead of the real one:
 
     weather.url = http://localhost:8089
 
@@ -353,19 +352,26 @@ In this test case I read a sample JSON response from a file (you could also simp
 You can argue that this kind of test is rather a unit than an integration test. Nevertheless, this kind of test can be pretty valuable to make sure that your JSON serialization and deserialization works as expected. Having these tests in place allows you to keep the integration tests around your REST API and your client classes smaller as you don't need to check the entire JSON conversion again.
 
 ## CDC Tests
-Writing CDC tests can be as easy as sending HTTP requests to a deployed version of the service we're integrating against and verifying that the service answers with the expected data and status codes. Rolling our own CDC tests is straightforward but will soon send us down the rabbit hole. We need to somehow come up with a way to bundle our CDC tests, distribute CDC them between teams and need to find a mechanism for versioning. While this is certainly possible, I want to demonstrate a different way.
+Consumer-Driven Contract (CDC) tests ensure that both parties involved in an interface between two services (the provider and the consumer) stick to the contract defined to keep the integration between these services intact.
 
-In this example I'm using [Pact](https://github.com/DiUS/pact-jvm) to implement the consumer and provider side of our CDC tests. Pact is available for multiple languages and can therefore also be used in a polyglot context. Using Pact we only need to exchange JSON files between consumers and providers. One of the more advanced features even gives us a so called "broker" that we can use to exchange pacts between teams and show which services integrate with each other.
+Writing CDC tests can be as easy as sending HTTP requests to a deployed version of the service we're integrating against and verifying that the service answers with the expected data and status codes. Rolling our own CDC tests from scratch is straightforward but will soon send us down a rabbit hole. We need to somehow come up with a way to bundle our CDC tests, distribute CDC them between teams and need to find a mechanism for versioning. While this is certainly possible, I want to demonstrate a different way.
 
-**TODO image of broker?**
+In this example I'm using [Pact](https://github.com/DiUS/pact-jvm) to implement the consumer and provider side of our CDC tests. Pact is available for multiple languages and can therefore also be used in a polyglot context. Using Pact we only need to exchange JSON files between consumers and providers. One of the more advanced features even gives us a so called ["pact broker"](https://github.com/pact-foundation/pact_broker/tree/master) that we can use to exchange pacts between teams and show which services integrate with each other.
+
+Contract tests always include both sides of an interface -- the consumer and the provider. Both parties need to write and run automated tests to ensure that their changes don't break the interface contract. Let's take a look at both sides in our example.
 
 ### Consumer Test (our end)
-Our microservices consumes the weather API. So it's our responsibility to write a **consumer test** that defines our expectations for this contract.
+Our microservice consumes the weather API. So it's our responsibility to write a **consumer test** that defines our expectations for the contract (the API) between our microservice and the weather service.
+
+First we include a library for writing pact consumer tests in our `build.gradle`:
+
+    testCompile("au.com.dius:pact-jvm-consumer-junit_2.11:3.5.5")
+
+Thanks to this library we can implement a consumer test and use pact's mock services:
 
 {% highlight java %}
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@TestPropertySource(locations = "classpath:application-test.properties")
 public class WeatherClientConsumerTest {
 
     @Autowired
@@ -392,21 +398,55 @@ public class WeatherClientConsumerTest {
     public void shouldFetchWeatherInformation() throws Exception {
         Optional<WeatherResponse> weatherResponse = weatherClient.fetchWeather();
         assertThat(weatherResponse.isPresent(), is(true));
-        assertThat(weatherResponse.get().getCurrently().getSummary(), is("Rain"));
+        assertThat(weatherResponse.get().getSummary(), is("Rain"));
     }
 }
 {% endhighlight %}
 
-If you look closely, you'll see that the _WeatherClientConsumerTest_ is very similar to the _WeatherClientIntegrationTest_. Instead of using Wiremock for the server stub we use Pact this time. In fact the consumer test works exactly as the integration test, we replace the real third-party server with a stub, define the expected response and check that our client can parse the response correctly. The difference this time is that the consumer test will also generate a **pact file** (`pact.json`) that describes our expectations for the contract.
+If you look closely, you'll see that the `WeatherClientConsumerTest` is very similar to the `WeatherClientIntegrationTest`. Instead of using Wiremock for the server stub we use Pact this time. In fact the consumer test works exactly as the integration test, we replace the real third-party server with a stub, define the expected response and check that our client can parse the response correctly. The difference this time is that the consumer test will also generate a **pact file** (`target/pacts/<pact-name>.json`) that describes our expectations for the contract.
 
 We can take this pact file file and hand it to the team providing the interface. They in turn can take this pact file and write a provider test using the defined expectations. This way they can test if their API fulfills all our expectations.
 
-In your application you'd don't need both, a _clientIntegrationTest_ and a _clientConsumerTest_. The sample codebase contains both to show you how to use either one. If you want to write CDC tests using pact I recommend sticking to the latter. The effort writing the tests is the same. Using pact has the benefit that you automatically win a pact file with the expectations to the contract that other teams can use to easily implement their provider tests. Of course this only makes sense if you can convince the other team to use pact as well. If this doesn't work, using the _integration test_ and Wiremock combination is a decent plan b.
+In your real-world application you'd don't need both, a _client integration test_ and a _client consumer test_. The sample codebase contains both to show you how to use either one. If you want to write CDC tests using pact I recommend sticking to the latter. The effort writing the tests is the same. Using pact has the benefit that you automatically win a pact file with the expectations to the contract that other teams can use to easily implement their provider tests. Of course this only makes sense if you can convince the other team to use pact as well. If this doesn't work, using the _integration test_ and Wiremock combination is a decent plan b.
 
 ### Provider Test (the other team)
-This is the test the darksky.net team would implement on their end to check that they're not breaking the contract between their application and our service. Obviously they don't care about us and won't implement a CDC test for our lousy microservice. That's the big difference between a public-facing API and an organisation adopting microservices. Public-facing APIs can't consider every single consumer out there or they'd become unable to move forward. Within your system of microservices, you can. Your app will probably serve a handful, maybe a couple dozen consumers max. You'll be fine talking to these people in order to keep a stable system.
+The provider test in our example has to be implemented by the people providing the weather API. We're consuming a public API provided by darksky.net. In theory the darksky team would implement the provider test on their end to check that they're not breaking the contract between their application and our service. Obviously they don't care about our little sample application and won't implement a CDC test for us. That's the big difference between a public-facing API and an organisation adopting microservices. Public-facing APIs can't consider every single consumer out there or they'd become unable to move forward. Within your own organisation, you can. Your app will probably serve a handful, maybe a couple dozen of consumers max. You'll be fine writing provider tests for these interfaces in order to keep a stable system.
 
-Implementing a provider test example: https://github.com/DiUS/pact-jvm/tree/master/pact-jvm-provider-spring
+The **"consumer-driven"** part of CDC makes clear that the consumer of an API drives what the contract between services looks like. Pact makes sure that this happens by generating pact files with every run of consumer tests. The consumer team has to make these pact files available to the providing team. There's multiple ways this can be done. A simple one would be to check them into version control and tell the provider team to always fetch the latest version of the pact file.
+
+This pact file can be fetched by the providing team and then run against their providing service. All the providing team has to do is to implement a provider test that reads the pact file, stubs out some test data and runs the expectations defined in the pact file against their service.
+
+The pact folks have written several libraries for implementing provider tests. Their main [GitHub repo](https://github.com/DiUS/pact-jvm) gives you a nice overview which consumer and which provider libraries are available. Pick the one that matches your tech stack best. For simplicity we assume that the darksky API is implemented in Spring Boot as well. This allows us to use the [Spring pact provider](https://github.com/DiUS/pact-jvm/tree/master/pact-jvm-provider-spring) which hooks nicely into Spring's MockMVC mechanisms. A hypothetical provider test that the darksky.net team would implement could look like this:
+
+{% highlight java %}
+@RunWith(RestPactRunner.class)
+@Provider("weather_provider") // same as in the "provider_name" part in our clientConsumerTest
+@PactFolder("target/pacts") // tells pact where to load the pact files from
+public class WeatherProviderTest {
+    @InjectMocks
+    private ForecastController forecastController = new ForecastController();
+
+    @Mock
+    private ForecastService forecastService;
+
+    @TestTarget
+    public final MockMvcTarget target = new MockMvcTarget();
+
+    @Before
+    public void before() {
+        initMocks(this);
+        target.setControllers(forecastController);
+    }
+
+    @State("weather forecast data") // same as the "given()" part in our clientConsumerTest
+    public void weatherForecastData() {
+        when(forecastService.fetchForecastFor(any(String.class), any(String.class)))
+                .thenReturn(weatherForecast("Rain"));
+    }
+}
+{% endhighlight %}
+
+You see that all the provider test has to do is to load a pact file (using the `@PactFolder` annotation to load previously downloaded pact files or attaching to a pact broker using a different annotation) and then define how test data for pre-defined states should be provided (e.g. using Mockito mocks). There's no custom test to be implemented as these are all derived from the pact file. It's important that the provider test has matching counterparts to the _provider name_ and _state_ declared in the consumer test.
 
 ## End-to-End Tests
 
