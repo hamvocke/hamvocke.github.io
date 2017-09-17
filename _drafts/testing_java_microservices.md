@@ -2,13 +2,11 @@
 layout: post
 title: Testing Microservices — Java & Spring Boot
 tags: programming testing java
-excerpt: Based on the previous post about testing microservices, I'll show how to implement different types of tests for a Spring Boot application in Java
+excerpt: Based on the previous post about testing microservices, I'll show how to implement different types of tests for a Spring Boot microservice written  in Java
 comments: true
 ---
 
-**TODO: link to other post**
-
-In my previous post I gave a round-trip over what it means to test microservices. We discussed the concept of the test pyramid and found out that you should write different types of automated tests to come up with a reliable and effective test suite.
+In my [previous post](/blog/testing_microservices/) I gave a round-trip over what it means to test microservices. We discussed the concept of the test pyramid and found out that you should write different types of automated tests to come up with a reliable and effective test suite.
 
 While the previous post was a little more abstract, explaining concepts and high-level approaches, this post will be more hands on. We will explore how we can implement the concepts we discussed before. The technology of choice for this post will be **Java** with **Spring Boot** as the application framework.
 
@@ -23,11 +21,11 @@ This post will show you tools and libraries that help you implement the differen
   * [**Pact**](https://docs.pact.io/) for writing CDC tests
 
 ## The Sample Application
-I've written a [simple microservice](https://github.com/hamvocke/spring-testing) including. The codebase contains a test suite with tests for the different layers of the test pyramid. There are more tests than necessary for an application of this size. The tests on different levels overlap sometimes. This actively contradicts my hint that you should avoid test duplication throughout your test pyramid. I decided to duplicate tests throughout the test pyramid for demonstration purposes. Please keep in mind that this is not what you want for your real-world application. Duplicated tests are smelly and will be more annoying then helpful in the long run.
+I've written a [simple microservice](https://github.com/hamvocke/spring-testing) including a test suite with tests for the different layers of the test pyramid. There are more tests than necessary for an application of this size. The tests on different levels overlap. This actively contradicts my hint that you should avoid test duplication throughout your test pyramid. I decided to duplicate tests throughout the test pyramid for demonstration purposes. Please keep in mind that this is not what you want for your real-world application. Duplicated tests are smelly and will be more annoying then helpful in the long run.
 
 The sample application shows traits of a typical microservice. It provides a REST interface, talks to a database and fetches information from a third-party REST service. It's implemented in [Spring Boot ](https://projects.spring.io/spring-boot/) and should be understandable even if you've never worked with Spring Boot before.
 
-Make sure to check out [the code](https://github.com/hamvocke/spring-testing) on github. The readme contains all instructions you need to run the application and all automated tests on your machine.
+Make sure to check out [the code](https://github.com/hamvocke/spring-testing) on GitHub. The readme contains all instructions you need to run the application and all automated tests on your machine.
 
 ### Functionality
 The application's functionality is simple. It provides a REST interface with three endpoints:
@@ -483,11 +481,22 @@ public class ExampleE2ETest {
 
 Note that this test will only run on your system if you have Firefox installed on the system you run this test on. That also means that your continuous integration server needs to install Firefox as well to be able to run this test.
 
-## General Rules
-  * Test code is as important as production code. Give it the same level of care and attention
-  * one assertion per test
+## General Advice
+When it comes to writing automated tests there are some core principles to keep in mind that I find myself repeating frequently:
 
+  1. Test code is as important as production code. Give it the same level of care and attention. Never allow sloppy code to be justified with the _"this is only test code"_ claim
+  2. Test one condition per test. This helps you to keep your tests short and easy to reason about
+  3. _"arrange, act, assert"_ or _"given, when, then"_ are good mnemonics to keep your tests well-structured
+  4. Readability matters. Don't try to be overly <abbr title="Don't Repeat Yourself">DRY</abbr>. Duplication is okay, if it improves readability. Try to find a balance between [DRY and <abbr title="Descriptive and Meaningful Phrases">DAMP</abbr>](https://stackoverflow.com/questions/6453235/what-does-damp-not-dry-mean-when-talking-about-unit-tests) code
+  5. When in doubt use the [Rule of Three](https://blog.codinghorror.com/rule-of-three/) to decide when to refactor. _Use before reuse_.
+
+## Summary
+This post showed how to implement an effective test suite for a Spring Boot microservice. Make sure to check out the [GitHub repository](https://github.com/hamvocke/spring-testing) and fiddle around with the code. Coming up with an effective test suite can be a challenging task. You will be rewarded with more safety, better quality and more peace of mind in the longer run. If you're still wondering why you should bother putting in such big effort make sure to read my previous post about [testing microservices](/blog/testing_microservices/).
+
+Now it's your turn to make sure your microservices are properly tested. Be diligent and experiment along the way.
 
 **TODO**
   * provide readme.md for repo
   * link to previous article
+  * check that all links are correct
+  * spell check
