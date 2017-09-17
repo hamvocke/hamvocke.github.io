@@ -183,25 +183,25 @@ public class ExampleControllerTest {
 
 We're writing the unit tests using [JUnit](http://junit.org), the de-facto standard testing framework for Java. We use [Mockito](http://site.mockito.org/) to replace the real `PersonRepository` class with a stub for our test. This stub allows us to define canned responses the stubbed method should return in this test. Stubbing makes our test more simple, predictable and allows us to easily setup test data.
 
-Following the _arrange, act, assert_ structure explained above, we write two unit tests -- a positive case and a case where the searched person cannot be found. The first, positive test case creates a new person object and tells the mocked repository to return this object when it's called with _"Pan"_ as the value for the `lastName` parameter. The test then goes on to call the method that should be tested. Finally it asserts that the response is equal to the expected response.
+Following the _arrange, act, assert_ structure, we write two unit tests -- a positive case and a case where the searched person cannot be found. The first, positive test case creates a new person object and tells the mocked repository to return this object when it's called with _"Pan"_ as the value for the `lastName` parameter. The test then goes on to call the method that should be tested. Finally it asserts that the response is equal to the expected response.
 
 The second test works similarly but tests the scenario where the tested method does not find a person for the given parameter.
 
 ## Integration Tests
-Integration tests are the next level in your test pyramid. They test that your application can integrate with its sorroundings successfully. For your automated tests this means you don't just need to provide your own application but also the component you're integrating with. If you're testing the integration with a database you need to run a database during your tests. For testing that you can read files from a disk you need to save a file to your disk and use it as input for your integration test.
+Integration tests are the next higher level in your test pyramid. They test that your application can successfully integrate with its sorroundings (databases, network, filesystems, etc.). For your automated tests this means you don't just need to run your own application but also the component you're integrating with. If you're testing the integration with a database you need to run a database when running your tests. For testing that you can read files from a disk you need to save a file to your disk and use it as load it in your integration test.
 
 ### What to Test?
-A good way to think about the places of your microservice where you should have integration tests is to think about all places where data gets serialized or deserialized. Common places are:
+A good way to think about where you should have integration tests is to think about all places where data gets serialized or deserialized. Common ones are:
 
   * reading HTTP requests and sending HTTP responses through your REST API
   * reading and writing from/to a database
   * reading and writing from/to a filesystem
   * sending HTTP(S) requests to other services and parsing their responses
 
-In our sample codebase you can find integration tests for `Repository`, `Controller` and `Client` classes. All these classes interface with the sorroundings of the application (databases or the network) and serialize and deserialize data. Having tests in place to test these integrations is something we can't achieve with unit tests.
+In the sample codebase you can find integration tests for `Repository`, `Controller` and `Client` classes. All these classes interface with the sorroundings of the application (databases or the network) and serialize and deserialize data. We can't test these integrations with unit tests.
 
 ### Database Integration
-The `PersonRepository` is the only repository class in the codebase. It relies on _Spring Data_ and has no actual implementation. It just extends the `CrudRepository` interface and provides a single method header. The rest is Spring magic. Even without the method definition Spring Boot provides a fully functional CRUD repository with `findOne`, `findAll`, `save`, `update` and `delete` methods. Our custom method definition extends this basic functionality and allows us to provide a way to fetch `Person`s by their last name. Spring Data analyses the return type of the method and its method name and checks the method name against a naming convention to figure out what it should do.
+The `PersonRepository` is the only repository class in the codebase. It relies on _Spring Data_ and has no actual implementation. It just extends the `CrudRepository` interface and provides a single method header. The rest is Spring magic.
 
 {% highlight java %}
 public interface PersonRepository extends CrudRepository<Person, String> {
@@ -209,11 +209,21 @@ public interface PersonRepository extends CrudRepository<Person, String> {
 }
 {% endhighlight %}
 
-Although _Spring Data_ does the heavy lifting of implementing database repositories for us, I still wrote a database integration test. You might argue that this is _testing the framework_ and something that I should avoid as it's not our code we're testing. Still, I believe having at least one integration test here is crucial. First it tests that our custom `findByLastName` method actually behaves correctly. Secondly it proves that our repository in general uses Spring's magic correctly and most of it all can connect to our desired database.
+With the `CrudRepository` interface Spring Boot offers a fully functional CRUD repository with `findOne`, `findAll`, `save`, `update` and `delete` methods. Our custom method definition (`findByLastName()`) extends this basic functionality and gives us a way to fetch `Person`s by their last name. Spring Data analyses the return type of the method and its method name and checks the method name against a naming convention to figure out what it should do.
 
-To make things easier for you to run locally our test connects to an in-memory _H2_ database. We've defined H2 as a test dependency in our `build.gradle`. Our `application.properties` in our test directory doesn't define any `spring.datasource` properties. This tells Spring Data to should use an in-memory database. As it finds H2 on the classpath it simply uses H2 when running our tests. When running the real application with the `int` profile (e.g. by setting `SPRING_PROFILES_ACTIVE=int` as environment variable) it connects to a PostgreSQL database as defined in the `application-int.properties`. To avoid having to run a PostgreSQL database during testing I decided to replace it with an H2 instead. That's an awful lot of Spring magic to know and understand. The resulting code is quite easy on the eye but hard to understand if you don't know the fine details of Spring Data. Going with an in-memory databse is also risky business since our integration tests run against a different type of database than they would in production. Go ahead and decide for yourself if you prefer magic and simple code over an explicit yet more verbose implementation.
+Although Spring Data does the heavy lifting of implementing database repositories I still wrote a database integration test. You might argue that this is _testing the framework_ and something that I should avoid as it's not our code that we're testing. Still, I believe having at least one integration test here is crucial. First it tests that our custom `findByLastName` method actually behaves as expected. Secondly it proves that our repository used Spring's magic correctly and can connect to the database.
 
-A simple integration test that saves a Person to the connected database and then tries to find it by its last name looks like this:
+To make it easier for you to run the tests on your machine (without having to install a PostgreSQL database) our test connects to an in-memory _H2_ database.
+
+I've defined H2 as a test dependency in the `build.gradle` file. The `application.properties` in the test directory doesn't define any `spring.datasource` properties. This tells Spring Data to use an in-memory database. As it finds H2 on the classpath it simply uses H2 when running our tests.
+
+When running the real application with the `int` profile (e.g. by setting `SPRING_PROFILES_ACTIVE=int` as environment variable) it connects to a PostgreSQL database as defined in the `application-int.properties`.
+
+I know, that's an awful lot of Spring magic to know and understand. To get there, you'll have to sift through [a lot of documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-sql.html#boot-features-embedded-database-support). The resulting code is easy on the eye but hard to understand if you don't know the fine details of Spring.
+
+On top of that going with an in-memory database is risky business. After all, our integration tests run against a different type of database than they would in production. Go ahead and decide for yourself if you prefer Spring magic and simple code over an explicit yet more verbose implementation.
+
+Enough explanation already, here's a simple integration test that saves a Person to the database and finds it by its last name:
 
 {% highlight java %}
 @RunWith(SpringRunner.class)
@@ -239,19 +249,22 @@ public class PersonRepositoryIntegrationTest {
 }
 {% endhighlight %}
 
-You can see that our integration test follows the same _arrange, act, assert_ structure as the unit tests.
+You can see that our integration test follows the same _arrange, act, assert_ structure as the unit tests. Told you that this was a universal concept!
 
 ### REST API Integration
-Testing our microservice's REST API is quite simple. First we can of course write simple unit tests for all `Controller` classes and call the controller methods directly. `Controller` classes should generally be quite straightforward and focus request and response handling. Putting business logic into controllers should be avoided. Therefore unit tests will be pretty easy.
+Testing our microservice's REST API is quite simple. Of course we can write simple unit tests for all `Controller` classes and call the controller methods directly as a first measure. `Controller` classes should generally be quite straightforward and focus on request and response handling. Avoid putting business logic into controllers, that's none of their business (_best pun ever..._). This makes our unit tests straightforward (or even unnecessary, if it's too trivial).
 
-As Controllers make heavy use of [Spring MVC's](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html) annotations for defining endpoints, query parameters and others we won't get very far with unit tests alone. In order to see if our API works as expected, e.g. by providing the correct endpoints, interpreting input parameters and answering with correct status codes and HTTP endpoints we have to go beyond unit tests. One way to test this would be to start up the entire Spring Boot service and fire real HTTP requests against our API. With this approach we'd be on the very top of our test pyramid. There's another way that's a little less end-to-end. Spring MVC comes with a nice testing utility we can use: [MockMVC](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-testing-spring-boot-applications-testing-autoconfigured-mvc-tests) allows us to only spin up a small slice of our spring application and use a nice <abbr title="Domain-Specific Language">DSL</abbr> to fire test requests at our API and check that the returned data is as expected.
+As Controllers make heavy use of [Spring MVC's](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html) annotations for defining endpoints, query parameters and so on we won't get very far with unit tests. We want to see if our API works as expected: Does it have the correct endpoints, interpret input parameters and answer with correct HTTP status codes and response bodies? To do so, we have to go beyond unit tests.
 
-Let's take our `ExampleController` and check if the `/hello/<lastname>` endpoint works correctly:
+One way to test our API were to start up the entire Spring Boot service and fire real HTTP requests against our API. With this approach we were on the very top of our test pyramid. Luckily there's another, a little less end-to-end way.
+
+Spring MVC comes with a nice testing utility we can use: With [MockMVC](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-testing-spring-boot-applications-testing-autoconfigured-mvc-tests)we can spin up a small slice of our spring application, use a <abbr title="Domain-Specific Language">DSL</abbr> to fire test requests at our API and check that the returned data is as expected.
+
+Let's see how this works for the `/hello/<lastname>` endpoint `ExampleController`:
 
 {% highlight java %}
 @RestController
 public class ExampleController {
-
     private final PersonRepository personRepository;
 
     // shortened for clarity
@@ -267,7 +280,7 @@ public class ExampleController {
 }
 {% endhighlight %}
 
-Our controller calls the `PersonRepository` in the `/hello/<lastname>` endpoint. For our tests we need to replace this repository class with a mock to avoid hitting a real database. The controller integration test looks as follows:
+Our controller calls the `PersonRepository` in the `/hello/<lastname>` endpoint. For our tests we need to replace this repository class with a mock to avoid hitting a real database. Even though this is an integration test, we're testing the REST API integration, not the database integration. That's why we stub the database in this case. The controller integration test looks as follows:
 
 {% highlight java %}
 @RunWith(SpringRunner.class)
@@ -294,18 +307,18 @@ public class ExampleControllerIntegrationTest {
 }
 {% endhighlight %}
 
-We annotated the test class with `@WebMvcTest` and tell the annotation which controller we're testing. This mechanism instructs Spring to only start the Rest API slice of our application. We won't hit any repositories so spinning them up and requiring a database to connect to would simply be wasteful. This is why the `@WebMvcTest` annotation is quite handy for us.
+I annotated the test class with `@WebMvcTest` to tell Spring which controller we're testing. This mechanism instructs Spring to only start the Rest API slice of our application. We won't hit any repositories so spinning them up and requiring a database to connect to would simply be wasteful.
 
-Instead of relying on the real `PersonRepository` dependency we replace it with a mock in our Spring context using the `@MockBean` annotation. This annotation replaces the annotated class with a Mockito mock globally. In our test methods we can set the behaviour of these mocks exactly as we would do in a unit test, it's a Mockito mock after all. In our simple case we return a static string so there's no need to set up any mocks.
+Instead of relying on the real `PersonRepository` we replace it with a mock in our Spring context using the `@MockBean` annotation. This annotation replaces the annotated class with a Mockito mock globally, all classes that are `@Autowired` will only find the `@MockBean` in the Spring context and wire that one instead of a real one. In our test methods we can set the behaviour of these mocks exactly as we would in a unit test, it's a Mockito mock after all.
 
-To use `MockMvc` we can simply `@Autowire` a MockMvc instance. In combination with the `@WebMvcTest` annotation this is all Spring needs to fire test requests against our controller. In the test method you see `MockMvc` in action. You can use its DSL to fire requests (in our case a _GET_ request) againt your controller's endpoints and then expect return values and HTTP status codes. The `MockMVC` DSL is quite powerful and should get you a long way.
+To use `MockMvc` we can simply `@Autowire` a MockMvc instance. In combination with the `@WebMvcTest` annotation this is all Spring needs to fire test requests against our controller and expect return values and HTTP status codes. The `MockMVC` DSL is quite powerful and gets you a long way. Fiddle around with it to see what else you can do.
 
 ### Integration With Third-Party Services
-The next thing we'll look at is integrating with third-party services. Our microservice talks to [darksky.net](https://darksky.net), a weather REST API. Of course we want to ensure that our service sends requests correctly and parses the responses as we need.
+Our microservice talks to [darksky.net](https://darksky.net), a weather REST API. Of course we want to ensure that our service sends requests and parses the responses correctly.
 
-We want to avoid hitting the real _darksky_ servers during our automated tests. Quota limits of our free plan is only part of the reason. The real reason is decoupling. Our tests should run independently of whatever the lovely people at darksky.net are doing. Even when the machine, we're running the tests on, can't access the _darksky_ servers, e.g. when sitting in an airplane without internet connection, when the _darksky_ servers have temporary hiccups or we have a flaky internet connection.
+We want to avoid hitting the real _darksky_ servers when running automated tests. Quota limits of our free plan is only part of the reason. The real reason is _decoupling_. Our tests should run independently of whatever the lovely people at darksky.net are doing. Even when your machine can't access the _darksky_ servers (e.g. when you're coding on the airplane again instead of enjoying being crammed into a tiny airplane seat) or the darksky servers are down for some reason.
 
-To avoid hitting the real _darksky_ servers, we'll provide our own, fake _darksky_ server while running our integration tests. This might sound like a huge task. Thanks to tools like [Wiremock](http://wiremock.org/) it's easy peasy.
+We can avoid hitting the real _darksky_ servers by running our own, fake _darksky_ server while running our integration tests. This might sound like a huge task. Thanks to tools like [Wiremock](http://wiremock.org/) it's easy peasy. Watch this:
 
 {% highlight java %}
 @RunWith(SpringRunner.class)
@@ -334,11 +347,15 @@ public class WeatherClientIntegrationTest {
 }
 {% endhighlight %}
 
-To use Wiremock we instanciate a `WireMockRule` on a defined port and set up our fake server using Wiremock's DSL. Using the DSL we can define endpoints and corresponding canned responses the Wiremock server should listen and respond to. Next we can call the method we want to test, the one that calls the third-party service and check if the result is parsed correctly. You'll be wondering how this works. How does the test know that it should call the fake Wiremock server instead of the real _darksky_ API. The secret lies in our `application.properties` file contained in `src/test/resources`. This is the properties file Spring loads when running tests. In this file we override configuration like API keys and URLs with values that are suitable for our testing purposes, e.g. calling the the fake Wiremock server instead of the real one:
+To use Wiremock we instanciate a `WireMockRule` on a fixed port (`8089`). Using the DSL we can set up the Wiremock server, define the endpoints it should listen on and set canned responses it should respond with.
+
+Next we call the method we want to test, the one that calls the third-party service and check if the result is parsed correctly.
+
+It's important to understand how the test knows that it should call the fake Wiremock server instead of the real _darksky_ API. The secret is in our `application.properties` file contained in `src/test/resources`. This is the properties file Spring loads when running tests. In this file we override configuration like API keys and URLs with values that are suitable for our testing purposes, e.g. calling the the fake Wiremock server instead of the real one:
 
     weather.url = http://localhost:8089
 
-Note that the port has to be the same we define when instanciating the `WireMockRule` in our test. Exchanging the real weather API URL with a fake one in our tests is made possible by injecting URL in our `WeatherClient` class' constructor:
+Note that the port defined here has to be the same we define when instanciating the `WireMockRule` in our test. Replacing the real weather API's URL with a fake one in our tests is made possible by injecting the URL in our `WeatherClient` class' constructor:
 
 {% highlight java %}
 @Autowired
