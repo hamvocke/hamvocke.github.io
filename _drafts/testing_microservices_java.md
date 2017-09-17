@@ -449,6 +449,39 @@ public class WeatherProviderTest {
 You see that all the provider test has to do is to load a pact file (using the `@PactFolder` annotation to load previously downloaded pact files or attaching to a pact broker using a different annotation) and then define how test data for pre-defined states should be provided (e.g. using Mockito mocks). There's no custom test to be implemented as these are all derived from the pact file. It's important that the provider test has matching counterparts to the _provider name_ and _state_ declared in the consumer test.
 
 ## End-to-End Tests
+At last we arrived at top of our test pyramid. Time to write a real end-to-end test that calls our service via the user interface and includes a complete round-trip through the complete system.
+
+For end-to-end tests [Selenium](http://docs.seleniumhq.org/) and the [WebDriver](https://www.w3.org/TR/webdriver/) protocal have proven to be the tool of choice for many developers. Using Selenium you can pick a browser you like and let it automatically call your website, click here and there, enter data and check that stuff changes in the user interface.
+
+Selenium needs a browser that it can start and use for running its tests. There are multiple so-called _'drivers'_ for different browsers that you could use. Running a fully-fledged browser can be challenging when running your test suite. Especially when using continuous delivery the server running your pipeline might not always be able to spin up a browser including its user interface (e.g. because there's no XServer available). There are workarounds for this problem like starting a virtual XServer like [xvfb](https://en.wikipedia.org/wiki/Xvfb). A more recent approach is to use a _headless_ browser (i.e. a browser that doesn't have a user interface) to run your webdriver tests. Until recently [PhantomJS](http://phantomjs.org/) was the leading headless browser used for browser automation. Ever since both [Chromium](https://developers.google.com/web/updates/2017/04/headless-chrome) and [Firefox](https://developer.mozilla.org/en-US/Firefox/Headless_mode) announced that they've implemented a headless mode in their browsers PhantomJS all of a sudden became obsolete. After all it's better to test your website with a browser that your users actually use (like Firefox and Chrome) instead of using an artificial browser just because it's convenient for you as a developer.
+
+Both, headless Firefox and Chrome, are brand new features that might not work in your environment yet. We want to keep things simple. Instead of fiddling around to use the bleeding edge headless modes let's stick to the more simple classic way. A simple end-to-end test that fires up a Firefox browser, navigates to our service and checks the content of the website looks like this:
+
+{% highlight java %}
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class ExampleE2ETest {
+
+    private WebDriver driver = new FirefoxDriver();
+
+    @LocalServerPort
+    private int port;
+
+    @After
+    public void tearDown() {
+        driver.close();
+    }
+
+    @Test
+    public void helloPageHasTextHelloWorld() {
+        driver.get(String.format("http://127.0.0.1:%s/hello", port));
+
+        assertThat(driver.findElement(By.tagName("body")).getText(), containsString("Hello World!"));
+    }
+}
+{% endhighlight %}
+
+Note that this test will only run on your system if you have Firefox installed on the system you run this test on. That also means that your continuous integration server needs to install Firefox as well to be able to run this test.
 
 ## General Rules
   * Test code is as important as production code. Give it the same level of care and attention

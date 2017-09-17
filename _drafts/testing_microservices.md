@@ -4,7 +4,6 @@ title: Testing Microservices
 tags: programming testing
 excerpt: If you want to jump aboard the Microservices hype-train, continuous delivery and test automation will be your best friends. Finding out which tests you need and how you can write them can be quite challenging. This post sums up my experience testing Microservices to allow fast development and frequent deployments.
 comments: true
-toc: true
 ---
 
 Microservices have been all the rage for a while. If you attended any tech conference or read software engineering blogs lately, you'll either be amazed or fed up with all the stories that companies love to share about their microservices journey.
@@ -15,7 +14,7 @@ Proper test automation is essential if you want to build and run microservices. 
 
 This post consists of two parts. The one you're reading right now looks at high-level concepts and explains what type of tests you should have for your microservices. It also introduces you to a number of resources that you can use to learn more about the field.
 
-If you're ready to get more hands on (and you're not afraid of looking at Java code) take a look at the [second part](**TODO link**) **TODO link** where we'll look at a sample microservice codebase and see how the concepts we learned in this post can be implemented there.
+If you're ready to get more hands on (and you're not afraid of looking at Java code) take a look at the [second part](/blog/testing-java-microservices/) where we'll look at a sample microservice codebase and see how the concepts we learned in this post can be implemented there.
 
 ## <abbr title="too long; didn't read">tl;dr</abbr>
 Here's what you'll take away from this post:
@@ -36,7 +35,7 @@ Here's what you'll take away from this post:
 </div>
 
 ## Microservices Need (Test) Automation
-Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can be released into production any time. You use a **build pipeline** to automatically test and deploy your application to your testing and production environments. 
+Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can be released into production any time. You use a **build pipeline** to automatically test and deploy your application to your testing and production environments.
 
 Once you advance on your microservices quest you'll be juggling with dozens, maybe even hundreds of microservices. At this point building, testing and deploying these services manually becomes impossible -- at least if you want to deliver working software instead of spending all your time deploying stuff. Automating everything -- from build to tests, deployment and infrastructure -- is your only way forward.
 
@@ -150,7 +149,7 @@ UI Tests and end-to-end tests are sometimes (as in Mark Cohn's case) said to be 
 
 With traditional web applications testing the user interface can be achieved with tools like [Selenium](http://docs.seleniumhq.org/). If you consider a REST API to be your user interface you should have everything you need by writing proper integration tests around your API.
 
-With web interfaces there's multiple aspects that you probably want to test: UI behaviour, layout, usability or adherence to your corporate design are only a few. 
+With web interfaces there's multiple aspects that you probably want to test: UI behaviour, layout, usability or adherence to your corporate design are only a few.
 
 Fortunally, testing the behaviour of your user interface is pretty simple. You click here, enter data there and want the state of the user interface to change accordingly. Modern single page application frameworks ([react](https://facebook.github.io/react/), [vue.js](https://vuejs.org/), [Angular](https://angular.io/) and the like) often come with their own tools and helpers that allow you to thorougly test these interactions in a pretty low-level (unit test) fashion. Even if you roll your own frontend implementation using vanilla javascript you can use your regular testing tools like [Jasmine](https://jasmine.github.io/) or [Mocha](http://mochajs.org/). With a more traditional, server-side rendered application, Selenium-based tests will be your best choice.
 
@@ -173,7 +172,7 @@ As you often spread the consuming and providing services across different teams 
   3. Throw the interface definition over the fence to the consuming team
   4. Wait until they implement their part of consuming the interface
   5. Run some large-scale manual system test to see if everything works
-  6. Hope that both teams stick to the interface definition forever 
+  6. Hope that both teams stick to the interface definition forever
 
 If you're not stuck in the dark ages of software development, you hopefully have replaced steps _5._ and _6._ with something more automated. Automated tests make sure that the implemented interface still follows the defined contract. They serve as a good regression test suite and make sure that deviations from the contract will be noticed early.
 
@@ -208,29 +207,29 @@ _End-to-end tests test your entire, completely integrated system_
 
 End-to-end tests give you the biggest confidence when you need to decide if your software is working or not. [Selenium](http://docs.seleniumhq.org/) and the [WebDriver Protocol](https://www.w3.org/TR/webdriver/) allow you to automate your tests by automatically driving a (headless) browser against your deployed services, performing clicks, entering data and checking the state of your user interface. You can use Selenium directly or use tools that are build on top of it, [Nightwatch](http://nightwatchjs.org/) being one of them.
 
-End-to-End tests come with their own kind of problems. They are notoriously flaky and often fail for unexpected and unforseeable reasons. Quite often their failure is a false positive. The more sophisticated your user interface, the more flaky the tests tend to become. Browser quirks, bad timings, transition animations and unexpected popup dialogs are only some of the reasons that lead got me spending more of my time with debugging than I like to admit. 
+End-to-End tests come with their own kind of problems. They are notoriously flaky and often fail for unexpected and unforseeable reasons. Quite often their failure is a false positive. The more sophisticated your user interface, the more flaky the tests tend to become. Browser quirks, bad timings, transition animations and unexpected popup dialogs are only some of the reasons that lead got me spending more of my time with debugging than I like to admit.
 
 In a microservices world there's also the big question of who's in charge of writing these tests. Since they span multiple services (your entire system) there's no single team responsible for writing end-to-end tests. If you have a centralised _quality assurance_ team it might seem like this is the place to go. But having a centralised QA team is a big anti-pattern and shouldn't have a place in a DevOps world where your teams are truly cross-functional. There's no easy answer who should own end-to-end tests. Maybe your organisation has a community of practice or a _quality guild_ that can take care of these. Finding the correct answer depends mostly on your organisation.
 
-Furthermore, end-to-end tests require a lot of maintenance and run pretty slowly. Once you have more than a couple of microservices in place you won't even be able to run your end-to-end tests locally -- as this would require to start all your microservices locally as well. Good luck spinning up hundreds of microservices on your development machine without frying your RAM. 
+Furthermore, end-to-end tests require a lot of maintenance and run pretty slowly. Once you have more than a couple of microservices in place you won't even be able to run your end-to-end tests locally -- as this would require to start all your microservices locally as well. Good luck spinning up hundreds of microservices on your development machine without frying your RAM.
 
-Due to their high maintenance cost you should aim to reduce the number of end-to-end tests to a bare minimum. 
+Due to their high maintenance cost you should aim to reduce the number of end-to-end tests to a bare minimum.
 
 Think about the high-value interactions users will have with your application. Try to come up with user journeys that define the core value of your product and translate the most important steps of these user journeys into automated end-to-end tests. If you're building an e-commerce site your most valuable customer journey could be a user searching for a product, putting it in the shopping basket and doing a checkout. That's it. As long as this journey still works you shouldn't be in too much trouble. Maybe you'll find one or two more crucial user journeys that you can translate into end-to-end tests. But everything more than that will probably be more painful than helpful. Remember: you have lots of lower levels in your test pyramid where you already tested all sorts of edge cases and integrations with other parts of the system. There's no need to repeat these tests on a higher level. High maintenance effort and lots of false positives will slow you don't and make sure you'll lose trust in your tests rather sooner than later. So keeping end-to-end tests to a minimum is a good bet. In _Building Microservices_ Sam Newman even [argues](https://opds.oreilly.com/learning/building-microservices-testing) that that end-to-end test should be avoided entirely in favor of CDC tests and proper monitoring.
 
 ### Acceptance Tests -- Do Your Features Work Correctly?
-The higher you move up in your test pyramid the more likely you enter the realms of testing whether the features you're building work correctly from a user's perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from 
+The higher you move up in your test pyramid the more likely you enter the realms of testing whether the features you're building work correctly from a user's perspective. With high-level end-to-end tests you can treat your application as a black box. The focus in your tests shifts from
 
 > when I enter the values `x` and `y`, the return value should be `z`
-    
-towards 
+
+towards
 
 > _given_ there's a logged in user  
 > _and_ there's an article "bicycle"  
 > _when_ the user navigates to the "bicycle" article's detail page  
 > _and_ clicks the "add to basket" button  
 > _then_ the article "bicycle" should be in their shopping basket
-    
+
 Sometimes you'll hear the terms [**functional test**](https://en.wikipedia.org/wiki/Functional_testing) or [**acceptance test**](https://en.wikipedia.org/wiki/Acceptance_testing#Acceptance_testing_in_extreme_programming) for these kinds of tests. Sometimes people will tell you that functional and acceptance tests are different things. Sometimes the terms are conflated. Sometimes people will argue endlessly about wording and definitions. Often this discussion is a pretty big source of confusion. Here's the thing: At one point you should make sure to test that your software works correctly from a _user's_ perspective, not just from a technical perspective. What you call these tests really is not that important. Having these tests, however, is. Pick a term, stick to it, and write those tests.
 
 This is also the moment where people talk about <abbr title="Behaviour-Driven Development">BDD</abbr> and tools that allow you to implement tests in a BDD fashion. BDD or a BDD-style way of wrtiting tests can be a nice trick to shift your mindset from implementation details towards the users' needs. Go ahead and give it a try. You don't even need to adopt full-blown BDD tools like [Cucumber](https://cucumber.io/) (there's nothing wrong with it). Some assertion libraries (like [chai.js](http://chaijs.com/guide/styles/#should) allow you to write assertions with `should`-style keywords that can make your tests read more BDD-like. And even if you don't use a library that provides this notation, clever and well-factored code will allow you to write user behaviour focused tests. Some helper methods/functions can get you a very long way:
@@ -252,7 +251,7 @@ def test_add_to_basket():
 Acceptance tests can come in different levels of granularity. Most of the time they will be rather high-level and test your service through the user interface. However, it's good to understand that there's technically no need to write acceptance tests at the highest level of your test pyramid. If your application design and your scenario at hand permits that you write an acceptance test at a lower level, go for it. Having a low-level test is better than having a high-level test. The concept of acceptance tests -- proving that your features work correctly for the user -- is completely orthogonal to your test pyramid.
 
 ### Exploratory Testing
-Even the most diligent test automation efforts are not perfect. Sometimes you miss certain edge cases in your automated tests. Sometimes it's nearly impossible to detect a particular bug by writing a unit test. Certain quality issues don't even become apparent within your automated tests (think about design or usability). Despite your best intentions with regards to test automation, manual testing of some sorts is still a good idea. 
+Even the most diligent test automation efforts are not perfect. Sometimes you miss certain edge cases in your automated tests. Sometimes it's nearly impossible to detect a particular bug by writing a unit test. Certain quality issues don't even become apparent within your automated tests (think about design or usability). Despite your best intentions with regards to test automation, manual testing of some sorts is still a good idea.
 
 ![exploratory testing](/assets/img/uploads/exploratoryTesting.png)
 _Use exploratory testing to spot all quality issues that your build pipeline didn't spot_
