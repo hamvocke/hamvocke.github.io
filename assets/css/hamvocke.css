@@ -165,9 +165,21 @@ h1.title {
     margin: auto;
 }
 
+#text ul, #text ol {
+    margin-bottom: 1.5em;
+}
+
 #text ul li, #text ol li {
     line-height: 1.5em;
     margin-top: 0.5em;
+}
+
+#markdown-toc {
+    font-size: 15px;
+}
+
+#markdown-toc ul, #markdown-toc ol {
+    margin-bottom: inherit;
 }
 
 .author {
