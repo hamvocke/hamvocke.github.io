@@ -6,13 +6,15 @@ excerpt: Based on the previous post about testing microservices, I'll show how t
 comments: true
 ---
 
-In my [previous post](/blog/testing_microservices/) I gave a round-trip over what it means to test microservices. We discussed the concept of the test pyramid and found out that you should write different types of automated tests to come up with a reliable and effective test suite.
+In my [previous post](/blog/testing_microservices/) I give a round-trip of what it means to test microservices. We looked at the test pyramid and found out that you should write different types of automated tests to come up with a reliable and effective test suite.
 
-While the previous post was a little more abstract, explaining concepts and high-level approaches, this post will be more hands on. We will explore how we can implement the concepts we discussed before. The technology of choice for this post will be **Java** with **Spring Boot** as the application framework.
+While the previous post was more abstract this post will be more hands on and include code, lots of code. We will explore how we can implement the concepts discussed before. The technology of choice for this post will be **Java** with **Spring Boot** as the application framework. Most of the tools and libraries outlined here work for Java in general and don't require you to use Spring Boot at all. A few of them are test helpers specific to Spring Boot. Even if you don't use Spring Boot for your application there will be a lot to learn for you.
 
-This post will show you tools and libraries that help you implement the different types of tests we discussed in the previous post. Some of these can be used independently of Spring Boot. As long as you're using Java you can use these libraries in your codebase -- regardless of the application framework you're using. One of the things I like most about Spring Boot is that it bundles some clever testing mechanisms that support you in writing maintainable and readable tests for your application. So even if you're not using Spring Boot for your application this post might give you some insights.
+{% include table_of_contents.html %}
 
 ## Tools and Libraries We'll Look at
+This post will demonstrate several tools and libraries that help us implement automated tests. The most important ones are:
+
   * [**JUnit**](http://junit.org) as our test runner
   * [**Mockito**](http://site.mockito.org/) for mocking dependencies
   * [**Wiremock**](http://wiremock.org/) for stubbing out third-party services
@@ -21,11 +23,11 @@ This post will show you tools and libraries that help you implement the differen
   * [**Pact**](https://docs.pact.io/) for writing CDC tests
 
 ## The Sample Application
-I've written a [simple microservice](https://github.com/hamvocke/spring-testing) including a test suite with tests for the different layers of the test pyramid. There are more tests than necessary for an application of this size. The tests on different levels overlap. This actively contradicts my hint that you should avoid test duplication throughout your test pyramid. I decided to duplicate tests throughout the test pyramid for demonstration purposes. Please keep in mind that this is not what you want for your real-world application. Duplicated tests are smelly and will be more annoying then helpful in the long run.
+I've written a [simple microservice](https://github.com/hamvocke/spring-testing) including a test suite with tests for the different layers of the test pyramid. There are more tests than necessary for an application of this size. The tests on different levels overlap. This actively contradicts the advice that you should avoid test duplication throughout your test pyramid. Here I decided to go for duplication for demonstration purposes. Please keep in mind that this is not what you want for your real-world application. Duplicated tests are smelly and will be more annoying than helpful in the long term.
 
 The sample application shows traits of a typical microservice. It provides a REST interface, talks to a database and fetches information from a third-party REST service. It's implemented in [Spring Boot ](https://projects.spring.io/spring-boot/) and should be understandable even if you've never worked with Spring Boot before.
 
-Make sure to check out [the code](https://github.com/hamvocke/spring-testing) on GitHub. The readme contains all instructions you need to run the application and all automated tests on your machine.
+Make sure to check out [the code on GithHub](https://github.com/hamvocke/spring-testing). The readme contains instructions you need to run the application and its automated tests on your machine.
 
 ### Functionality
 The application's functionality is simple. It provides a REST interface with three endpoints:
@@ -40,10 +42,10 @@ On a high-level the system has the following structure:
 ![sample application structure](/assets/img/uploads/testService.png)
 _the high level structure of our microservice system_
 
-Our Spring microservice provides a REST interface that can be called via HTTP. In some cases the service will fetch information from a database. In other cases the service will call an external [weather API](https://darksky.net) via HTTP to fetch current weather conditions.
+Our microservice provides a REST interface that can be called via HTTP. For some endpoints the service will fetch information from a database. In other cases the service will call an external [weather API](https://darksky.net) via HTTP to fetch and display current weather conditions.
 
 ### Internal Architecture
-Internally, the Spring Service has a pretty typical architecture:
+Internally, the Spring Service has a Spring-typical architecture:
 
 ![sample application architecture](/assets/img/uploads/testArchitecture.png)
 _the internal structure of our microservice_
@@ -53,36 +55,61 @@ _the internal structure of our microservice_
   * `Client` classes talk to other APIs, in our case it fetches _JSON_ via _HTTPS_ from the darksky.net weather API
   * `Domain` classes capture our [domain model](https://en.wikipedia.org/wiki/Domain_model) including the domain logic (which, to be fair, is quite trivial in our case).
 
-Experienced Spring developers might notice that a frequently used layer is missing here: Inspired by [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) a lot of developers build a **service layer** consisting of _service_ classes (which is its own stereotype in Spring). I decided not to include a service layer in this application. One reason is that our application is simple enough, a service layer would have been an unnecessary level of indirection. The other one is that I think people overdo it with service layers. I often encounter codebases where the entire business logic is captured within service classes. The domain model becomes merely a layer for data, not for behaviour (Martin Fowler calls this an [Aenemic Domain Model](https://en.wikipedia.org/wiki/Anemic_domain_model)). For every non-trivial application this wastes a lot of potential to keep your code well-structured and testable and does not fully utilize the power of object orientation.
+Experienced Spring developers might notice that a frequently used layer is missing here: Inspired by [Domain-Driven Design](https://en.wikipedia.org/wiki/Domain-driven_design) a lot of developers build a **service layer** consisting of _service_ classes. I decided not to include a service layer in this application. One reason is that our application is simple enough, a service layer would have been an unnecessary level of indirection. The other one is that I think people overdo it with service layers. I often encounter codebases where the entire business logic is captured within service classes. The domain model becomes merely a layer for data, not for behaviour (Martin Fowler calls this an [Aenemic Domain Model](https://en.wikipedia.org/wiki/Anemic_domain_model)). For every non-trivial application this wastes a lot of potential to keep your code well-structured and testable and does not fully utilize the power of object orientation.
 
-Our repositories are straightforward and provide simple <abbr title="Create Read Update Delete">CRUD</abbr> functionality. To keep it simple I used [Spring Data](http://projects.spring.io/spring-data/). Spring Data brings a simple and generic CRUD repository implementation that we can use instead of rolling our own. It also takes care of spinning up a in-memory database for our tests instead of using a real PostgreSQL database as it would in production.
+Our repositories are straightforward and provide simple <abbr title="Create Read Update Delete">CRUD</abbr> functionality. To keep the code simple I used [Spring Data](http://projects.spring.io/spring-data/). Spring Data gives us a simple and generic CRUD repository implementation that we can use instead of rolling our own. It also takes care of spinning up an in-memory database for our tests instead of using a real PostgreSQL database as it would in production.
 
 Take a look at the codebase and make yourself familiar with the internal structure. It will be useful for our next step: Testing the application!
 
 ## Unit Tests
-Unit tests have the smallest scope of all the different tests in your test suite. Depending on the language you're using (and depending on who you ask) unit tests usually test single functions, methods or classes. Since we're working in Java, an object-oriented language, our unit tests will test methods in our Java classes. My rule of thumb is to have one test class per class of production code.
+Unit tests have the narrowest scope of all the tests in your test suite. Depending on the language you're using (and depending on who you ask) unit tests usually test single functions, methods or classes. Since we're working in Java, an object-oriented language, our unit tests will test methods in our Java classes. A good rule of thumb is to have one test class per class of production code.
 
 ### What to Test?
 The good thing about unit tests is that you can write them for all your production code classes, regardless of their functionality or which layer in your internal structure they belong to. You can unit tests controllers just like you can unit test repositories, domain classes or file readers. Simply stick to the **one test class per production class** rule of thumb and you're off to a good start.
 
 A unit test class should at least **test the _public_ interface of the class**. Private methods can't be tested anyways since you simply can't call them from a different test class. _Protected_ or _package-private_ are accessible from a test class (given the package structure of your test class is the same as with the production class) but testing these methods could already go too far.
 
-There's a fine line when it comes to writing unit tests: They should ensure that all your non-trivial code paths are tested (including happy path as well es edge cases). At the same time they shouldn't be tied to your implementation too closely. Why's that? Tests that are too close to the production code quickly become annoying. As soon as you refactor your production code (and remember, refactoring means changing the internal structure of your code without altering the externally visible behavior) your unit tests will break. This way you lose one big benefit of unit tests: acting as a safety net for code changes. So what do you want to do instead? Instead of reflecting your internal code structure within your unit tests it's generally more advisable to simply test for observable behavior instead. Think about "if I enter these values, will those values be returned?" instead of "if I enter these values, will the method call class A first, then call class B and then return the result of class A plus the result of class B?".
+There's a fine line when it comes to writing unit tests: They should ensure that all your non-trivial code paths are tested (including happy path and edge cases). At the same time they shouldn't be tied to your implementation too closely.
 
-Private (and sometimes also protected) methods should generally be considered an implementation detail. In order to avoid tying your tests too closely to the production code, reflecting implementation details in your test code should be avoided.
+Why's that?
 
-I often hear opponents of unit testing (or <abbr title="Test-Driven Development">TDD</abbr>) arguing that writing unit tests becomes pointless work where you have to test all your methods in order to come up with a high test coverage. They often cite scenarios where an overly eager team lead forced them to write unit tests for getters and setters and all other sorts of trivial code in order to come up with 100% test coverage. Let me tell you, there's so much wrong with that. Despite my previously cited rule to _"test the public interface"_ take care that there's one huge exception: **Don't test trivial code**. You won't gain anything from testing simple _getters_ or _setters_ or other trivial implementations (e.g. without any conditional logic). Don't worry, [Kent Beck said it's ok](https://stackoverflow.com/questions/153234/how-deep-are-your-unit-tests/).
+Tests that are too close to the production code quickly become annoying. As soon as you refactor your production code (quick recap: refactoring means changing the internal structure of your code without changing the externally visible behavior) your unit tests will break.
 
-### But I Really Need to Test This Private Method
-If you ever find yourself in a situation where you _really really_ need to test a private method you should take a step back and ask yourself why. I'm pretty sure this is more of a design problem than a scoping problem. Most likely you feel the need to test a private method because it's complex and testing this method through the public interface of the class requires a lot of awkward setup. When I find myself in this situation I usually come to the conclusion that the class I'm testing is already too complex. It's doing too many things -- and thus violates the _single responsibility_ principle, the _S_ of the five [_SOLID_](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) principles. The solution that often works for me is to split the original class in two classes. I move the private method (that I urgently want to test on its own) to the new class, make the new class a dependency of the old one and let the old class call the new dependency. Voilà, my awkward-to-test private method is now public and can be tested. On top of that I have improved the structure of my code by adhering to the single responsibility principle.
+This way you lose one big benefit of unit tests: acting as a safety net for code changes. You rather become fed up with those stupid tests failing every time you refactor, causing more work than being helpful and whose idea was this stupid testing stuff anyways?
+
+What do you do instead? Don't reflect your internal code structure within your unit tests. Test for observable behavior instead. Think about
+
+> _"if I enter values `x` and `y`, will the result be `z`?"_
+
+instead of
+
+> _"if I enter `x` and `y`, will the method call class A first, then call class B and then return the result of class A plus the result of class B?"_
+
+Private methods should generally be considered an implementation detail that's why you shouldn't even have the urge to test them.
+
+I often hear opponents of unit testing (or <abbr title="Test-Driven Development">TDD</abbr>) arguing that writing unit tests becomes pointless work where you have to test all your methods in order to come up with a high test coverage. They often cite scenarios where an overly eager team lead forced them to write unit tests for getters and setters and all other sorts of trivial code in order to come up with 100% test coverage.
+
+There's so much wrong with that.
+
+Yes, you should _test the public interface_. More importantly, however, you **don't test trivial code**. You won't gain anything from testing simple _getters_ or _setters_ or other trivial implementations (e.g. without any conditional logic). Save the time, that's one more meeting you can attend, hooray! Don't worry, [Kent Beck said it's ok](https://stackoverflow.com/questions/153234/how-deep-are-your-unit-tests/).
+
+### But I _Really_ Need to Test This Private Method
+If you ever find yourself in a situation where you _really really_ need to test a private method you should take a step back and ask yourself why.
+
+I'm pretty sure this is more of a design problem than a scoping problem. Most likely you feel the need to test a private method because it's complex and testing this method through the public interface of the class requires a lot of awkward setup.
+
+Whenever I find myself in this situation I usually come to the conclusion that the class I'm testing is already too complex. It's doing too much and violates the _single responsibility_ principle -- the _S_ of the five [_SOLID_](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)) principles.
+
+The solution that often works for me is to split the original class into two classes. It often only takes one or two minutes of thinking to find a good way to cut the one big class into two smaller classes with individual responsibility. I move the private method (that I urgently want to test) to the new class and let the old class call the new method. Voilà, my awkward-to-test private method is now public and can be tested easily. On top of that I have improved the structure of my code by adhering to the single responsibility principle.
 
 ### Test Structure
-Typically your unit tests should follow a simple structure:
+A good structure for all your tests (this is not limited to unit tests) is this one:
+
   1. Set up the test data
   2. Call your method under test
   3. Assert that the expected results are returned
 
-There's a quite nifty mnemonic to keep in mind. Just thing of the _"three As"_ when writing a test: [_"Arrange, Act, Assert"_](http://wiki.c2.com/?ArrangeActAssert). Another one that you can use takes inspiration from <abbr title="Behavior-Driven Development">BDD</abbr>. It's the _"given"_, _"when"_, _"then"_ triad, where _given_ reflects the setup, _when_ the method call and _then_ the assertion part.
+There's a nice mnemonic to remember this structure: [_"Arrange, Act, Assert"_](http://wiki.c2.com/?ArrangeActAssert). Another one that you can use takes inspiration from <abbr title="Behavior-Driven Development">BDD</abbr>. It's the _"given"_, _"when"_, _"then"_ triad, where _given_ reflects the setup, _when_ the method call and _then_ the assertion part.
 
 This pattern can be applied to other, more high-level tests as well. In every case they ensure that your tests remain easy and consistent to read. On top of that tests written with this structure in mind tend to be shorter and more expressive.
 
@@ -183,8 +210,7 @@ public interface PersonRepository extends CrudRepository<Person, String> {
 
 Although _Spring Data_ does the heavy lifting of implementing database repositories for us, I still wrote a database integration test. You might argue that this is _testing the framework_ and something that I should avoid as it's not our code we're testing. Still, I believe having at least one integration test here is crucial. First it tests that our custom `findByLastName` method actually behaves correctly. Secondly it proves that our repository in general uses Spring's magic correctly and most of it all can connect to our desired database.
 
-**TODO remove H2 dependency, provide docker container instead?**
-To make things even easier our test connects to an in-memory _H2_ database. We've defined H2 as a test dependency in our `build.gradle`. Our `application-test.properties` in our test directory don't define any `spring.datasource` properties that's how Spring Data knows it should use an in-memory database. As it finds H2 on the classpath it simply uses H2 during our tests. When running the real application with the `int` profile it connects to a PostgreSQL database as defined in the `application-int.properties`. To avoid having to run a PostgreSQL database during testing I decided to replace it with an H2 instead. That's an awful lot of Spring magic to know and understand. The resulting code is quite easy on the eye but hard to understand if you don't know the fine details of Spring Data. Go ahead and decide for yourself if you prefer magic and simple code over an explicit yet more verbose implementation.
+To make things easier for you to run locally our test connects to an in-memory _H2_ database. We've defined H2 as a test dependency in our `build.gradle`. Our `application.properties` in our test directory doesn't define any `spring.datasource` properties. This tells Spring Data to should use an in-memory database. As it finds H2 on the classpath it simply uses H2 when running our tests. When running the real application with the `int` profile (e.g. by setting `SPRING_PROFILES_ACTIVE=int` as environment variable) it connects to a PostgreSQL database as defined in the `application-int.properties`. To avoid having to run a PostgreSQL database during testing I decided to replace it with an H2 instead. That's an awful lot of Spring magic to know and understand. The resulting code is quite easy on the eye but hard to understand if you don't know the fine details of Spring Data. Going with an in-memory databse is also risky business since our integration tests run against a different type of database than they would in production. Go ahead and decide for yourself if you prefer magic and simple code over an explicit yet more verbose implementation.
 
 A simple integration test that saves a Person to the connected database and then tries to find it by its last name looks like this:
 
