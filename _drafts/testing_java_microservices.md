@@ -116,7 +116,7 @@ This pattern can be applied to other, more high-level tests as well. In every ca
 ### An Example
 Now that we know what to test and how to structure our unit tests we can finally see a real example.
 
-Let's take the following `Controller` class:
+Let's take a simplified version of the `ExampleController` class:
 
 {% highlight java %}
 @RestController
@@ -131,8 +131,7 @@ public class ExampleController {
 
     @GetMapping("/hello/{lastName}")
     public String hello(@PathVariable final String lastName) {
-        Optional<Person> foundPerson =
-	    personRepo.findByLastName(lastName);
+        Optional<Person> foundPerson = personRepo.findByLastName(lastName);
 
         return foundPerson
                 .map(person -> String.format("Hello %s %s!",
@@ -143,7 +142,7 @@ public class ExampleController {
 }
 {% endhighlight %}
 
-A corresponding unit test for the `hello(lastname)` method could look like this:
+A unit test for the `hello(lastname)` method could look like this:
 
 {% highlight java %}
 public class ExampleControllerTest {
@@ -163,7 +162,7 @@ public class ExampleControllerTest {
     public void shouldReturnFullNameOfAPerson() throws Exception {
         Person peter = new Person("Peter", "Pan");
         given(personRepo.findByLastName("Pan"))
-	    .willReturn(Optional.of(peter));
+            .willReturn(Optional.of(peter));
 
         String greeting = subject.hello("Pan");
 
@@ -173,7 +172,7 @@ public class ExampleControllerTest {
     @Test
     public void shouldTellIfPersonIsUnknown() throws Exception {
         given(personRepo.findByLastName(anyString()))
-	    .willReturn(Optional.empty());
+            .willReturn(Optional.empty());
 
         String greeting = subject.hello("Pan");
 
@@ -182,9 +181,11 @@ public class ExampleControllerTest {
 }
 {% endhighlight %}
 
-We're writing the unit tests using [JUnit](http://junit.org) which is the de-facto standard testing framework for Java. We're also using [Mockito](http://site.mockito.org/) to replace the real `PersonRepository` class with a mock for our test. This mock allows us to define canned responses that should be returned in our test context. This makes our test predictable and easy to setup.
+We're writing the unit tests using [JUnit](http://junit.org), the de-facto standard testing framework for Java. We use [Mockito](http://site.mockito.org/) to replace the real `PersonRepository` class with a stub for our test. This stub allows us to define canned responses the stubbed method should return in this test. Stubbing makes our test more simple, predictable and allows us to easily setup test data.
 
-Following the _arrange, act, assert_ structure explained above, we can now write two unit tests -- a positive case and a case where the searched person cannot be found. The first, positive test case creates a new person object and tells the mocked repository to return this object when it's called with _"Pan"_ as the value for the `lastName` parameter. The test then goes on to call the method that should be tested and finally asserts that the response is equal to the expected response. The second test works similarly but tests the scenario where the tested method does not find a person for the given parameter.
+Following the _arrange, act, assert_ structure explained above, we write two unit tests -- a positive case and a case where the searched person cannot be found. The first, positive test case creates a new person object and tells the mocked repository to return this object when it's called with _"Pan"_ as the value for the `lastName` parameter. The test then goes on to call the method that should be tested. Finally it asserts that the response is equal to the expected response.
+
+The second test works similarly but tests the scenario where the tested method does not find a person for the given parameter.
 
 ## Integration Tests
 Integration tests are the next level in your test pyramid. They test that your application can integrate with its sorroundings successfully. For your automated tests this means you don't just need to provide your own application but also the component you're integrating with. If you're testing the integration with a database you need to run a database during your tests. For testing that you can read files from a disk you need to save a file to your disk and use it as input for your integration test.
