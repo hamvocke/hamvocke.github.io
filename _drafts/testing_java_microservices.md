@@ -371,11 +371,15 @@ public WeatherClient(final RestTemplate restTemplate,
 This way we tell our `WeatherClient` to read the `weatherUrl` parameter's value from the `weather.url` property we define in our application properties.
 
 ### Parsing and Writing JSON
-Writing a REST API these days you often send your data as JSON over the wire. Using Spring there's no need to writing JSON on your own. Instead you define <abbr title="Plain Old Java Object">POJOs</abbr> that represent the JSON structure you want to parse from a request or send with a response.
+Writing a REST API these days you often pick JSON when it comes to sending your data over the wire. Using Spring there's no need to writing JSON by hand nor to write logic that transforms your objects into JSON (although you can do both if you feel like reinventing the wheel). Defining <abbr title="Plain Old Java Object">POJOs</abbr> that represent the JSON structure you want to parse from a request or send with a response is enough.
 
-Spring automatically can automatically parse JSON and convert it into your Java object structure and vice versa. When we talk to the weather API we receive JSON as response. To make this data structure accessible in our Java code I've written the `WeatherResponse` class. This class defines the nested JSON object structure with all fields that are relevant in our case (for us this is `response.currently.summary` only). Spring uses [Jackson](https://github.com/FasterXML/jackson) to convert between Java and JSON per default. This mechanism is usually hidden from you as a developer. If you define a method in a `RestController` that returns a POJO, Spring MVC will automatically use Jackson to convert that POJO to JSON and send the resulting JSON in the resposne body. Using Spring's `RestTemplate` you get the same magic. If you send a request using `RestTemplate` you can provide a POJO class that should be used to parse the response. Again, Jackson is used under the hood per default.
+Spring and [Jackson](https://github.com/FasterXML/jackson) take care of everything else. With the help of Jackson, Spring automagically parses JSON into Java objects and vice versa. If you have good reasons you can use any other JSON mapper out there in your codebase. The advantage of Jackson is that it comes bundled with Spring Boot.
 
-If you want to test-drive your Jackson Mapping, take a look at the `WeatherResponseTest` I've written.  In this test I test the conversion of JSON into a `WeatherResponse` object. Since this deserialization is the only conversion taking place in the application's flow there's no need to test if a `WeatherResponse` can be converted to JSON correctly. Using this approach it's very simple to test the other way, though.
+Spring often hides the parsing and converting to JSON part from you as a developer. If you define a method in a `RestController` that returns a POJO, Spring MVC will automatically convert that POJO to a JSON string and put it in the response body. With Spring's `RestTemplate` you get the same magic. Sending a request using `RestTemplate` you can provide a POJO class that should be used to parse the response. Again it's Jackson being used under the hood.
+
+When we talk to the weather API we receive a JSON response. The `WeatherResponse` class is a POJO representation of that JSON structure including all the fields we care about (which is only `response.currently.summary`). Using the `@JsonIgnoreProperties(ignoreUnknown = true)` annotation on our POJO objects gives us a [tolerant reader](https://www.martinfowler.com/bliki/TolerantReader.html), an interface that is liberal in what data it accepts (following [Postel's Law](https://en.wikipedia.org/wiki/Robustness_principle)). This way there can be all kinds of silly stuff in the JSON response we receive from the weather API. As long as `response.currently.summary` is there, we're happy.
+
+If you want to test-drive your Jackson Mapping take a look at the `WeatherResponseTest`. This one tests the conversion of JSON into a `WeatherResponse` object. Since this deserialization is the only conversion we do in the application there's no need to test if a `WeatherResponse` can be converted to JSON correctly. Using the approach outlined below it's very simple to test serialization as well, though.
 
 {% highlight java %}
 @Test
@@ -389,25 +393,27 @@ public void shouldDeserializeJson() throws Exception {
 }
 {% endhighlight %}
 
-In this test case I read a sample JSON response from a file (you could also simply define a `String` in your test case) and let Jackson parse this JSON response using `ObjectMapper.readValue()`. I then compare the result of the conversion with an expected `WeatherResponse` to see if the conversion works as expected.
+In this test case I read a sample JSON response from a file and let Jackson parse this JSON response using `ObjectMapper.readValue()`. Then I compare the result of the conversion with an expected `WeatherResponse` to see if the conversion works as expected.
 
 You can argue that this kind of test is rather a unit than an integration test. Nevertheless, this kind of test can be pretty valuable to make sure that your JSON serialization and deserialization works as expected. Having these tests in place allows you to keep the integration tests around your REST API and your client classes smaller as you don't need to check the entire JSON conversion again.
 
 ## CDC Tests
-Consumer-Driven Contract (CDC) tests ensure that both parties involved in an interface between two services (the provider and the consumer) stick to the contract defined to keep the integration between these services intact.
+Consumer-Driven Contract (CDC) tests ensure that both parties involved in an interface between two services (the provider and the consumer) stick to the  defined interface contract. This way contract tests ensure that the integration between two services remains intact.
 
-Writing CDC tests can be as easy as sending HTTP requests to a deployed version of the service we're integrating against and verifying that the service answers with the expected data and status codes. Rolling our own CDC tests from scratch is straightforward but will soon send us down a rabbit hole. We need to somehow come up with a way to bundle our CDC tests, distribute CDC them between teams and need to find a mechanism for versioning. While this is certainly possible, I want to demonstrate a different way.
+Writing CDC tests can be as easy as sending HTTP requests to a deployed version of the service we're integrating against and verifying that the service answers with the expected data and status codes. Rolling your own CDC tests from scratch is straightforward but will soon send you down a rabbit hole. All of a sudden you need come up with a way to bundle our CDC tests, distribute them between teams and find a way to do versioning. While this is certainly possible, I want to demonstrate a different way.
 
-In this example I'm using [Pact](https://github.com/DiUS/pact-jvm) to implement the consumer and provider side of our CDC tests. Pact is available for multiple languages and can therefore also be used in a polyglot context. Using Pact we only need to exchange JSON files between consumers and providers. One of the more advanced features even gives us a so called ["pact broker"](https://github.com/pact-foundation/pact_broker/tree/master) that we can use to exchange pacts between teams and show which services integrate with each other.
+In this example I'm using [Pact](https://github.com/DiUS/pact-jvm) to implement the consumer and provider side of our CDC tests.
 
-Contract tests always include both sides of an interface -- the consumer and the provider. Both parties need to write and run automated tests to ensure that their changes don't break the interface contract. Let's take a look at both sides in our example.
+Pact is available for multiple languages and can therefore also be used in a polyglot context. Using Pact we only need to exchange JSON files between consumers and providers. One of the more advanced features even gives us a so called ["pact broker"](https://github.com/pact-foundation/pact_broker/tree/master) that we can use to exchange pacts between teams and show which services integrate with each other.
+
+Contract tests always include both sides of an interface -- the consumer and the provider. Both parties need to write and run automated tests to ensure that their changes don't break the interface contract. Let's see what either side has to do when using Pact.
 
 ### Consumer Test (our end)
 Our microservice consumes the weather API. So it's our responsibility to write a **consumer test** that defines our expectations for the contract (the API) between our microservice and the weather service.
 
 First we include a library for writing pact consumer tests in our `build.gradle`:
 
-    testCompile("au.com.dius:pact-jvm-consumer-junit_2.11:3.5.5")
+    testCompile('au.com.dius:pact-jvm-consumer-junit_2.11:3.5.5')
 
 Thanks to this library we can implement a consumer test and use pact's mock services:
 
@@ -422,7 +428,7 @@ public class WeatherClientConsumerTest {
     @Rule
     public PactProviderRuleMk2 weatherProvider = new PactProviderRuleMk2("weather_provider", "localhost", 8089, this);
 
-    @Pact( consumer="test_consumer")
+    @Pact(consumer="test_consumer")
     public RequestResponsePact createPact(PactDslWithProvider builder) throws IOException {
         return builder
                 .given("weather forecast data")
@@ -445,20 +451,26 @@ public class WeatherClientConsumerTest {
 }
 {% endhighlight %}
 
-If you look closely, you'll see that the `WeatherClientConsumerTest` is very similar to the `WeatherClientIntegrationTest`. Instead of using Wiremock for the server stub we use Pact this time. In fact the consumer test works exactly as the integration test, we replace the real third-party server with a stub, define the expected response and check that our client can parse the response correctly. The difference this time is that the consumer test will also generate a **pact file** (`target/pacts/<pact-name>.json`) that describes our expectations for the contract.
+If you look closely, you'll see that the `WeatherClientConsumerTest` is very similar to the `WeatherClientIntegrationTest`. Instead of using Wiremock for the server stub we use Pact this time. In fact the consumer test works exactly as the integration test, we replace the real third-party server with a stub, define the expected response and check that our client can parse the response correctly. The difference is that the consumer test generates a **pact file** (found in `target/pacts/<pact-name>.json`) each time it runs. This pact file describes our expectations for the contract in a special JSON format.
 
-We can take this pact file file and hand it to the team providing the interface. They in turn can take this pact file and write a provider test using the defined expectations. This way they can test if their API fulfills all our expectations.
+You see that this is where the **consumer-driven** part of CDC comes from. The consumer drives the implementation of the interface by describing their expectations. The provider has to make sure that they fulfill all expectations and they're done. No gold-plating, no YAGNI and stuff.
 
-In your real-world application you'd don't need both, a _client integration test_ and a _client consumer test_. The sample codebase contains both to show you how to use either one. If you want to write CDC tests using pact I recommend sticking to the latter. The effort writing the tests is the same. Using pact has the benefit that you automatically win a pact file with the expectations to the contract that other teams can use to easily implement their provider tests. Of course this only makes sense if you can convince the other team to use pact as well. If this doesn't work, using the _integration test_ and Wiremock combination is a decent plan b.
+We can take the pact file and hand it to the team providing the interface. They in turn can take this pact file and write a provider test using the expectations defined in there. This way they test if their API fulfills all our expectations.
+
+Getting the pact file to the providing team can happen in multiple ways. A simple one is to check them into version control and tell the provider team to always fetch the latest version of the pact file. A more advances one is to use an artifact repository, a service like Amazon's S3 or the pact broker. Start simple and grow as you need.
+
+In your real-world application you don't need both, an _integration test_ and a _consumer test_ for a client class. The sample codebase contains both to show you how to use either one. If you want to write CDC tests using pact I recommend sticking to the latter. The effort of writing the tests is the same. Using pact has the benefit that you automatically get a pact file with the expectations to the contract that other teams can use to easily implement their provider tests. Of course this only makes sense if you can convince the other team to use pact as well. If this doesn't work, using the _integration test_ and Wiremock combination is a decent plan b.
 
 ### Provider Test (the other team)
-The provider test in our example has to be implemented by the people providing the weather API. We're consuming a public API provided by darksky.net. In theory the darksky team would implement the provider test on their end to check that they're not breaking the contract between their application and our service. Obviously they don't care about our little sample application and won't implement a CDC test for us. That's the big difference between a public-facing API and an organisation adopting microservices. Public-facing APIs can't consider every single consumer out there or they'd become unable to move forward. Within your own organisation, you can. Your app will probably serve a handful, maybe a couple dozen of consumers max. You'll be fine writing provider tests for these interfaces in order to keep a stable system.
+The provider test has to be implemented by the people providing the weather API. We're consuming a public API provided by darksky.net. In theory the darksky team would implement the provider test on their end to check that they're not breaking the contract between their application and our service.
 
-The **"consumer-driven"** part of CDC makes clear that the consumer of an API drives what the contract between services looks like. Pact makes sure that this happens by generating pact files with every run of consumer tests. The consumer team has to make these pact files available to the providing team. There's multiple ways this can be done. A simple one would be to check them into version control and tell the provider team to always fetch the latest version of the pact file.
+Obviously they don't care about our meager sample application and won't implement a CDC test for us. That's the big difference between a public-facing API and an organisation adopting microservices. Public-facing APIs can't consider every single consumer out there or they'd become unable to move forward. Within your own organisation, you can -- and should. Your app will most likely serve a handful, maybe a couple dozen of consumers max. You'll be fine writing provider tests for these interfaces in order to keep a stable system.
 
-This pact file can be fetched by the providing team and then run against their providing service. All the providing team has to do is to implement a provider test that reads the pact file, stubs out some test data and runs the expectations defined in the pact file against their service.
+The providing team gets the pact file and runs it against their providing service. To do so they implement a provider test that reads the pact file, stubs out some test data and runs the expectations defined in the pact file against their service.
 
-The pact folks have written several libraries for implementing provider tests. Their main [GitHub repo](https://github.com/DiUS/pact-jvm) gives you a nice overview which consumer and which provider libraries are available. Pick the one that matches your tech stack best. For simplicity we assume that the darksky API is implemented in Spring Boot as well. This allows us to use the [Spring pact provider](https://github.com/DiUS/pact-jvm/tree/master/pact-jvm-provider-spring) which hooks nicely into Spring's MockMVC mechanisms. A hypothetical provider test that the darksky.net team would implement could look like this:
+The pact folks have written several libraries for implementing provider tests. Their main [GitHub repo](https://github.com/DiUS/pact-jvm) gives you a nice overview which consumer and which provider libraries are available. Pick the one that best matches your tech stack.
+
+For simplicity let's assume that the darksky API is implemented in Spring Boot as well. In this case they could use the [Spring pact provider](https://github.com/DiUS/pact-jvm/tree/master/pact-jvm-provider-spring) which hooks nicely into Spring's MockMVC mechanisms. A hypothetical provider test that the darksky.net team would implement could look like this:
 
 {% highlight java %}
 @RunWith(RestPactRunner.class)
@@ -488,21 +500,30 @@ public class WeatherProviderTest {
 }
 {% endhighlight %}
 
-You see that all the provider test has to do is to load a pact file (using the `@PactFolder` annotation to load previously downloaded pact files or attaching to a pact broker using a different annotation) and then define how test data for pre-defined states should be provided (e.g. using Mockito mocks). There's no custom test to be implemented as these are all derived from the pact file. It's important that the provider test has matching counterparts to the _provider name_ and _state_ declared in the consumer test.
+You see that all the provider test has to do is to load a pact file (e.g. by using the `@PactFolder` annotation to load previously downloaded pact files) and then define how test data for pre-defined states should be provided (e.g. using Mockito mocks). There's no custom test to be implemented. These are all derived from the pact file. It's important that the provider test has matching counterparts to the _provider name_ and _state_ declared in the consumer test.
+
+I know that this whole CDC thing can be confusing as hell when you get started. Believe me when I say it's worth taking your time to understand it. If you need a more thorough example, go and check out the [fantastic example](https://github.com/lplotni/pact-example) my friend [Lukasz](https://twitter.com/lplotni) has written. This repo demonstrates how to write consumer and provider tests using pact. It even features both Java and JavaScript services so that you can see how easy it is to use this approach with different programming languages.
 
 ## End-to-End Tests
-At last we arrived at top of our test pyramid. Time to write a real end-to-end test that calls our service via the user interface and includes a complete round-trip through the complete system.
+At last we arrived at top of our test pyramid (phew, almost there!). Time to write end-to-end tests that calls our service via the user interface and does a round-trip through the complete system.
 
-For end-to-end tests [Selenium](http://docs.seleniumhq.org/) and the [WebDriver](https://www.w3.org/TR/webdriver/) protocal have proven to be the tool of choice for many developers. Using Selenium you can pick a browser you like and let it automatically call your website, click here and there, enter data and check that stuff changes in the user interface.
+### Using Selenium (testing via the UI)
+For end-to-end tests [Selenium](http://docs.seleniumhq.org/) and the [WebDriver](https://www.w3.org/TR/webdriver/) protocol are the tool of choice for many developers. With Selenium you can pick a browser you like and let it automatically call your website, click here and there, enter data and check that stuff changes in the user interface.
 
-Selenium needs a browser that it can start and use for running its tests. There are multiple so-called _'drivers'_ for different browsers that you could use. Running a fully-fledged browser can be challenging when running your test suite. Especially when using continuous delivery the server running your pipeline might not always be able to spin up a browser including its user interface (e.g. because there's no XServer available). There are workarounds for this problem like starting a virtual XServer like [xvfb](https://en.wikipedia.org/wiki/Xvfb). A more recent approach is to use a _headless_ browser (i.e. a browser that doesn't have a user interface) to run your webdriver tests. Until recently [PhantomJS](http://phantomjs.org/) was the leading headless browser used for browser automation. Ever since both [Chromium](https://developers.google.com/web/updates/2017/04/headless-chrome) and [Firefox](https://developer.mozilla.org/en-US/Firefox/Headless_mode) announced that they've implemented a headless mode in their browsers PhantomJS all of a sudden became obsolete. After all it's better to test your website with a browser that your users actually use (like Firefox and Chrome) instead of using an artificial browser just because it's convenient for you as a developer.
+Selenium needs a browser that it can start and use for running its tests. There are multiple so-called _'drivers'_ for different browsers that you could use. [Pick one](https://www.mvnrepository.com/search?q=selenium+driver) (or multiple) and add it to your `build.gradle`:
 
-Both, headless Firefox and Chrome, are brand new features that might not work in your environment yet. We want to keep things simple. Instead of fiddling around to use the bleeding edge headless modes let's stick to the more simple classic way. A simple end-to-end test that fires up a Firefox browser, navigates to our service and checks the content of the website looks like this:
+    testCompile('org.seleniumhq.selenium:selenium-firefox-driver:3.5.3')
+
+Running a fully-fledged browser in your test suite can be a hassle. Especially when using continuous delivery the server running your pipeline might not be able to spin up a browser including a user interface (e.g. because there's no X-Server available). You can take a workaround for this problem by starting a virtual X-Server like [xvfb](https://en.wikipedia.org/wiki/Xvfb).
+
+A more recent approach is to use a _headless_ browser (i.e. a browser that doesn't have a user interface) to run your webdriver tests. Until recently [PhantomJS](http://phantomjs.org/) was the leading headless browser used for browser automation. Ever since both [Chromium](https://developers.google.com/web/updates/2017/04/headless-chrome) and [Firefox](https://developer.mozilla.org/en-US/Firefox/Headless_mode) announced that they've implemented a headless mode in their browsers PhantomJS all of a sudden became obsolete. After all it's better to test your website with a browser that your users actually use (like Firefox and Chrome) instead of using an artificial browser just because it's convenient for you as a developer.
+
+Both, headless Firefox and Chrome, are brand new and yet to be widely adopted for implementing webdriver tests. We want to keep things simple. Instead of fiddling around to use the bleeding edge headless modes let's stick to the classic way using Selenium and a regular browser. A simple end-to-end test that fires up Firefox, navigates to our service and checks the content of the website looks like this:
 
 {% highlight java %}
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ExampleE2ETest {
+public class HelloE2ESeleniumTest {
 
     private WebDriver driver = new FirefoxDriver();
 
@@ -523,10 +544,55 @@ public class ExampleE2ETest {
 }
 {% endhighlight %}
 
-Note that this test will only run on your system if you have Firefox installed on the system you run this test on. That also means that your continuous integration server needs to install Firefox as well to be able to run this test.
+Note that this test will only run on your system if you have Firefox installed on the system you run this test on (your local machine, your CI server).
 
-## General Advice
-When it comes to writing automated tests there are some core principles to keep in mind that I find myself repeating frequently:
+The test is straightforward. It spins up the entire Spring application on a random port using `@SpringBootTest`. We then instanciate a new Firefox webdriver, tell it to go navigate to the `/hello` endpoint of our microservice and check that it prints "Hello World!" on the browser window. Cool stuff!
+
+### Using RestAssured (Testing via the REST API)
+I know, we already have tests in place that fire some sort of request against our REST API and check that the results are correct. Still, none of them is truly end to end. The MockMVC tests are "only" integration tests and don't send real HTTP requests against a fully running service.
+
+Let me show you one last tool that can come in handy when you write a service that provides a REST API. [REST-assured](https://github.com/rest-assured/rest-assured) is a library that gives you a nice DSL for firing real HTTP requests against an API and checks the responses. It looks similar to MockMVC but is truly end-to-end (fun fact: there's even a REST-Assured MockMVC dialect). If you think Selenium is overkill for your application as you don't really have a user interface that needs testing, REST-Assured is the way to go.
+
+First things first: Add the dependency to your `build.gradle`.
+
+    testCompile('io.rest-assured:rest-assured:3.0.3')
+
+With this library at our hands we can implement a end-to-end test for our REST API:
+
+{% highlight java %}
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class HelloE2ERestTest {
+
+    @Autowired
+    private PersonRepository personRepository;
+
+    @LocalServerPort
+    private int port;
+
+    @After
+    public void tearDown() throws Exception {
+        personRepository.deleteAll();
+    }
+
+    @Test
+    public void shouldReturnGreeting() throws Exception {
+        Person peter = new Person("Peter", "Pan");
+        personRepository.save(peter);
+
+        when()
+                .get(String.format("http://localhost:%s/hello/Pan", port))
+        .then()
+                .statusCode(is(200))
+                .body(containsString("Hello Peter Pan!"));
+    }
+}
+{% endhighlight %}
+
+Again, we start the entire Spring application using `@SpringBootTest`. In this case we `@Autowire` the `PersonRepository` so that we can write test data into our database easily. When we now ask the REST API to say "hello" to our friend "Mr Pan" we're being presented with a nice greeting. Amazing! And more than enough of an end-to-end test if you don't even sport a web interface.
+
+## Some Advice Before You Go
+There we go, you made it through the entire testing pyramid. Congratulations! Before you go, there are some more general pieces of advice that I think will be helpful on your journey. Keep these in mind and you'll soon write automated tests that truly kick ass:
 
   1. Test code is as important as production code. Give it the same level of care and attention. Never allow sloppy code to be justified with the _"this is only test code"_ claim
   2. Test one condition per test. This helps you to keep your tests short and easy to reason about
@@ -534,13 +600,7 @@ When it comes to writing automated tests there are some core principles to keep 
   4. Readability matters. Don't try to be overly <abbr title="Don't Repeat Yourself">DRY</abbr>. Duplication is okay, if it improves readability. Try to find a balance between [DRY and <abbr title="Descriptive and Meaningful Phrases">DAMP</abbr>](https://stackoverflow.com/questions/6453235/what-does-damp-not-dry-mean-when-talking-about-unit-tests) code
   5. When in doubt use the [Rule of Three](https://blog.codinghorror.com/rule-of-three/) to decide when to refactor. _Use before reuse_.
 
-## Summary
-This post showed how to implement an effective test suite for a Spring Boot microservice. Make sure to check out the [GitHub repository](https://github.com/hamvocke/spring-testing) and fiddle around with the code. Coming up with an effective test suite can be a challenging task. You will be rewarded with more safety, better quality and more peace of mind in the longer run. If you're still wondering why you should bother putting in such big effort make sure to read my previous post about [testing microservices](/blog/testing_microservices/).
-
-Now it's your turn to make sure your microservices are properly tested. Be diligent and experiment along the way.
+Now it's your turn. Go ahead and make sure your microservices are properly tested. Your life will be more relaxed and your features will be written in almost no time. Promise!
 
 **TODO**
-  * provide readme.md for repo
-  * link to previous article
   * check that all links are correct
-  * spell check
