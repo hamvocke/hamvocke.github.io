@@ -19,8 +19,9 @@ This post will demonstrate several tools and libraries that help us implement au
   * [**Mockito**](http://site.mockito.org/) for mocking dependencies
   * [**Wiremock**](http://wiremock.org/) for stubbing out third-party services
   * [**MockMVC**](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html#boot-features-testing-spring-boot-applications-testing-autoconfigured-mvc-tests) for writing HTTP integration tests (this one's Spring specific)
-  * [**Selenium**](http://docs.seleniumhq.org/) for writing UI-driven end-to-end tests
   * [**Pact**](https://docs.pact.io/) for writing CDC tests
+  * [**Selenium**](http://docs.seleniumhq.org/) for writing UI-driven end-to-end tests
+  * [**REST-assured**](https://github.com/rest-assured/rest-assured) for writing REST API-driven end-to-end tests
 
 ## The Sample Application
 I've written a [simple microservice](https://github.com/hamvocke/spring-testing) including a test suite with tests for the different layers of the test pyramid. There are more tests than necessary for an application of this size. The tests on different levels overlap. This actively contradicts the advice that you should avoid test duplication throughout your test pyramid. Here I decided to go for duplication for demonstration purposes. Please keep in mind that this is not what you want for your real-world application. Duplicated tests are smelly and will be more annoying than helpful in the long term.
