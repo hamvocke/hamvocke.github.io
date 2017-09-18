@@ -14,7 +14,7 @@ Proper test automation is essential if you want to build and run microservices. 
 
 This post consists of two parts. The one you're reading right now looks at high-level concepts and explains what type of tests you should have for your microservices. It also introduces you to a number of resources that you can use to learn more about the field.
 
-If you're ready to get more hands on (and you're not afraid of looking at Java code) take a look at the [second part](/blog/testing-java-microservices/) where we'll look at a sample microservice codebase and see how the concepts we learned in this post can be implemented there.
+If you're ready to get more hands on (and you're not afraid of looking at Java code) take a look at the [second part](/blog/testing-java-microservices/) where we look at a sample microservice codebase and see how the concepts we learned in this post can be implemented there.
 
 ## <abbr title="too long; didn't read">tl;dr</abbr>
 Here's what you'll take away from this post:
@@ -33,6 +33,8 @@ Here's what you'll take away from this post:
 	<li>Exploratory testing will spot issues your build pipeline didn't catch</li>
     </ol>
 </div>
+
+{% include table_of_contents.html %}
 
 ## Microservices Need (Test) Automation
 Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can be released into production any time. You use a **build pipeline** to automatically test and deploy your application to your testing and production environments.
