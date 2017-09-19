@@ -602,6 +602,3 @@ There we go, you made it through the entire testing pyramid. Congratulations! Be
   5. When in doubt use the [Rule of Three](https://blog.codinghorror.com/rule-of-three/) to decide when to refactor. _Use before reuse_.
 
 Now it's your turn. Go ahead and make sure your microservices are properly tested. Your life will be more relaxed and your features will be written in almost no time. Promise!
-
-**TODO**
-  * check that all links are correct
