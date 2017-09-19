@@ -10,11 +10,13 @@ Microservices have been all the rage for a while. If you attended any tech confe
 
 Behind all the hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down than I could. Chance is, if you're reading this you somehow ended up with the decision to take a look into microservices and what it means to test them.
 
-Proper test automation is essential if you want to build and run microservices. Getting testing right in a microservices world is what this blog post is about. Don't get me wrong, this post can merely be a starting point, introducing you to core concepts and terms. From here you can dive deeper into further topics using the linked resources. And most importantly: From here you can start, experiment and learn what it means to test microservices on your own. You won't get it all correct from the beginning. That's ok. Start with best intentions, be diligent and explore!
+This post is part one of a two parts series. The post you're reading right now explains high-level concepts and what type of tests you should have for your microservices. It also introduces you to a number of resources that you can use to learn more about the field.
 
-This post consists of two parts. The one you're reading right now looks at high-level concepts and explains what type of tests you should have for your microservices. It also introduces you to a number of resources that you can use to learn more about the field.
+You want to get more hands on (and you're not afraid of Java)? Take a look at the [second part](/blog/testing-java-microservices/) where we look at a sample microservice codebase and see how the concepts we learned in this post can be implemented.
 
-If you're ready to get more hands on (and you're not afraid of looking at Java code) take a look at the [second part](/blog/testing-java-microservices/) where we look at a sample microservice codebase and see how the concepts we learned in this post can be implemented there.
+This is a long post, go grab a cup of coffee and take your time. Maybe add it to your bookmarks and come back later. This post tries to be exhaustive, still it's just a starting point. Go ahead and dive deeper into the world of test automation using the linked resources. And most importantly: Start, experiment and learn what it means to test microservices on your own. You won't get it all correct from the beginning. That's ok. Start with best intentions, be diligent and explore!
+
+Ready? Let's rock!
 
 ## <abbr title="too long; didn't read">tl;dr</abbr>
 Here's what you'll take away from this post:
@@ -39,36 +41,45 @@ Here's what you'll take away from this post:
 ## Microservices Need (Test) Automation
 Microservices go hand in hand with **continuous delivery**, a practice where you automatically ensure that your software can be released into production any time. You use a **build pipeline** to automatically test and deploy your application to your testing and production environments.
 
-Once you advance on your microservices quest you'll be juggling with dozens, maybe even hundreds of microservices. At this point building, testing and deploying these services manually becomes impossible -- at least if you want to deliver working software instead of spending all your time deploying stuff. Automating everything -- from build to tests, deployment and infrastructure -- is your only way forward.
+Once you advance on your microservices quest you'll be juggling dozens, maybe even hundreds of microservices. At this point building, testing and deploying these services manually becomes impossible -- unless you want to spend all your time with manual, repetitive work instead of delivering working software. Automating everything -- from build to tests, deployment and infrastructure -- is your only way forward.
 
 ![build pipeline](/assets/img/uploads/buildPipeline.png)
 *Use build pipelines to automatically and reliably get your software into production*
 
-Most microservices success stories are told by teams who employ continuous delivery or **continuous deployment** (every software change that's proven to be releasable will be deployed to production). These teams make sure that changes get into the hands of their customers quickly. How do you proof that your latest change still results in releasable software? You test your software including the latest change thoroughly. Traditionally you'd do this manually by deploying your application to a test environment and then performing some black-box style testing e.g. by clicking through your user interface to see if anything's broken. It's obvious that testing all changes manually is time-consuming, repetitive and tedious. Repetitive is boring, boring leads to mistakes and makes you look for a different job soon. Luckily there's a remedy for repetitive tasks: **automation**.
+Most microservices success stories are told by teams who use continuous delivery or **continuous deployment** (every software change that's proven to be releasable will be deployed to production). These teams make sure that changes get into the hands of their customers quickly.
+
+How do you proof that your latest change still results in releasable software? You test your software including the latest change thoroughly. Traditionally you'd do this manually by deploying your application to a test environment and then performing some black-box style testing e.g. by clicking through your user interface to see if anything's broken.
+
+It's obvious that testing all changes manually is time-consuming, repetitive and tedious. Repetitive is boring, boring leads to mistakes and makes you look for a different job by the end of the week.
+
+Luckily there's a remedy for repetitive tasks: **automation**.
 
 Automating your tests can be a big game changer in your life as a software developer. Automate your tests and you no longer have to mindlessly follow click protocols in order to check if your software still works correctly. Automate your tests and you can change your codebase without batting an eye. If you've ever tried doing a large-scale refactoring without a proper test suite I bet you know what a terrifying experience this can be. How would you know if you accidentally broke stuff along the way? Well, you click through all your manual test cases, that's how. But let's be honest: do you really enjoy that? How about making even large-scale changes and knowing whether you broke stuff within seconds while taking a nice sip of coffee? Sounds more enjoyable if you ask me.
 
 Automation in general and test automation specifically are essential to building a successful microservices architecture. Do yourself a favor and take a look at the concepts behind continuous delivery ([the Continuous Delivery book](https://www.amazon.com/gp/product/0321601912) is my go to resource). You will see that diligent automation allows you to deliver software faster and more reliable. Continuous delivery paves the way into a new world full of fast feedback and experimentation. At the very least it makes your life as a developer more peaceful.
 
 ## The Test Pyramid
-If you want to get serious about automated tests for your software there is one key concept that you should know about: the **test pyramid**. Mike Cohn came up with this concept in his book [Succeeding with Agile](https://www.amazon.com/dp/0321579364/ref=cm_sw_r_cp_dp_T2_bbyqzbMSHAG05). It's a great visual metaphor telling you to think about different layers of testing and how much testing to do on each layer.
+If you want to get serious about automated tests for your software there is one key concept that you should know about: the **test pyramid**. Mike Cohn came up with this concept in his book [Succeeding with Agile](https://www.amazon.com/dp/0321579364/ref=cm_sw_r_cp_dp_T2_bbyqzbMSHAG05). It's a great visual metaphor telling you to think about different layers of testing. It also tells you how much testing to do on each layer.
 
 ![Test Pyramid](/assets/img/uploads/testPyramid.png)
+_The test pyramid_
 
-Mike Cohn's original testing pyramid consists of three layers that your test suite should consist of (bottom to top):
+Mike Cohn's original test pyramid consists of three layers that your test suite should consist of (bottom to top):
 
   1. Unit Tests
   2. Service Tests
   3. User Interface Tests
 
-Unfortunately the concept of the test pyramid falls a little short if you take a closer look. [Some will argue](https://watirmelon.blog/2011/06/10/yet-another-software-testing-pyramid/) that either the naming or some conceptual aspects of Mike Cohn's test pyramid are not optimal, and I have to agree. From a modern point of view the test pyramid seems overly simplistic and can therefore be a bit misleading. Still, due to it's simplicity the essence of the test pyramid still serves as a good rule of thumb when it comes to establishing your own test suite. Your best bet is to remember two things from Cohn's original test pyramid:
+Unfortunately the concept of the test pyramid falls a little short if you take a closer look. [Some argue](https://watirmelon.blog/2011/06/10/yet-another-software-testing-pyramid/) that either the naming or some conceptual aspects of Mike Cohn's test pyramid are not optimal, and I have to agree. From a modern point of view the test pyramid seems overly simplistic and can therefore be a bit misleading.
+
+Still, due to it's simplicity the essence of the test pyramid serves as a good rule of thumb when it comes to establishing your own test suite. Your best bet is to remember two things from Cohn's original test pyramid:
 
   1. Write tests with different granularity
-  2. The more high-level you get the fewer tests you should have on that level
+  2. The more high-level you get the fewer tests you should have
 
 Stick to the pyramid shape to come up with a healthy, fast and maintainable test suite: Write _lots_ of small and fast _unit tests_. Write _some_ more coarse-grained tests and _very few_ high-level tests that test your application from end to end. Watch out that you don't end up with a [test ice-cream cone](https://watirmelon.blog/2012/01/31/introducing-the-software-testing-ice-cream-cone/) that will be a nightmare to maintain and takes way too long to run.
 
-Don't become too attached to the names of the individual layers in Cohn's test pyramid. In fact they can be quite misleading: _service test_ is a term that is hard to capture (Cohn himself talks about the observation that [a lot of developers completely ignore this layer](https://www.mountaingoatsoftware.com/blog/the-forgotten-layer-of-the-test-automation-pyramid)). In the advent of modern single page application frameworks like react, angular, ember.js and others it becomes apparent that _UI tests_ don't have to be on the highest level of your pyramid -- you're perfectly able to unit test your UI in all of these frameworks.
+Don't become too attached to the names of the individual layers in Cohn's test pyramid. In fact they can be quite misleading: _service test_ is a term that is hard to grasp (Cohn himself talks about the observation that [a lot of developers completely ignore this layer](https://www.mountaingoatsoftware.com/blog/the-forgotten-layer-of-the-test-automation-pyramid)). In the days of modern single page application frameworks like react, angular, ember.js and others it becomes apparent that _UI tests_ don't have to be on the highest level of your pyramid -- you're perfectly able to unit test your UI in all of these frameworks.
 
 Given the shortcomings of the original names it's totally okay to come up with other names for your test layers, as long as you keep it consistent within your codebase and your team's discussions.
 
@@ -84,12 +95,14 @@ The foundation of your test suite will be made up of unit tests. Your unit tests
 #### What's a Unit?
 If you ask three different people what _"unit"_ means in the context of unit tests, you'll probably receive four different, slightly nuanced answers. To a certain extend it's a matter of your own definition and it's okay to have no canonical answer.
 
-If you're working in a functional language a _unit_ will probably be a single function within your codebase. Your unit tests will call your function with different parameters and ensure that the function returns the expected values. In an object-oriented language a unit can range from a single method to an entire class.
+If you're working in a functional language a _unit_ will most likely be a single function. Your unit tests will call a function with different parameters and ensure that it returns the expected values. In an object-oriented language a unit can range from a single method to an entire class.
 
 #### Sociable and Solitary
-Some people argue that all collaborators (e.g. other classes that are called by your class under test) of your subject under test should be substituted with _mocks_ or _stubs_ to come up with perfect isolation and to avoid side-effects and complicated test setup. Others argue that only collaborators that are slow or have bigger side effects (e.g. classes that access databases or make network calls) should be stubbed or mocked. [Occasionally](https://www.martinfowler.com/bliki/UnitTest.html) people label these two sorts of tests as **solitary unit tests** for tests that stub all collaborators and **sociable unit tests** for tests that allow talking to real collaborators (Jay Fields' [Working Effectively with Unit Tests](https://leanpub.com/wewut) coined these terms). If you have some spare time you can go down the rabbit hole and [read more about the pros and cons](https://martinfowler.com/articles/mocksArentStubs.html) of the different schools of thought.
+Some argue that all collaborators (e.g. other classes that are called by your class under test) of your subject under test should be substituted with _mocks_ or _stubs_ to come up with perfect isolation and to avoid side-effects and complicated test setup. Others argue that only collaborators that are slow or have bigger side effects (e.g. classes that access databases or make network calls) should be stubbed or mocked.
 
-At the end of the day it's not important to decide if you go for solitary or sociable unit tests (if you consider yourself to be a _classicist_ or _mockist_ kind of tester as Martin Fowler calls it). Writing automated tests is what's important. Personally, I find myself using both approaches all the time. If it becomes awkward to use real collaborators I will use mocks and stubs generously. If I feel like involving the real collaborator gives me more confidence in a test I'll only stub the outermost parts of my service.
+[Occasionally](https://www.martinfowler.com/bliki/UnitTest.html) people label these two sorts of tests as **solitary unit tests** for tests that stub all collaborators and **sociable unit tests** for tests that allow talking to real collaborators (Jay Fields' [Working Effectively with Unit Tests](https://leanpub.com/wewut) coined these terms). If you have some spare time you can go down the rabbit hole and [read more about the pros and cons](https://martinfowler.com/articles/mocksArentStubs.html) of the different schools of thought.
+
+At the end of the day it's not important to decide if you go for solitary or sociable unit tests. Writing automated tests is what's important. Personally, I find myself using both approaches all the time. If it becomes awkward to use real collaborators I will use mocks and stubs generously. If I feel like involving the real collaborator gives me more confidence in a test I'll only stub the outermost parts of my service.
 
 #### Mocking and Stubbing
 **Mocking** and **stubbing** ([there's a difference](https://martinfowler.com/articles/mocksArentStubs.html) if you want to be precise) should be heavily used instruments in your unit tests. In plain words it means that you replace a real thing (e.g. a class, module or function) with a fake version of that thing. The fake version looks and acts like the real thing (answers to the same method calls) but answers with canned responses that you define yourself at the beginning of your unit test. Regardless of your technology choice, there's a good chance that either your language's standard library or some third-party library will provide you with elegang ways to set up mocks. And even writing your own mocks from scratch is only a matter of writing a fake class/module/function with the same signature as the real one and setting up the fake in your test.
