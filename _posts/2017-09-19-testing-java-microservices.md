@@ -2,7 +2,7 @@
 layout: post
 title: Testing Microservices — Java & Spring Boot
 tags: programming testing java
-excerpt: Based on the previous post about testing microservices, I'll show how to implement different types of tests for a Spring Boot microservice written  in Java
+excerpt: Learn how to test your Java & Spring Boot microservice, based on the "Testing Microservices" article
 comments: true
 ---
 
