@@ -2,7 +2,7 @@
 layout: post
 title: Testing Microservices
 tags: programming testing
-excerpt: Learn the concepts you need to build a reliable, fast and effective test suite for your microservices 
+excerpt: Learn the concepts you need to build a reliable, fast and effective test suite for your microservices
 comments: true
 ---
 
