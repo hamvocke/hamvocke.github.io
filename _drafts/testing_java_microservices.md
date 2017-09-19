@@ -592,7 +592,7 @@ public class HelloE2ERestTest {
 
 Again, we start the entire Spring application using `@SpringBootTest`. In this case we `@Autowire` the `PersonRepository` so that we can write test data into our database easily. When we now ask the REST API to say "hello" to our friend "Mr Pan" we're being presented with a nice greeting. Amazing! And more than enough of an end-to-end test if you don't even sport a web interface.
 
-## Some Advice Before You Go
+## Some Advice Before You Leave
 There we go, you made it through the entire testing pyramid. Congratulations! Before you go, there are some more general pieces of advice that I think will be helpful on your journey. Keep these in mind and you'll soon write automated tests that truly kick ass:
 
   1. Test code is as important as production code. Give it the same level of care and attention. Never allow sloppy code to be justified with the _"this is only test code"_ claim
