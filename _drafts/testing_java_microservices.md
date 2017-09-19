@@ -6,7 +6,7 @@ excerpt: Based on the previous post about testing microservices, I'll show how t
 comments: true
 ---
 
-In my [previous post](/blog/testing_microservices/) I give a round-trip of what it means to test microservices. We looked at the test pyramid and found out that you should write different types of automated tests to come up with a reliable and effective test suite.
+In my [previous post](/blog/testing-microservices/) I give a round-trip of what it means to test microservices. We looked at the test pyramid and found out that you should write different types of automated tests to come up with a reliable and effective test suite.
 
 While the previous post was more abstract this post will be more hands on and include code, lots of code. We will explore how we can implement the concepts discussed before. The technology of choice for this post will be **Java** with **Spring Boot** as the application framework. Most of the tools and libraries outlined here work for Java in general and don't require you to use Spring Boot at all. A few of them are test helpers specific to Spring Boot. Even if you don't use Spring Boot for your application there will be a lot to learn for you.
 
