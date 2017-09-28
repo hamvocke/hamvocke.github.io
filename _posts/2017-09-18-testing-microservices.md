@@ -6,6 +6,10 @@ excerpt: Learn the concepts you need to build a reliable, fast and effective tes
 comments: true
 ---
 
+<div class="highlight">
+  <strong>Update:</strong> Prefer to read this on your e-reader? This article is now available as an <a href="/blog/ebook-testing-microservices/">e-book version</a>
+</div>
+
 Microservices have been all the rage for a while. If you attended any tech conference or read software engineering blogs lately, you'll either be amazed or fed up with all the stories that companies love to share about their microservices journey.
 
 Behind all the hype are some true advantages to adopting a microservice architecture. And of course -- as with every architecture decision -- there will be trade-offs. I won't give you a lecture about the benefits and drawbacks of microservices or whether you should use them. Others have done [a way better job](https://www.martinfowler.com/microservices) at breaking this down than I could. Chance is, if you're reading this you somehow ended up with the decision to take a look into microservices and what it means to test them.
