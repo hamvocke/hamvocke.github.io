@@ -130,7 +130,7 @@ Maybe there's something funky happening once all your small units join forces an
 ### Integration Tests
 All non-trivial applications will integrate with some other parts (databases, filesystems, network, and other services in your microservices landscape). When writing unit tests these are usually the parts you leave out in order to come up with better isolation and fast tests. Still, your application will interact with other parts and this needs to be tested. _Integration tests_ are there to help. They test the integration of your application with all the parts that live outside of your application.
 
-Integration tests live at the boundary of your service. Conceptually they're always about triggerng an action that leads to integrating with the outside part (filesystem, database, etc). A database integration test would probably look like this:
+Integration tests live at the boundary of your service. Conceptually they're always about triggering an action that leads to integrating with the outside part (filesystem, database, etc). A database integration test would probably look like this:
 
 ![a database integration test](/assets/img/uploads/dbIntegrationTest.png)
 *A database integration test integrates your code with a real database*
