@@ -517,20 +517,20 @@ For end-to-end tests [Selenium](http://docs.seleniumhq.org/) and the [WebDriver]
 
 Selenium needs a browser that it can start and use for running its tests. There are multiple so-called _'drivers'_ for different browsers that you could use. [Pick one](https://www.mvnrepository.com/search?q=selenium+driver) (or multiple) and add it to your `build.gradle`:
 
-    testCompile('org.seleniumhq.selenium:selenium-firefox-driver:3.5.3')
+    testCompile('org.seleniumhq.selenium:selenium-chrome-driver:2.53.1')
 
 Running a fully-fledged browser in your test suite can be a hassle. Especially when using continuous delivery the server running your pipeline might not be able to spin up a browser including a user interface (e.g. because there's no X-Server available). You can take a workaround for this problem by starting a virtual X-Server like [xvfb](https://en.wikipedia.org/wiki/Xvfb).
 
 A more recent approach is to use a _headless_ browser (i.e. a browser that doesn't have a user interface) to run your webdriver tests. Until recently [PhantomJS](http://phantomjs.org/) was the leading headless browser used for browser automation. Ever since both [Chromium](https://developers.google.com/web/updates/2017/04/headless-chrome) and [Firefox](https://developer.mozilla.org/en-US/Firefox/Headless_mode) announced that they've implemented a headless mode in their browsers PhantomJS all of a sudden became obsolete. After all it's better to test your website with a browser that your users actually use (like Firefox and Chrome) instead of using an artificial browser just because it's convenient for you as a developer.
 
-Both, headless Firefox and Chrome, are brand new and yet to be widely adopted for implementing webdriver tests. We want to keep things simple. Instead of fiddling around to use the bleeding edge headless modes let's stick to the classic way using Selenium and a regular browser. A simple end-to-end test that fires up Firefox, navigates to our service and checks the content of the website looks like this:
+Both, headless Firefox and Chrome, are brand new and yet to be widely adopted for implementing webdriver tests. We want to keep things simple. Instead of fiddling around to use the bleeding edge headless modes let's stick to the classic way using Selenium and a regular browser. A simple end-to-end test that fires up Chrome, navigates to our service and checks the content of the website looks like this:
 
 {% highlight java %}
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class HelloE2ESeleniumTest {
 
-    private WebDriver driver = new FirefoxDriver();
+    private WebDriver driver = new ChromeDriver();
 
     @LocalServerPort
     private int port;
@@ -549,9 +549,9 @@ public class HelloE2ESeleniumTest {
 }
 {% endhighlight %}
 
-Note that this test will only run on your system if you have Firefox installed on the system you run this test on (your local machine, your CI server).
+Note that this test will only run on your system if you have Chrome installed on the system you run this test on (your local machine, your CI server).
 
-The test is straightforward. It spins up the entire Spring application on a random port using `@SpringBootTest`. We then instanciate a new Firefox webdriver, tell it to go navigate to the `/hello` endpoint of our microservice and check that it prints "Hello World!" on the browser window. Cool stuff!
+The test is straightforward. It spins up the entire Spring application on a random port using `@SpringBootTest`. We then instanciate a new Chrome webdriver, tell it to go navigate to the `/hello` endpoint of our microservice and check that it prints "Hello World!" on the browser window. Cool stuff!
 
 ### Using RestAssured (Testing via the REST API)
 I know, we already have tests in place that fire some sort of request against our REST API and check that the results are correct. Still, none of them is truly end to end. The MockMVC tests are "only" integration tests and don't send real HTTP requests against a fully running service.
