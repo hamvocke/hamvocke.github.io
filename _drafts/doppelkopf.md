@@ -8,7 +8,7 @@ comments: true
 
 I grew up in the countryside of northern Germany. Growing up sorrounded by woods and fields you get to appreciate some rather traditional, maybe even old-fashioned parts of German culture. One of these things is learning to play card games like [_"Skat"_](https://en.wikipedia.org/wiki/Skat_%28card_game%29) or [_"Doppelkopf"_](https://en.wikipedia.org/wiki/Doppelkopf).
 
-I remember my father and my uncles playing Doppelkopf for countless hours every year when we visited my grandmother (also an avid Doppelkopf player) for Christmas. Later at school, people played Skat or Doppelkopf in their breaks. Going to the pub you could sometimes spot people playing cards as well.
+I remember my father and my uncles playing Doppelkopf for countless hours every year when we visited my grandmother (also an avid Doppelkopf player) for Christmas. Later at school, people played Skat or Doppelkopf in their breaks. Going to the pub you could sometimes spot people playing these games as well.
 
 ![Die Skatpartie by Josef Wagner-Höhenberg](/assets/img/uploads/skat.jpg)
 _"Die Skatpartie" by Josef Wagner-Höhenberg_
