@@ -62,6 +62,7 @@ Fortunately I had a short-cut to understanding the setup of these tools. Peter J
 I quickly noticed that writing a card game as code makes for a fantastic [code kata](https://en.wikipedia.org/wiki/Kata_(programming)). If you think of it as a domain modelling excercise it shapes up quite nicely.
 
   * A `card` has a `suite` and a `rank`
+  * The `rank` of a card defines it's `value`
   * A `deck` consists of 40 `cards` [^1]
   * Each `player` has a `hand` of 10 `cards`
   * A `hand` can be _Re_ or _Kontra_
