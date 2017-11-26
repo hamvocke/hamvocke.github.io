@@ -6,15 +6,19 @@ excerpt: I started implementing a browser game version of the German "Doppelkopf
 comments: true
 ---
 
-I grew up in the countryside of northern Germany. Growing up sorrounded by woods and fields you get to appreciate some rather traditional, maybe even old-fashioned parts of German culture. One of these things is learning to play card games like [_"Skat"_](https://en.wikipedia.org/wiki/Skat_%28card_game%29) or [_"Doppelkopf"_](https://en.wikipedia.org/wiki/Doppelkopf). My grandmother still is an avid Doppelkopf player. I fondly remember my father and my uncles playing Doppelkopf for countless hours every year when we visited her for Christmas. Later at school, people played Skat or Doppelkopf in their breaks. Going to the pub you could sometimes spot people playing cards as well. Pubs and card games go together. This great oil on canvas painting I found on Wikipedia shows a classic depiction of what these games would look like.
+I grew up in the countryside of northern Germany. Growing up sorrounded by woods and fields you get to appreciate some rather traditional, maybe even old-fashioned parts of German culture. One of these things is learning to play card games like [_"Skat"_](https://en.wikipedia.org/wiki/Skat_%28card_game%29) or [_"Doppelkopf"_](https://en.wikipedia.org/wiki/Doppelkopf).
+
+I remember my father and my uncles playing Doppelkopf for countless hours every year when we visited my grandmother (also an avid Doppelkopf player) for Christmas. Later at school, people played Skat or Doppelkopf in their breaks. Going to the pub you could sometimes spot people playing cards as well.
 
 ![Die Skatpartie by Josef Wagner-Höhenberg](/assets/img/uploads/skat.jpg)
 _"Die Skatpartie" by Josef Wagner-Höhenberg_
 
 
-Luckily, my parents taught the complex rules of Doppelkopf to my siblings and me when we were children. We played here and there but I never played it as excessive that I could even remotely challenge more experienced players. Try playing with your grandparents and you'll learn what losing looks like. It seems like these folks have seen it all, have played every hand there is to play and recognize every tiny mistake you do. It's intimidating. Earlier this year, some friends asked me if I wanted to join their Doppelkopf group in Hamburg. Knowing the basics of the game I was excited to join. Now we're meeting once a week in a random pub or down at the harbour, have a beer or two and play Doppelkopf. It's great fun and a nice breakout from my otherwise overly digitalized daily life. Every now and then a stranger stops by to [kibitz](https://en.wiktionary.org/wiki/kibitz). They always seem fascinated or even nostalgic by the archaic scenery of people playing traditional card games these days.
+Luckily, I learned the complex rules of Doppelkopf from my parents when I was a child. We played here and there. I was good enough to internalize the basic rules but never good enough that I could challenge more experienced players. Try playing with your grandparents and you'll learn what losing looks like. After all these folks have been playing that game all their lives. They've seen it all, have played every hand there is to play and recognize every tiny mistake you do. It's intimidating. 
 
-Doppelkopf is a complex game. The game features a lot of rules, exceptional rules and the occasional exception from these exceptional rules. It's best played with four players who form two different parties in each game. It's all about taking tricks and getting the beter score for your party. To make it even more difficult, every group of players tend to have their very own set of extra rules. It's full of jargon, for bystanders a conversation about the game simply sounds like a bunch of gibberish. Despite the steep learning curve it's really rewarding to learn the game. The countless hours of fun and socializing really make up for it.
+Earlier this year, some friends asked me if I wanted to join their Doppelkopf group in Hamburg. Knowing the basics of the game I was excited to join. Now we're meeting once a week in a random pub or down at the harbour, have a beer or two and play Doppelkopf. It's great fun and a nice breakout from my otherwise overly digitalized daily life. Every now and then a stranger stops by to [kibitz](https://en.wiktionary.org/wiki/kibitz). They always seem fascinated or even nostalgic by the archaic scenery of people playing traditional card games these days.
+
+Doppelkopf is a complex game. It has a lot of rules, exceptional from these rules and the occasional exception from these exceptions. It's best played with four players who form two different parties in each game (_Re_ and _Kontra_). It's all about taking tricks and getting the beter score for your party. To make it even more difficult, every group of players tend to have their very own set of extra rules. The game is full of jargon, for bystanders a conversation about the game simply sounds like a bunch of gibberish. Despite the steep learning curve it's really rewarding to learn the game. The countless hours of fun and socializing really make up for it.
 
 ![Playing Doppelkopf in Hamburg](/assets/img/uploads/doppelkopf.jpg)
 _Playing Doppelkopf in a Cafe in Hamburg, not meant to be a shameless plug for Astra_
@@ -30,7 +34,7 @@ Being a developer I obviously found the best solution for this problem. _"I'm go
 ![I'll build my own game](/assets/img/uploads/doppelkopf-bender.jpg)
 _Probably not blackjack and hookers though_
 
-Yeah, right, because that always works out so well. Having quite a track record for starting side projects that I never finish (who hasn't?) I know I'm probably lying to myself when I say that I'll definitely finish that one. Still, I decided to build my own game, mainly for two reasons:
+Yeah, right, because that always turns out so well. Having quite a track record for starting side projects that I never finish (who hasn't?) I know I'm probably lying to myself when I say that I'll definitely finish that one. Still, I decided to build my own game, mainly for two reasons:
 
   1. Implementing your own Doppelkopf game will teach you a lot about the game
   2. I don't get to do too much coding these days so a side project is more than welcome
@@ -67,7 +71,8 @@ And so on.
 
 So far I've been busy capturinig the essence Doppelkopf in a domain model. With the help of [Jest](https://facebook.github.io/jest/) I worked on this in a strictly test-driven way. Being test-driven (and having set up a CI server) allowed me to work on my Doppelkopf game whenever I had a few minutes to spare. I could split the complex ruleset of Doppelkopf into hundreds of small-scoped bits and pieces that could be implemented within a couple of minutes. Having tests and a continuous integration server in place allows me to come back to where I left at any time.
 
-I'm taking some extra care of massaging my domain model into a shape that's pleasant to use and easy to read. With a domain as tangible as a card game this has worked really well. Take a look at these tests to see what I'm talking about:
+I'm taking some extra care of massaging my domain model into a shape that's pleasant to use and easy to read. With a domain as tangible as a card game this has worked really well. Take a look at these code snippets to see what I'm talking about:
+
 
 ```javascript
 test('a hand without queen of clubs is kontra', () => {
@@ -82,6 +87,17 @@ test('a hand without queen of clubs is kontra', () => {
 ```
 
 ```javascript
+class Hand {
+    // [...]
+    value() {
+        return this.cards
+            .map(card => card.value)
+            .reduce((acc, value) => acc + value, 0);
+    }
+
+    // [...]
+}
+
 test('hand has a value', () => {
     const cards = [
         queen.of(suites.spades),
@@ -97,7 +113,7 @@ test('hand has a value', () => {
 These tests are easy to understand, even if you don't know the rules of Doppelkopf. They serve as a good documentation, make it easy for me to reason about small portions of the complex game at a time and the sume of these small portions add up to the wonderful thing that is Doppelkopf.
 
 ## Moving on
-Right now my card browser game is only a bunch of domain classes and tests. There's nothing visible and I'm not even talking about anything that's remotely playable yet. Still, this excercise has been so much fun for me and allowed me to work on a pace that keeps me motivated to move on, one simple rule at a time.
+Right now my card browser game is only a bunch of domain classes and tests. There's nothing visible and I'm not even talking about anything that's remotely playable yet. Still, this excercise has been so much fun for me and allowed me to work on a pace that keeps me motivated to move on, one simple rule at a time. The source code is already [available on GitHub](https://github.com/hamvocke/doppelkopf), feel free to check it out and track the progress.
 
 There will be huge challenges further down the road. When I told my friends that I'm building a Doppelkopf game, they were nothing but excited. The first question that came up was how I wanted to build an AI for singleplayer mode. Actually, I don't have a clue. I've never done this before and don't know how to approach this. I guess there'll be some research for me to do and a long way until I have build something that is remotely more clever than a bunch if `if-else` statements.
 
