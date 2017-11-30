@@ -29,10 +29,9 @@ At one point I thought that I should have some practice to improve my game. As y
 
 ## I'll Build My Own Doppelkopf Game
 
-Being a developer I obviously found the best solution for this problem. _"I'm gonna build this myself!"_ was my proclaimed goal. 
+Being a software developer I obviously found the best solution for this problem. _"I'm gonna build this myself!"_ was my proclaimed goal. 
 
 ![I'll build my own game](/assets/img/uploads/doppelkopf-bender.jpg)
-_Probably not blackjack and hookers though_
 
 Yeah, right, because that always works so well. Having quite a track record for starting side projects that I never finish (who hasn't?) I know I'm probably lying to myself when I say that I'll definitely finish that one. Still, I decided to build my own game, mainly for two reasons:
 
