@@ -8,9 +8,9 @@ comments: true
 
 [Pair Programming](https://en.wikipedia.org/wiki/Pair_programming) has found wide adoption in software development ever since it became popular with the rise of Extreme Programming and other agile development approaches. This practice where two developers are working on the same machine and the same task has some really neat advantages over working all by yourself. Working in pairs results in higher quality, spreads knowledge between your team members and ultimately leads to higher satisfaction. Sounds cool? Well, it is!
 
-However, pair programming often becomes difficult as soon as the development team is spread accross different locations. People might be working from home. Parts of your team might be located at a different office, maybe even in an entirely different country. 
+However, pair programming often becomes difficult as soon as the development team is spread accross different locations. People might be working from home. Parts of your team might be located at a different office, maybe even in an entirely different country.
 
-It's 2015, the idea of pair programming has been around for more than a decade by now. This remote pair programming thing should be a solved problem. And luckily it is. There are different solutions for different needs. From fully fledged screen sharing solutions with integrated voice chat (like [Screenhero](https://screenhero.com/)) over shared [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing) to IDE and editor plugins like [Floobits](https://floobits.com/), there seems to be a nearly endless amount of solutions to enable remote collaboration. 
+It's 2015, the idea of pair programming has been around for more than a decade by now. This remote pair programming thing should be a solved problem. And luckily it is. There are different solutions for different needs. From fully fledged screen sharing solutions with integrated voice chat (like [Screenhero](https://screenhero.com/)) over shared [VNC](https://en.wikipedia.org/wiki/Virtual_Network_Computing) to IDE and editor plugins like [Floobits](https://floobits.com/), there seems to be a nearly endless amount of solutions to enable remote collaboration.
 
 Those are a lot of services and tools, trying to solve multiple of your problems at once. Personally, I like to keep it simple. I like to keep control over what I'm doing. I like to have tools that do one job and do that job right. And, like many other developers, I like to work in my terminal and hack away in vim/emacs/nano (I'm not gonna start an editor war here!). Luckily, I have everything I need at my disposal. And most likely so do you!
 
@@ -30,7 +30,7 @@ Once they are connected to the same machine, they can use tmux for a shared envi
 ## Sharing a tmux session
 The simplest setup is using the exact same session with multiple tmux client instances. The following steps will get us there:
 
-<div class="highlight">
+<div class="highlighted">
 <ol>
   <li>Alice and Bob <code>ssh</code> into the same server</li>
   <li>Alice creates a new tmux sesssion: <code>tmux new -s shared</code></li>
@@ -38,9 +38,9 @@ The simplest setup is using the exact same session with multiple tmux client ins
 </ol>
 </div>
 
-Please note that _"shared"_ will be the name of the session, feel free to give it any name you like. 
+Please note that _"shared"_ will be the name of the session, feel free to give it any name you like.
 
-From here Alice and Bob can happily hack away on their terminal and make use of all the fancy features offered by tmux. They can create panes and windows, launch different command line applications and pair happily on their tasks. They can even detach from that session and return at any later point. Both will see the exact same output in their respective terminal window. 
+From here Alice and Bob can happily hack away on their terminal and make use of all the fancy features offered by tmux. They can create panes and windows, launch different command line applications and pair happily on their tasks. They can even detach from that session and return at any later point. Both will see the exact same output in their respective terminal window.
 
 This is what it will look like in action:
 
@@ -49,16 +49,16 @@ This is what it will look like in action:
 But somehow Alice and Bob feel that this is not quite perfect. There are situations where they want to work on different stuff while still being in that session. But as soon as Alice switches to a different window to work on her tasks, Bob's terminal will also switch along.  
 
 ## Independent window switching
-Instead of sharing the exact same session between multiple tmux clients, we can also create multiple session within the same window group. The result is similar to what we've seen above with one difference: Each developer can switch tmux windows independently. 
+Instead of sharing the exact same session between multiple tmux clients, we can also create multiple session within the same window group. The result is similar to what we've seen above with one difference: Each developer can switch tmux windows independently.
 
-All contents of the windows will be synchronized between all clients. But each client can decide individually which window's content should be shown at the moment. This allows Alice and Bob to work independently on different tasks if they feel the need to do so. Whenever they want to go back to normal pairing they can switch back to the same tmux window and will see the same content again. 
+All contents of the windows will be synchronized between all clients. But each client can decide individually which window's content should be shown at the moment. This allows Alice and Bob to work independently on different tasks if they feel the need to do so. Whenever they want to go back to normal pairing they can switch back to the same tmux window and will see the same content again.
 
 This is how independent window switching will look like in action:
 <video src="/assets/video/ssh_tmux_advanced.webm" autoplay controls></video>
 
 The steps for this setup are a little different:
 
-<div class="highlight">
+<div class="highlighted">
 <ol>
   <li>Again, Alice and Bob <code>ssh</code> into the same server</li>
   <li>Alice, as before, creates a new tmux session: <code>tmux new -s alice</code>. tmux will implicitly create a new <strong>window group</strong></li>
@@ -78,7 +78,7 @@ As you can see, there are two sessions with their respective name. Both sessions
 <img class="space-bottom" src="/assets/img/uploads/ssh_tmux_advanced.png" alt="independent shared sessions with tmux">
 
 ## Benefits and drawbacks
-To me this is a really nice and lightweight solution if you want to collaborate remotely. You can use it for pair programming, to troubleshoot issues on your servers together and much more. However, you need to be aware that this is a solution with a lot of restrictions. You're completely bound to the command line and its tools, there's no way around it. You also need to have a separate channel to talk to each other 
+To me this is a really nice and lightweight solution if you want to collaborate remotely. You can use it for pair programming, to troubleshoot issues on your servers together and much more. However, you need to be aware that this is a solution with a lot of restrictions. You're completely bound to the command line and its tools, there's no way around it. You also need to have a separate channel to talk to each other
 
 If you are looking for a fully-fledged solution that allows you to use tools outside of the command line and also includes audio and video conferencing, one of the previously mentioned tools and services might be better suited for you. But if you need something really lightweight that you can control completely on your own and are not afraid of the command line, this setup might be perfect for you.
 
