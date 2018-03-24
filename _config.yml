@@ -1,11 +1,43 @@
-name: Ham Vocke
-description: Hermann Vocke on software development, technology and random stuff
-url: http://www.hamvocke.com
-markdown: kramdown
-include: ['.htaccess']
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: Ham Vocke
+email: hermann.vocke@gmail.com
+description: Hermann Vocke writing random bits around software development
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://www.hamvocke.com" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: hamvocke
+github_username: hamvocke
 
 paginate: 5
 paginate_path: "/blog/page:num"
 permalink: "/blog/:title/"
 
-gems: [jekyll-paginate]
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-paginate
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
