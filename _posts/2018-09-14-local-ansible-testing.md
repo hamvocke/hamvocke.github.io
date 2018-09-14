@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Testing Ansible Scripts Locally
+title: Testing Ansible Provisioning Locally
 tags: programming infrastructure testing
 excerpt: Learn how to test Ansible provisioning scripts locally
 comments: true
