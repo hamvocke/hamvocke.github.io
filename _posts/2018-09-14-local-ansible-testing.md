@@ -3,7 +3,7 @@ layout: post
 title: Testing Ansible Provisioning Locally
 tags: programming infrastructure testing
 excerpt: Learn how to test Ansible provisioning scripts locally
-summary: Learn how to test Ansible provisioning scripts locally
+summary: A simple setup to test Ansible provisioning on your machine using Vagrant and Serverspec
 image: /assets/img/uploads/ansible-local-testing-title.png
 comments: true
 ---
