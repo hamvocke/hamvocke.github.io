@@ -3,6 +3,8 @@ layout: post
 title: Testing Microservices — Java & Spring Boot
 tags: programming testing java
 excerpt: Learn how to test your Java & Spring Boot microservice, based on the "Testing Microservices" article
+summary: Learn how to apply microservices testing concepts when writing a Java and Spring Boot application
+image: /assets/img/practicalPyramid.png
 comments: true
 ---
 

@@ -3,6 +3,8 @@ layout: post
 title: Testing Microservices
 tags: programming testing
 excerpt: Learn the concepts you need to build a reliable, fast and effective test suite for your microservices
+summary: Learn about to apply the test pyramid for your microservices architecture
+image: /assets/img/practicalPyramid.png
 comments: true
 ---
 

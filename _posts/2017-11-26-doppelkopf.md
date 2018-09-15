@@ -3,6 +3,8 @@ layout: post
 title: A "Doppelkopf" Browser Game
 tags: programming doppelkopf
 excerpt: I started implementing a browser game version of the German "Doppelkopf" card game and it's great fun. Read why I started doing this and what I've discovered so far.
+summary: I'm writing a "Doppelkopf" web application
+image: /assets/img/uploads/doppelkopf.jpg
 comments: true
 ---
 

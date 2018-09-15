@@ -3,6 +3,8 @@ layout: post
 title: "The Tweetrospective - refresh your next Agile Retrospective"
 tags: agile 
 excerpt: I've recently tried a new approach for facilitating an agile retrospecitve based on Twitter. It was a fun and creative session and I got great feedback. Read what I've done, what I've learned and grab some resources to do it yourself!
+summary: A fun retrospective format using tweets as an instrument
+image: /assets/img/uploads/tweetrospectivePhoto.jpg
 comments: true
 ---
 

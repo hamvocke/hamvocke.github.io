@@ -1,0 +1,54 @@
+
+<!-- Twitter cards -->
+<meta name="twitter:site"    content="@{{ site.twitter_username }}">
+
+{% if page.title %}
+<meta name="twitter:title"   content="{{ page.title }}">
+{% else %}
+<meta name="twitter:title"   content="{{ site.title }}">
+{% endif %}
+
+{% if page.summary %}
+<meta name="twitter:description" content="{{ page.summary }}">
+{% else %}
+<meta name="twitter:description" content="{{ site.description }}">
+{% endif %}
+
+{% if page.image %}
+<meta name="twitter:card"  content="summary_large_image">
+<meta name="twitter:image" content="{{ site.url }}{{ page.image }}">
+{% else %}
+<meta name="twitter:card"  content="summary">
+<meta name="twitter:image" content="{{ site.url }}{{ site.title_image }}">
+{% endif %}
+<!-- end of Twitter cards -->
+
+<!-- open graph -->
+{% if page.title %}
+<meta content="{{ page.title }}" property="og:title">
+{% else %}
+<meta content="{{ site.title }}" property="og:title">
+{% endif %}
+
+{% if page.title %}
+<meta content="article" property="og:type">
+{% else %}
+<meta content="website" property="og:type">
+{% endif %}
+
+{% if page.description %}
+<meta content="{{ page.description }}" property="og:description">
+{% else %}
+<meta content="{{ site.description }}" property="og:description">
+{% endif %}
+
+{% if page.url %}
+<meta content="{{ site.url }}{{ page.url }}" property="og:url">
+{% endif %}
+
+{% if page.image %}
+<meta content="{{ site.url }}{{ page.image }}" property="og:image">
+{% else %}
+<meta content="{{ site.url }}{{ site.title_image }}" property="og:image">
+{% endif %}
+<!-- end open graph -->

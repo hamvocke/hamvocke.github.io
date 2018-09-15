@@ -21,6 +21,8 @@ url: "https://www.hamvocke.com" # the base hostname & protocol for your site, e.
 twitter_username: hamvocke
 github_username: hamvocke
 
+title_image: "/assets/img/logo512.png"
+
 paginate: 5
 paginate_path: "/blog/page:num"
 permalink: "/blog/:title/"

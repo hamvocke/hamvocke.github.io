@@ -3,6 +3,8 @@ layout: post
 title: E-book Release of Testing Microservices
 tags: programming testing
 excerpt: Yeah, the "testing microservices" post series got a little out of hand. If you prefer ebooks over blog posts I've got your back. I released the "testing microservices" series as an ebook.
+summary: I published the huge "testing microservices" article as an ebook
+image: /assets/img/practicalPyramid.png
 comments: true
 ---
 
