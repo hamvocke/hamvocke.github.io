@@ -1,7 +1,8 @@
 ---
 layout: post
 title: A Quick and Easy Guide to tmux
-tags: terminal
+tags:
+  - command line
 excerpt: tmux is a tool that can boost your productivity while using the terminal. Think of it as a window manager in your terminal with some extra fanciness on top. This post gives you an easy-to-follow introduction to tmux and explains its basic features and how to use them.
 summary: Become a master of tmux in a few minutes
 image: /assets/img/uploads/tmux.png

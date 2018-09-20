@@ -7,7 +7,7 @@ title: hamvocke.com | Tags
     {% for tag in site.tags %}
     {% assign t = tag | first %}
     {% assign posts = tag | last | sort %}
-    <h2>{{t | upcase | replace:" ","-" }} </h2>
+    <h2>{{t | upcase }} </h2>
     <div class="meta-info">{{ posts | size }} posts</div>
     {% for post in posts %}
     {% if post.tags contains t %}

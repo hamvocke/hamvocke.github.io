@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Goodbye Gütersloh, Hello Hamburg!
-tags: personal job
+tags: personal
 excerpt: Today is my last day in Gütersloh. I'm leaving Bertelsmann after six exciting years. This post is about the my previous journey as a software developer and about my future in Hamburg.
 summary: Reflecting on my time in Gütersloh, looking forward to my time in Hamburg
 comments: true
@@ -27,6 +27,6 @@ The last 10 months have been very exciting, to say the least. I finished my Mast
 
 Nevertheless, I felt that there was something lacking in my current position. I had seen quite a few projects and worked with talented people. But I had the feeling that even though there was still a lot I could learn, I had no real perspective left at Bertelsmann. Our projects were basically the same, I missed real innovation, technology-wise as well as from a business perspective (besides that, there were several other factors as well but this was my major gripe). In January 2014, at the last day of my winter vacation, I discovered that ThoughtWorks, the company that basically brought up the idea of Continuous Delivery, was looking for someone with experience in Java development and Continuous Delivery for their office in Hamburg. Being quite a northerner myself and having no roots in Gütersloh, I decided to apply for this job. I had written a fair amount of Java code and spent the past six months studying the topic of Continuous Delivery intensively after all. I got lucky. Only a few hours after sending in my application I got a call from a lady of ThoughtWorks' HR department. They told me they were interested and we chatted nicely for about 45 minutes. I managed to pass the rest of their application process and got an offer for a position in Hamburg sometime late February. I handed in my notice of termination at Bertelsmann directly afterwards.
 
-And here I am now. Six months after I handed in my notice my cancellation period is over and my last day at Bertelsmann has come. It was a great experience, I had the chance to learn a lot, was paid a fair salary, got the chance to work with smart and talented colleagues and got to know many nice people. Nevertheless, six years into my career I felt it was time to move on. I am excited to start at ThoughtWorks next month and I'm sure that this is the right company to offer me what I've missed before: Learning even more, working on exciting and diverse projects and experiencing a great work culture. 
+And here I am now. Six months after I handed in my notice my cancellation period is over and my last day at Bertelsmann has come. It was a great experience, I had the chance to learn a lot, was paid a fair salary, got the chance to work with smart and talented colleagues and got to know many nice people. Nevertheless, six years into my career I felt it was time to move on. I am excited to start at ThoughtWorks next month and I'm sure that this is the right company to offer me what I've missed before: Learning even more, working on exciting and diverse projects and experiencing a great work culture.
 
 Let's hope for the best!

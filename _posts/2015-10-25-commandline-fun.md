@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Fun and Useless Tools for Your Command Line
-tags: terminal
+tags:
+  - command line
 excerpt: There are a couple of really great tools out there that can help you getting more fun out of your day-to-day command line use. These are some of my favorites.
 comments: true
 ---
@@ -9,7 +10,7 @@ comments: true
 Ah, the command line. Home of ancient power tools with text-only interfaces, loved by geeks, avoided by everyone else. Did I already mention, that I love the command line? (Oh yes, [most certainly](/blog/a-quick-and-easy-guide-to-tmux/)). Superficially the command line looks plain and boring and I can totally understand why people are reluctant spending any time there while everything else is nice and shiny these days. But behold! There are some really nice gimmicks to make your command line experience more fun. Don't ask for the value of these, there probably is none. But maybe that's why it's so fun. These are some of my favorite useless command line applications that I keep showing to people who actually don't want to know.
 
 ## Cowsay
-This is a real classic. **Cowsay** uses ASCII art to create a nice cow with a speech bubble that's filled with any text you like. Cowsay is available for Linux and Mac and can easily be installed with your favorite package manager. After that your ASCII cow fun is only a `cowsay yourTextHere` away: 
+This is a real classic. **Cowsay** uses ASCII art to create a nice cow with a speech bubble that's filled with any text you like. Cowsay is available for Linux and Mac and can easily be installed with your favorite package manager. After that your ASCII cow fun is only a `cowsay yourTextHere` away:
 
 ![Cowsay in action](/assets/img/uploads/cowsay.jpg)
 
@@ -36,5 +37,3 @@ I have a knack for ASCII art. Seriously. That's why I love to play around with *
 ![figlet](/assets/img/uploads/figlet.jpg)
 
 Want to see which other fonts are available? Use `showfigfonts` to get a preview of all the fonts that are installed on your system.
-
-

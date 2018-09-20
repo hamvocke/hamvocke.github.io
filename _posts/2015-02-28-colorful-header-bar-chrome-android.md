@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Add Color to Chrome's Header Bar on Android Lollipop
-tags: programming web
+tags: programming
 excerpt: Chrome on Android Lollipop offers a nice way for your website to set the color of the header bar. Let me show you how!
 summary: Learn how to change Chrome's header bar color for your website
 comments: true
