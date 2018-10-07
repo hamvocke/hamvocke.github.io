@@ -1,20 +1,20 @@
 language: ruby
 rvm:
-    - 2.5.1
+  - 2.5.1
 
 install: bundle install
 
 script:
-    - bundle exec jekyll build
-    - bundle exec htmlproofer --http-status-ignore "0,410,999" ./_site
+  - bundle exec jekyll build
+  - bundle exec htmlproofer --http-status-ignore "0,410,999" ./_site
 
 deploy:
-    provider: s3
-    bucket: "devbox-bucket.ham.codes"
-    skip_cleanup: true
-    region: eu-west-1
-    local_dir: _site
-    upload-dir: blog
+  provider: s3
+  bucket: "devbox-bucket.ham.codes"
+  skip_cleanup: true
+  region: eu-west-1
+  local_dir: _site
+  upload-dir: blog
 
 env:
   global:
