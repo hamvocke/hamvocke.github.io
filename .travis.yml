@@ -2,6 +2,9 @@ language: ruby
 rvm:
   - 2.5.1
 
+addons:
+  ssh_known_hosts: ham.codes
+
 install: bundle install
 
 script:
