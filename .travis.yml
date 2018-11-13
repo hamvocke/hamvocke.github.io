@@ -9,7 +9,7 @@ install: bundle install
 
 script:
   - bundle exec jekyll build
-  - bundle exec htmlproofer --http-status-ignore "0,410,999" ./_site
+  - bundle exec htmlproofer --http-status-ignore "0,410,503,999" ./_site
   - ./deploy.sh
 
 deploy:
