@@ -3,7 +3,7 @@
 set -e
 
 echo "Transfer website to server"
-rsync -rvz _site/ root@ham.codes:/tmp/blog
+rsync -rvz _site/ root@ham.codes:/tmp/blog -e "ssh -o StrictHostKeyChecking=no"
 
 echo "Archive old website, activate current version"
 ssh -T root@ham.codes << EOF
