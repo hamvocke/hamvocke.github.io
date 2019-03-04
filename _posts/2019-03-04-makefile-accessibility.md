@@ -2,8 +2,8 @@
 layout: post
 title: Using "make" to Make Your Code More Accessible
 tags: programming
-excerpt: Learn how to use "make" to automate common tasks for your programming projects
-summary: Learn how to use "make" to automate common tasks for your programming projects
+excerpt: With "make" we can automate common tasks for our programming projects and make them more accessible as a result.
+summary: With "make" we can automate common tasks for our programming projects and make them more accessible as a result.
 image: /assets/img/uploads/make.png
 comments: true
 ---
@@ -140,7 +140,7 @@ Another cool gimmick when using `make` is that some shells provide autocompletio
 
 With make autocompletion in place, you can start typing `make` in your command line and hit `tab` repeatedly to cycle through the available targets defined in your `Makefile`.
 
-## Limitations
+## Caveats
 Using `make` is an easy way to make your project's source code easy to work with. Make certainly is powerful and that power comes with great responsibility. Makefiles can grow out of hand quickly. Personally, I wouldn't use `make` for anything that's way more complex than what we've outlined here. If you just need small wrappers around a certain set of commands, `make` is a good way to go. It's available on most systems and your `Makefile` can be simple and maintainable. As with every tool, you can go overboard easily and produce something that will haunt you for years to come:
 
 <blockquote class="twitter-tweet" data-lang="de"><p lang="en" dir="ltr">I made this project entirely in Make, like thousands of lines of make, and all the weird make-shit, I’m definitely going to hell. <a href="https://t.co/Xq8lKHzZ0z">https://t.co/Xq8lKHzZ0z</a></p>&mdash; jessie frazelle 👩🏼‍🚀 (@jessfraz) <a href="https://twitter.com/jessfraz/status/1101232677326336001?ref_src=twsrc%5Etfw">28. Februar 2019</a></blockquote>
