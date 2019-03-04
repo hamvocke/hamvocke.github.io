@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Using "make" to Make Your Code More Accessible
+title: Using 'make' to Make Your Code More Accessible
 tags: programming
-excerpt: With "make" we can automate common tasks for our programming projects and make them more accessible as a result.
-summary: With "make" we can automate common tasks for our programming projects and make them more accessible as a result.
+excerpt: With 'make' we can automate common tasks for our programming projects and make them more accessible as a result.
+summary: With 'make' we can automate common tasks for our programming projects and make them more accessible as a result.
 image: /assets/img/uploads/make.png
 comments: true
 ---
