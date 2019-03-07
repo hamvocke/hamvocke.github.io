@@ -37,6 +37,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision :serverspec do |spec|
     spec.pattern = 'test/*_spec.rb' # pattern for test files
   end
+end
 ```
 
 Before we can use this configuration, we need to install the [vagrant-serverspec](https://github.com/vvchik/vagrant-serverspec) plugin:
