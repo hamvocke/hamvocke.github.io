@@ -2,8 +2,8 @@
 layout: post
 title: Moving On
 tags: personal
-excerpt: I'm starting a new job remotely after leaving the adventures of a consultancy behind. Some thoughts on the change.
-summary: I left ThoughtWorks and will work remotely for Stack Overflow.
+excerpt: I'm starting a new job remotely after leaving the adventures of a consultancy behind. Some thoughts on this change.
+summary: I'm starting a new job remotely after leaving the adventures of a consultancy behind.
 image: /assets/img/uploads/ham-was-here.jpg
 comments: true
 ---
