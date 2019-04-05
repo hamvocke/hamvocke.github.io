@@ -8,18 +8,22 @@ image: /assets/img/uploads/ham-stickers.jpg
 comments: false
 ---
 
-My name is _Hermann_. And so is my father's name. Growing up, I found this more annoying than charming. Living in one household with another person sharing the exact same name as you do can lead to some weird situations.
+My name is _Hermann_. And so is my father's name. Growing up, I found this more annoying than charming. Living in one household with another person sharing the same name can lead to weird situations.
 
 ![Ham stickers](/assets/img/uploads/ham-stickers.jpg)
 _Going with a name like "Ham" gives you a perfect excuse to print silly stickers._
 
-When my mother would yell _"Hermann!"_ it was always a guessing game who was supposed to answer. Sometimes I could tell by the tone of voice, especially if I knew that it was either me or my father who was in trouble.
+When my mother yelled _"Hermann!"_ it was always a guessing game who was supposed to answer. Sometimes I could tell by her tone of voice, especially if I knew that it was either me or my father who was in trouble.
 
-Sometimes it was hard to decipher who the intended recipient for letters and packets was. I can't remember how often I had to explain insurance companies, banks or automobile clubs (looking at you, ADAC) that my father and I are not the same person.
+Deciphering the intended recipient for letters and packets was annoying. So was explaining insurance companies, banks or automobile clubs (looking at you, ADAC) that my father and I are not the same person.
 
-The worst memory I have, though, is answering the phone. Having a small handyman shop, my father often went out to install or repair things. Living in a small town in the 90s and early 00s, a lot of communication was done over landline phones. My parents always encouraged me and my siblings to pick up the phone in order to help them. For me, this was always a desaster. Once I started sounding exactly like my father people couldn't tell us apart by listening to us speaking. Also, answering the phone with _"Hello, this is Hermann Vocke speaking"_ (of course I said this in German, not English) didn't help avoiding that confusion at all. After a couple dozen calls from strangers who rambled about their broken washing machines, ordered parts for their dishwasher or yelled at me because they were not happy with "my" previous job, I simply refused to answer the phone. I suspect this was the root cause for my anxiety of talking to strangers on the phone for years to come.
+The worst memory I have, though, is answering the phone. Having a small handyman shop, my father often went out to install or repair things. Living in a small town in the 90s and early 00s, a lot of communication was done over landline phones. My parents always encouraged me and my siblings to pick up the phone to help them. 
 
-Luckily enough, my family was good with nicknames. Growing up, I had quite a couple of them. Some a little more playful or awkward, some more presentable. The one that ultimately stuck was _"Ham"_ (pronounced either _hæm_ - as in the English word for porky meat or _ha:m_ with a German pronunciation, both are fine).
+This was a desaster.
+
+Once I started to sound exactly like my father people couldn't tell us apart on the phone. And answering the phone with _"Hello, this is Hermann Vocke speaking"_ (of course I said this in German, not English) did not help avoiding that confusion at all. After a couple dozen calls from strangers who rambled about their broken washing machines, ordered parts for their dishwasher or yelled at me because they were not happy with "my" previous job, I simply refused to answer the phone. I suspect this was the root cause for my anxiety of talking to strangers on the phone for years to come.
+
+Luckily enough, my family was good with nicknames. Growing up, I had quite a couple of them. Some were more playful, some were super awkward, and some more presentable. The one that ultimately stuck was _"Ham"_ (pronounced either _[hæm]_ - as in the English word for porky meat or _[ha:m]_ with a German pronunciation, both are fine).
 
 _Ham_ or _Häm_ is a quite common nickname for people named _Hermann_ where I grew up. When [Low German ("Plattdeutsch")](https://en.wikipedia.org/wiki/Low_German) was the main spoken language about two generations ago, Hermanns became Häms the same way as Heinrichs became Hinnerks. For extra credit, you'd put the last name in front and use it in a possesive way: _"Vocken Häm"_.
 
@@ -30,6 +34,6 @@ Over the past couple of years, I embraced that name more and more as it has some
 3. **It's personal.** With its origin in a regional dialect there's a regional touch to it.
 4. **It's fun.** People usually think of the meaty product first and are confused. Being a legit name of Low German origin it has nothing to do with meat, of course. Still, it allows me to embrace this double meaning in a tongue-in-cheek way. Like printing hundreds of really spiffy _ham_ vinyl stickers that I can put on my stuff and hand out to people to remember me.
 
-Being _Ham_ has always been a lot of fun. The name has got personality and charm and that's why I love it ♥
+Being _Ham_ has always been a lot of fun. The name has got personality and charm and that's why I love it. ♥️
 
-Ham
+Ham 🍖
