@@ -91,53 +91,40 @@ Depending on your color scheme (I'm using [base16-ocean-dark](https://github.com
     ######################
 
     # loud or quiet?
-    set-option -g visual-activity off
-    set-option -g visual-bell off
-    set-option -g visual-silence off
-    set-window-option -g monitor-activity off
-    set-option -g bell-action none
+    set -g visual-activity off
+    set -g visual-bell off
+    set -g visual-silence off
+    setw -g monitor-activity off
+    set -g bell-action none
 
     #  modes
     setw -g clock-mode-colour colour5
-    setw -g mode-attr bold
-    setw -g mode-fg colour1
-    setw -g mode-bg colour18
+    setw -g mode-style 'fg=colour1 bg=colour18 bold'
 
     # panes
-    set -g pane-border-bg colour0
-    set -g pane-border-fg colour19
-    set -g pane-active-border-bg colour0
-    set -g pane-active-border-fg colour9
+    set -g pane-border-style 'fg=colour19 bg=colour0'
+    set -g pane-active-border-style 'bg=colour0 fg=colour9'
 
     # statusbar
     set -g status-position bottom
     set -g status-justify left
-    set -g status-bg colour18
-    set -g status-fg colour137
-    set -g status-attr dim
+    set -g status-style 'bg=colour18 fg=colour137 dim'
     set -g status-left ''
-    set -g status-right '#[fg=colour233,bg=colour19,bold] %d/%m #[fg=colour233,bg=colour8,bold] %H:%M:%S '
+    set -g status-right '#[fg=colour233,bg=colour19] %d/%m #[fg=colour233,bg=colour8] %H:%M:%S '
     set -g status-right-length 50
     set -g status-left-length 20
 
-    setw -g window-status-current-fg colour1
-    setw -g window-status-current-bg colour19
-    setw -g window-status-current-attr bold
+    setw -g window-status-current-style 'fg=colour1 bg=colour19 bold'
     setw -g window-status-current-format ' #I#[fg=colour249]:#[fg=colour255]#W#[fg=colour249]#F '
 
-    setw -g window-status-fg colour9
-    setw -g window-status-bg colour18
-    setw -g window-status-attr none
+    setw -g window-status-style 'fg=colour9 bg=colour18'
     setw -g window-status-format ' #I#[fg=colour237]:#[fg=colour250]#W#[fg=colour244]#F '
 
-    setw -g window-status-bell-attr bold
-    setw -g window-status-bell-fg colour255
-    setw -g window-status-bell-bg colour1
+    setw -g window-status-bell-style 'fg=colour255 bg=colour1 bold'
 
     # messages
-    set -g message-attr bold
-    set -g message-fg colour232
-    set -g message-bg colour16
+    set -g message-style 'fg=colour232 bg=colour16 bold'
+
 
 ## A Word of Caution
 I took care of explaining and documenting all suggested changes in this post to make it easy for you to understand what they do and to decide if this is something you want for your tmux.conf as well.
