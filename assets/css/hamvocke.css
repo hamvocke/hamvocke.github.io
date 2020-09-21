@@ -154,6 +154,11 @@ h1.title {
     margin-top: 120px;
 }
 
+#home .image img, #about .image img {
+    height: 180px;
+    width: 180px;
+}
+
 #blog {
     margin-top: 20px;
     margin-bottom: 50px;
