@@ -5,12 +5,13 @@ layout: default
 <h1 class="post-title">{{ page.title }}</h1>
 <div class="meta-info">
   <div class="tags">
-    <i class="fa fa-tag"></i>
+    <img src="/assets/img/icons/tag.svg" alt="tag icon" height="16" width="16">
     {{ page.tags | array_to_sentence_string }}
   </div>
 
   <div class="post-date">
-    <i class="fa fa-calendar-o"></i> {{ page.date | date_to_string }}
+    <img src="/assets/img/icons/calendar.svg" alt="calendar icon" height="16" width="16">
+    {{ page.date | date_to_string }}
   </div>
 
   {% include reading_time.html %}
@@ -21,27 +22,16 @@ layout: default
 </div>
 
 <div class="author">
-  <img src="/assets/img/ham.jpg" class="img-circle" alt="photo ham">
+  <img src="/assets/img/ham.jpg" class="profile img-circle" alt="photo ham">
   <h4>Ham Vocke</h4>
   <p class="lead">
   Ham is a software developer at <a href="https://www.stackoverflow.com">Stack&nbsp;Overflow</a>. Previously, he was a consultant at <a href="https://www.thoughtworks.com">ThoughtWorks</a>. He helps teams deliver great software and is excited about learning and teaching new things.</a>
   <div class="contact">
     <div class="icons">
-      <a href="mailto:ham@hamvocke.com">
-        <i class="far fa-envelope"></i>
-      </a> &nbsp;
-      <a href="https://github.com/hamvocke">
-        <i class="fab fa-github"></i>
-      </a> &nbsp;
-      <a href="https://twitter.com/hamvocke">
-        <i class="fab fa-twitter"></i>
-      </a> &nbsp;
-      <a href="https://www.xing.com/profile/Hermann_Vocke">
-        <i class="fab fa-xing"></i>
-      </a> &nbsp;
-      <a href="https://www.linkedin.com/in/hamvocke/">
-        <i class="fab fa-linkedin"></i>
-      </a>
+      <a href="mailto:ham@hamvocke.com"><img src="/assets/img/icons/mail.svg" alt="mail icon" height="20" width="20"></a> &nbsp;
+      <a href="https://github.com/hamvocke"><img src="/assets/img/icons/github.svg" alt="gitub icon" height="20" width="20"></a> &nbsp;
+      <a href="https://twitter.com/hamvocke"><img src="/assets/img/icons/twitter.svg" alt="twitter icon" height="20" width="20"></a> &nbsp;
+      <a href="https://www.linkedin.com/in/hamvocke"><img src="/assets/img/icons/linkedin.svg" alt="linkedin icon" height="20" width="20"></a>
     </div>
   </div>
 </div>

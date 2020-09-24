@@ -105,6 +105,10 @@ pre > code {
     white-space: pre;
 }
 
+img {
+    vertical-align: middle;
+}
+
 #logo {
     text-align: center;
     margin: 15px 4px;
@@ -177,7 +181,7 @@ nav ul li a {
 }
 
 nav ul li a:focus, nav ul li a:hover {
-    color: #E74C3C
+    color: #E74C3C;
 }
 
 h1.title {
@@ -211,6 +215,10 @@ h1.title {
 #blog {
     margin-top: 20px;
     margin-bottom: 50px;
+}
+
+#blog .date img {
+    vertical-align: baseline;
 }
 
 #text {
@@ -255,7 +263,7 @@ h1.title {
     margin-top: 4px;
 }
 
-.author img {
+.author img.profile {
     height: 80px;
     width: 80px;
     position: absolute;
@@ -388,7 +396,7 @@ h1.title {
 
 .pager li > a {
     display: inline-block;
-    padding: 5px 14px;
+    padding: 6px 10px;
     border: 1px solid #eee;
     border-radius: 16px;
 }
