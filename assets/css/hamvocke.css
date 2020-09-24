@@ -75,21 +75,21 @@ code {
     color: #333;
     border: 1px solid #ccc;
     border-radius: 4px;
+    word-break: break-word;
     white-space: nowrap;
 }
 
 pre {
     display: block;
-    padding: 8px;
+    padding: 12px;
     margin: 0 0 1.5em;
     font-size: 14px;
     line-height: 1.4;
     color: #333;
-    word-break: break-all;
-    word-wrap: break-word;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
     border-radius: 4px;
+    overflow: auto;
 }
 
 pre code {
@@ -98,6 +98,7 @@ pre code {
     color: inherit;
     background-color: transparent;
     border-radius: 0;
+    word-break: normal;
 }
 
 pre > code {
