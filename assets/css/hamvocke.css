@@ -1,17 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-size: 18px;
     font-family: 'Open Sans', sans-serif;
-}
-
-h1, h2, h3, h4 {
-    font-family: 'Roboto Slab', sans-serif;
-    color: #222;
 }
 
 abbr {
     font-variant: small-caps;
     font-size: 1.1em;
     text-decoration: none;
+}
+
+hr {
+    height: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Roboto Slab', sans-serif;
+    color: #222;
+    margin-bottom: 10px;
 }
 
 h1.post-title {
@@ -27,6 +40,10 @@ h2, h3, h4 {
     font-weight: 700;
 }
 
+h2 {
+    font-size: 30px;
+}
+
 h3 {
     font-size: 24px;
 }
@@ -38,25 +55,52 @@ h4 {
 p {
     line-height: 1.5em;
     color: #444;
-    margin-bottom: 1.5em;
+    margin: 0 0 1.5em;
 }
 
 a {
+    text-decoration: none;
     color: #E74C3C;
 }
 
-a:hover {
+a:focus, a:hover {
     text-decoration: none;
+    color: #222;
 }
 
 code {
+    padding: 2px 4px;
+    font-size: 90%;
     background: #f5f5f5;
     color: #333;
     border: 1px solid #ccc;
+    border-radius: 4px;
     white-space: nowrap;
 }
 
-pre>code {
+pre {
+    display: block;
+    padding: 8px;
+    margin: 0 0 1.5em;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+pre code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+pre > code {
     border: none;
     white-space: pre;
 }
@@ -70,6 +114,7 @@ pre>code {
     margin: 4px;
     height: 32px;
     width: 32px;
+    vertical-align: middle;
 }
 
 #logo div.logo-text {
@@ -129,6 +174,10 @@ nav ul li a {
     display: inline-block;
     padding: 12px 18px;
     color: #444;
+}
+
+nav ul li a:focus, nav ul li a:hover {
+    color: #E74C3C
 }
 
 h1.title {
@@ -219,6 +268,7 @@ h1.title {
 .author p.lead {
     font-size: 0.9em;
     margin-bottom: 0;
+    font-weight: 300;
 }
 
 .author .contact {
@@ -290,20 +340,12 @@ h1.title {
     margin: 2.5em 0;
     border-left: 8px solid #F7CA88;
     padding: 6px;
+    line-height: 1.5em;
 }
 
 .intro {
     font-size: 1.2em;
     line-height: 1.4em;
-}
-
-.pager {
-    margin-top: 50px;
-}
-
-.page_number {
-    margin: 0 30px;
-    color: #777;
 }
 
 .comments {
@@ -326,6 +368,44 @@ h1.title {
 
 .float-right {
     float: right;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+
+.pager {
+    padding-left: 0;
+    margin: 50px 0 20px;
+    text-align: center;
+    list-style: none;
+}
+
+.pager li {
+    display: inline;
+}
+
+.pager li > a {
+    display: inline-block;
+    padding: 5px 14px;
+    border: 1px solid #eee;
+    border-radius: 16px;
+}
+
+.pager li > a:focus, .pager li > a:hover {
+    text-decoration: none;
+    background-color: #eee;
+}
+
+.pager .disabled > a {
+    color: #777;
+    background-color: #fff;
+}
+
+.page_number {
+    margin: 0 30px;
+    color: #777;
 }
 
 @media (max-width: 768px) {
