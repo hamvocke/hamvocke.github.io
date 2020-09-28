@@ -5,12 +5,12 @@ layout: default
 <h1 class="post-title">{{ page.title }}</h1>
 <div class="meta-info">
   <div class="tags">
-    <img src="/assets/img/icons/tag.svg" alt="tag icon" height="16" width="16">
+    {% include icon.html icon="tag" %}
     {{ page.tags | array_to_sentence_string }}
   </div>
 
   <div class="post-date">
-    <img src="/assets/img/icons/calendar.svg" alt="calendar icon" height="16" width="16">
+    {% include icon.html icon="calendar" %}
     {{ page.date | date_to_string }}
   </div>
 
@@ -28,10 +28,10 @@ layout: default
   Ham is a software developer at <a href="https://www.stackoverflow.com">Stack&nbsp;Overflow</a>. Previously, he was a consultant at <a href="https://www.thoughtworks.com">ThoughtWorks</a>. He helps teams deliver great software and is excited about learning and teaching new things.</a>
   <div class="contact">
     <div class="icons">
-      <a href="mailto:ham@hamvocke.com"><img src="/assets/img/icons/mail.svg" alt="mail icon" height="20" width="20"></a> &nbsp;
-      <a href="https://github.com/hamvocke"><img src="/assets/img/icons/github.svg" alt="gitub icon" height="20" width="20"></a> &nbsp;
-      <a href="https://twitter.com/hamvocke"><img src="/assets/img/icons/twitter.svg" alt="twitter icon" height="20" width="20"></a> &nbsp;
-      <a href="https://www.linkedin.com/in/hamvocke"><img src="/assets/img/icons/linkedin.svg" alt="linkedin icon" height="20" width="20"></a>
+      <a href="mailto:ham@hamvocke.com">{% include icon.html icon="mail" %}</a> &nbsp;
+      <a href="https://github.com/hamvocke">{% include icon.html icon="github" %}</a> &nbsp;
+      <a href="https://twitter.com/hamvocke">{% include icon.html icon="twitter" %}</a> &nbsp;
+      <a href="https://www.linkedin.com/in/hamvocke">{% include icon.html icon="linkedin" %}</a>
     </div>
   </div>
 </div>

@@ -68,6 +68,10 @@ a:focus, a:hover {
     color: #222;
 }
 
+a svg:hover, a svg:focus {
+    stroke: #E74C3C;
+}
+
 code {
     padding: 2px 4px;
     font-size: 90%;
@@ -145,6 +149,10 @@ footer {
     border-top: 1px solid #ddd;
     margin: 50px auto 50px;
     width: 80%;
+}
+
+footer a {
+    color: #444;
 }
 
 footer .contact {
