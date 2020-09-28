@@ -160,13 +160,14 @@ footer .contact .icons {
 }
 
 nav {
-    line-height: 2em;
-    text-align: center;
+    max-width: 480px;
+    margin: auto;
 }
 
 nav ul {
-    display: block;
-    margin: 1em 0 1em 0;
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0 0 0;
     padding: 0;
 }
 
@@ -177,12 +178,16 @@ nav ul li {
 
 nav ul li a {
     display: inline-block;
-    padding: 12px 18px;
+    padding: 10px 10px;
     color: #444;
 }
 
 nav ul li a:focus, nav ul li a:hover {
     color: #E74C3C;
+}
+
+nav .nav-icon {
+    display: inline;
 }
 
 h1.title {
@@ -446,5 +451,11 @@ h1.title {
     	bottom: 12px;
     	left: 12px;
     	width: 300px;
+    }
+}
+
+@media(max-width: 320px) {
+    nav .nav-icon {
+        display: none;
     }
 }
