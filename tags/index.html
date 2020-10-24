@@ -14,7 +14,7 @@ title: hamvocke.com | Tags
     <li>
         <a href="{{ post.url }}">{{ post.title }}</a>
         <div class="meta-info">
-            <img src="/assets/img/icons/calendar.svg" alt="calendar icon" height="16" width="16"> {{ post.date | date: "%-d %B, %Y"  }}
+            {% include icon.html icon="calendar" %} {{ post.date | date: "%-d %B, %Y"  }}
         </div>
     </li>
     {% endif %}

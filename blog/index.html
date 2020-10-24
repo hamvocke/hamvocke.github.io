@@ -10,7 +10,8 @@ title: hamvocke.com | Hermann Vocke's Blog
 		<h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
 		<p>
 			<span class="date">
-				<img src="/assets/img/icons/calendar.svg" alt="calendar icon" height="16" width="16"> {{ post.date | date_to_string }}
+				{% include icon.html icon="calendar" %}
+				{{ post.date | date_to_string }}
 			</span>
 		</p>
 		<p>{{ post.excerpt }}</p>
