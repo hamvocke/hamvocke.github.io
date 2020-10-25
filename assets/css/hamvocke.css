@@ -1,3 +1,18 @@
+:root {
+    --black: #222;
+    --white: #fefefe;
+    --gray-1: #444;
+    --gray-2: #888;
+    --gray-3: #bbb;
+    --gray-4: #eee;
+    --gray-1: #444;
+    --gray-3: #bbb;
+    --gray-4: #eee;
+    --gray-5: #f5f5f5;
+    --accent: #E74C3C;
+    --light-accent: #F7CA88;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -5,6 +20,7 @@
 body {
     font-size: 18px;
     font-family: 'Open Sans', sans-serif;
+    background-color: var(--white);
 }
 
 abbr {
@@ -18,12 +34,12 @@ hr {
     margin-top: 20px;
     margin-bottom: 20px;
     border: 0;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--gray-4);
 }
 
 h1, h2, h3, h4 {
     font-family: 'Roboto Slab', sans-serif;
-    color: #222;
+    color: var(--black);
     margin-bottom: 10px;
 }
 
@@ -54,30 +70,30 @@ h4 {
 
 p {
     line-height: 1.5em;
-    color: #444;
+    color: var(--gray-1);
     margin: 0 0 1.5em;
 }
 
 a {
     text-decoration: none;
-    color: #E74C3C;
+    color: var(--accent);
 }
 
 a:focus, a:hover {
     text-decoration: none;
-    color: #222;
+    color: var(--black);
 }
 
 a svg:hover, a svg:focus {
-    stroke: #E74C3C;
+    stroke: var(--accent);
 }
 
 code {
     padding: 2px 4px;
     font-size: 90%;
-    background: #f5f5f5;
-    color: #333;
-    border: 1px solid #ccc;
+    background: var(--gray-5);
+    color: var(--gray-1);
+    border: 1px solid var(--gray-3);
     border-radius: 4px;
     word-break: break-word;
     white-space: nowrap;
@@ -89,9 +105,9 @@ pre {
     margin: 0 0 1.5em;
     font-size: 14px;
     line-height: 1.4;
-    color: #333;
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
+    color: var(--gray-1);
+    background-color: var(--gray-5);
+    border: 1px solid var(--gray-3);
     border-radius: 4px;
     overflow: auto;
 }
@@ -135,31 +151,31 @@ img {
     vertical-align: middle;
     font-size: 24px;
     margin: 0;
-    color: #E74C3C;
+    color: var(--accent);
 }
 
 #logo .subtitle {
     font-style: italic;
-    color: #aaa;
+    color: var(--gray-2);
     font-weight: 300;
 }
 
 footer {
     height: 3em;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--gray-4);
     margin: 50px auto 50px;
     width: 80%;
 }
 
 footer a {
-    color: #444;
+    color: var(--gray-2);
 }
 
 footer .contact {
     margin: 10px 0 0 10px;
     text-align: center;
     font-size: 0.8em;
-    color: #aaa;
+    color: var(--gray-2);
 }
 
 footer .contact .icons {
@@ -187,11 +203,11 @@ nav ul li {
 nav ul li a {
     display: inline-block;
     padding: 10px 10px;
-    color: #444;
+    color: var(--gray-1);
 }
 
 nav ul li a:focus, nav ul li a:hover {
-    color: #E74C3C;
+    color: var(--accent);
 }
 
 nav .nav-icon {
@@ -208,7 +224,7 @@ h1.title {
 }
 
 #home p.lead {
-    color: #aaa;
+    color: var(--gray-2);
     font-size: 1.5em;
     margin-top: 30px;
     font-weight: 300;
@@ -263,11 +279,11 @@ h1.title {
 }
 
 .author {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
+    border-top: 1px solid var(--gray-3);
+    border-bottom: 1px solid var(--gray-3);
     padding: 35px 0 24px 0;
     margin-top: 72px;
-    background: #fff;
+    background: var(--white);
     position: relative;
 }
 
@@ -284,7 +300,7 @@ h1.title {
     top: -45px;
     left: 50%;
     margin-left: -40px;
-    border: 4px solid #fff;
+    border: 4px solid var(--white);
 }
 
 .author p.lead {
@@ -306,7 +322,7 @@ h1.title {
     font-weight: 400;
     font-style: italic;
     font-size: 0.8em;
-    color: #aaa;
+    color: var(--gray-2);
     margin-bottom: 1.5em;
 }
 
@@ -360,7 +376,7 @@ h1.title {
 
 .post div.highlighted {
     margin: 2.5em 0;
-    border-left: 8px solid #F7CA88;
+    border-left: 8px solid var(--light-accent);
     padding: 6px;
     line-height: 1.5em;
 }
@@ -375,8 +391,8 @@ h1.title {
 }
 
 .skills .tag {
-    background: #444;
-    color: #fff;
+    background: var(--gray-1);
+    color: var(--gray-5);
     padding: 4px 12px;
     margin: 4px;
     border-radius: 6px;
@@ -411,23 +427,23 @@ h1.title {
 .pager li > a {
     display: inline-block;
     padding: 6px 10px;
-    border: 1px solid #eee;
+    border: 1px solid var(--gray-5);
     border-radius: 16px;
 }
 
 .pager li > a:focus, .pager li > a:hover {
     text-decoration: none;
-    background-color: #eee;
+    background-color: var(--gray-5);
 }
 
-.pager .disabled > a {
-    color: #777;
-    background-color: #fff;
+.pager .disabled > a, .disabled > a:hover {
+    color: var(--gray-3);
+    background-color: var(--gray-5);
 }
 
 .page_number {
     margin: 0 30px;
-    color: #777;
+    color: var(--gray-1);
 }
 
 @media (max-width: 768px) {
