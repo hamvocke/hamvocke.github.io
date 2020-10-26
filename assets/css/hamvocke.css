@@ -1,6 +1,7 @@
 :root {
     --black: #2d4059;
     --white: #f6f6f6;
+    --code: #e4e4ea;
     --accent: #E74C3C;
     --light-accent: #F7CA88;
 }
@@ -94,8 +95,7 @@ a svg:hover, a svg:focus {
 code {
     padding: 2px 4px;
     font-size: 90%;
-    border: 1px solid var(--light-accent);
-    background: #FCECD4;
+    background: var(--code);
     color: var(--black);
     border-radius: 4px;
     word-break: break-word;
@@ -109,8 +109,7 @@ pre {
     font-size: 14px;
     line-height: 1.4;
     color: var(--black);
-    background: var(--white);
-    border: 1px solid var(--black);
+    background: var(--code);
     border-radius: 4px;
     overflow: auto;
 }
