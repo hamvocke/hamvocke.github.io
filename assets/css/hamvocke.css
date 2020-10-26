@@ -1,11 +1,6 @@
 :root {
-    --black: #222;
-    --white: #fefefe;
-    --gray-1: #444;
-    --gray-2: #888;
-    --gray-3: #bbb;
-    --gray-4: #eee;
-    --gray-5: #f5f5f5;
+    --black: #2d4059;
+    --white: #f6f6f6;
     --accent: #E74C3C;
     --light-accent: #F7CA88;
 }
@@ -18,6 +13,7 @@ body {
     font-size: 18px;
     font-family: 'Open Sans', sans-serif;
     background-color: var(--white);
+    color: var(--black);
 }
 
 abbr {
@@ -31,7 +27,7 @@ hr {
     margin-top: 20px;
     margin-bottom: 20px;
     border: 0;
-    border-top: 1px solid var(--gray-4);
+    border-top: 1px solid var(--white);
 }
 
 h1, h2, h3, h4 {
@@ -67,7 +63,7 @@ h4 {
 
 p {
     line-height: 1.5em;
-    color: var(--gray-1);
+    color: var(--black);
     margin: 0 0 1.5em;
 }
 
@@ -88,9 +84,9 @@ a svg:hover, a svg:focus {
 code {
     padding: 2px 4px;
     font-size: 90%;
-    background: var(--gray-5);
-    color: var(--gray-1);
-    border: 1px solid var(--gray-3);
+    border: 1px solid var(--light-accent);
+    background: #FCECD4;
+    color: var(--black);
     border-radius: 4px;
     word-break: break-word;
     white-space: nowrap;
@@ -102,9 +98,9 @@ pre {
     margin: 0 0 1.5em;
     font-size: 14px;
     line-height: 1.4;
-    color: var(--gray-1);
-    background-color: var(--gray-5);
-    border: 1px solid var(--gray-3);
+    color: var(--black);
+    background: var(--white);
+    border: 1px solid var(--black);
     border-radius: 4px;
     overflow: auto;
 }
@@ -153,26 +149,25 @@ img {
 
 #logo .subtitle {
     font-style: italic;
-    color: var(--gray-2);
+    color: var(--black);
     font-weight: 300;
 }
 
 footer {
     height: 3em;
-    border-top: 1px solid var(--gray-4);
     margin: 50px auto 50px;
     width: 80%;
 }
 
 footer a {
-    color: var(--gray-2);
+    color: var(--black);
 }
 
 footer .contact {
     margin: 10px 0 0 10px;
     text-align: center;
     font-size: 0.8em;
-    color: var(--gray-2);
+    color: var(--black);
 }
 
 footer .contact .icons {
@@ -200,7 +195,7 @@ nav ul li {
 nav ul li a {
     display: inline-block;
     padding: 10px 10px;
-    color: var(--gray-1);
+    color: var(--black);
 }
 
 nav ul li a:focus, nav ul li a:hover {
@@ -221,7 +216,7 @@ h1.title {
 }
 
 #home p.lead {
-    color: var(--gray-2);
+    color: var(--black);
     font-size: 1.5em;
     margin-top: 30px;
     font-weight: 300;
@@ -276,8 +271,6 @@ h1.title {
 }
 
 .author {
-    border-top: 1px solid var(--gray-3);
-    border-bottom: 1px solid var(--gray-3);
     padding: 35px 0 24px 0;
     margin-top: 72px;
     background: var(--white);
@@ -319,7 +312,7 @@ h1.title {
     font-weight: 400;
     font-style: italic;
     font-size: 0.8em;
-    color: var(--gray-2);
+    color: var(--black);
     margin-bottom: 1.5em;
 }
 
@@ -388,8 +381,8 @@ h1.title {
 }
 
 .skills .tag {
-    background: var(--gray-1);
-    color: var(--gray-5);
+    background: var(--black);
+    color: var(--white);
     padding: 4px 12px;
     margin: 4px;
     border-radius: 6px;
