@@ -221,27 +221,49 @@ h1.title {
     text-align: center;
 }
 
+del {
+    text-decoration: line-through;
+    background-color: var(--accent);
+    color: var(--white);
+    padding: 0 4px;
+}
+
+ins {
+    text-decoration: none;
+    background-color: var(--light-accent);
+    padding: 0 4px;
+}
+
 #home {
     text-align: center;
 }
 
-#home p.lead {
-    color: var(--black);
-    font-size: 1.5em;
-    margin-top: 30px;
-    font-weight: 300;
-    font-style: italic;
-    margin-bottom: 120px;
-}
-
 #home .image {
     margin: auto;
-    margin-top: 120px;
+    margin-top: 60px;
 }
 
 #home .image img, #about .image img {
-    height: 180px;
-    width: 180px;
+    height: 200px;
+    width: 200px;
+    border: 8px solid var(--light-accent);
+}
+
+#home h1.title {
+    display: inline-block;
+    font-size: 2.1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-bottom: 6px solid var(--light-accent);
+}
+
+#home p {
+    color: var(--black);
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 1em;
 }
 
 #blog {
@@ -445,14 +467,6 @@ h1.title {
     #text {
 	    width: 100%;
       padding: 15px;
-    }
-
-    #home .image {
-	    margin-top: 40px;
-    }
-
-    #home p.lead {
-	    margin-bottom: 40px;
     }
 
     h1.post-title {
