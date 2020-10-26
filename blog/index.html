@@ -19,19 +19,19 @@ title: hamvocke.com | Hermann Vocke's Blog
 		{% endfor %}
 	</div>
 
-	<ul class="pager">
+	<div class="pager">
 		{% if paginator.previous_page %}
-		<li><a href="{{ paginator.previous_page_path }}">{% include icon.html icon="chevron-left" %}</a></li>
+		<a href="{{ paginator.previous_page_path }}">{% include icon.html icon="chevron-left" %}</a>
 		{% else %}
-		<li class="disabled"><a href="{{ paginator.previous_page_path }}">{% include icon.html icon="chevron-left" %}</a></li>
+		<a class="disabled" href="{{ paginator.previous_page_path }}">{% include icon.html icon="chevron-left" %}</a>
 		{% endif %}
 		{% if paginator.total_pages %}
-		<span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+		<span class="page_number ">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
 		{% endif %}
 		{% if paginator.next_page %}
-		<li><a href="{{ paginator.next_page_path }}">{% include icon.html icon="chevron-right" %}</a></li>
+		<a href="{{ paginator.next_page_path }}">{% include icon.html icon="chevron-right" %}</a>
 		{% else %}
-		<li class="disabled"><a href="{{ paginator.next_page_path }}">{% include icon.html icon="chevron-right" %}</a></li>
+		<a class="disabled" href="{{ paginator.next_page_path }}">{% include icon.html icon="chevron-right" %}</a>
 		{% endif %}
-	</ul>
+	</div>
 </div>

@@ -409,38 +409,33 @@ h1.title {
     border-radius: 50%;
 }
 
-
 .pager {
-    padding-left: 0;
     margin: 50px 0 20px;
-    text-align: center;
-    list-style: none;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
-.pager li {
-    display: inline;
-}
-
-.pager li > a {
-    display: inline-block;
-    padding: 6px 10px;
-    border: 1px solid var(--gray-5);
+.pager a {
+    display: inline-flex;
+    padding: 12px 10px;
     border-radius: 16px;
+    align-items: center;
 }
 
-.pager li > a:focus, .pager li > a:hover {
+.pager a:focus, .pager a:hover {
     text-decoration: none;
-    background-color: var(--gray-5);
+    background-color: var(--light-accent);
 }
 
-.pager .disabled > a, .disabled > a:hover {
-    color: var(--gray-3);
-    background-color: var(--gray-5);
+.pager a.disabled  {
+    visibility: hidden;
 }
 
 .page_number {
-    margin: 0 30px;
-    color: var(--gray-1);
+    margin: 0 12px;
+    color: var(--black);
 }
 
 @media (max-width: 768px) {
