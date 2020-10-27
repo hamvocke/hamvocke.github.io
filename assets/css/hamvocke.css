@@ -257,7 +257,7 @@ ins {
 }
 
 #home .image img, #about .image img {
-    margin-top: 32px;
+    margin: 32px 0;
     height: 200px;
     width: 200px;
     border: 8px solid var(--light-accent);
@@ -266,9 +266,7 @@ ins {
 #home h1.title {
     display: inline-block;
     font-size: 2.1em;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    border-bottom: 6px solid var(--light-accent);
+    margin: 0 0 1em 0;
 }
 
 #home p {
