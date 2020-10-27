@@ -195,7 +195,7 @@ nav ul li {
 nav ul li a {
     display: inline-block;
     padding: 12px;
-    margin: 0 6px;
+    margin: 0;
     color: var(--black);
 }
 
@@ -209,7 +209,8 @@ nav .nav-icon {
 
 main#content {
     text-align: left;
-    width: 600px;
+    max-width: 600px;
+    min-width: 0;
     margin: auto;
 }
 
@@ -473,7 +474,7 @@ ins {
 
 @media (max-width: 768px) {
     main#content {
-	    width: 100%;
+	  max-width: 100%;
       padding: 16px;
     }
 
@@ -495,7 +496,7 @@ ins {
     }
 }
 
-@media(max-width: 320px) {
+@media(max-width: 360px) {
     nav .nav-icon {
         display: none;
     }
