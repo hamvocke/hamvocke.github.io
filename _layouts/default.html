@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="author" content="Hermann Vocke">
+  <meta name="author" content="Ham Vocke">
   <meta name="description" content="{{ site.description }}">
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
   <link rel="author" href="/humans.txt" />
@@ -31,7 +31,7 @@
       <a href="/" title="home">
         <img src="/assets/img/logo128.png" alt="ham logo">
         <h1>{{ site.title }}</h1>
-        <p class="subtitle">writing stuff about software</p>
+        <p class="subtitle">{{ site.subtitle }}</p>
       </a>
     </div>
     <nav role="navigation">
@@ -54,7 +54,7 @@
     <div class="contact">
       © 2014-2020 Hermann Vocke
       <div class="icons">
-        <a href="mailto:ham@hamvocke.com">{% include icon.html icon="mail" %}</a> &nbsp;
+        <a href="mailto:{{site.email}}">{% include icon.html icon="mail" %}</a> &nbsp;
         <a href="https://github.com/hamvocke">{% include icon.html icon="github" %}</a> &nbsp;
         <a href="https://twitter.com/hamvocke">{% include icon.html icon="twitter" %}</a> &nbsp;
         <a href="https://www.linkedin.com/in/hamvocke">{% include icon.html icon="linkedin" %}</a>

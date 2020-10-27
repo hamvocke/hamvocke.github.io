@@ -14,8 +14,9 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Ham Vocke
-email: hermann.vocke@gmail.com
-description: Hermann Vocke writing random bits around software development
+subtitle: building software like it's 1999
+email: ham@hamvocke.com
+description: Hermann Vocke writing about software development, mostly
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.hamvocke.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: hamvocke
