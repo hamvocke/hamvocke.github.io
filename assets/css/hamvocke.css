@@ -215,9 +215,8 @@ main#content {
 }
 
 footer#footer {
-    height: 3em;
-    margin: 50px auto 50px;
-    width: 80%;
+    margin: 12px auto 12px;
+    padding: 12px;
 }
 
 footer#footer a {
@@ -225,14 +224,13 @@ footer#footer a {
 }
 
 footer#footer .contact {
-    margin: 10px 0 0 10px;
     text-align: center;
     font-size: 0.8em;
     color: var(--black);
 }
 
 footer#footer .contact .icons {
-    margin: 10px 0 0 0;
+    margin: 12px 0 0 0;
     font-size: 1.2em;
 }
 
@@ -256,11 +254,6 @@ ins {
 
 #home {
     text-align: center;
-}
-
-#home .image {
-    margin: auto;
-    margin-top: 60px;
 }
 
 #home .image img, #about .image img {
