@@ -10,11 +10,17 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-size: 18px;
     font-family: 'Open Sans', sans-serif;
     background-color: var(--white);
     color: var(--black);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 
 abbr {
@@ -132,78 +138,64 @@ img {
     vertical-align: middle;
 }
 
+ul, ol {
+    margin-bottom: 1.5em;
+}
+
+ul li, ol li {
+    line-height: 1.5em;
+    margin-top: 0.5em;
+}
+
+#topBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 #logo {
     text-align: center;
-    margin: 15px 4px;
+    margin: 16px;
 }
 
 #logo img {
-    margin: 4px;
+    margin: 0 8px;
     height: 32px;
     width: 32px;
-    vertical-align: middle;
 }
 
-#logo div.logo-text {
-    text-align: left;
+#logo .subtitle {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--black);
+    margin: 0;
 }
 
 #logo h1 {
-    display: inline-block;
+    display: inline;
     vertical-align: middle;
     font-size: 24px;
     margin: 0;
     color: var(--accent);
 }
 
-#logo .subtitle {
-    font-style: italic;
-    color: var(--black);
-    font-weight: 300;
-}
-
-footer {
-    height: 3em;
-    margin: 50px auto 50px;
-    width: 80%;
-}
-
-footer a {
-    color: var(--black);
-}
-
-footer .contact {
-    margin: 10px 0 0 10px;
-    text-align: center;
-    font-size: 0.8em;
-    color: var(--black);
-}
-
-footer .contact .icons {
-    margin: 10px 0 0 0;
-    font-size: 1.2em;
-}
-
-nav {
-    max-width: 480px;
-    margin: auto;
-}
-
 nav ul {
     display: flex;
-    justify-content: space-between;
-    margin: 1em 0 0 0;
+    justify-content: center;
+    margin: 0;
     padding: 0;
 }
 
 nav ul li {
-    display: inline;
+    line-height: 1em;
+    margin: 0;
     list-style-type: none;
 }
 
 nav ul li a {
     display: inline-block;
-    padding: 10px 10px;
+    padding: 12px;
+    margin: 0 6px;
     color: var(--black);
 }
 
@@ -213,6 +205,34 @@ nav ul li a:focus, nav ul li a:hover {
 
 nav .nav-icon {
     display: inline;
+}
+
+main#content {
+    text-align: left;
+    width: 600px;
+    margin: auto;
+}
+
+footer#footer {
+    height: 3em;
+    margin: 50px auto 50px;
+    width: 80%;
+}
+
+footer#footer a {
+    color: var(--black);
+}
+
+footer#footer .contact {
+    margin: 10px 0 0 10px;
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--black);
+}
+
+footer#footer .contact .icons {
+    margin: 10px 0 0 0;
+    font-size: 1.2em;
 }
 
 h1.title {
@@ -276,21 +296,6 @@ ins {
 
 #blog .post {
     margin-bottom: 48px;
-}
-
-#text {
-    text-align: left;
-    width: 600px;
-    margin: auto;
-}
-
-#text ul, #text ol {
-    margin-bottom: 1.5em;
-}
-
-#text ul li, #text ol li {
-    line-height: 1.5em;
-    margin-top: 0.5em;
 }
 
 #markdown-toc {
@@ -467,9 +472,9 @@ ins {
 }
 
 @media (max-width: 768px) {
-    #text {
+    main#content {
 	    width: 100%;
-      padding: 15px;
+      padding: 16px;
     }
 
     h1.post-title {
