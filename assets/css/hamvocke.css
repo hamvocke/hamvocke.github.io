@@ -257,6 +257,7 @@ ins {
 }
 
 #home .image img, #about .image img {
+    margin-top: 32px;
     height: 200px;
     width: 200px;
     border: 8px solid var(--light-accent);
