@@ -70,7 +70,7 @@ p {
 
 ::selection {
     background: var(--light-accent);
-    color: var(--white);
+    color: var(--black);
 }
 
 ::-moz-selection {
