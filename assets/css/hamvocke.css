@@ -397,11 +397,22 @@ ins {
     text-align: center;
 }
 
-.post div.highlighted, blockquote {
+.post div.highlighted {
     margin: 2.5em 0;
     border-left: 8px solid var(--light-accent);
     padding: 0 12px;
     line-height: 1.5em;
+}
+
+blockquote {
+    line-height: 1.5em;
+    border-left: 8px solid var(--light-accent);
+    padding: 1em;
+    margin: 1em 0 1em 1em;
+}
+
+blockquote p {
+    margin: 0;
 }
 
 .intro {
