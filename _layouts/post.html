@@ -11,7 +11,7 @@ layout: default
 
   <div class="post-date">
     {% include icon.html icon="calendar" %}
-    {{ page.date | date_to_string }}
+    <time>{{ page.date | date_to_string }}</time>
   </div>
 
   {% include reading_time.html %}
