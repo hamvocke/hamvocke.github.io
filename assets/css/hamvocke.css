@@ -370,8 +370,12 @@ ins {
     float: right;
 }
 
-.tags i {
-    margin-right: 10px;
+.feather {
+    vertical-align: bottom;
+}
+
+h2 .feather {
+    vertical-align: baseline;
 }
 
 .post img {
@@ -485,10 +489,6 @@ blockquote p {
 .page_number {
     margin: 0 12px;
     color: var(--black);
-}
-
-.feather {
-    vertical-align: bottom;
 }
 
 @media (max-width: 768px) {
