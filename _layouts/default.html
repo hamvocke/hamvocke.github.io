@@ -5,9 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="author" content="Ham Vocke">
   <meta name="description" content="{{ site.description }}">
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
   <link rel="author" href="/humans.txt" />
-  <link rel="canonical" href="https://www.hamvocke.com"/>
+  {% if page.external_url %}
+  <link rel="canonical" href="{{ page.external_url }}">
+  {% else %}
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="/feed.xml">
+  {% endif %}
   <title>{{ page.title }}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/css/normalize.css" type="text/css">
