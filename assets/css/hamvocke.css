@@ -94,8 +94,12 @@ a:focus, a:hover {
     color: var(--black);
 }
 
-a svg:hover, a svg:focus {
+a svg {
     stroke: var(--accent);
+}
+
+a:hover svg, a:focus svg {
+    stroke: var(--black);
 }
 
 code {
@@ -199,8 +203,20 @@ nav ul li a {
     color: var(--black);
 }
 
-nav ul li a:focus, nav ul li a:hover {
+nav ul li a svg {
+    stroke: var(--black);
+}
+
+nav ul li a:focus,
+nav ul li a:hover
+{
     color: var(--accent);
+}
+
+nav ul li a:hover svg,
+nav ul li a:focus svg
+{
+    stroke: var(--accent);
 }
 
 nav .nav-icon {
@@ -283,10 +299,6 @@ ins {
     margin-bottom: 50px;
 }
 
-#blog .date img {
-    vertical-align: baseline;
-}
-
 #blog .post {
     margin-bottom: 48px;
 }
@@ -344,7 +356,7 @@ ins {
 .meta-info {
     font-weight: 400;
     font-style: italic;
-    font-size: 0.8em;
+    font-size: 0.9em;
     color: var(--black);
     margin-bottom: 1.5em;
 }
@@ -473,6 +485,10 @@ blockquote p {
 .page_number {
     margin: 0 12px;
     color: var(--black);
+}
+
+.feather {
+    vertical-align: bottom;
 }
 
 @media (max-width: 768px) {
