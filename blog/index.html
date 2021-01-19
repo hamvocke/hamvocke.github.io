@@ -8,13 +8,20 @@ title: hamvocke.com | Hermann Vocke's blog
 	<div class="posts">
 		{% for post in paginator.posts %}
 		<div class="post">
-			<h1><a href="{{ post.url }}">{{ post.title }}</a></h1>
-			<p>
-				<span class="date">
-					{% include icon.html icon="calendar" %}
+			{% if post.external_url %}
+			<h2>
+				<a href="{{ post.external_url }}">{{ post.title }}</a>
+				{% include icon.html icon="external-link" %}
+			</h2>
+			{% else %}
+			<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+			{% endif %}
+			<div class="meta-info">
+				{% include icon.html icon="calendar" %}
+				<time class="date">
 					{{ post.date | date_to_string }}
-				</span>
-			</p>
+				</time>
+			</div>
 			<p>{{ post.excerpt }}</p>
 		</div>
 		{% endfor %}
