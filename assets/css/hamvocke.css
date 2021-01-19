@@ -240,14 +240,12 @@ footer#footer a {
 }
 
 footer#footer .contact {
-    text-align: center;
     font-size: 0.8em;
     color: var(--black);
 }
 
 footer#footer .contact .icons {
     margin: 12px 0 0 0;
-    font-size: 1.2em;
 }
 
 h1.title {
@@ -346,11 +344,15 @@ ins {
 
 .author .contact {
   padding-top: 12px;
-  text-align: center;
 }
 
 .author .contact a {
   padding: 12px;
+}
+
+.contact .icons {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .meta-info {
