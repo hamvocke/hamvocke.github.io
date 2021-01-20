@@ -531,7 +531,7 @@ blockquote p {
     }
 }
 
-@media(max-width: 360px) {
+@media(max-width: 576px) {
     nav .nav-icon {
         display: none;
     }
