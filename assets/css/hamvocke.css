@@ -266,6 +266,20 @@ ins {
     padding: 0 4px;
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+th, td {
+    padding: 8px 8px;
+}
+
+th {
+    border-bottom: 1px solid var(--black);
+}
+
 #home {
     text-align: center;
 }
