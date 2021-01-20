@@ -12,8 +12,7 @@ Here's what keeps me busy at the moment. [what?](https://nownownow.com/about)
 ## 👨‍💻 Side Projects
 
 ### Doppelkopf
-Work on [Doppelkopf](https://github.com/hamvocke/doppelkopf) goes on. This is my biggest time sink outside of work currently. I'm tackling the probably biggest feature I've done so far: _Multiplayer mode_. There's a lot of technical design to be done but I think I'm almost ready to get some code out there. Other than that I'm busy trying to find a good domain - ideas welcome.
-
+Work on [Doppelkopf](https://github.com/hamvocke/doppelkopf) goes on. If you've been following this blog, you might've seen that I don't shut up about this one. This is my biggest time sink outside of work currently. I'm tackling the probably biggest feature I've done so far: _Multiplayer mode_. There's a lot of technical design to be done but I think I'm almost ready to get some code out there. Other than that I'm busy trying to find a good domain - ideas welcome.
 
 ## 📚 Reading
 The last 3 books I've read, most recent at the top.
