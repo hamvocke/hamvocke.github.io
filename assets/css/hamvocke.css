@@ -323,10 +323,6 @@ th {
     margin-bottom: inherit;
 }
 
-#tags li {
-    list-style: none;
-}
-
 .author {
     padding: 35px 0 24px 0;
     margin-top: 72px;
