@@ -6,7 +6,9 @@ layout: default
 <div class="meta-info">
   <div class="tags">
     {% include icon.html icon="tag" %}
-    {{ page.tags | array_to_sentence_string }}
+    {% for tag in page.tags %}
+    <span><a href="/tags/{{ tag }}">{{ tag }}</a></span>
+    {% endfor %}
   </div>
 
   <div class="post-date">

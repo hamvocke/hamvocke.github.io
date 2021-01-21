@@ -382,6 +382,14 @@ th {
     float: right;
 }
 
+.tags span::after {
+    content: ", ";
+}
+
+.tags span:last-child::after {
+    content: "";
+}
+
 .feather {
     vertical-align: bottom;
 }
