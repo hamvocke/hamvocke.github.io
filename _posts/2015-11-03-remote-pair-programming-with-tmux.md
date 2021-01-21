@@ -2,7 +2,7 @@
 layout: post
 title: Remote Pair Programming Made Easy with SSH and tmux
 tags:
-  - command line
+  - command-line
   - programming
 excerpt: For many developers pair programming is the way to go. But pairing often becomes challenging as soon as people are working remotely. With a simple SSH and tmux setup you can have a very simple but effective setup for collaborating remotely using nothing but your command line.
 summary: Learn how to start a remote pair programming session with SSH and tmux

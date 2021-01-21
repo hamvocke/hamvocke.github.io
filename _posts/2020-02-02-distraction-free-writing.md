@@ -2,7 +2,7 @@
 layout: post
 title: Distraction-free writing with vim
 tags:
-    - command line
+    - command-line
 excerpt: Want to write without distractions and don't feel like buying an extra app for that? Here's how.
 summary: Want to write in a beautiful, distraction-free setting without ever leaving your command line? Here's how.
 image: /assets/img/uploads/goyo-vim.png

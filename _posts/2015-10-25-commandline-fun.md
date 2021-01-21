@@ -2,7 +2,7 @@
 layout: post
 title: Fun and Useless Tools for Your Command Line
 tags:
-  - command line
+  - command-line
 excerpt: There are a couple of really great tools out there that can help you getting more fun out of your day-to-day command line use. These are some of my favorites.
 comments: true
 ---
