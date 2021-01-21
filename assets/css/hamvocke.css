@@ -370,11 +370,11 @@ th {
     font-style: italic;
     font-size: 0.9em;
     color: var(--black);
-    margin-bottom: 1.5em;
+    margin-bottom: 2em;
 }
 
 .post-date {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.7em;
 }
 
 .tags {
