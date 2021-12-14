@@ -1,7 +1,7 @@
 ---
 layout: default
 title: What I'm doing now | Ham Vocke
-latest_update: 2021-01-20 19:57:00 +0100
+latest_update: 2021-12-13 08:46:00 +0100
 ---
 
 # Now
@@ -11,36 +11,26 @@ Here's what keeps me busy at the moment. [what?](https://nownownow.com/about)
 
 ## 👨‍💻 Side Projects
 
-### Doppelkopf
-Work on [Doppelkopf](https://github.com/hamvocke/doppelkopf) goes on. If you've been following this blog, you might've seen that I don't shut up about this one. This is my biggest time sink outside of work currently. I'm tackling the probably biggest feature I've done so far: _Multiplayer mode_. There's a lot of technical design to be done but I think I'm almost ready to get some code out there. Other than that I'm busy trying to find a good domain - ideas welcome.
+### [Doppelkopf](https://doppelkopf.party)
+
+My browser-based Doppelkopf card game is still under [active development](https://github.com/hamvocke/doppelkopf). Earlier this year [I hit a massive wall](https://github.com/hamvocke/doppelkopf/issues/62) when trying to shoehorn a multiplayer mode into the codebase that deliberately started out as a pure single-player game. I should've known better and resisted the temptation to half-ass a multiplayer mode that architecturally wouldn't fit too well to the core concept of the codebase.
+
+After weeks and months of designing user flows and connection protocols, endless experiments with websockets, handling connections, building resilient reconnection behavior, and coming up with logic to establish a multiplayer game session I realized that all of this is just too damn tedious to do as a side project with the occasional hour to spare. I learned a great deal about websockets and managing persistent connections with flaky wifi conditions and server restarts but ultimately gave up on those efforts. I grew quite frustrated about the project a while after and didn't feel like putting a lot of energy into it but that energy is slowly coming back. I've got a few new ideas to experiment with and there are still some features missing to make the current Doppelkopf game feature complete.
 
 ## 📚 Reading
 The last 3 books I've read, most recent at the top.
 
-### _Factfulness_ by Hans Rosling 
+### _The Manager's Path_ by Camille Fournier 
 
-It's a long winter and the bad news keep on coming. Factfulness has been on my list for a while and I finally decided to pick it up. I'm enjoying it a lot. Its uplifting tone is a welcome change.
-[more info](https://www.goodreads.com/book/show/34890015-factfulness)
+Over the years I often found myself at the intersection of building software and making teams run smoothly. _The Manager's Path_ has been on my to-read list for a while and I'm happy I picked it up. It's both, a great way to look at what could be ahead when taking over more management duties, as well as a great guide on how to be good in your current technical leadership role. [more info](https://www.oreilly.com/library/view/the-managers-path/9781491973882/)
 
-### _ASP.NET Core in Action_ by Andrew Lock
+### _Fundamentals of Software Architecture_ by Mark Richards & Neal Ford
 
-Stack Overflow runs on .NET and C#. Last year we finally migrated everything to .NET Core to get some of the latest greatness. It was time to fill a bunch of gaps I had when it comes to understanding the .NET ecosystem and ASP.NET Core. Andrew Lock takes a comprehensible tour through what it takes to build, test and deploy an ASP.NET Core application. Exactly what I was looking for. [more info](https://www.goodreads.com/book/show/37836790-asp-net-core-in-action)
+Stack Overflow is growing. As we hire more engineers, grow existing teams and establish new ones, it becomes more and more pressing to make sure that changing our codebase remains a smooth process. Organizational growth needs an architecture that allows multiple teams to do their work without stepping on each other's toes. It needs guiding principles that makes it easy for us developers to make the right decisions. I'm diving into a lot of architecture-related literature lately, revisiting classics like _Domain-driven design_ but also the relatively recent _Fundamentals of Software Architecture_ to gather ideas and balance trade-offs about how we might shift our architecture to allow for more sustainable development and growth in the future. [more info](https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/)
 
-### _Lovecraft Country_ by Matt Ruff
+### _If It Bleeds_ by Stephen King
 
-I've read a few of Lovecraft's horror stories a few years back and enjoyed the sinister atmosphere. I found myself conflicted when I learned more about [the person Lovecraft was](https://en.wikipedia.org/wiki/H._P._Lovecraft#Personal_views) and the racist views he held. _Lovecraft Country_ dives right into this conflict and combines supernatural horror with the racism and conflicts of 1950s rural America. [more info](https://www.goodreads.com/book/show/25109947-lovecraft-country)
+I try to be mindful about my reading. I often find myself reading lots of technical books outside of work. This is a double-edged sword: It's fun to learn something new. It's amazing to re-learn something I've known before and apply it to my current context. Yet, it usually keeps me thinking about work much longer than I should; and it often keeps my mind spinning while I'm trying to sleep.
 
-## 🏋 Fitness
-I've got a garage gym where I lift heavy stuff just to put it back down. Sometimes that sounds silly, even to me, but it makes me happy and keeps me balanced.
+I can't say that I'm a big fan of Stephen King but his books tend to be a kind of default choice whenever I need some fiction in my reading diet. _If it bleeds_ is a collection of short stories. I enjoyed the suspense and mystery in _"Mr. Harrigan's Phone"_ and _"Rat"_. The title story, on the other hand, felt like a drag to me. [more info](https://en.wikipedia.org/wiki/If_It_Bleeds)
 
-My most recent 1 rep maxes:
-
-| Squat | Deadlift | Bench Press | Overhead Press |
-| ----: | -------: | ----------: | -------------: |
-| 125kg |    145kg |       105kg |          65kg  |
-
-## 🏡 Renovations
-We bought a house last year. During all those Covid lockdowns, we try to use the time to get some small renovations and projects around the house done. The next big thing is doing some woodworking to build shelves and a new workbench for the garage. Neither I nor my wife have done anything like that before so we're excited to see how this goes.
-
-## 🛵 Moped tweaks
-My dad gave me his old 1964 [NSU Quickly](https://en.wikipedia.org/wiki/NSU_Quickly) N23 moped and I've enjoyed a bunch of rides in spring and summer. I've never been a handyman and I'm a joke to any serious mechanic. A vehicle as simple as the NSU Quickly makes it really easy to get started with some easy reparations, restaurations and improvements and so I'm trying. Last year I got to grips with its two-stroke engine and all the basics. This winter I'm looking into fixing the broken speedometer and replace the tires with whitewall tires - that should easily get me an extra 5km/h.
