@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Using 'make' to Make Your Code More Accessible
+title: Using 'make' to Make Your Code Easy to Work With
 tags: programming
-excerpt: With 'make' we can automate common tasks for our programming projects and make them more accessible as a result.
-summary: With 'make' we can automate common tasks for our programming projects and make them more accessible as a result.
+excerpt: With 'make' we can automate common tasks for our programming projects and make them easier to work with as a result.
+summary: With 'make' we can automate common tasks for our programming projects and make them easier to work with as a result.
 image: /assets/img/uploads/make.png
 comments: true
 ---
@@ -14,7 +14,7 @@ In my daily work, I often switch between codebases. Each brings its own ecosyste
 
 At ThoughtWorks, we often call this a `go` script (which, admittedly, became confusing after _go_, the programming language, has become a thing). Teams at ThoughtWorks often create these scripts to make it easy run common tasks automatically: I can call `./go build` to compile my source code, `./go test` to run the test suite, or `./go run` to start the application locally, regardless of the tools that are used under the hood. [Pete Hodgson](https://twitter.com/ph1) wrote a nice series of articles [in praise of the go script](https://www.thoughtworks.com/insights/blog/praise-go-script-part-i) to describe this practice in more detail ([Part II is here](https://www.thoughtworks.com/insights/blog/praise-go-script-part-ii)).
 
-Having a script as a single entry point makes your code more accessible. It's easy to do the things you want to do without memorizing long-winded commands. It's easy to switch between different projects as the commands stay mostly the same. And it's easy to discover what's possible (by running `./go help`) which helps getting new people up to speed. 
+Having a script as a single entry point makes your code more accessible to other developers (and your future self!). It's easy to do the things you want to do without memorizing long-winded commands. It's easy to switch between different projects as the commands stay mostly the same. And it's easy to discover what's possible (by running `./go help`) which helps getting new people up to speed. 
 
 ## `go` Scripts: An Example in Bash
 Most of the `go` scripts I've seen were written in _bash_ and roughly followed the same structure of parsing the first parameter and then mapping that to certain actions:
