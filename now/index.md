@@ -1,7 +1,7 @@
 ---
 layout: now
 title: What I'm doing now | Ham Vocke
-latest_update: 2021-12-13 08:46:00 +0100
+latest_update: 2022-10-04 21:24:00 +0200
 ---
 
 # Now
@@ -9,41 +9,34 @@ _Last update: {{ page.latest_update | date_to_string }}_
 
 Here's what keeps me busy at the moment. [what?](https://nownownow.com/about)
 
+## Keeping Things Balanced
+As social live is getting back to normal around me, I really try to embrace it. Meet friends, have a meaningful social life, and try to get away from my computer, social media, and work-related stuff as much as I can. My day to day job can be pretty demanding and in the past I've learned that it's a slippery slope trying to do too much that overlaps with work after hours. To keep things balanced and keep myself healthy, I try to be very deliberate about the time I spend on technical reading, on social media, or in front of my computer - and instead try to go outside, do something constructive, or spend time with the people I love.
+
 ## 👨‍💻 Side Projects
 
-### [Doppelkopf](https://doppelkopf.party)
+### [doppelkopf.party](https://doppelkopf.party) - A Doppelkopf Browser Game
 
-My browser-based Doppelkopf card game is still under [active development](https://github.com/hamvocke/doppelkopf). Earlier this year [I hit a massive wall](https://github.com/hamvocke/doppelkopf/issues/62) when trying to shoehorn a multiplayer mode into the codebase that deliberately started out as a pure single-player game. I should've known better and resisted the temptation to half-ass a multiplayer mode that architecturally wouldn't fit too well to the core concept of the codebase.
+This project started a few years ago when I started playing Doppelkopf (a popular German card game) with friends in Hamburg. A lot of time has passed, I've [written a thing or two](https://www.hamvocke.com/tags/doppelkopf/) about the project and occasionally I'm still tweaking things here and there. After so many years, my excitement died down a little although the game is not feature complete yet. The most prominent missing feature is playing solo. In the past few months I couldn't get myself motivated to invest more time into this project. Spending more time programming after a demanding day job that mostly revolves around programming just didn't sound too appealing while the sun was shining and social interactions slowly get back to normal. Maybe, if winter becomes a little more quiet, I'll find the motivation to get back in the saddle.
 
-After weeks and months of designing user flows and connection protocols, endless experiments with websockets, handling connections, building resilient reconnection behavior, and coming up with logic to establish a multiplayer game session I realized that all of this is just too damn tedious to do as a side project with the occasional hour to spare.
+In the meantime you can [check out the code on GitHub]((https://github.com/hamvocke/doppelkopf)).
 
-![game server sequence diagram](/assets/img/uploads/gameserver-sequence-diagram.jpg)
+### Learning Elixir & Phoenix
 
-I learned a great deal about websockets and managing persistent connections with flaky wifi conditions and server restarts but ultimately gave up on those efforts. I grew quite frustrated about the project a while after and didn't feel like putting a lot of energy into it but that energy is slowly coming back. I've got a few new ideas to experiment with and there are still some features missing to make the current Doppelkopf game feature complete.
-
-### Electronics
-
-I started fiddling around with electronics and microcontrollers this year. Inspired by [this Adafruit project](https://learn.adafruit.com/flora-neopixel-led-skateboard-upgrade/overview) my daughter and I started designing and building a circuit to add LED lights to her longboard. I'm not much of an electronics person so I had to read up on a lot of basics, learn about circuit design, find the right components, prototype and experiment and do a lot of soldering. Progress has been slow but that's okay. My daughter and I worked on this together and I'm happy that I got her excited about this project and that we could spend some time together experimenting and coming up with new ideas.
-
-![circuit diagram for the longboard illumination project](/assets/img/uploads/circuit.png)
-
-This project helped me grow more confident about understanding basic electronics, soldering, circuit design, and reading datasheets. Currently, the microcontroller (a Raspberry Pico) and LEDs are all wired up, soldered in place and ready to be attached to my daughter's longboard. The next step is to figure out how to get everything water-proof and properly attached to the longboard.
+[Elixir](https://elixir-lang.org/) is a programming language I've observed with a lot of curiosity for years now. I've dabbled with the language again and again, learned the syntax with the official docs, solved puzzles on exercism.io, and immediately got this warm and fuzzy feeling you get when you discover something that's just incredibly elegantly designed. I figured out that I wanted to use Elixir in anger but I never found a good case for it. I started playing around with [Phoenix](https://www.phoenixframework.org/), a web framework for Elixir, a little more but was pretty intimidated by its learning curve. This year I took it as a challenge to push through this learning curve and build some small but non-trivial example with Phoenix. It took some time and my progress is slow (mostly due to fact that I'm deliberately not spending a lot of time in front of my computer outside of work) but I'm starting to get a better feeling for things. I decided to learn these things properly by going through the Pragmatic Bookshelf books ([Programming Elixir](https://pragprog.com/titles/elixir16/programming-elixir-1-6/) and [Programming Phoenix](https://pragprog.com/titles/phoenix14/programming-phoenix-1-4/)) and I start to connect the dots and get a better feeling for the language's idioms.
 
 
 ## 📚 Reading
 The last 3 books I've read, most recent at the top.
 
-### _The Manager's Path_ by Camille Fournier 
+### _Modern Software Engineering: Doing What Works to Build Better Software Faster_ by David Farley 
 
-Over the years I often found myself at the intersection of building software and making teams run smoothly. _The Manager's Path_ has been on my to-read list for a while and I'm happy I picked it up. It's both, a great way to look at what could be ahead when taking over more management duties, as well as a great guide on how to be good in your current technical leadership role. [more info](https://www.oreilly.com/library/view/the-managers-path/9781491973882/)
+*"Continuous Delivery"* has easily been the most eye-opening book I've read in my career. As I revisited this faourite of mine earlier this year to help push for a CI/CD initiative at work, I discovered how David Farley, one of the "Continuous Delivery" authors has published a new book. *"Modern Software Engineering"* is a great book on how to apply an engineering mindset to building software, how to work in a way that emphasizes learning, and what it means to build software manageable in the face of complexity. Farley touches on a lot of fairly well-known aspects like modularity, cohesion and coupling, and separation of concerns, and manages to put them into context -- all while relentlessly making a case for TDD and test automation as tools to drive these ideas. To me, this is an instant classic and I know that it's going to be one of those books I will recommend to fellow new and seasoned developers. [more info](https://www.oreilly.com/library/view/modern-software-engineering/9780137314942/)  
 
-### _Fundamentals of Software Architecture_ by Mark Richards & Neal Ford
 
-Stack Overflow is growing. As we hire more engineers, grow existing teams and establish new ones, it becomes more and more pressing to make sure that changing our codebase remains a smooth process. Organizational growth needs an architecture that allows multiple teams to do their work without stepping on each other's toes. It needs guiding principles that makes it easy for us developers to make the right decisions. I'm diving into a lot of architecture-related literature lately, revisiting classics like _Domain-driven design_ but also the relatively recent _Fundamentals of Software Architecture_ to gather ideas and balance trade-offs about how we might shift our architecture to allow for more sustainable development and growth in the future. [more info](https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/)
+### _Continuous Delivery Pipelines_ by David Farley 
 
-### _If It Bleeds_ by Stephen King
+For the same reason I revisited *"Continuous Delivery"*, I read through David Farley's more recently published "Continuous Delivery Pipelines" to see if I could <del>steal</del> <ins>take inspiration from</ins> some of his ideas for an initiative I led at work. As excited as I am about "Modern Software Engineering", I was severly disappointed by Farley's "Continuous Delivery Pipelines". It's a very high-level overview of the ideas outlined in the seminal "Continuous Delivery" book (by Farley and Jez Humble) but with much less depth. If you need a high-level introduction to the ideas behind Continous Delivery, this might be a good and quick overview - but you'll leave longing for much more depth. It's not really hands-on, lacking detail, and the editing seemed rather sloppy at times. Not my favourite - but maybe helpful for people who are completely new to the world of CD. [more info](https://leanpub.com/cd-pipelines)
+ 
+### _Project Hail Mary_ by Andy Weir
 
-I try to be mindful about my reading. I often find myself reading lots of technical books outside of work. This is a double-edged sword: It's fun to learn something new. It's amazing to re-learn something I've known before and apply it to my current context. Yet, it usually keeps me thinking about work much longer than I should; and it often keeps my mind spinning while I'm trying to sleep.
-
-I can't say that I'm a big fan of Stephen King but his books tend to be a kind of default choice whenever I need some fiction in my reading diet. _If it bleeds_ is a collection of short stories. I enjoyed the suspense and mystery in _"Mr. Harrigan's Phone"_ and _"Rat"_. The title story, on the other hand, felt like a drag to me. [more info](https://en.wikipedia.org/wiki/If_It_Bleeds)
-
+Oh, how I loved this book! I'm always struggling to find captivating fiction and often end up reading books that hardly get more than a "meh" reaction, but this book has been pure joy. There's something so fun, genuine, and uncomplicated about the main character who finds himself in a hopeless and desparate situation that had me longing for more. [more info](https://www.goodreads.com/book/show/54493401-project-hail-mary)
