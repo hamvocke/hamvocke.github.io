@@ -315,14 +315,6 @@ th {
     margin-bottom: 48px;
 }
 
-#markdown-toc {
-    font-size: 15px;
-}
-
-#markdown-toc ul, #markdown-toc ol {
-    margin-bottom: inherit;
-}
-
 .author {
     padding: 35px 0 24px 0;
     margin-top: 72px;
