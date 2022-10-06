@@ -21,10 +21,12 @@ title: Blog & Articles | Ham Vocke
 			<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
 			{% endif %}
 			<div class="meta-info">
-				{% include icon.html icon="calendar" %}
-				<time class="date">
-					{{ post.date | date_to_string }}
-				</time>
+				<div>
+					{% include icon.html icon="calendar" %}
+					<time>
+						{{ post.date | date_to_string }}
+					</time>
+				</div>
 			</div>
 			<p>{{ post.excerpt }}</p>
 		</div>

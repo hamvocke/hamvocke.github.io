@@ -371,12 +371,13 @@ th {
 
 .meta-info {
     display: flex;
+    justify-content: space-between;
     flex-flow: row wrap;
     font-weight: 400;
     font-style: italic;
     font-size: 0.9em;
     color: var(--black);
-    margin-bottom: 2em;
+    margin-bottom: 1.4em;
 }
 
 .meta-info > div {
@@ -539,5 +540,9 @@ blockquote p {
 @media(max-width: 576px) {
     nav .nav-icon {
         display: none;
+    }
+
+    .meta-info > div {
+        flex: 1 100%;
     }
 }

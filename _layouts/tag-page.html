@@ -20,10 +20,12 @@ title: Tagged {{ page.tag }} | Ham Vocke
             <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
             {% endif %}
             <div class="meta-info">
-                {% include icon.html icon="calendar" %}
-                <time class="date">
-                    {{ post.date | date_to_string }}
-                </time>
+                <div class="post-date">
+                    {% include icon.html icon="calendar" %}
+                    <time>
+                        {{ post.date | date_to_string }}
+                    </time>
+                </div>
             </div>
             <p>{{ post.excerpt }}</p>
         </div>
