@@ -304,20 +304,6 @@ th {
     margin-bottom: 1em;
 }
 
-#home .latest-updates {
-    margin-top: 4em;
-    text-align: left;
-}
-
-#home .latest-updates h2 {
-    margin-top: 0;
-}
-
-#home .latest-updates ul {
-    list-style: none;
-    padding-left: 0;
-}
-
 #blog {
     margin-top: 20px;
     margin-bottom: 50px;
