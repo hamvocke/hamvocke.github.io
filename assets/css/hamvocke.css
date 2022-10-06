@@ -292,18 +292,30 @@ th {
 }
 
 #home h1.title {
-    display: inline-block;
     font-size: 2.1em;
     margin: 0 0 1em 0;
 }
 
-#home p {
-    color: var(--black);
+#home .lead {
     text-align: left;
     font-size: 1.2em;
     font-weight: 300;
     font-style: italic;
     margin-bottom: 1em;
+}
+
+#home .latest-updates {
+    margin-top: 4em;
+    text-align: left;
+}
+
+#home .latest-updates h2 {
+    margin-top: 0;
+}
+
+#home .latest-updates ul {
+    list-style: none;
+    padding-left: 0;
 }
 
 #blog {
