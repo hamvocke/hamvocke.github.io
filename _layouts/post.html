@@ -2,61 +2,74 @@
 layout: default
 ---
 
-<h1 class="post-title">{{ page.title }}</h1>
-<div class="meta-info">
-  <div class="tags">
-    {% include icon.html icon="tag" %}
-    {% for tag in page.tags %}
-    <span><a href="/tags/{{ tag }}">{{ tag }}</a></span>
-    {% endfor %}
+<article itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    <h1 class="post-title" itemprop="name headline">{{ page.title | escape }}</h1>
+    <div class="meta-info">
+      <div class="tags">
+        {% include icon.html icon="tag" %}
+        {% for tag in page.tags %}
+        <span><a href="/tags/{{ tag }}">{{ tag }}</a></span>
+        {% endfor %}
+      </div>
+    
+      <div class="post-date">
+        {% include icon.html icon="calendar" %}
+        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date_to_string }}</time>
+
+        {%- if page.modified_date -%}
+        | last update: 
+          <time datetime="{{ page.modified_date | date_to_xmlschema }}" itemprop="dateModified">
+            {{ page.modified_date | date_to_string }}
+          </time>
+        {%- endif -%}
+
+      </div>
+    
+      {% include reading_time.html %}
+    </div>    
+  </header>
+
+  <div class="post" itemprop="articleBody">
+    {{ content }}
   </div>
 
-  <div class="post-date">
-    {% include icon.html icon="calendar" %}
-    <time>{{ page.date | date_to_string }}</time>
-  </div>
-
-  {% include reading_time.html %}
-</div>
-
-<div class="post">
-  {{ content }}
-</div>
-
-<div class="author">
-  <img src="/assets/img/ham.jpg" class="profile img-circle" alt="photo ham">
-  <h4>Ham Vocke</h4>
-  <p class="lead">
-  Ham is a software developer at <a href="https://www.stackoverflow.com">Stack&nbsp;Overflow</a>. Previously, he was a consultant at <a href="https://www.thoughtworks.com">ThoughtWorks</a>. He helps teams deliver great software and is excited about learning and teaching new things.</a>
-  <div class="contact">
-    <div class="icons">
-      <a href="mailto:{{site.email}}">{% include icon.html icon="mail" %}</a> &nbsp;
-      <a href="https://github.com/hamvocke">{% include icon.html icon="github" %}</a> &nbsp;
-      <a href="https://twitter.com/hamvocke">{% include icon.html icon="twitter" %}</a> &nbsp;
-      <a href="https://www.linkedin.com/in/hamvocke">{% include icon.html icon="linkedin" %}</a>
+  <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img src="/assets/img/ham.jpg" class="profile img-circle" alt="photo ham" itemprop="image">
+    <h4 itemprop="name">Ham Vocke</h4>
+    <p class="lead">
+    Ham is a software developer at <a href="https://www.stackoverflow.com">Stack&nbsp;Overflow</a>. Previously, he was a consultant at <a href="https://www.thoughtworks.com">ThoughtWorks</a>. He helps teams deliver great software and is excited about learning and teaching new things.</a>
+    <div class="contact">
+      <div class="icons">
+        <a href="mailto:{{site.email}}">{% include icon.html icon="mail" %}</a> &nbsp;
+        <a href="https://github.com/hamvocke">{% include icon.html icon="github" %}</a> &nbsp;
+        <a href="https://twitter.com/hamvocke">{% include icon.html icon="twitter" %}</a> &nbsp;
+        <a href="https://www.linkedin.com/in/hamvocke">{% include icon.html icon="linkedin" %}</a>
+      </div>
     </div>
   </div>
-</div>
+  
+  {% if page.comments %}
+  <div class="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+  </div>
+  <script type="text/javascript">
+  var disqus_shortname = 'onehamarmy';
 
-    {% if page.comments %}
-    <div class="comments">
-      <h2>Comments</h2>
-      <div id="disqus_thread"></div>
-    </div>
-    <script type="text/javascript">
-    var disqus_shortname = 'onehamarmy';
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] ||
+    document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+  </script>
+  <noscript>
+    Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+  </noscript>
 
-    (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript';
-      dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] ||
-      document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-    </script>
-    <noscript>
-      Please enable JavaScript to view the
-      <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-    </noscript>
+  {% endif %}
 
-    {% endif %}
+</article>
