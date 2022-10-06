@@ -7,11 +7,8 @@ tags:
 excerpt: For many developers pair programming is the way to go. But pairing often becomes challenging as soon as people are working remotely. With a simple SSH and tmux setup you can have a very simple but effective setup for collaborating remotely using nothing but your command line.
 summary: Learn how to start a remote pair programming session with SSH and tmux
 comments: true
-latest_update: 2022-10-05 11:57:00 +0200
+modified_date: 2022-10-05 11:57:00 +0200
 ---
-
-_Last update: {{ page.latest_update | date_to_string }}_
-
 
 [Pair Programming](https://en.wikipedia.org/wiki/Pair_programming) has found wide adoption in software development ever since it became popular with the rise of Extreme Programming and other agile development approaches. This practice where two developers are working on the same machine and the same task has some really neat advantages over working all by yourself. Working in pairs results in higher quality, spreads knowledge between your team members and ultimately leads to higher satisfaction. Sounds cool? Well, it is!
 

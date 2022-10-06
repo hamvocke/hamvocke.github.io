@@ -18,7 +18,7 @@ layout: default
         <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date_to_string }}</time>
 
         {%- if page.modified_date -%}
-        | last update: 
+        , updated: 
           <time datetime="{{ page.modified_date | date_to_xmlschema }}" itemprop="dateModified">
             {{ page.modified_date | date_to_string }}
           </time>

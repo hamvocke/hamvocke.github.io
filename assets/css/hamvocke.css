@@ -370,6 +370,8 @@ th {
 }
 
 .meta-info {
+    display: flex;
+    flex-flow: row wrap;
     font-weight: 400;
     font-style: italic;
     font-size: 0.9em;
@@ -377,13 +379,8 @@ th {
     margin-bottom: 2em;
 }
 
-.post-date {
-    margin-bottom: 0.7em;
-}
-
-.tags {
-    text-align: right;
-    float: right;
+.meta-info > div {
+    margin: 0 1em 0.7em 0;
 }
 
 .tags span::after {
