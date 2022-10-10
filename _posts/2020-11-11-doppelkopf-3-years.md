@@ -16,7 +16,7 @@ Nope, none of it! Almost 3 years and over _1024 commits_ later [the project](htt
 
 _Hey you&hellip; If you're just here looking for the **Play the Game** button: Here it is. But you've gotta come back and read on, you hear?_
 
-<a href="https://doppelkopf.ham.codes" target="_blank">
+<a href="https://doppelkopf.party" target="_blank">
 <img src="{% link assets/img/uploads/doppelkopfTeaser.png %}" alt="game teaser" />
 <em>Go ahead, play the game right here</em>
 </a>
@@ -109,6 +109,6 @@ A lot has happened and the project has seen slow but steady progress. There's st
 
 [![the product roadmap]({% link assets/img/uploads/doppelkopfRoadmap.png %})](https://github.com/hamvocke/doppelkopf/projects/1)
 
-Now that I finally got this heartbeat out in the open, I plan to write more regular updates with more detailed topics on specific aspects of the project in the upcoming weeks. Watch this space, [check out the game](https://doppelkopf.ham.codes) and if you feel adventurous, come join me over [on GitHub](https://github.com/hamvocke/doppelkopf)!
+Now that I finally got this heartbeat out in the open, I plan to write more regular updates with more detailed topics on specific aspects of the project in the upcoming weeks. Watch this space, [check out the game](https://doppelkopf.party) and if you feel adventurous, come join me over [on GitHub](https://github.com/hamvocke/doppelkopf)!
 
 
