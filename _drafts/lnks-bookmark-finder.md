@@ -68,21 +68,21 @@ Here's `lnks` in action.
 
 `lnks` uses [`fzf` - the incredibly practical command-line fuzzy finder](https://github.com/junegunn/fzf) to do all the heavy lifting of searching and displaying stuff in a neat UI. `lnks` is merely orchestrating a few Unix tools, really.
 
-The script simply reads all adjacent `.txt` files and passes their content over to `fzf`. `fzf` then lists each bookmark on one line. As you select a line, `fzf` shows the last segment of the line (the actual URL) in a _preview_ window at the top. Finally, I configured up a key binding in `fzf` so that pressing the <kbd>Enter</kbd> key opens the bookmark's URL in your default browser.
+The script simply reads all adjacent `.txt` files and passes their content over to `fzf`. `fzf` then lists each bookmark on one line. As you select a line, `fzf` shows the last segment of the line (the actual URL) in a _preview_ window at the top. The rest of a line will be used as the name of the bookmark, this is also what `fzf` runs your search query against. Finally, I configured up a key binding in `fzf` so that pressing the <kbd>Enter</kbd> key opens the bookmark's URL in your default browser.
 
 
 ## Why You Might Want to Use This
-As software developers, we often have a lot of bookmarks and important URLs to access throughout our day. Production systems, staging environments, bug trackers, observability tools, CI/CD pipelines, you know what I'm talking about.
+As software developers, we often access a lot of bookmarks and important URLs throughout our day. Production systems, staging environments, bug trackers, observability tools, CI/CD pipelines, you know what I'm talking about.
 
-Of course you could these bookmarks within your browser like a normal person. But where's the fun in that?
+Of course you could manage these bookmarks within your browser like a normal person. But you didn't click the link to this blog post because you're looking for vanilla solutions to everyday problems, did you?
 
-Chances are that you've got a terminal open all day. And if you use something like `tmux` ([check out my tmux guide](/blog/a-quick-and-easy-guide-to-tmux) if you don't!) you can dedicate a small pane to keep `lnks` open at all times.
+Chances are that you've got a terminal open all day so navigating bookmarks from a terminal might feel like second nature. And if you use something like `tmux` ([check out my tmux guide](/blog/a-quick-and-easy-guide-to-tmux) if you don't!) you can dedicate a small pane to keep `lnks` open at all times.
 
 The nice thing about keeping all your bookmarks in plain `.txt` files is that you can share them easily with people you work with. Most likely they will need access to the same things as you do, so sharing these bookmarks is a great way to keep important bookmarks up to date and point people to the right places at all times. A good way to do this is to fork [the GitHub repository](https://github.com/hamvocke/lnks), check in your own bookmark files, and share your fork with your team.
 
 I learned to love this kind of bookmark sharing when I worked with a software development team at [Otto](https://www.otto.de), a German online retailer. We did a lot of pair programming and switched machines frequently. Someone on the team had built a small bookmarks website that looked pretty much just like `lnks` and allowed you to search through important bookmarks for the team. As we were pairing, we could always rely on having quick and easy access to that bookmark website and therefore to all our test environments, logs, bug trackers, code repos, you name it.
 
-I hope you find this helpful, too.
+I'm getting a lot of mileage out of this small script. I hope you find it helpful, too.
 
 ### Footnotes
 
