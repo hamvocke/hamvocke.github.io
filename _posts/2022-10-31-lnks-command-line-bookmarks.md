@@ -2,8 +2,8 @@
 layout: post
 title: Browser Bookmarks on the Command Line
 tags: command-line
-excerpt: I wrote "lnks", a small tool to helps you and your team to search through and open browser bookmarks from the command line
-summary: I wrote "lnks", a small tool to helps you and your team to search through and open browser bookmarks from the command line
+excerpt: I wrote lnks, a small tool to helps you and your team to search through and open browser bookmarks from the command line
+summary: I wrote lnks, a small tool to helps you and your team to search through and open browser bookmarks from the command line
 image: /assets/img/uploads/lnks-post-preview.jpg
 comments: false
 ---
