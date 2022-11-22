@@ -7,7 +7,7 @@ excerpt: tmux is a tool that can boost your productivity while using the termina
 summary: Become a master of tmux in a few minutes
 image: /assets/img/uploads/tmux.png
 comments: true
-latest_update: 2022-11-22 21:03:00 +0100
+modified_date: 2022-11-22 21:03:00 +0100
 ---
 
 I love working with the command line. I think there's hardly any more productive and versatile tool for a software developer than the terminal. The additional hacker/wizard/neckbeard kind of feeling you get when using a terminal comes for free, what's not to love?
