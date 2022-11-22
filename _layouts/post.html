@@ -15,11 +15,13 @@ layout: default
     
       <div class="post-date">
         {% include icon.html icon="calendar" %}
-        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date_to_string }}</time>
+        <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished" title="created: {{ page.date | date_to_string }}">
+            {{ page.date | date_to_string }}
+        </time>
 
         {%- if page.modified_date -%}
-        , updated: 
-          <time datetime="{{ page.modified_date | date_to_xmlschema }}" itemprop="dateModified">
+          | {% include icon.html icon="edit" %}
+          <time datetime="{{ page.modified_date | date_to_xmlschema }}" itemprop="dateModified" title="last update: {{ page.modified_date | date_to_string }}">
             {{ page.modified_date | date_to_string }}
           </time>
         {%- endif -%}
