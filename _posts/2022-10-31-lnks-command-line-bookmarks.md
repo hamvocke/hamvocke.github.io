@@ -6,6 +6,7 @@ excerpt: I wrote lnks, a small tool to helps you and your team to search through
 summary: I wrote lnks, a small tool to helps you and your team to search through and open browser bookmarks from the command line
 image: /assets/img/uploads/lnks-post-preview.jpg
 comments: false
+modified_date: 2023-02-07 21:58:00 +0100
 ---
 
 I wrote a small tool. It's merely more than a script, actually. This tool has been immensely helpful for me over the past few weeks and so I'm sharing it more broadly.
@@ -50,6 +51,11 @@ A bookmark text file needs to follow these conventions:
 4. A bookmark file needs to have the `.txt` extension
 5. You can have as many bookmark files next to your `lnks.sh` script as you want
 
+## Demo
+Here's `lnks` in action.
+
+<video src="/assets/video/lnks.webm" autoplay loop muted playsinline controls></video>
+
 ## Create an Alias for Easier Access
 Here's a pro-tip: to make opening your bookmarks a little more convenient, add an alias to your `~/.bashrc`, `~/.zshrc`, or `~/.profile`:
 
@@ -59,10 +65,25 @@ alias lnks='~/your/directory/lnks/lnks.sh'
 
 This way you can open your bookmarks from anywhere simply by typing `lnks`.
 
-## Demo
-Here's `lnks` in action.
+## Or Bind it to a Hotkey
+You could take this one step further by binding `lnks` to a global keyboard shortcut. That way, your bookmarks will pop up by triggering a key-combo of your choice.
 
-<video src="/assets/video/lnks.webm" autoplay loop muted playsinline controls></video>
+How to can bind custom commands to certain keyboard shortcuts depends on your operating system (and desktop environment) of choice. On Mac, you'd have to dig into [Automator](https://support.apple.com/guide/automator/welcome/mac). On Gnome on Linux, you can [set up a custom keyboard shortcut](https://help.gnome.org/users/gnome-help/stable/keyboard-shortcuts-set.html) in your keyboard settings. Other desktop environments will allow similar customization. In window managers like i3 or Sway, you can bind a custom command to a key combination in your config ([check out how I did this in my own Sway config](https://github.com/hamvocke/dotfiles/blob/f4938fb6a1e4275d06e01c2777ea85ca193d07bd/sway/.config/sway/config#L132-L133)).
+
+You get the idea. You tell your operating system launch your terminal application of choice and then execute the `lnks.sh` script from the right directory whenever you trigger the right key combination. Depending on your terminal application the command to trigger will look slightly different, but it should be somewhat similar to one of these:
+
+```bash
+# gnome-terminal:
+gnome-terminal -- ~/dev/lnks/lnks.sh
+
+# alacritty:
+alacritty -e ~/dev/lnks/lnks.sh
+
+# foot
+foot ~/dev/lnks/lnks.sh
+```
+
+This is going to be much more fun if your terminal and shell startup times are fairly snappy.
 
 ## How the Sausage is Made
 
