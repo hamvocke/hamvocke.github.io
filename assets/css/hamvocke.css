@@ -1,10 +1,35 @@
 :root {
     --black: #2d4059;
     --white: #f6f6f6;
+    --text: var(--black);
+    --background: var(--white);
     --code: #e4e4ea;
-    --accent: #ce4257;
-    --light-accent: #F7CA88;
+    --accent: #D81159;
+    --light-accent: #FFBC42;
+
+    --lighter-bg: #e4e4ea;
+    --box-shadow: 0, 0, 0, 0.2;
+    --kbd-top-shadow: 255, 255, 255, 0.7;
+    --kbd-border: var(--black);
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --white: #f6f6f6;
+        --black: #223144;
+        --text: var(--white);
+        --background: var(--black);
+        --code: #151E29;
+        --accent: #F04282;
+        --light-accent: #FFBC42;
+
+        --lighter-bg: #30455f;
+        --box-shadow: 0, 0, 0, 0.8;
+        --kbd-top-shadow: 255, 255, 255, 0.15;
+        --kbd-border: var(--code);
+    }
+}
+
 
 * {
     box-sizing: border-box;
@@ -17,8 +42,8 @@ html, body {
 body {
     font-size: 18px;
     font-family: 'Open Sans', sans-serif;
-    background-color: var(--white);
-    color: var(--black);
+    background-color: var(--background);
+    color: var(--text);
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
@@ -39,7 +64,7 @@ hr {
 
 h1, h2, h3, h4 {
     font-family: 'Roboto Slab', sans-serif;
-    color: var(--black);
+    color: var(--text);
     margin-bottom: 10px;
 }
 
@@ -70,7 +95,7 @@ h4 {
 
 p {
     line-height: 1.5em;
-    color: var(--black);
+    color: var(--text);
     margin: 0 0 1.5em;
 }
 
@@ -91,7 +116,7 @@ a {
 
 a:focus, a:hover {
     text-decoration: none;
-    color: var(--black);
+    color: var(--text);
 }
 
 a svg {
@@ -99,14 +124,14 @@ a svg {
 }
 
 a:hover svg, a:focus svg {
-    stroke: var(--black);
+    stroke: var(--text);
 }
 
 code {
     padding: 2px 4px;
     font-size: 90%;
     background: var(--code);
-    color: var(--black);
+    color: var(--text);
     border-radius: 4px;
     word-break: break-word;
     white-space: nowrap;
@@ -118,7 +143,7 @@ pre {
     margin: 0 0 1.5em;
     font-size: 14px;
     line-height: 1.4;
-    color: var(--black);
+    color: var(--text);
     background: var(--code);
     border-radius: 4px;
     overflow: auto;
@@ -152,16 +177,16 @@ ul li, ol li {
 }
 
 kbd {
-    background-color: var(--code);
+    background-color: var(--lighter-bg);
     border-radius: 4px;
-    border: 1px solid var(--black);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .2), 0 2px 0 rgba(255, 255, 255, .7) inset;
-    color: var(--black);
+    border: 1px solid var(--kbd-border);
+    box-shadow: 0 1px 2px rgba(var(--box-shadow)), 0 2px 0 rgba(var(--kbd-top-shadow)) inset;
+    color: var(--text);
     display: inline-block;
     font-size: .85em;
     font-weight: 700;
     line-height: 1;
-    padding: 2px 4px;
+    padding: 4px 8px;
     white-space: nowrap;
 }
 
@@ -184,12 +209,12 @@ kbd {
 
 #logo .subtitle {
     font-style: italic;
-    font-weight: 300;
-    color: var(--black);
+    color: var(--text);
     margin: 0;
 }
 
-#logo h1 {
+#logo .title {
+    font-family: 'Roboto Slab', sans-serif;
     display: inline;
     vertical-align: middle;
     font-size: 24px;
@@ -214,11 +239,11 @@ nav ul li a {
     display: inline-block;
     padding: 12px;
     margin: 0;
-    color: var(--black);
+    color: var(--text);
 }
 
 nav ul li a svg {
-    stroke: var(--black);
+    stroke: var(--text);
 }
 
 nav ul li a:focus,
@@ -250,12 +275,12 @@ footer#footer {
 }
 
 footer#footer a {
-    color: var(--black);
+    color: var(--text);
 }
 
 footer#footer .contact {
     font-size: 0.8em;
-    color: var(--black);
+    color: var(--text);
 }
 
 footer#footer .contact .icons {
@@ -278,6 +303,7 @@ ins {
     text-decoration: none;
     background-color: var(--light-accent);
     padding: 0 4px;
+    color: var(--black);
 }
 
 table {
@@ -305,7 +331,7 @@ th {
     border: 8px solid var(--light-accent);
 }
 
-#home h1.title {
+#home .title {
     font-size: 2.1em;
     margin: 0 0 1em 0;
 }
@@ -313,7 +339,6 @@ th {
 #home .lead {
     text-align: left;
     font-size: 1.2em;
-    font-weight: 300;
     font-style: italic;
     margin-bottom: 1em;
 }
@@ -330,7 +355,7 @@ th {
 .author {
     padding: 35px 0 24px 0;
     margin-top: 72px;
-    background: var(--white);
+    background: var(--background);
     position: relative;
 }
 
@@ -347,21 +372,20 @@ th {
     top: -45px;
     left: 50%;
     margin-left: -40px;
-    border: 4px solid var(--white);
 }
 
 .author p.lead {
     font-size: 0.9em;
     margin-bottom: 0;
-    font-weight: 300;
+    font-style: italic;
 }
 
 .author .contact {
-  padding-top: 12px;
+    padding-top: 12px;
 }
 
 .author .contact a {
-  padding: 12px;
+    padding: 12px;
 }
 
 .contact .icons {
@@ -373,10 +397,9 @@ th {
     display: flex;
     justify-content: space-between;
     flex-flow: row wrap;
-    font-weight: 400;
     font-style: italic;
     font-size: 0.9em;
-    color: var(--black);
+    color: var(--text);
     margin-bottom: 1.4em;
 }
 
@@ -463,8 +486,8 @@ blockquote p {
 }
 
 .skills .tag {
-    background: var(--black);
-    color: var(--white);
+    background: var(--code);
+    color: var(--text);
     padding: 4px 12px;
     margin: 4px;
     border-radius: 6px;
@@ -510,30 +533,30 @@ blockquote p {
 
 .page_number {
     margin: 0 12px;
-    color: var(--black);
+    color: var(--text);
 }
 
 @media (max-width: 768px) {
     main#content {
-	  max-width: 100%;
-      padding: 16px;
+        max-width: 100%;
+        padding: 16px;
     }
 
     h1.post-title {
-	    font-size: 36px;
+        font-size: 36px;
     }
 
     .page_number {
-	    margin: 0 10px;
+        margin: 0 10px;
     }
 }
 
 @media(min-width: 1280px) {
     .author {
-    	position: fixed;
-    	bottom: 12px;
-    	left: 12px;
-    	width: 300px;
+        position: fixed;
+        bottom: 12px;
+        left: 12px;
+        width: 300px;
     }
 }
 

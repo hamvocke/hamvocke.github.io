@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="/assets/css/normalize.css" type="text/css">
   <link rel="stylesheet" href="/assets/css/hamvocke.css" type="text/css">
   <link rel="stylesheet" href="/assets/css/syntax.css" type="text/css">
-  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab:700|Open+Sans:300,400,700" type="text/css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto+Slab:700|Open+Sans:400,700" type="text/css">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon/apple-touch-icon.png?v=m2lLvX9Kmj">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon/favicon-32x32.png?v=m2lLvX9Kmj">
@@ -34,7 +34,7 @@
     <div id="logo">
       <a href="/" title="home">
         <img src="/assets/img/logo128.png" alt="ham logo">
-        <h1>{{ site.title }}</h1>
+        <div class="title">{{ site.title }}</div>
         <p class="subtitle">{{ site.subtitle }}</p>
       </a>
     </div>
@@ -57,7 +57,7 @@
 
   <footer id="footer">
     <div class="contact">
-      © 2014-2022 Hermann Vocke
+      © 2014-2023 Hermann Vocke
       <div class="icons">
         <a href="mailto:{{site.email}}">{% include icon.html icon="mail" %}</a>
         <a href="https://github.com/hamvocke">{% include icon.html icon="github" %}</a>
