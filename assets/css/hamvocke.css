@@ -120,10 +120,6 @@ a:focus, a:hover {
     color: var(--text);
 }
 
-a:focus {
-    outline: 2px solid var(--light-accent);
-}
-
 a svg {
     stroke: var(--accent);
 }
