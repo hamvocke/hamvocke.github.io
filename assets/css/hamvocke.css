@@ -473,6 +473,13 @@ h2 .feather {
     line-height: 1.5em;
 }
 
+.post aside {
+    border: 1px solid var(--text);
+    padding: 0 24px;
+    font-size: 0.9em;
+    transform: rotate(-2deg);
+}
+
 blockquote {
     line-height: 1.5em;
     border-left: 8px solid var(--light-accent);
