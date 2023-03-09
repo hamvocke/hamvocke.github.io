@@ -7,15 +7,15 @@ summary: Learn about Path to Production Mapping, a tool to understand, discuss, 
 image: /assets/img/uploads/path-to-prod-preview.jpg
 ---
 
-Wanna hear something reassuring? Every software development team has problems getting their shit into production. There, I said it. Now take a big sigh of relief, feel better about the absolute mess your team is in, and close the browser tab. **Or** you can read on and learn about a tool that can help you tackle these problems.
+Wanna hear something reassuring? Every software development team has problems getting their shit into production. There, I said it. Now take a big sigh of relief, feel better about the absolute mess your team is in, and close the browser tab. **Or** read on and learn about a tool that can help you tackle these problems.
 
 When it comes to getting your software from your grimy old Macbook Pro into the sweaty metaphorical hands of your users, one thing is a given: there's *always* something to improve. No matter where you are on your Continuous Delivery journey.
 
 Sure, some teams are better off than others on the *"our path to production sucks"* scale. While some are more on the *"well, this is mildly annoying"* side of things, others might find themselves on the *"holy shit, we'll go out of business if we don't fix this"* end. Some teams are struggling to deploy more than once a year, while others might be able to do so 10 times a day but they are annoyed by their stupidly slow integration test suite or their constantly flaky end-to-end tests that nobody really trusts anyways.
 
-When I was doing consulting for Thoughtworks, I often worked with teams who were unhappy about their development cadence. They didn't like how often they were able to ship new stuff to real users. Continuous Delivery was a hot topic back then (still is, honestly) and teams asked us to help them get started or get better with it.
+When I was doing consulting at Thoughtworks, I often worked with teams who were unhappy about their development cadence. They didn't like how often they were able to ship new stuff to real users. Continuous Delivery was a hot topic back then (still is, honestly) and companies asked us to help them get started or get better with it.
 
-One tool I've used a lot back then and keep using a lot today is **"Path to Production Mapping"**. This tool might sound like a secret weapon but it really is something everyone can do. Thoughtworks [call it out on their Technology Radar](https://www.thoughtworks.com/radar/techniques/path-to-production-mapping), but unfortunately don't go into detail what this is all about. I'm here to fix that. I'll explain how I usually do "Path to Production Mapping" with teams I work with, and how you can do the same.
+One tool we used a lot back then, a tool I keep using today even after my consulting days are over is **"Path to Production Mapping"**. This tool might sound like a secret weapon but it really is something everyone can do. Thoughtworks [call it out on their Technology Radar](https://www.thoughtworks.com/radar/techniques/path-to-production-mapping), but unfortunately don't go into detail what this is all about. I'm here to fix that. I'll explain how I usually do "Path to Production Mapping" with teams I work with, and how you can do the same.
 
 
 ## "Path to Production Mapping" in a Nutshell
@@ -42,7 +42,9 @@ Once you're there you can pat yourselves on the backs because you finally collec
 
 Sounds cool? Cool. Read on.
 
-## Why You Should Map Your Path to Production
+## Get Clarity, Identify Pain Points & Improve
+
+So what? This is just a bunch of sticky notes. What's the big deal?
 
 You're a software team. The only software that matters is the one your users can use. Getting your software into the hands of your users efficiently and frequently is important. [Continuous Delivery](https://www.continuousdelivery.com/) (<abbr title="Continuous Delivery">CD</abbr>, or "CI/CD" as everyone seems to call it by now) has emerged as a practice to help you pull that off. Doing CD effectively is a game changer. I'm not making this shit up, [we've got great research to back this up](https://www.devops-research.com/research.html).
 
@@ -51,8 +53,8 @@ Chances are that you [claim to "do CI/CD" but you're lying to yourself](https://
 Running this exercise can help you to:
 
 * get clarity and a shared understanding about your current path to production (you'll be surprised how different people *will* have different understanding of what's actually going on)
-* identify bottlenecks, brittle steps, unnecessary work and things that can be streamlined
-* come up with plans to improve, automate, eliminate, parallelize  steps in your path to production
+* identify bottlenecks, brittle steps, unnecessary work and things that are completely unknown to the team today
+* come up with plans to improve, automate, eliminate, parallelize steps on your path to production
 * figure out that no single person actually understands the whole process
 
 <aside>
@@ -70,6 +72,8 @@ Running this exercise can help you to:
 </aside>
 
 ## How to Create Your Path to Production Map
+
+Maybe you're sold on the idea that that mapping your path to production could help you make sense of the mess you're in. Here are detailed instructions for you if you're eager to run this exercise with a team: 
 
 To create your own Path to Production Map, you set up a workshop where the right people come together to discuss and write down the individual steps of your path to production. This sounds simple, but it will be **intense**. 
 
@@ -105,7 +109,7 @@ Set up the canvas by showing what each sticky notes' color is used for (you can 
 You *can* add more types to the mix if you think it's worth capturing more: It might be useful to capture *comments & questions* that come up as part of your discussion, or *outputs* of certain steps, or *environments* you run your stuff on. This is your tool, feel free to add what you and your crew thinks is helpful to understand your path to production better.
 
 
-### Go wild!
+### Go Wild!
 Once you've got everyone in the room and your canvas prepared, explain what you're doing: You want to sketch out **all the steps** it takes right ow to get code from a developer's machine into the hands of your users. You want to capture **who is involved** in these steps and **which tools are used** during each step. And finally you want to write down how long each of these steps usually takes, and how much idle time is spent waiting for this step to happen.
 
 Usually there's going to be some chaos and hesitation in the beginning. People are shy to start, argue about the right level of detail, get lost in meta-discussions. It's okay to let these happen for a bit but after a few minutes you should encourage them to *just fucking do it* and write something down to get the ball rolling. This is not an exam, there's nobody grading what he team comes up with. If you've set this workshop for 2 hours, tell them they should be done with the "mapping" part after 1 hour. This will give you some room to extend their time, but it'll give the team a sense of urgency.
