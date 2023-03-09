@@ -477,7 +477,8 @@ h2 .feather {
     border: 1px solid var(--text);
     padding: 0 24px;
     font-size: 0.9em;
-    transform: rotate(-2deg);
+    transform: rotate(-1deg);
+    margin: 12px;
 }
 
 blockquote {
