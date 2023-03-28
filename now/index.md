@@ -1,7 +1,7 @@
 ---
 layout: now
 title: What I'm doing now | Ham Vocke
-latest_update: 2022-10-04 21:24:00 +0200
+latest_update: 2023-03-28 21:00:00 +0200
 ---
 
 # Now
@@ -9,34 +9,36 @@ _Last update: {{ page.latest_update | date_to_string }}_
 
 Here's what keeps me busy at the moment. [what?](https://nownownow.com/about)
 
-## Keeping Things Balanced
-As social live is getting back to normal around me, I really try to embrace it. Meet friends, have a meaningful social life, and try to get away from my computer, social media, and work-related stuff as much as I can. My day to day job can be pretty demanding and in the past I've learned that it's a slippery slope trying to do too much that overlaps with work after hours. To keep things balanced and keep myself healthy, I try to be very deliberate about the time I spend on technical reading, on social media, or in front of my computer - and instead try to go outside, do something constructive, or spend time with the people I love.
+## Taking a Breather
+I guess the only time I manage to update this page is whenever there's some time to take a breather in my life. This time is no different. Until now, the year has been incredibly busy. Our team worked hard to design, build, and ship a new feature. And outside of work things haven't slowed down either. As spring is starting and Easter is around the corner, I feel how I'm slowly getting out of my rut that always keeps me low on energy during our long winters. I'm looking forward to taking a few days off next week for the Easter weekend to see friends and family, unwind, and just do whatever I'm up to for a few days.
+
 
 ## 👨‍💻 Side Projects
 
+### Ham's Hams
+Over my Christmas break, I took the time to cure and cold-smoke my first ham. Over the course of 3 weeks I brined, smoked and dried about 2.5kg of pork to create my first dry-cured ham. I love the results and shared a bunch with friends and family. I really enjoyed taking the time to do what it takes to create something you can easily buy at the supermarket by hand to get an appreciation for the work and craft that goes into producing food we get to enjoy. If you're curious, you can see the results [on Mastodon](https://hachyderm.io/@ham/109642523986154607).
+
 ### [doppelkopf.party](https://doppelkopf.party) - A Doppelkopf Browser Game
+Not many updates here. Contributions and improvements are sporadic but I did put in some work recently. One of the last big features missing is the ability to "play a solo" as you say in Doppelkopf terms. I've started building a user interface that lets you choose a solo before starting the game. That UI is now looking to be hooked up to the actual game but I didn't find the motivation to take this any further, yet.
 
-This project started a few years ago when I started playing Doppelkopf (a popular German card game) with friends in Hamburg. A lot of time has passed, I've [written a thing or two](https://www.hamvocke.com/tags/doppelkopf/) about the project and occasionally I'm still tweaking things here and there. After so many years, my excitement died down a little although the game is not feature complete yet. The most prominent missing feature is playing solo. In the past few months I couldn't get myself motivated to invest more time into this project. Spending more time programming after a demanding day job that mostly revolves around programming just didn't sound too appealing while the sun was shining and social interactions slowly get back to normal. Maybe, if winter becomes a little more quiet, I'll find the motivation to get back in the saddle.
+As always, you can [check out the code on GitHub]((https://github.com/hamvocke/doppelkopf)).
 
-In the meantime you can [check out the code on GitHub]((https://github.com/hamvocke/doppelkopf)).
-
-### Learning Elixir & Phoenix
-
-[Elixir](https://elixir-lang.org/) is a programming language I've observed with a lot of curiosity for years now. I've dabbled with the language again and again, learned the syntax with the official docs, solved puzzles on exercism.io, and immediately got this warm and fuzzy feeling you get when you discover something that's just incredibly elegantly designed. I figured out that I wanted to use Elixir in anger but I never found a good case for it. I started playing around with [Phoenix](https://www.phoenixframework.org/), a web framework for Elixir, a little more but was pretty intimidated by its learning curve. This year I took it as a challenge to push through this learning curve and build some small but non-trivial example with Phoenix. It took some time and my progress is slow (mostly due to fact that I'm deliberately not spending a lot of time in front of my computer outside of work) but I'm starting to get a better feeling for things. I decided to learn these things properly by going through the Pragmatic Bookshelf books ([Programming Elixir](https://pragprog.com/titles/elixir16/programming-elixir-1-6/) and [Programming Phoenix](https://pragprog.com/titles/phoenix14/programming-phoenix-1-4/)) and I start to connect the dots and get a better feeling for the language's idioms.
-
+### Elixir & Phoenix
+I continue with my Elixir & Phoenix journey and try to fiddle around with this new stack on a side project whenever time & motivation hit right. I continue to be amazed how elegant Elixir as a language can be and how well Phoenix manages to build on top of that elegance. Together with [Ecto](https://github.com/elixir-ecto/ecto) it's a really well-designed and thoughtful combination of tools that's delightful (although sometimes alien) to use and that's inspired me to think about a few long-held beliefs slightly differently.
 
 ## 📚 Reading
 The last 3 books I've read, most recent at the top.
 
-### _Modern Software Engineering: Doing What Works to Build Better Software Faster_ by David Farley 
+### _Hyperion_ and _The Fall of Hyperion_ by Dan Simmons
 
-*"Continuous Delivery"* has easily been the most eye-opening book I've read in my career. As I revisited this faourite of mine earlier this year to help push for a CI/CD initiative at work, I discovered how David Farley, one of the "Continuous Delivery" authors has published a new book. *"Modern Software Engineering"* is a great book on how to apply an engineering mindset to building software, how to work in a way that emphasizes learning, and what it means to build software manageable in the face of complexity. Farley touches on a lot of fairly well-known aspects like modularity, cohesion and coupling, and separation of concerns, and manages to put them into context -- all while relentlessly making a case for TDD and test automation as tools to drive these ideas. To me, this is an instant classic and I know that it's going to be one of those books I will recommend to fellow new and seasoned developers. [more info](https://www.oreilly.com/library/view/modern-software-engineering/9780137314942/)  
+Encouraged by how much I enjoyed reading _Project Hail Mary_ by Andy Weir last year I
+wanted to try some more Sci-Fi literature to see if the genre is in fact growing on me. I started picking up Dan Simmons' _Hyperion_ after a friend recommended it to me. It took me a bit to get into Simmons' style of writing but once I got into it I was hooked. _Hyperion_ has some fascinating world building. The different stories from different characters told throughout the first book left me excited, sad, thoughtful, and intrigued. Once I finished the first one, I immediately picked up the sequel and continue to have a great time seeing the whole story unfold.
 
+[more info](https://app.thestorygraph.com/books/3ab993ae-3728-4f7c-a107-78dbc26bf718)
 
-### _Continuous Delivery Pipelines_ by David Farley 
+### _The Staff Engineer's Path_ by Tanya Reilly
 
-For the same reason I revisited *"Continuous Delivery"*, I read through David Farley's more recently published "Continuous Delivery Pipelines" to see if I could <del>steal</del> <ins>take inspiration from</ins> some of his ideas for an initiative I led at work. As excited as I am about "Modern Software Engineering", I was severly disappointed by Farley's "Continuous Delivery Pipelines". It's a very high-level overview of the ideas outlined in the seminal "Continuous Delivery" book (by Farley and Jez Humble) but with much less depth. If you need a high-level introduction to the ideas behind Continous Delivery, this might be a good and quick overview - but you'll leave longing for much more depth. It's not really hands-on, lacking detail, and the editing seemed rather sloppy at times. Not my favourite - but maybe helpful for people who are completely new to the world of CD. [more info](https://leanpub.com/cd-pipelines)
+Tanya Reilly's [Being Glue](https://noidea.dog/glue) talk has been an eye-opening piece for me, helping me understand and identify some of the patterns I see in my daily job. When I saw her book _The Staff Engineer's Path_ being announced on O'Reilly, I immediately put it on my watch list and checked it out the day it was released. Once more, it's a super insightful, eye-opening read that helps me get a better grip on the things I've been doing as a tech lead and staff engineer for better or worse over the years. It's a book full of timeless advice and it feels like working with a much more experienced colleague who's sharing their hard earned wisdom with you as you need to hear it. I've never taking so many highlights and written down so many notes on any other book so far.
+
+[more info](https://learning.oreilly.com/library/view/the-staff-engineers/9781098118723/)
  
-### _Project Hail Mary_ by Andy Weir
-
-Oh, how I loved this book! I'm always struggling to find captivating fiction and often end up reading books that hardly get more than a "meh" reaction, but this book has been pure joy. There's something so fun, genuine, and uncomplicated about the main character who finds himself in a hopeless and desparate situation that had me longing for more. [more info](https://www.goodreads.com/book/show/54493401-project-hail-mary)
