@@ -1,7 +1,7 @@
 ---
 layout: now
 title: What I'm doing now | Ham Vocke
-latest_update: 2023-03-28 21:00:00 +0200
+latest_update: 2023-09-05 21:39:00 +0200
 ---
 
 # Now
@@ -9,36 +9,39 @@ _Last update: {{ page.latest_update | date_to_string }}_
 
 Here's what keeps me busy at the moment. [what?](https://nownownow.com/about)
 
-## Taking a Breather
-I guess the only time I manage to update this page is whenever there's some time to take a breather in my life. This time is no different. Until now, the year has been incredibly busy. Our team worked hard to design, build, and ship a new feature. And outside of work things haven't slowed down either. As spring is starting and Easter is around the corner, I feel how I'm slowly getting out of my rut that always keeps me low on energy during our long winters. I'm looking forward to taking a few days off next week for the Easter weekend to see friends and family, unwind, and just do whatever I'm up to for a few days.
+## Enjoying (late) summer
+The last few weeks have been packed with amazing activity, summer holidays with my wife, meeting friends and family, and generally having a good time and making the best out of this summer. I'm super grateful for living in a small town with so many good friends and family close by, with such a strong sense of community and tight-knit interaction. I hardly have any words to describe how great this feels and contributes to my well-being.
+
+As summer's back for a few more days here in northern Germany, I'm about to head out on a camping trip with my lads for a weekend and I'm sure we're going to have a few great days of enjoying the outdoors, cooking together, having a few drinks, enjoying life and getting ready for summer to slowly fade into fall.
+
+Life's good.
 
 
 ## 👨‍💻 Side Projects
 
-### Ham's Hams
-Over my Christmas break, I took the time to cure and cold-smoke my first ham. Over the course of 3 weeks I brined, smoked and dried about 2.5kg of pork to create my first dry-cured ham. I love the results and shared a bunch with friends and family. I really enjoyed taking the time to do what it takes to create something you can easily buy at the supermarket by hand to get an appreciation for the work and craft that goes into producing food we get to enjoy. If you're curious, you can see the results [on Mastodon](https://hachyderm.io/@ham/109642523986154607).
 
-### [doppelkopf.party](https://doppelkopf.party) - A Doppelkopf Browser Game
-Not many updates here. Contributions and improvements are sporadic but I did put in some work recently. One of the last big features missing is the ability to "play a solo" as you say in Doppelkopf terms. I've started building a user interface that lets you choose a solo before starting the game. That UI is now looking to be hooked up to the actual game but I didn't find the motivation to take this any further, yet.
+### [dotfiles](https://github.com/hamvocke/dotfiles) - Geeking out over silly command-line tools
+Yeah, I'm back at it. Every now and then I get this craving. A craving to fully geek out over clunky command line tools and waste hours tweaking, exploring, configuring, and optimizing my setup, especially the stuff revolving around command line tools.
 
-As always, you can [check out the code on GitHub]((https://github.com/hamvocke/doppelkopf)).
+This time I'm back at tweaking my tmux config a bit (see my [blog](https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/) [posts](https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/) on tmux if you want to dive into the rabbit hole head first). But more than that, I'm overhauling my vim (or neovim, really) config. While I usually had a very conservative approach to tweaking my vim configuration I decided to take [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim) for a spin this time and so far I love it. It comes with support for <abbr="Language Server Protocol">LSP</abbr>, Treesitter for fancy syntax highlighting, code navigation and editing, and SO MUCH MORE. It's fun. For a very weird definition of "fun" that is.
 
-### Elixir & Phoenix
-I continue with my Elixir & Phoenix journey and try to fiddle around with this new stack on a side project whenever time & motivation hit right. I continue to be amazed how elegant Elixir as a language can be and how well Phoenix manages to build on top of that elegance. Together with [Ecto](https://github.com/elixir-ecto/ecto) it's a really well-designed and thoughtful combination of tools that's delightful (although sometimes alien) to use and that's inspired me to think about a few long-held beliefs slightly differently.
+### Blog Overhaul
+This blog starts to show its age. I've started exploring ways to overhaul it a little. I've been running off this current Jekyll-based incarnation since 2014. I don't need much, really. A static site generator that can turn markdown files into blog posts is most I care about, really. Jekyll continues to be a fine tool for that job - but as with my dotfiles fiddling above, I'm probably looking for an excuse to try something new at this point. Starting from scratch sounds fun and would allow me to get rid of some junk that's accumulated over the years while having an opportunity to experiment with new CSS and HTML features, a different static site generator, and maybe some delicately sprinkled client-side interactivity. Not sure where this is going, but my blog has always been a no-excuses outlet for me to experiment with things just for shits and giggles, and I think it will be fun to do more of that again.
 
 ## 📚 Reading
 The last 3 books I've read, most recent at the top.
 
-### _Hyperion_ and _The Fall of Hyperion_ by Dan Simmons
+### _Endymion_ and _The Rise of Endymion_ by Dan Simmons
 
-Encouraged by how much I enjoyed reading _Project Hail Mary_ by Andy Weir last year I
-wanted to try some more Sci-Fi literature to see if the genre is in fact growing on me. I started picking up Dan Simmons' _Hyperion_ after a friend recommended it to me. It took me a bit to get into Simmons' style of writing but once I got into it I was hooked. _Hyperion_ has some fascinating world building. The different stories from different characters told throughout the first book left me excited, sad, thoughtful, and intrigued. Once I finished the first one, I immediately picked up the sequel and continue to have a great time seeing the whole story unfold.
+After finishing the first two books of the "Hyperion Cantos" (which I really enjoyed) I wanted to finish the series. The last two books feel a little different than the first two, changing the main characters and forwarding the story by a few hundred years. It's a somewhat different story with back-references to the first few books, but the story is nevertheless exciting and keeps me coming back for more. The worldbuilding is top notch and I'm having a great time with the entire "Cantos".
 
 [more info](https://app.thestorygraph.com/books/3ab993ae-3728-4f7c-a107-78dbc26bf718)
 
-### _The Staff Engineer's Path_ by Tanya Reilly
+### _Software Architecture: The Hard Parts_ by Neal Ford, Mark Richards, Pramod Sadalage and Zhamak Dehghani
 
-Tanya Reilly's [Being Glue](https://noidea.dog/glue) talk has been an eye-opening piece for me, helping me understand and identify some of the patterns I see in my daily job. When I saw her book _The Staff Engineer's Path_ being announced on O'Reilly, I immediately put it on my watch list and checked it out the day it was released. Once more, it's a super insightful, eye-opening read that helps me get a better grip on the things I've been doing as a tech lead and staff engineer for better or worse over the years. It's a book full of timeless advice and it feels like working with a much more experienced colleague who's sharing their hard earned wisdom with you as you need to hear it. I've never taking so many highlights and written down so many notes on any other book so far.
+I'm diving deep into software architecture at work and have been doing so for a good while now. This is not my first time diving deep into architecture questions and research, but it's comforting to have a book at hand that reassures me that some of the things I think and do are not completely nuts on the one hand, and on the other hand is thought provoking and giving me pointers at things I should look at more deeply that I hadn't considered before.
 
-[more info](https://learning.oreilly.com/library/view/the-staff-engineers/9781098118723/)
+"Software Archutecture: The Hard Parts" goes into a lot of topics related to building large-scale (distributed) systems and drives one point home (a point I learned when I was at ThoughtWorks myself): **Software architecture is all about trade-offs.** There's never a perfect solution. Nothing is ever completely obvious. If you optimize for one thing, you often inevitably sacrifice another thing. That's how it goes, and balancing trade-offs for your specific needs is what it's all about. A nice book with a lot of examples and case studies that I can recommend to anyone facing the challenge of breaking down or modernizing a larger-scale system. It doesn't contain much ground-breakingly new but it's a comforting read that helps put things into perspective and inspire with a few ideas and thoughts.
+
+[more info](https://www.oreilly.com/library/view/software-architecture-the/9781492086888/)
  
