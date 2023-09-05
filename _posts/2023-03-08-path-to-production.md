@@ -162,4 +162,4 @@ I hope this exercise helps you as much as it has helped me in the past. If you'v
 
 ## Footnotes
 
-[^1]: you're probably making a few people very upset. [DevOps is not a title](https://dzone.com/articles/devops-is-not-a-title-it-is-a-philosophy).
+[^1]: get ready for people with their pitchforks. Don't say you haven't been warned! [DevOps is not a title](https://dzone.com/articles/devops-is-not-a-title-it-is-a-philosophy).
