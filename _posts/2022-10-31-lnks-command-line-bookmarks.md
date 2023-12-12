@@ -74,13 +74,14 @@ You get the idea. You tell your operating system launch your terminal applicatio
 
 ```bash
 # gnome-terminal:
-gnome-terminal -- ~/dev/lnks/lnks.sh
+gnome-terminal -- bash -c ~/dev/lnks/lnks.sh
+# -> replace this ^^^^ with your shell of choice if you're not a bash user
 
 # alacritty:
-alacritty -e ~/dev/lnks/lnks.sh
+alacritty -e bash -c ~/dev/lnks/lnks.sh
 
 # foot
-foot ~/dev/lnks/lnks.sh
+foot bash -c ~/dev/lnks/lnks.sh
 ```
 
 This is going to be much more fun if your terminal and shell startup times are fairly snappy.
