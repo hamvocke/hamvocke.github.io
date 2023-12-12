@@ -1,7 +1,7 @@
 ---
 layout: post
-title: “Learning Test-Driven Development” - A Book Review
-tags: programming testing
+title: "Book Review: “Learning Test-Driven Development”"
+tags: books programming testing
 excerpt: A book review for Saleem Siddiqui's “Learning Test-Driven Development”. Spoiler alert -- It's excellent.
 summary: “Learning Test-Driven Development” is a fresh take on teaching TDD to curious developers. Go check it out.
 image: /assets/img/uploads/learning-tdd-cover.jpg
