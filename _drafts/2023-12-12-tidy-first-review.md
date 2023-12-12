@@ -3,8 +3,8 @@ layout: post
 title: "Book Review: “Tidy First?”"
 tags: books programming
 excerpt: My review of Kent Beck's “Tidy First?”, a short book on the "what", "when", and "why" of tidying code.
-summary: A book review of Kent Beck's “Tidy First?”.
-image: Image for Social Media (1200x630 px for open graph)
+summary: My book review of Kent Beck's “Tidy First?”.
+image: /assets/img/uploads/tidy-first.jpg
 comments: false
 ---
 
@@ -12,6 +12,8 @@ Hardly any author shaped the way I think about software development more than Ke
 
 Kent Beck's publishes insightful ideas about software design on his ["Tidy First?" Newsletter](https://tidyfirst.substack.com). This newsletter is the source for his book *["Tidy First?: A Personal Exercise in Empirical Software Design"](https://www.goodreads.com/book/show/171691901-tidy-first)*. 
 I only recently stumbled across "Tidy First?" and finished it last week. This is my review.
+
+!["Tidy First?" book cover](/assets/img/uploads/tidy-first.jpg)
 
 ## What's "Tidy First?" all about?
 
